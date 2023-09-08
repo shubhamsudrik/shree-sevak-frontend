@@ -1,0 +1,12 @@
+.material-icon-pointer {
+    cursor: pointer !important;
+    }
+    /* Add this to your CSS file */
+/* Add this to your CSS file */
+.invalid-input {
+    border-color: red !important; /* Use !important to ensure it takes precedence */
+  }
+  .invalid-input {
+    border: 1px solid red;
+  }
+  

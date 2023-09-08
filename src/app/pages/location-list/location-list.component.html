@@ -1,0 +1,108 @@
+<div class="container-fluid mt--7 pb-8 pt-50 pt-md-8">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          
+          <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
+            <li class="nav-item ml-auto">
+              <span class="d-none d-md-block form-group">
+                <h3>{{ 'location' | translate }}</h3>
+              </span>
+            </li>
+            <li class="nav-item ml-auto">
+              <span class="d-none d-md-block form-group align-items-right">
+                <label>{{ 'Choose Language' | translate }}</label>
+                <select name="" class="form-control ml-auto" #selectedLang (change)="switchLang(selectedLang.value)">
+                  <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
+                    {{ language }}
+                  </option>
+                </select>
+              </span>
+            </li>
+            <!-- For screens less than 600px -->
+            <li class="nav-item d-md-none"> <!-- Hide this for medium and larger scren -->
+              <span class="form-group">
+                <h3>{{ 'location' | translate }}</h3>
+              </span>
+            </li>
+            <li class="nav-item d-md-none"> <!-- Hide this item on medium and larger screen -->
+              <span class="form-group align-items-right">
+                <label>{{ 'Choose Language' | translate }}</label>
+                <select name="" class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
+                  <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
+                    {{ language }}
+                  </option>
+                </select>
+              </span>
+            </li>
+          </ul>
+          
+          
+
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>    
+              </div>
+              <input class="form-control" placeholder="{{ 'Search' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+              (blur)="focus = false">
+            </div >
+            <div class="form-group"><br>
+            <ul class="nav nav-pills justify-content">
+              <li class="nav-item mr-2 mr-md-0">
+                  <span class="d-none d-md-block" class="form-group">
+                    <!-- <button class="btn btn-success" (click)="onAddNewUser($event)">नवीन जोडा</button> -->
+                    <button class="btn btn-success" (click)="onOpen()" > {{'Add New'|translate}}</button>
+                  </span>
+              </li>
+              <li class="nav-item mr-2 mr-md-0">
+                  <span class="d-none d-md-block" class="form-group">
+                    <div  *ngFor="let location of defaultLocations; let i = index">
+                      
+                      <button *ngIf="location.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'edit'|translate}}</button>
+                      <!-- <button *ngIf="location.isDeleting" class="btn btn-danger" (click)="deleteLocation(location.locationId)">{{'delete'|translate}}</button> -->
+                    </div>
+                  </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="table-responsive " >
+          <table  class="table align-items-center table-flush ">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">{{'action'|translate}} </th>
+                <th scope="col">{{'locationId'|translate}}</th>
+                <th scope="col">{{'address'|translate}}</th>
+                <th scope="col">{{'division'|translate}} </th>
+                <th scope="col">{{'city'|translate}}</th>
+                <th scope="col">{{'state'|translate}} </th>
+                <th scope="col">{{'country'|translate}} </th>
+                <th scope="col">{{'mNumber'|translate}}</th>
+                <!-- <th scope="col">{{'status'|translate}}</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
+                <tr *ngFor="let location of defaultLocations |filter:searchText; let i = index ">
+
+                <td>
+                  <input type="radio" name="operation" (click)="toggleButtons('edit', location)" value="edit"  (change)="selectedRow = i">
+                  <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->
+                </td>
+                <td>{{ location.locationId }}</td>
+                <td>{{ location.address }}</td>
+                <td>{{ location.division }}</td>
+                <td>{{ location.city }}</td>
+                <td>{{ location.state }}</td>
+                <td>{{ location.country }}</td>
+                <td>{{ location.number }}</td>
+                <!-- <td>{{ location.status }}</td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->

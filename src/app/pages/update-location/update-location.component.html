@@ -1,0 +1,113 @@
+<div class="container-fluid mt--7 pb-8 pt-5 pt-md-16">
+<div class="py-7 py-lg-8">
+</div>
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+<!-- Table -->
+
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-md-8">
+    <div class="card bg-secondary shadow border-0">
+      <div class="card-body px-lg-5 py-lg-5">
+        <form role="form" (ngSubmit)="onSubmit()">
+          
+          <div class="form-group">
+            <label>{{'location'|translate}}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend">
+              </div>
+              <input type="text" class="form-control" id="address" required="text" [(ngModel)]="location.address"  name="address"><br>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <label>{{'city'|translate}}</label><br>
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                </div>
+                <!-- <input type="text" class="form-control"[(ngModel)]="editedLocation.city" name="city"><br> -->
+                <select 
+                 class="form-control" id="city" [(ngModel)]="location.city" name="city">
+                  <option value="Pune">{{'Pune'|translate}}</option>
+                  <option value="Mumbai">{{'Mumbai'|translate}}</option>
+                  <option value="kolhapur">{{'Kolhapur'|translate}}</option>
+                  <option value="Pune">{{'Nagpur'|translate}}</option>
+              </select>
+              </div>
+            </div>
+            <label>{{'Division'|translate}}</label><br>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend">
+              </div>
+              <select 
+              class="form-control" id="division" [(ngModel)]="location.division" name="division">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+            </select>
+              <!-- <input type="text"class="form-control" [(ngModel)]="editedLocation.division" name="division"><br> -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label>{{'state'|translate}}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend">
+              </div>
+              <select 
+              class="form-control" id="state" [(ngModel)]="location.state" name="state">
+                <option value="maharashtra">{{'Maharashtra'|translate}}</option>
+                <option value="uttar predesh">{{'Uttar predesh'|translate}}</option>
+                <option value="delhi">{{'Delhi'|translate}}</option>
+            </select>
+              <!-- <input type="text" class="form-control" [(ngModel)]="editedLocation.state" name="state"><br> -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label>{{'country'|translate}}</label><br>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend">
+              </div>
+              <select 
+              class="form-control" id="country" [(ngModel)]="location.country" name="country">
+               <option value="IN">IN</option>
+               <option value="US">US</option>
+               <option value="USA">USA</option>
+           </select>
+              <!-- <input type="text" class="form-control" [(ngModel)]="editedLocation.country" name="country"><br> -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label>{{'mobile number'|translate}}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend">
+              </div>
+              <input type="number" class="form-control" pattern="[789][0-9]{9}" id="number" [(ngModel)]="location.number" name="number"><br>
+            </div>
+          </div>
+
+          
+          <div class="form-group">
+            <label>{{'status'|translate}}</label><br>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend">
+              </div>
+              <select 
+              class="form-control" id="status" [(ngModel)]="location.status" name="country">
+               <option value="1">{{'Active'|translate}}</option>
+               <option value="0">{{'Inactive'|translate}}</option>
+           </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+          <button  type="submit" class="btn btn-success" >{{'save'|translate}}</button>
+          <button  type="button" class="btn btn-danger " (click)="CancelChanges()">{{'Back'|translate}} </button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

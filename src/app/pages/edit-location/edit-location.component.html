@@ -1,0 +1,178 @@
+<div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+<div class="py-7 py-lg-8">
+</div>
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+<!-- Table -->
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-md-8">
+    <div class="card bg-secondary shadow border-0">
+      <div class="card-body px-lg-5 py-lg-5">
+        <form role="form" [formGroup]="locationform" (ngSubmit)="onSubmit()">
+     
+          <div class="form-group">
+            <label for="locationname">{{ 'location' | translate }}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <input
+                  formControlName="locationname"
+                  type="text"
+                  class="form-control"
+                 id="address"
+                name="address"
+                [(ngModel)]="location.address"
+                [ngClass]="{
+                 'invalid-input': (submitted && locationFormControl.locationname.errors?.required)
+                }"
+                  />
+            </div>
+           </div>
+          
+           <div class="form-group">
+            <label>{{ 'city' | translate }}</label><br>
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend"></div>
+              <select
+                formControlName="city"
+                class="form-control"
+                id="city"
+                name="city"
+                [(ngModel)]="location.city"
+                required
+                [ngClass]="{
+                  'invalid-input': (submitted && locationFormControl.city.errors?.required)
+                }"
+              >
+                <option value="" disabled>Select City</option>
+                <option value="Pune">Pune</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="kolhapur">Kolhapur</option>
+                <option value="Nagpur">Nagpur</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>{{ 'division' | translate }}</label><br>
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend"></div>
+                <select
+                  formControlName="division"
+                  class="form-control"
+                  id="division"
+                  name="division"
+                  [(ngModel)]="location.division" 
+                  required
+                  [ngClass]="{
+                    'invalid-input': (submitted && locationFormControl.division.errors?.required)
+                  }"
+                >
+                  <option value="" disabled>Select Division</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label>{{ 'state' | translate }}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <select
+                formControlName="state"
+                class="form-control"
+                id="state"
+                name="state"
+                [(ngModel)]="location.state"
+                required
+                [ngClass]="{
+                  'invalid-input': (submitted && locationFormControl.state.errors?.required)
+                }"
+              >
+                <option value="" disabled>Select state</option>
+                <option value="maharashtra">{{ 'maharashtra' | translate }}</option>
+                <option value="uttar predesh">{{ 'uttar predesh' | translate }}</option>
+                <option value="delhi">{{ 'delhi' | translate }}</option>
+              </select>
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label>{{ 'country' | translate }}</label><br>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <select
+                formControlName="country"
+                class="form-control"
+                id="country"
+                name="country"
+                [(ngModel)]="location.country"
+                required
+                [ngClass]="{
+                  'invalid-input': (submitted && locationFormControl.country.errors?.required)
+                }"
+              >
+                <option value="" disabled>Select Country</option>
+                <option value="IN">IN</option>
+                <option value="US">US</option>
+                <option value="USA">USA</option>
+              </select>
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label for="number">{{ 'number' | translate }}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <input
+                  formControlName="number"
+                  type="number"
+                  class="form-control"
+                 id="number"
+                name="number"
+                pattern="[789][0-9]{9}"
+                [(ngModel)]="location.number"
+                [ngClass]="{
+                 'invalid-input': (submitted && locationFormControl.number.errors?.required)
+                }"
+                  />
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label>{{ 'status' | translate }}</label><br>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <select
+                formControlName="status"
+                class="form-control"
+                id="status"
+                name="status"
+                [(ngModel)]="location.status"
+                required
+                [ngClass]="{
+                  'invalid-input': (submitted && locationFormControl.status.errors?.required)
+                }"
+              >
+                <option value="" disabled>Select Status</option>
+                <option value="1">{{'Active'|translate}}</option>
+                <option value="0">{{'Inactive'|translate}}</option>
+              </select>
+            </div>
+           </div>
+
+
+           <div ><br>
+            <button type="submit" class="btn btn-success mx-2" >{{'save'|translate}}</button>
+            <button type="button" class="btn btn-primary mx-2" (click)="Clear()">{{'Clear'|translate}} </button>
+            <button type="button" class="btn btn-danger mx-2" (click)="CancelChanges()">{{'Back'|translate}} </button>
+           </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
