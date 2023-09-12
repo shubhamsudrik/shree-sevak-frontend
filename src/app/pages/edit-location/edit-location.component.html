@@ -11,7 +11,7 @@
         <form role="form" [formGroup]="locationform" (ngSubmit)="onSubmit()">
      
           <div class="form-group">
-            <label for="locationname">{{ 'location' | translate }}</label>
+            <label for="locationname">{{ 'Location' | translate }}</label>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <input
@@ -27,9 +27,51 @@
                   />
             </div>
            </div>
+
+           <!-- Address 1 -->
+
+           <div class="form-group">
+            <label for="locationname">{{ 'Address-1 ' | translate }}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <input
+                  formControlName="Address-1"
+                  type="text"
+                  class="form-control"
+                 id="Address-1"
+                name="Address-1"
+                [(ngModel)]="location.address1"
+                [ngClass]="{
+                 'invalid-input': (submitted && locationFormControl.locationaddress1.errors?.required)
+                }"
+                  />
+            </div>
+           </div>
+
+           <!-- Address 2 -->
+
+           <div class="form-group">
+            <label for="locationname">{{ 'Address-2' | translate }}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <input
+                  formControlName="Address2"
+                  type="text"
+                  class="form-control"
+                 id="Address2"
+                name="Address2"
+                [(ngModel)]="location.address2"
+                [ngClass]="{
+                 'invalid-input': (submitted && locationFormControl.address2.errors?.required)
+                }"
+                  />
+            </div>
+           </div>
+
+           <!-- city -->
           
            <div class="form-group">
-            <label>{{ 'city' | translate }}</label><br>
+            <label>{{ 'City' | translate }}</label><br>
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend"></div>
               <select
@@ -52,7 +94,7 @@
             </div>
 
             <div class="form-group">
-              <label>{{ 'division' | translate }}</label><br>
+              <label>{{ 'Division' | translate }}</label><br>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <select
@@ -78,7 +120,7 @@
            </div>
 
            <div class="form-group">
-            <label>{{ 'state' | translate }}</label>
+            <label>{{ 'State' | translate }}</label>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <select
@@ -93,15 +135,13 @@
                 }"
               >
                 <option value="" disabled>Select state</option>
-                <option value="maharashtra">{{ 'maharashtra' | translate }}</option>
-                <option value="uttar predesh">{{ 'uttar predesh' | translate }}</option>
-                <option value="delhi">{{ 'delhi' | translate }}</option>
+                <option value="Maharashtra">{{ 'Maharashtra' | translate }}</option>
               </select>
             </div>
            </div>
 
            <div class="form-group">
-            <label>{{ 'country' | translate }}</label><br>
+            <label>{{ 'Country' | translate }}</label><br>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <select
@@ -117,14 +157,34 @@
               >
                 <option value="" disabled>Select Country</option>
                 <option value="IN">IN</option>
-                <option value="US">US</option>
-                <option value="USA">USA</option>
               </select>
             </div>
            </div>
 
+           <!-- pincode -->
+
            <div class="form-group">
-            <label for="number">{{ 'number' | translate }}</label>
+            <label for="Pincode">{{ 'Pincode' | translate }}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <input
+                  formControlName="pincode"
+                  type="number"
+                  class="form-control"
+                 id="pincode"
+                name="pincode"
+                [(ngModel)]="location.pincode"
+                [ngClass]="{
+                 'invalid-input': (submitted && locationFormControl.pincode.errors?.required)
+                }"
+                  />
+            </div>
+           </div>
+
+
+           <!-- Phone Number -->
+           <div class="form-group">
+            <label for="number">{{ 'Phone Number' | translate }}</label>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <input
@@ -143,7 +203,7 @@
            </div>
 
            <div class="form-group">
-            <label>{{ 'status' | translate }}</label><br>
+            <label>{{ 'Status' | translate }}</label><br>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <select

@@ -25,6 +25,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ToastrModule } from 'ngx-toastr';
+import { LocationDataService } from './location-data.service';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -69,7 +70,7 @@ import { ToastrModule } from 'ngx-toastr';
     // ComponentComponent
   ],
  
-  providers: [],
+  providers: [LocationDataService],
   bootstrap: [AppComponent]
 })
 

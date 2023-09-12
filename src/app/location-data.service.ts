@@ -13,7 +13,7 @@ export class LocationDataService {
   
 
   constructor(private httpclient: HttpClient) {
-   this.userPayLoad = this.decodedToken();
+  //  this.userPayLoad = this.decodedToken();
   }
 
   // For Get the active record from database
@@ -71,12 +71,12 @@ export class LocationDataService {
     return !!localStorage.getItem('token')
   }
 
-  decodedToken(){
-    const jwtHelper =new JwtHelperService();
-    const token =this.getToken();
-    console.log(jwtHelper.decodeToken(token));
-    return jwtHelper.decodeToken(token);
-  }
+  // decodedToken(){
+  //   const jwtHelper =new JwtHelperService();
+  //   const token =this.getToken();
+  //   console.log(jwtHelper.decodeToken(token));
+  //   return jwtHelper.decodeToken(token);
+  // }
 
   getfullNameFromToken(){
     

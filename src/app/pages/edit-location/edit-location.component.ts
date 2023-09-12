@@ -38,11 +38,14 @@ export class EditLocationComponent implements OnInit {
 
        // FormValidation
        this.locationform = this.formBuilder.group({
-      locationname: ['', Validators.required],
+      locationname: ['', Validators.required ,  Validators.maxLength(15)],
+      Address1: ['', Validators.required,  Validators.maxLength(15)],
+      Address2: ['', Validators.required,  Validators.maxLength(15)],
       city: ['', Validators.required],
       division: ['', Validators.required],
       state: ['', Validators.required],
       country: ['', Validators.required],
+      pincode: ['', Validators.required,  Validators.maxLength(6), Validators.minLength(6)],
       number: ['', Validators.required],
       status: ['', Validators.required],
     });

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationDataService } from 'src/app/location-data.service'; // Import the service
-import { Router } from '@angular/router'; 
+import { LocationDataService } from 'src/app/location-data.service';
+import { Router } from '@angular/router';
 import { Location } from 'src/app/location';
 import { TranslateService } from '@ngx-translate/core';
-
 
 @Component({
   selector: 'app-location-list',
@@ -11,38 +10,38 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./location-list.component.css']
 })
 export class LocationListComponent implements OnInit {
- 
   location: Location = new Location;
-  
-  defaultLocations : Location[];
+  defaultLocations: Location[] = [];
   public focus;
   searchText: any;
   
-  constructor(private locationDataService: LocationDataService, private router: Router,public translate: TranslateService) {
-    console.log(Location);
-    console.log(locationDataService)
-
-
-    translate.addLangs(['English','Marathi']);
+  constructor(
+    private locationDataService: LocationDataService,
+    private router: Router,
+    public translate: TranslateService
+  ) {
+    translate.addLangs(['English', 'Marathi']);
     translate.setDefaultLang('English');
   }
 
-  private getLocations(){
-  this.locationDataService.getLocationList().subscribe(data => {
-    this.defaultLocations = data;
-  })
+  private getLocations() {
+    this.locationDataService.getLocationList().subscribe(
+      (data: Location[]) => {
+        this.defaultLocations = data;
+        console.log(data);
+      },
+      (error) => {
+        console.error('Error fetching locations:', error);
+      }
+    );
   }
 
   switchLang(lang: string) {
-    this.translate.use(lang); // Change the active language
+    this.translate.use(lang);
   }
 
-
-
   ngOnInit(): void {
-  
-   this.getLocations();
-
+    this.getLocations();
   }
 
   onOpen() {
@@ -54,29 +53,25 @@ export class LocationListComponent implements OnInit {
     if (operation === 'edit') {
       location.isEditing = true;
       location.isDeleting = true;
-    // } else if (operation === 'delete') {
-    //   location.isEditing = false;
-    //   location.isDeleting = true;
     }
   }
-  
-    deleteLocation(id: number ) {
-  const confirmation = confirm('तुम्ही हे हटवू इच्छिता...');
-  if (confirmation) {
-   this.locationDataService.deleteLocation(id).subscribe(data => {
-    console.log(data);
-    this.router.navigate(['/location-list']);
-  }, error => {
-        console.error('Error deleting location:', error);
-      });
+
+  deleteLocation(id: number ) {
+    const confirmation = confirm('Do you want to delete this location?');
+    if (confirmation) {
+      this.locationDataService.deleteLocation(id).subscribe(
+        (data) => {
+          console.log(data);
+          this.router.navigate(['/location-list']);
+        },
+        (error) => {
+          console.error('Error deleting location:', error);
+        }
+      );
     }
-
   }
 
-  updateLocation(locationId: number){
-    this.router.navigate(['/update-location',locationId]);
+  updateLocation(locationId: number) {
+    this.router.navigate(['/update-location', locationId]);
   }
-  
-
-  
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, from } from 'rxjs';
+import {  CanActivate, Router, } from '@angular/router';
 import { LocationDataService } from '../location-data.service';
 import { NgToastService } from 'ng-angular-popup';
 
@@ -12,7 +11,8 @@ export class AuthGuard implements CanActivate {
 
 
 constructor( private locationDataService: LocationDataService,
-   private router: Router, private toast: NgToastService){
+   private router: Router,
+   private toast: NgToastService){
 
 }
 
