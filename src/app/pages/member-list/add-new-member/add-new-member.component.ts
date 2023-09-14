@@ -47,14 +47,11 @@ export class AddNewMemberComponent implements OnInit {
       country: ['', Validators.required],
       firstName: ['', Validators.required],
       dob: ['', Validators.required],
-      education: ['', Validators.required],
+      Education: ['', Validators.required],
+      email: ['', Validators.required],
       middleName: ['', Validators.required],
       lastName: ['', Validators.required],
-
-     
-     
       gender: ['', Validators.required],
-     
       pincode: ['', [Validators.required, Validators.minLength(6)]],
       mobile: ['', [Validators.required, Validators.minLength(10)]],
       latitude: ['', Validators.required],
@@ -154,11 +151,12 @@ export class AddNewMemberComponent implements OnInit {
   isDuplicateData(newMember: Member): boolean {
     for (let item of this.defaultMembers) {
       if (
+        
         // item.city === newMember.city &&
-        // item.state === newMember.state &&
-        item.email === newMember.email &&
-        item.mobile === newMember.mobile &&
-        item.addharNumber === newMember.addharNumber 
+        item.state === newMember.state 
+        // item.email === newMember.email &&
+        // item.mobile === newMember.mobile &&
+        // item.addharNumber === newMember.addharNumber 
         // item.division === newMember.division 
         // item.id !== newMember.MemberId
       ) {
