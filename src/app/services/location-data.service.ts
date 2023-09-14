@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Location } from './location';
-import { EditLocationComponent } from './pages/edit-location/edit-location.component';
+import { Location } from '../Classes/location';
+import { EditLocationComponent } from '../pages/location-list/edit-location/edit-location.component';
 import { JwtHelperService } from "@auth0/angular-jwt";
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class LocationDataService {
 
   // For Get the active record from database
   getLocationList(): Observable<Location[]> {
-    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/active/1`);
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/status/1`);
   }
 
   // for create the record in the database

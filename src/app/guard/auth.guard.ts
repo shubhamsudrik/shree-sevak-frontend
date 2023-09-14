@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  CanActivate, Router, } from '@angular/router';
-import { LocationDataService } from '../location-data.service';
+import { LocationDataService } from '../services/location-data.service';
 import { NgToastService } from 'ng-angular-popup';
 
 

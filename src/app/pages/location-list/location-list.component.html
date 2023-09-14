@@ -7,7 +7,7 @@
           <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
             <li class="nav-item ml-auto">
               <span class="d-none d-md-block form-group">
-                <h3>{{ 'location' | translate }}</h3>
+                <h2>{{ 'location records!' | translate }}</h2>
               </span>
             </li>
             <li class="nav-item ml-auto">
@@ -59,7 +59,7 @@
                   <span class="d-none d-md-block" class="form-group">
                     <div  *ngFor="let location of defaultLocations; let i = index">
                       
-                      <button *ngIf="location.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'edit'|translate}}</button>
+                      <button *ngIf="location.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'Update'|translate}}</button>
                       <!-- <button *ngIf="location.isDeleting" class="btn btn-danger" (click)="deleteLocation(location.locationId)">{{'delete'|translate}}</button> -->
                     </div>
                   </span>
@@ -73,14 +73,16 @@
               <tr>
                 <th scope="col">{{'action'|translate}} </th>
                 <th scope="col">{{'locationId'|translate}}</th>
-                <th scope="col">{{'address'|translate}}</th>
-                <th scope="col">{{'address 1'|translate}} </th>
-                <th scope="col">{{'address 2'|translate}} </th>
+                <th scope="col">{{'location name'|translate}}</th>
+                <th scope="col">{{'address1'|translate}} </th>
+                <th scope="col">{{'address2'|translate}} </th>
                 <th scope="col">{{'division'|translate}} </th>
                 <th scope="col">{{'city'|translate}}</th>
                 <th scope="col">{{'state'|translate}} </th>
                 <th scope="col">{{'country'|translate}} </th>
                 <th scope="col">{{'pincode'|translate}} </th>
+                <th scope="col">{{'Latitude'|translate}} </th>
+                <th scope="col">{{'Longitude'|translate}}</th>
                 <th scope="col">{{'mNumber'|translate}}</th>
                 <!-- <th scope="col">{{'status'|translate}}</th> -->
               </tr>
@@ -94,15 +96,17 @@
                   <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->
                 </td>
                 <td>{{ location.locationId }}</td>
-                <td>{{ location.address }}</td>
-                <td>{{ location.address1 }}</td>
-                <td>{{ location.address2 }}</td>
+                <td>{{ location.locationName }}</td>
+                <td>{{ location.add1 }}</td>
+                <td>{{ location.add2 }}</td>
                 <td>{{ location.division }}</td>
                 <td>{{ location.city }}</td>
                 <td>{{ location.state }}</td>
                 <td>{{ location.country }}</td>
                 <td>{{ location.pincode }}</td>
-                <td>{{ location.number }}</td>
+                <td>{{ location.latitude }}</td>
+                <td>{{ location.longitude }}</td>
+                <td>{{ location.phoneNumber }}</td>
                 <!-- <td>{{ location.status }}</td> -->
               </tr>
             </tbody>

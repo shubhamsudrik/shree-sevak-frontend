@@ -16,8 +16,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/location-list', title: 'Location',  icon:'ni-pin-3 text-red', class: '' },
     { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
     { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' },
-    { path: '/component', title: 'Com',  icon:'ni-circle-08 text-pink', class: '' },
-  
+    { path: '/member-list', title: 'member',  icon:'ni-pin-3 text-red', class: '' },
+   
 ];
 
 @Component({

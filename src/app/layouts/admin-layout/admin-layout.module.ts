@@ -11,7 +11,7 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LocationDataService } from 'src/app/location-data.service';
+import { LocationDataService } from 'src/app/services/location-data.service';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({

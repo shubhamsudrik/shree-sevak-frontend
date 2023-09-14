@@ -1,14 +1,16 @@
 export class Location{
     
     locationId : Number;
-    address : string;
-    address1 : string;
-    address2 : string;
+    locationName : string;
+    add1 : string;
+    add2 : string;
     division : string;
     city : string;
     state : string;
     country : string;
     pincode : number;
-    number : number;
+    phoneNumber : number;
+    latitude : string;
+    longitude : string;
     status : number;
 }

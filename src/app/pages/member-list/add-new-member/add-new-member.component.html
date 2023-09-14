@@ -1,0 +1,497 @@
+<div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+    <div class="py-7 py-lg-8">
+    </div>
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+    <!-- Table -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="card bg-secondary shadow border-0">
+          <div class="card-body px-lg-5 py-lg-5">
+            
+            <form role="form" [formGroup]="memberform" (ngSubmit)="onSubmit()">
+              <h2 class="text-center">{{'Add new member record!' | translate }}</h2><br>
+              
+               <!-- aadhar number-->
+               <div class="form-group">
+                <label for="addharNumber">{{ 'Addhar Number' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="addharNumber"
+                      type="text"
+                      class="form-control"
+                     id="addharNumber"
+                    name="addharNumber"
+                    [(ngModel)]="Member.addharNumber"
+                    [ngClass]="{
+                      'is-invalid': (submitted && (MemberFormControl.addharNumber.errors?.required || MemberFormControl.addharNumber.errors?.minlength))
+    
+                    }"
+                    (input)="validateAddharNumber($event)"
+                    minlength="16"
+                      />
+                      <div class="invalid-feedback">
+                        <div *ngIf="MemberFormControl.addharNumber.errors?.required">{{ 'Addhar Number is required.' | translate }}</div>
+                        <div *ngIf="MemberFormControl.addharNumber.errors?.minlength">{{ 'Addhar Number must be at least 10 characters long.' | translate }}</div>
+                      </div>
+                      
+                </div>
+               </div>
+
+               <!-- add1 -->
+              <div class="form-group">
+                <label for="add1">{{ 'Address-1' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="add1"
+                      type="text"
+                      class="form-control"
+                     id="add1"
+                    name="add1"
+                    [(ngModel)]="Member.add1"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.add1.errors?.required)
+                    }"
+                    maxlength="25" 
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'Address1  is required.' | translate }}
+                      </div>
+                </div>
+               </div>
+              <!-- add2 -->
+              <div class="form-group">
+                <label for="add1">{{ 'Address-2' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="add2"
+                      type="text"
+                      class="form-control"
+                     id="add2"
+                    name="add2"
+                    [(ngModel)]="Member.add2"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.add2.errors?.required)
+                    }"
+                    maxlength="25" 
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'Address2  is required.' | translate }}
+                      </div>
+                </div>
+               </div>
+
+               <!-- additional info -->
+              <div class="form-group">
+                <label for="additionalInfo">{{ 'Additional Info' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="additionalInfo"
+                      type="text"
+                      class="form-control"
+                     id="additionalInfo"
+                    name="additionalInfo"
+                    [(ngModel)]="Member.additionalInfo"
+                    
+                    maxlength="25" 
+                      />
+                </div>
+               </div>
+
+               <!-- city -->
+          
+           <div class="form-group">
+            <label>{{ 'City' | translate }}</label><br>
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend"></div>
+              <select
+                formControlName="city"
+                class="form-control"
+                id="city"
+                name="city"
+                [(ngModel)]="Member.city"
+                required
+                [ngClass]="{
+                  'is-invalid': (submitted && MemberFormControl.city.errors?.required)
+                }"
+              >
+                <option value="" disabled>Select City</option>
+                <option value="Pune">Pune</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="kolhapur">Kolhapur</option>
+                <option value="Nagpur">Nagpur</option>
+              </select>
+              <div class="invalid-feedback">
+                {{ 'City is required.' | translate }}
+              </div>
+            </div>
+
+            <!-- division -->
+            <div class="form-group">
+              <label>{{ 'Division' | translate }}</label><br>
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend"></div>
+                <select
+                  formControlName="division"
+                  class="form-control"
+                  id="division"
+                  name="division"
+                  [(ngModel)]="Member.division" 
+                  required
+                  [ngClass]="{
+                    'is-invalid': (submitted && MemberFormControl.division.errors?.required)
+                  }"
+                >
+                  <option value="" disabled>Select Division</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="E">E</option>
+                </select>
+                <div class="invalid-feedback">
+                  {{ 'Division is required.' | translate }}
+                </div>
+              </div>
+            </div>
+           </div>
+<!-- state -->
+           <div class="form-group">
+            <label>{{ 'State' | translate }}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <select
+                formControlName="state"
+                class="form-control"
+                id="state"
+                name="state"
+                [(ngModel)]="Member.state"
+                required
+                [ngClass]="{
+                  'is-invalid': (submitted && MemberFormControl.state.errors?.required)
+                }"
+              >
+         
+                <option value="" disabled>{{ 'Select state' | translate }}</option>
+                <option value="Andhra Pradesh">{{ 'Andhra Pradesh' | translate }}</option>
+                <option value="Arunachal Pradesh">{{ 'Arunachal Pradesh' | translate }}</option>
+                <option value="Assam">{{ 'Assam' | translate }}</option>
+                <option value="Bihar">{{ 'Bihar' | translate }}</option>
+                <option value="Chhattisgarh">{{ 'Chhattisgarh' | translate }}</option>
+                <option value="Goa">{{ 'Goa' | translate }}</option>
+                <option value="Gujarat">{{ 'Gujarat' | translate }}</option>
+                <option value="Haryana">{{ 'Haryana' | translate }}</option>
+                <option value="Himachal Pradesh">{{ 'Himachal Pradesh' | translate }}</option>
+                <option value="Jharkhand">{{ 'Jharkhand' | translate }}</option>
+                <option value="Karnataka">{{ 'Karnataka' | translate }}</option>
+                <option value="Kerala">{{ 'Kerala' | translate }}</option>
+                <option value="Madhya Pradesh">{{ 'Madhya Pradesh' | translate }}</option>
+                <option value="Maharashtra">{{ 'Maharashtra' | translate }}</option>
+                <option value="Manipur">{{ 'Manipur' | translate }}</option>
+                <option value="Meghalaya">{{ 'Meghalaya' | translate }}</option>
+                <option value="Mizoram">{{ 'Mizoram' | translate }}</option>
+                <option value="Nagaland">{{ 'Nagaland' | translate }}</option>
+                <option value="Odisha">{{ 'Odisha' | translate }}</option>
+                <option value="Punjab">{{ 'Punjab' | translate }}</option>
+                <option value="Rajasthan">{{ 'Rajasthan' | translate }}</option>
+                <option value="Sikkim">{{ 'Sikkim' | translate }}</option>
+                <option value="Tamil Nadu">{{ 'Tamil Nadu' | translate }}</option>
+                <option value="Telangana">{{ 'Telangana' | translate }}</option>
+                <option value="Tripura">{{ 'Tripura' | translate }}</option>
+                <option value="Uttar Pradesh">{{ 'Uttar Pradesh' | translate }}</option>
+                <option value="Uttarakhand">{{ 'Uttarakhand' | translate }}</option>
+                <option value="West Bengal">{{ 'West Bengal' | translate }}</option>
+                     
+              </select>
+              <div class="invalid-feedback">
+                {{ 'State is required.' | translate }}
+              </div>
+            </div>
+           </div>
+           <!-- country -->
+           <div class="form-group">
+            <label>{{ 'Country' | translate }}</label><br>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <select
+                formControlName="country"
+                class="form-control"
+                id="country"
+                name="country"
+                [(ngModel)]="Member.country"
+                required
+                [ngClass]="{
+                  'is-invalid': (submitted && MemberFormControl.country.errors?.required)
+                }"
+              >
+                <option value="" disabled>Select Country</option>
+                <option value="IN">IN</option>
+              </select>
+              <div class="invalid-feedback">
+                {{ 'Country is required.' | translate }}
+              </div>
+            </div>
+           </div>
+
+              <!-- firstName -->
+              <div class="form-group">
+                <label for="firstName">{{ 'First Name' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="firstName"
+                      type="text"
+                      class="form-control"
+                     id="firstName"
+                    name="firstName"
+                    [(ngModel)]="Member.firstName"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.firstName.errors?.required)
+                    }"
+                    maxlength="14" 
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'First Name  is required.' | translate }}
+                      </div>
+                </div>
+               </div>
+
+                <!-- dob -->
+              <div class="form-group">
+                <label for="dob">{{ 'Bitrh Date' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="dob"
+                      type="date"
+                      class="form-control"
+                     id="dob"
+                    name="dob"
+                    [(ngModel)]="Member.DOB"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.dob.errors?.required)
+                    }"
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'Birth date is required.' | translate }}
+                      </div>
+                </div>
+               </div>
+
+                <!-- education -->
+              <div class="form-group">
+                <label for="Education">{{ 'Education' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="Education"
+                      type="text"
+                      class="form-control"
+                     id="Education"
+                    name="Education"
+                    [(ngModel)]="Member.Education"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.Education.errors?.required)
+                    }"
+                    maxlength="20" 
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'Education is required.' | translate }}
+                      </div>
+                </div>
+               </div>
+
+               <!-- Email -->
+               <div class="form-group">
+                <label for="dob">{{ 'Email' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="email"
+                      type="email"
+                      class="form-control"
+                     id="email"
+                    name="email"
+                    [(ngModel)]="Member.email"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.email.errors?.required)
+                    }"
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'Email is required.' | translate }}
+                      </div>
+                </div>
+               </div>
+    
+               <!-- middle name -->
+    
+               <div class="form-group">
+                <label for="middleName">{{ 'Middle Name' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="middleName"
+                      type="text"
+                      class="form-control"
+                     id="middleName"
+                    name="middleName"
+                    [(ngModel)]="Member.middleName"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.middleName.errors?.required)
+                    }"
+                    maxlength="14" 
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'Middle Name 1 is required.' | translate }}
+                      </div>
+                </div>
+               </div>
+    
+               <!-- Last Name -->
+    
+               <div class="form-group">
+                <label for="lastName">{{ 'Last Name' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="lastName"
+                      type="text"
+                      class="form-control"
+                     id="lastName"
+                    name="lastName"
+                    [(ngModel)]="Member.lastName"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.lastName.errors?.required)
+                    }"
+                    maxlength="14" 
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'Last Name is required.' | translate }}
+                      </div>
+                </div>
+               </div>
+    
+               <!-- gender -->
+              
+               <div class="form-group">
+                <label for="gender">{{ 'Gender' | translate }}</label><br>
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend"></div>
+                  <select
+                    formControlName="gender"
+                    class="form-control"
+                    id="gender"
+                    name="gender"
+                    [(ngModel)]="Member.gender"
+                    required
+                    [ngClass]="{
+                      'is-invalid': (submitted && MemberFormControl.gender.errors?.required)
+                    }"
+                  >
+                    <option value="" disabled>Select gender</option>
+                    <option value="Pune">Male</option>
+                    <option value="Mumbai">Female</option>
+                    <option value="kolhapur">Other</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    {{ 'gender is required.' | translate }}
+                  </div>
+                </div>
+                
+               <!-- pincode -->
+               <div class="form-group">
+                <label for="Pincode">{{ 'Pincode' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <input
+                        formControlName="pincode"
+                        type="text"
+                        class="form-control"
+                        id="pincode"
+                        name="pincode"
+                        [(ngModel)]="Member.pincode"
+                        [ngClass]="{
+                            'is-invalid': (submitted && (MemberFormControl.pincode.errors?.required || MemberFormControl.pincode.errors?.minlength))
+                        }"
+                        (input)="validatePincode($event)"
+                        minlength="6"
+                    />
+                    <div class="invalid-feedback">
+                      <div *ngIf="MemberFormControl.pincode.errors?.required">{{ 'Pincode is required.' | translate }}</div>
+                      <div *ngIf="MemberFormControl.pincode.errors?.minlength">{{ 'Pincode must be at least 6 characters long.' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+    
+                <!-- mobile -->
+                <div class="form-group">
+                  <label for="mobile">{{ 'Phone mobile' | translate }}</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <input
+                        formControlName="mobile"
+                        type="text"
+                        class="form-control"
+                       id="mobile"
+                      name="mobile"
+                      [(ngModel)]="Member.mobile"
+                      [ngClass]="{
+                        'is-invalid': (submitted && (MemberFormControl.mobile.errors?.required || MemberFormControl.mobile.errors?.minlength))
+      
+                      }"
+                      (input)="validatePhoneNumber($event)"
+                      minlength="10"
+                        />
+                        <div class="invalid-feedback">
+                          <div *ngIf="MemberFormControl.mobile.errors?.required">{{ 'Phone mobile is required.' | translate }}</div>
+                          <div *ngIf="MemberFormControl.mobile.errors?.minlength">{{ 'Phone mobile must be at least 10 characters long.' | translate }}</div>
+                        </div>
+                        
+                  </div>
+                 </div>
+             
+    <!-- status -->
+               <div class="form-group">
+                <label>{{ 'Status' | translate }}</label><br>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <select
+                    formControlName="status"
+                    class="form-control"
+                    id="status"
+                    name="status"
+                    [(ngModel)]="Member.status"
+                    required
+                    [ngClass]="{
+                      'is-invalid': (submitted && MemberFormControl.status.errors?.required)
+                    }"
+                  >
+                    <option value="" disabled>Select Status</option>
+                    <option value="1">{{'Active'|translate}}</option>
+                    <option value="0">{{'Inactive'|translate}}</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    {{ 'Status is required.' | translate }}
+                  </div>
+                </div>
+               </div>
+    
+    
+               <div ><br>
+                <button type="submit" class="btn btn-success mx-2" >{{'Save'|translate}}</button>
+                <button type="button" class="btn btn-primary mx-2" (click)="Clear()">{{'Clear'|translate}} </button>
+                <button type="button" class="btn btn-danger mx-2" (click)="CancelChanges()">{{'Back'|translate}} </button>
+               
+               
+               </div>
+          </div>
+            </form>
+        </div>
+      </div>
+    </div>
+    </div>
+    

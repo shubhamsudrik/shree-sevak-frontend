@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationDataService } from 'src/app/location-data.service';
+import { LocationDataService } from 'src/app/services/location-data.service';
 import { Router } from '@angular/router';
-import { Location } from 'src/app/location';
+import { Location } from 'src/app/Classes/location';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -28,7 +28,7 @@ export class LocationListComponent implements OnInit {
     this.locationDataService.getLocationList().subscribe(
       (data: Location[]) => {
         this.defaultLocations = data;
-        console.log(data);
+        console.log(this.defaultLocations);
       },
       (error) => {
         console.error('Error fetching locations:', error);

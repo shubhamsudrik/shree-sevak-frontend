@@ -13,19 +13,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { LocationListComponent } from './pages/location-list/location-list.component';
-import { EditLocationComponent } from './pages/edit-location/edit-location.component';
+import { EditLocationComponent } from './pages/location-list/edit-location/edit-location.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { NgFor } from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import { UpdateLocationComponent } from './pages/update-location/update-location.component';
+import { UpdateLocationComponent } from './pages/location-list/update-location/update-location.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ToastrModule } from 'ngx-toastr';
-import { LocationDataService } from './location-data.service';
+import { LocationDataService } from './services/location-data.service';
+import { MemberListComponent } from './pages/member-list/member-list.component';
+import { AddNewMemberComponent } from './pages/member-list/add-new-member/add-new-member.component';
+import { UpdateMemberComponent } from './pages/member-list/update-member/update-member.component';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -66,6 +69,9 @@ import { LocationDataService } from './location-data.service';
     LocationListComponent,
     EditLocationComponent,
     UpdateLocationComponent,
+    MemberListComponent,
+    AddNewMemberComponent,
+    UpdateMemberComponent,
     
     // ComponentComponent
   ],
