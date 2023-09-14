@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -29,16 +28,21 @@ import { LocationDataService } from './services/location-data.service';
 import { MemberListComponent } from './pages/member-list/member-list.component';
 import { AddNewMemberComponent } from './pages/member-list/add-new-member/add-new-member.component';
 import { UpdateMemberComponent } from './pages/member-list/update-member/update-member.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateBaithakComponent } from './pages/baithak-list/create-baithak/create-baithak.component';
+import { UpdateBaithakComponent } from './pages/baithak-list/update-baithak/update-baithak.component';
+import { BaithakListComponent } from './pages/baithak-list/baithak-list.component';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
 
 @NgModule({
   imports: [
+    TranslateModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    
+    FormsModule,
     ComponentsModule,
     NgbModule,
     RouterModule,
@@ -72,6 +76,9 @@ import { UpdateMemberComponent } from './pages/member-list/update-member/update-
     MemberListComponent,
     AddNewMemberComponent,
     UpdateMemberComponent,
+    CreateBaithakComponent,
+    UpdateBaithakComponent,
+    BaithakListComponent
     
     // ComponentComponent
   ],

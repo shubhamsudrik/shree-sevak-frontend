@@ -1,0 +1,101 @@
+<div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+    <div class="py-7 py-lg-8"></div>
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <!-- Table -->
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-body px-lg-5 py-lg-5">
+                 <h3>Update Baithak Page</h3>
+              <form role="form" [formGroup]="baithakForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label for="baithak-type">{{
+                    "BaithakType" | translate
+                  }}</label>
+                  <select
+                    formControlName="baithakType"
+                    class="form-control"
+                    id="baithak-type"
+                    name="baithak-type"
+                    [(ngModel)]="baithak.baithakType"
+                  >
+                    <option value="" disabled>Select Baithak</option>
+                    <option value="child">CHILD</option>
+                    <option value="man">MAN</option>
+                    <option value="women">WOMEN</option>
+                    <option value="any">ANY</option>
+                  </select>
+                </div>
+  
+                <div class="form-group">
+                  <label for="dayOfWeek">{{ "DayOfWeek" | translate }}</label>
+                  <select
+                    formControlName="dayOfWeek"
+                    class="form-control"
+                    id="dayOfWeek"
+                    name="dayOfWeek"
+                    [(ngModel)]="baithak.dayOfWeek"
+                  >
+                    <option value="" disabled>Select Day</option>
+                    <option value="SUN">SUNDAY</option>
+                    <option value="MON">MONDAY</option>
+                    <option value="TUE">TUESDAY</option>
+                    <option value="WED">WEDNESDAY</option>
+                    <option value="THU">THURSDAY</option>
+                    <option value="FRI">FRIDAY</option>
+                    <option value="SAT">SATURDAY</option>
+                  </select>
+                </div>
+  
+                <div class="form-group">
+                  <label for="from-time">{{ "StartTime" | translate }}</label>
+                  <input
+                    type="time"
+                    formControlName="fromTime"
+                    class="form-control"
+                    id="from-time"
+                    name="from-time"
+                    [(ngModel)]="baithak.fromTime"
+                  />
+                </div>
+  
+                <div class="form-group">
+                  <label for="to-time">{{ "EndTime" | translate }}</label>
+                  <input
+                    type="time"
+                    formControlName="toTime"
+                    class="form-control"
+                    id="to-time"
+                    name="to-time"
+                    [(ngModel)]="baithak.toTime"
+                  />
+                </div>
+                
+                <div class="form-group">
+                  <label for="status">{{ "Status" | translate }}</label>
+                  <select
+                    formControlName="status"
+                    class="form-control"
+                    id="status"
+                    name="status"
+                    [(ngModel)]="baithak.status"
+                  >
+                    <option value="" disabled>Select Status</option>
+                    <option value="1">{{ "Active" | translate }}</option>
+                    <option value="0">{{ "Inactive" | translate }}</option>
+                  </select>
+                </div>
+               
+                <div class="form-group">
+                    <button  type="submit" class="btn btn-success" >{{'save'|translate}}</button>
+                    <button  type="button" class="btn btn-danger " (click)="CancelChanges()">{{'Back'|translate}} </button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

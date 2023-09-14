@@ -11,6 +11,9 @@ import { UpdateLocationComponent } from 'src/app/pages/location-list/update-loca
 import { MemberListComponent } from 'src/app/pages/member-list/member-list.component';
 import { UpdateMemberComponent } from 'src/app/pages/member-list/update-member/update-member.component';
 import { AddNewMemberComponent } from 'src/app/pages/member-list/add-new-member/add-new-member.component';
+import { BaithakListComponent } from 'src/app/pages/baithak-list/baithak-list.component';
+import { CreateBaithakComponent } from 'src/app/pages/baithak-list/create-baithak/create-baithak.component';
+import { UpdateBaithakComponent } from 'src/app/pages/baithak-list/update-baithak/update-baithak.component';
 // import { ComponentComponent } from 'src/app/pages/component/component.component';
 
 export const AdminLayoutRoutes: Routes = [
@@ -26,6 +29,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'member-list', component: MemberListComponent },
     { path: 'update-location/:id', component: UpdateLocationComponent },
     { path: 'update-member/:id', component: UpdateMemberComponent },
+    { path: 'baithak-list', component: BaithakListComponent },
+    { path: 'create-baithak', component: CreateBaithakComponent },
+     { path: 'update-baithak/:id', component: UpdateBaithakComponent },
     // {path :'component', component :ComponentComponent}
    
     
