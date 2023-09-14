@@ -52,13 +52,12 @@ export class MemberListComponent implements OnInit {
     toggleButtons(operation: string, member: any) {
       if (operation === 'edit') {
         member.isEditing = true;
-        member.isDeleting = true;
       }
     }
 
   
-    updateMember(memberIdId: number) {
-      this.router.navigate(['/update-member', memberIdId]);
+    updateMember(memberId: number) {
+      this.router.navigate(['/update-member', memberId]);
     }
   }
   

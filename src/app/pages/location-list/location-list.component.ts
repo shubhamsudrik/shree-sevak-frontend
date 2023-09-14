@@ -14,6 +14,7 @@ export class LocationListComponent implements OnInit {
   defaultLocations: Location[] = [];
   public focus;
   searchText: any;
+  allLocation: Location[]=[]
   
   constructor(
     private locationDataService: LocationDataService,
@@ -22,6 +23,8 @@ export class LocationListComponent implements OnInit {
   ) {
     translate.addLangs(['English', 'Marathi']);
     translate.setDefaultLang('English');
+
+    
   }
 
   private getLocations() {
@@ -42,7 +45,11 @@ export class LocationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLocations();
+    this.getAllLocationList()
+    this.getAllLocations(event);
+
   }
+  
 
   onOpen() {
     console.log(this.location);
@@ -73,5 +80,20 @@ export class LocationListComponent implements OnInit {
 
   updateLocation(locationId: number) {
     this.router.navigate(['/update-location', locationId]);
+  }
+
+  //get all location data
+
+  private getAllLocationList(){
+    this.locationDataService.getAllLocationList().subscribe(
+      (data: Location[]) => {
+        this.allLocation =data;
+        console.log(this.allLocation)
+      },)
+  }
+
+  getAllLocations(event){
+    this.getAllLocationList=event
+    console.log(this.getAllLocationList)
   }
 }

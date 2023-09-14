@@ -17,6 +17,12 @@ export class LocationDataService {
   }
 
   // For Get the active record from database
+  getAllLocationList(): Observable<Location[]> {
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/`);
+  }
+
+
+  // For Get the active record from database
   getLocationList(): Observable<Location[]> {
     return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/status/1`);
   }
@@ -46,17 +52,22 @@ export class LocationDataService {
 
   // auth guard
 
-  private userPayLoad: any;
-  //login
-  logIn(login: any): Observable<any> {
-    return this.httpclient.post(`${this.baseUrl}/auth/login`, login);
-  }
   //signup
+
+  
   signUP(signup: any): Observable<object> {
     return this.httpclient.post(`${this.baseUrl}/api/user/signup`, signup);
   }
 
-  //store token
+
+ //login
+
+  private userPayLoad: any;
+ 
+  logIn(login: any): Observable<any> {
+    return this.httpclient.post(`${this.baseUrl}/auth/login`, login);
+  }
+    //store token
   storeToken(tokenValue: string){
     // return this.httpclient.get<Location>(`${this.baseUrl}/api/location/${token}`);
     localStorage.setItem('token', tokenValue);

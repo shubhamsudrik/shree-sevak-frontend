@@ -40,7 +40,7 @@ export class AddNewMemberComponent implements OnInit {
       addharNumber: ['', [Validators.required, Validators.minLength(16)]],
       add1: ['', Validators.required],
       add2: ['', Validators.required],
-      additionalInfo: ['', Validators.required],
+      additionalInfo: [''],
       city: ['', Validators.required],
       division: ['', Validators.required],
       state: ['', Validators.required],

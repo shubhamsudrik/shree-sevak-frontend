@@ -49,12 +49,24 @@
             </div >
             <div class="form-group"><br>
             <ul class="nav nav-pills justify-content">
+              <li>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Actions
+                  </button>
+                  <div class="dropdown-menu">
+                    <button class="dropdown-item"> {{'Active Location'|translate}}</button>
+                    <button class="dropdown-item" (click)="getAllLocations($event)">{{ 'All Location' | translate }}</button>
+                  </div>
+                </div>
+              </li>
               <li class="nav-item mr-2 mr-md-0">
                   <span class="d-none d-md-block" class="form-group">
                     <!-- <button class="btn btn-success" (click)="onAddNewUser($event)">नवीन जोडा</button> -->
                     <button class="btn btn-success" (click)="onOpen()" > {{'Add New'|translate}}</button>
                   </span>
               </li>
+             
               <li class="nav-item mr-2 mr-md-0">
                   <span class="d-none d-md-block" class="form-group">
                     <div  *ngFor="let location of defaultLocations; let i = index">
