@@ -1,12 +1,11 @@
-import { Time } from "@angular/common";
 
 
 export class Baithak{
     bithakId :Number
     baithakType:string;
 	dayOfWeek:string ;
-	fromTime:Time ;
+	fromTime:String ;
 	status:string;
-    toTime:Time;
+    toTime:string;
     
 }
