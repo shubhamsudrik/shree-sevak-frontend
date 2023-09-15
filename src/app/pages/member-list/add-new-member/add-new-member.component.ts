@@ -52,6 +52,7 @@ export class AddNewMemberComponent implements OnInit {
       middleName: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: ['', Validators.required],
+
       pincode: ['', [Validators.required, Validators.minLength(6)]],
       mobile: ['', [Validators.required, Validators.minLength(10)]],
       latitude: ['', Validators.required],
