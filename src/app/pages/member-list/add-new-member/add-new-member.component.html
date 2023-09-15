@@ -12,6 +12,8 @@
             <form role="form" [formGroup]="memberform" (ngSubmit)="onSubmit()">
               <h2 class="text-center">{{'Add new member record!' | translate }}</h2><br>
               
+               
+               
                <!-- aadhar number-->
                <div class="form-group">
                 <label for="addharNumber">{{ 'Addhar Number' | translate }}</label>
@@ -35,7 +37,6 @@
                         <div *ngIf="MemberFormControl.addharNumber.errors?.required">{{ 'Addhar Number is required.' | translate }}</div>
                         <div *ngIf="MemberFormControl.addharNumber.errors?.minlength">{{ 'Addhar Number must be at least 10 characters long.' | translate }}</div>
                       </div>
-                      
                 </div>
                </div>
 
@@ -129,6 +130,8 @@
                 {{ 'City is required.' | translate }}
               </div>
             </div>
+           </div>
+            
 
             <!-- division -->
             <div class="form-group">
@@ -158,7 +161,7 @@
                 </div>
               </div>
             </div>
-           </div>
+           
 <!-- state -->
            <div class="form-group">
             <label>{{ 'State' | translate }}</label>
@@ -307,12 +310,12 @@
 
                <!-- Email -->
                <div class="form-group">
-                <label for="dob">{{ 'Email' | translate }}</label>
+                <label for="email">{{ 'Email' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
                       formControlName="email"
-                      type="email"
+                      type="text"
                       class="form-control"
                      id="email"
                     name="email"
@@ -401,6 +404,7 @@
                     {{ 'gender is required.' | translate }}
                   </div>
                 </div>
+               </div>
                 
                <!-- pincode -->
                <div class="form-group">
@@ -453,7 +457,50 @@
                         
                   </div>
                  </div>
-             
+              <!-- latitude -->
+              <div class="form-group">
+                <label for="latitude">{{ 'Latitude' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="latitude"
+                      type="text"
+                      class="form-control"
+                     id="latitude"
+                    name="latitude"
+                    [(ngModel)]="Member.latitude"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.latitude.errors?.required)
+                    }"
+                    maxlength="20" 
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'latitudeis required.' | translate }}
+                      </div>
+                </div>
+               </div>
+                <!-- longitude -->
+              <div class="form-group">
+                <label for="longitude">{{ 'Education' | translate }}</label>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <input
+                      formControlName="longitude"
+                      type="text"
+                      class="form-control"
+                     id="longitude"
+                    name="longitude"
+                    [(ngModel)]="Member.longitude"
+                    [ngClass]="{
+                     'is-invalid': (submitted && MemberFormControl.longitude.errors?.required)
+                    }"
+                    maxlength="20" 
+                      />
+                      <div class="invalid-feedback">
+                        {{ 'longitude is required.' | translate }}
+                      </div>
+                </div>
+               </div>
     <!-- status -->
                <div class="form-group">
                 <label>{{ 'Status' | translate }}</label><br>
@@ -485,11 +532,10 @@
                 <button type="submit" class="btn btn-success mx-2" >{{'Save'|translate}}</button>
                 <button type="button" class="btn btn-primary mx-2" (click)="Clear()">{{'Clear'|translate}} </button>
                 <button type="button" class="btn btn-danger mx-2" (click)="CancelChanges()">{{'Back'|translate}} </button>
-               
-               
                </div>
+          
+              </form>
           </div>
-            </form>
         </div>
       </div>
     </div>

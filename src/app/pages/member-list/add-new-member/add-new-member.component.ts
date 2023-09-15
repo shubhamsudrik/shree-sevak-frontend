@@ -40,18 +40,21 @@ export class AddNewMemberComponent implements OnInit {
       addharNumber: ['', [Validators.required, Validators.minLength(16)]],
       add1: ['', Validators.required],
       add2: ['', Validators.required],
-      additionalInfo: ['', Validators.required],
+      additionalInfo: [''],
       city: ['', Validators.required],
       division: ['', Validators.required],
       state: ['', Validators.required],
       country: ['', Validators.required],
       firstName: ['', Validators.required],
       dob: ['', Validators.required],
-      education: ['', Validators.required],
+      Education: ['', Validators.required],
+      email: ['', Validators.required],
       middleName: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: ['', Validators.required],
+
      pincode: ['', [Validators.required, Validators.minLength(6)]],
+
       mobile: ['', [Validators.required, Validators.minLength(10)]],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
@@ -150,11 +153,12 @@ export class AddNewMemberComponent implements OnInit {
   isDuplicateData(newMember: Member): boolean {
     for (let item of this.defaultMembers) {
       if (
+        
         // item.city === newMember.city &&
-        // item.state === newMember.state &&
-        item.email === newMember.email &&
-        item.mobile === newMember.mobile &&
-        item.addharNumber === newMember.addharNumber 
+        item.state === newMember.state 
+        // item.email === newMember.email &&
+        // item.mobile === newMember.mobile &&
+        // item.addharNumber === newMember.addharNumber 
         // item.division === newMember.division 
         // item.id !== newMember.MemberId
       ) {

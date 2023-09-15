@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
-import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
@@ -14,14 +13,13 @@ import { AddNewMemberComponent } from 'src/app/pages/member-list/add-new-member/
 import { BaithakListComponent } from 'src/app/pages/baithak-list/baithak-list.component';
 import { CreateBaithakComponent } from 'src/app/pages/baithak-list/create-baithak/create-baithak.component';
 import { UpdateBaithakComponent } from 'src/app/pages/baithak-list/update-baithak/update-baithak.component';
-// import { ComponentComponent } from 'src/app/pages/component/component.component';
+
 
 export const AdminLayoutRoutes: Routes = [
  
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },
-    { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'location-list', component: LocationListComponent},
     { path: 'edit-location', component: EditLocationComponent },
@@ -32,7 +30,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'baithak-list', component: BaithakListComponent },
     { path: 'create-baithak', component: CreateBaithakComponent },
      { path: 'update-baithak/:id', component: UpdateBaithakComponent },
-    // {path :'component', component :ComponentComponent}
-   
+  
     
 ];

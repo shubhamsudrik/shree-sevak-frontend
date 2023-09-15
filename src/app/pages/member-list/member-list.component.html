@@ -78,7 +78,7 @@
                   <tr *ngFor="let member of defaultMembers |filter:searchText; let i = index ">
   
                   <td>
-                    <input type="radio" name="operation" (click)="toggleButtons('edit', location)" value="edit"  (change)="selectedRow = i">
+                    <input type="radio" name="operation" (click)="toggleButtons('edit', member)" value="edit"  (change)="selectedRow = i">
                     <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->
                   </td>
                   <td>{{ member.memberId }}</td>
