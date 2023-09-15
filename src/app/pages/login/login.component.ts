@@ -27,7 +27,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Call decodedToken to get the decoded token value
+    const decodedToken = this.locationDataService.decodedToken();
+    if (decodedToken) {
+      // Now you can access properties of the decoded token if needed.
+      console.log(decodedToken);
+    }
+  }
 
   hideShowPass() {
     this.isText = !this.isText;
@@ -41,13 +48,21 @@ export class LoginComponent implements OnInit {
         email: this.loginForm.get('email').value,
         password: this.loginForm.get('password').value
       };
-
+  
       this.locationDataService.logIn(loginData).subscribe({
         next: (res) => {
           console.log("res: " + res.message);
           this.loginForm.reset();
           this.locationDataService.storeToken(res.token);
           this.toast.success({ detail: 'SUCCESS', summary: res.message, duration: 500 });
+  
+          // Call decodedToken after storing the token
+          const decodedToken = this.locationDataService.decodedToken();
+          if (decodedToken) {
+            // Now you can access properties of the decoded token if needed.
+            console.log(decodedToken);
+          }
+  
           this.router.navigate(['/dashboard']);
         },
         error: (error) => {
@@ -60,4 +75,4 @@ export class LoginComponent implements OnInit {
       // Handle form validation errors.
     }
   }
-}
+}  

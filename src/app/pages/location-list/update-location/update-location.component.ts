@@ -14,6 +14,7 @@ export class UpdateLocationComponent implements OnInit {
   submitted = false;
   location: Location = new Location();
   id: number;
+  defaultLocations: Location[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +34,19 @@ export class UpdateLocationComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  // get All location
+  getLocations() {
+    this.locationDataService.getLocationList().subscribe(
+      (data: Location[]) => {
+        this.defaultLocations = data;
+        console.log(this.defaultLocations);
+      },
+      (error) => {
+        console.error('Error fetching locations:', error);
+      }
+    );
   }
 
   initializeForm() {
@@ -58,10 +72,22 @@ export class UpdateLocationComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (this.locationform.invalid) {
-      return;
+
+    const isDuplicate = this.isDuplicateData(this.location);
+
+    if (isDuplicate) {
+      // Data already exists error message
+      alert(
+        'Data already exists with the same address, city, state, and division.'
+      );
+    } else if (this.locationform.valid) {
+      // Data doesn't exist and the form is valid, save the location
+      console.log(this.location.locationName);
+      console.log(this.location);
+      this.saveLocation();
+    } else {
+      alert('Please fill all fields: कृपया सर्व फील्ड भरा');
     }
-    this.saveLocation();
   }
 
   saveLocation() {
@@ -99,4 +125,19 @@ export class UpdateLocationComponent implements OnInit {
   CancelChanges() {
     this.router.navigate(['/location-list']);
   }
+
+  isDuplicateData(newLocation: Location): boolean {
+    for (let item of this.defaultLocations) {
+      if (
+        item.city === newLocation.city &&
+        item.state === newLocation.state &&
+        item.division === newLocation.division 
+        // item.locationName === newLocation.locationName
+      ) {
+        return true; // Data already exists
+      }
+    }
+    return false; // Data does not exist
+  }
+
 }

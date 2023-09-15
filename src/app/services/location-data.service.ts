@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {  Observable } from 'rxjs';
 import { Location } from '../Classes/location';
-import { EditLocationComponent } from '../pages/location-list/edit-location/edit-location.component';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,10 +13,10 @@ export class LocationDataService {
   
 
   constructor(private httpclient: HttpClient) {
-  //  this.userPayLoad = this.decodedToken();
+   this.userPayLoad = this.decodedToken();
   }
 
-  // For Get the active record from database
+  // For Get the all record from database
   getAllLocationList(): Observable<Location[]> {
     return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/`);
   }
@@ -26,6 +26,11 @@ export class LocationDataService {
   getLocationList(): Observable<Location[]> {
     return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/status/1`);
   }
+
+  // get active and Inactive by status
+  getLocationByStatus(statustype: string): Observable<Location[]>{
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/status/${statustype}`);
+   }
 
   // for create the record in the database
   createLocation(location: Location): Observable<Object>{
@@ -82,15 +87,23 @@ export class LocationDataService {
     return !!localStorage.getItem('token')
   }
 
-  // decodedToken(){
-  //   const jwtHelper =new JwtHelperService();
-  //   const token =this.getToken();
-  //   console.log(jwtHelper.decodeToken(token));
-  //   return jwtHelper.decodeToken(token);
-  // }
-
-  getfullNameFromToken(){
+  decodedToken() {
+    const jwtHelper = new JwtHelperService();
+    const token = this.getToken();
     
+    try {
+      if (token) {
+        console.log(jwtHelper.decodeToken(token));
+        return jwtHelper.decodeToken(token);
+      } else {
+        console.error('Token is undefined.');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
   }
+ 
 }
 

@@ -14,6 +14,19 @@ export class MemberListService {
   //  this.userPayLoad = this.decodedToken();
   }
 
+
+  // For Get the all record from database
+  getAllMemberList(): Observable<Member[]> {
+    return this.httpclient.get<Member[]>(`${this.baseUrl}/api/member/all-members`);
+  }
+
+  
+  //get member by status
+  getMemberByStatus(member: string): Observable<Member[]>{
+    return this.httpclient.get<Member[]>(`${this.baseUrl}/api/member/status/${member}`);
+
+  }
+
   // For Get the active record from database
   getMemberList(): Observable<Member[]> {
     return this.httpclient.get<Member[]>(`${this.baseUrl}/api/member/status/1`);

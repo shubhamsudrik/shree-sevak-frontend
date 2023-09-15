@@ -35,6 +35,17 @@ export class MemberListComponent implements OnInit {
         }
       );
     }
+
+
+    //get all location data
+
+  private getAllMemberList(){
+    this.memberListService.getAllMemberList().subscribe(
+      (data: Member[]) => {
+        this.defaultMembers =data;
+        console.log(this.defaultMembers)
+      },)
+  }
   
     switchLang(lang: string) {
       this.translate.use(lang);
@@ -59,5 +70,23 @@ export class MemberListComponent implements OnInit {
     updateMember(memberId: number) {
       this.router.navigate(['/update-member', memberId]);
     }
+
+    // show all data and handl using active in active button 
+  statusLocation(status: string){
+    if (status === "all") {
+      this.getAllMemberList();
+    }else{
+
+    this.memberListService.getMemberByStatus(status).subscribe(
+      (data: Member[]) => {
+        this.defaultMembers = data;
+        console.log(data);
+      },
+      (error) => {
+        console.error("fetching baithak detail:", error);
+      }
+    );
+    }
+  }
   }
   

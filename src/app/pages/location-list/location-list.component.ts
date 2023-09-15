@@ -14,7 +14,7 @@ export class LocationListComponent implements OnInit {
   defaultLocations: Location[] = [];
   public focus;
   searchText: any;
-  allLocation: Location[]=[]
+ 
   
   constructor(
     private locationDataService: LocationDataService,
@@ -44,11 +44,8 @@ export class LocationListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getLocations();
     this.getAllLocationList()
-    this.getAllLocations(event);
-
-  }
+    }
   
 
   onOpen() {
@@ -87,13 +84,28 @@ export class LocationListComponent implements OnInit {
   private getAllLocationList(){
     this.locationDataService.getAllLocationList().subscribe(
       (data: Location[]) => {
-        this.allLocation =data;
-        console.log(this.allLocation)
+        this.defaultLocations =data;
+        console.log(this.defaultLocations)
       },)
   }
 
-  getAllLocations(event){
-    this.getAllLocationList=event
-    console.log(this.getAllLocationList)
+
+  // show all data and handl using active in active button 
+  statusLocation(status: string){
+    if (status === "all") {
+      this.getAllLocationList();
+    }else{
+
+    this.locationDataService.getLocationByStatus(status).subscribe(
+      (data: Location[]) => {
+        this.defaultLocations = data;
+        console.log(data);
+      },
+      (error) => {
+        console.error("fetching baithak detail:", error);
+      }
+    );
+    }
   }
-}
+  }
+

@@ -132,12 +132,16 @@ validatePhoneNumber(event){
       if (
         item.city === newLocation.city &&
         item.state === newLocation.state &&
-        item.division === newLocation.division 
-        // item.id !== newLocation.locationId
+        item.division === newLocation.division &&
+        item.locationName === newLocation.locationName
       ) {
         return true; // Data already exists
       }
+      
     }
     return false; // Data does not exist
+    console.log(newLocation)
   }
+ 
+
 }

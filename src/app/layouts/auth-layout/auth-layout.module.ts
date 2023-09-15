@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
+import { LocationDataService } from 'src/app/services/location-data.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +17,8 @@ import { RegisterComponent } from '../../pages/register/register.component';
     ToastrModule.forRoot(),
     // NgbModule
   ],
+  providers: [LocationDataService],
+  
   declarations: [
     LoginComponent,
     RegisterComponent
