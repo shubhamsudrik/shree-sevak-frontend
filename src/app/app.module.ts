@@ -32,12 +32,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateBaithakComponent } from './pages/baithak-list/create-baithak/create-baithak.component';
 import { UpdateBaithakComponent } from './pages/baithak-list/update-baithak/update-baithak.component';
 import { BaithakListComponent } from './pages/baithak-list/baithak-list.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
 
 @NgModule({
   imports: [
+    NgxMaterialTimepickerModule,
     TranslateModule,
     BrowserAnimationsModule,
     FormsModule,

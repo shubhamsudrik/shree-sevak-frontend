@@ -16,8 +16,6 @@ export const ROUTES: RouteInfo[] = [
     { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
     { path: '/register', title: 'New Register',  icon:'ni-circle-08 text-pink', class: '' },
     { path: '/member-list', title: 'member',  icon:'ni-pin-3 text-red', class: '' },
-    { path: '/create-baithak', title: 'CreateBaithak',  icon:'ni-circle-08 text-pink', class: '' },
-    { path: '/update-baithak/:id', title: 'UpdateBaithak',  icon:'ni-circle-08 text-pink', class: '' },
     { path: '/baithak-list', title: 'Baithak',  icon:'ni-pin-3 text-red', class: '' },
 ];
 

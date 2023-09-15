@@ -3,7 +3,7 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h1>Baithak list</h1>
+        
           <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
             <li class="nav-item ml-auto">
               <span class="d-none d-md-block form-group">
@@ -44,7 +44,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>    
               </div>
-              <input class="form-control" placeholder="{{ 'Search'  }}"  type="text" 
+              <input class="form-control" placeholder="{{ 'Search'  }}"  [(ngModel)]="searchText" type="text" 
               >
             </div >
             <div class="form-group"><br>
@@ -53,6 +53,18 @@
                 <span class="d-none d-md-block" class="form-group">
                   <!-- <button class="btn btn-success" (click)="onAddNewUser($event)">नवीन जोडा</button> -->
                   <button class="btn btn-success" (click)="onOpen()" > {{'Add New'|translate}}</button>
+               
+
+
+                  <select class="btn btn-success" (change)="statusBaithak($event.target.value)">
+                    <option  disabled selected>Select Baithak</option>
+                    <option value="all" >All</option>
+                    <option value="1" >Active</option>
+                    <option value="0">InActive</option>
+                    
+                  </select>
+                
+           
                 </span>
               </li>
               <li class="nav-item mr-2 mr-md-0">
@@ -75,9 +87,9 @@
                 <th scope="col">{{'BaithakID' | translate}}</th>
                 <th scope="col">{{'BaithakType' | translate}}</th>
                 <th scope="col">{{' DayOFWeek' | translate}} </th>
-                <th scope="col">{{' FromTime' | translate}} </th>
+                <th scope="col">{{' StarTime' | translate}} </th>
+                <th scope="col">{{'EndTime' | translate}}</th>
                 <th scope="col">{{'Status' | translate}} </th>
-                <th scope="col">{{'ToTime' | translate}}</th>
       
                 <!-- <th scope="col">{{'status'}}</th> -->
               </tr>
@@ -94,8 +106,8 @@
                 <td>{{ baithaData.baithakType| translate}}</td>
                 <td>{{ baithaData.dayOfWeek| translate}}</td>
                 <td>{{ baithaData.fromTime | translate}}</td>
-                <td>{{ baithaData.status  | translate}}</td>
                 <td>{{ baithaData.toTime  | translate}}</td>
+                <td>{{ baithaData.status  | translate}}</td>
             
              
                 <!-- <td>{{ location.status }}</td> -->

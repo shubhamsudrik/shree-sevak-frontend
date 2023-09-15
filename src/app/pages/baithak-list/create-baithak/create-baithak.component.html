@@ -20,10 +20,10 @@
                   [(ngModel)]="baithak.baithakType"
                 >
                   <option value="" disabled>Select Baithak</option>
-                  <option value="child">CHILD</option>
-                  <option value="man">MAN</option>
-                  <option value="women">WOMEN</option>
-                  <option value="any">ANY</option>
+                  <option value="CHILD">CHILD</option>
+                  <option value="MAN">MAN</option>
+                  <option value="WOMEN">WOMEN</option>
+                  <option value="ANY">ANY</option>
                 </select>
               </div>
 
@@ -37,40 +37,42 @@
                   [(ngModel)]="baithak.dayOfWeek"
                 >
                   <option value="" disabled>Select Day</option>
-                  <option value="SUN">SUNDAY</option>
-                  <option value="MON">MONDAY</option>
-                  <option value="TUE">TUESDAY</option>
-                  <option value="WED">WEDNESDAY</option>
-                  <option value="THU">THURSDAY</option>
-                  <option value="FRI">FRIDAY</option>
-                  <option value="SAT">SATURDAY</option>
+                  <option value="SUNDAY">SUNDAY</option>
+                  <option value="MONDAY">MONDAY</option>
+                  <option value="TUESDAY">TUESDAY</option>
+                  <option value="WEDNESDAY">WEDNESDAY</option>
+                  <option value="THURSDAY">THURSDAY</option>
+                  <option value="FRIDAY">FRIDAY</option>
+                  <option value="SATURDAY">SATURDAY</option>
                 </select>
               </div>
 
               <div class="form-group">
                 <label for="from-time">{{ "StartTime" | translate }}</label>
                 <input
-                  type="time"
+                  [ngxTimepicker]="picker"
                   formControlName="fromTime"
                   class="form-control"
                   id="from-time"
                   name="from-time"
                   [(ngModel)]="baithak.fromTime"
                 />
+                <ngx-material-timepicker #picker></ngx-material-timepicker>
               </div>
 
               <div class="form-group">
                 <label for="to-time">{{ "EndTime" | translate }}</label>
                 <input
-                  type="time"
+                  [ngxTimepicker]="picker1"
                   formControlName="toTime"
                   class="form-control"
                   id="to-time"
                   name="to-time"
                   [(ngModel)]="baithak.toTime"
                 />
+                <ngx-material-timepicker #picker1></ngx-material-timepicker>
               </div>
-              
+
               <div class="form-group">
                 <label for="status">{{ "Status" | translate }}</label>
                 <select
@@ -85,7 +87,7 @@
                   <option value="0">{{ "Inactive" | translate }}</option>
                 </select>
               </div>
-             
+
               <div>
                 <br />
                 <button type="submit" class="btn btn-success mx-2">

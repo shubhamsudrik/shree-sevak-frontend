@@ -26,6 +26,11 @@ export class BaithakDataService {
   getBaithakById(baithakId: number): Observable<Baithak>{
     return this.httpclient.get<Baithak>(`${this.baseUrl}/${baithakId}`);
    }
+      // For Get the record by active status wise from database
+  getBaithakByStatus(statustype: string): Observable<Baithak[]>{
+    return this.httpclient.get<Baithak[]>(`${this.baseUrl}/status/${statustype}`);
+   }
+
 
 
     createBaithak(baithak:Baithak):Observable<Object>{
