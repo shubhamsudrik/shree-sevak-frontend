@@ -44,7 +44,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>    
               </div>
-              <input class="form-control" placeholder="{{ 'Search'  }}"  type="text" 
+              <input class="form-control" placeholder="{{ 'Search'  }}"  [(ngModel)]="searchText" type="text" 
               >
             </div >
             <div class="form-group"><br>
@@ -56,11 +56,11 @@
                
 
 
-                  <select (change)="statusBaithak($event.target.value)">
-                    <option  disabled>Select Baithak</option>
+                  <select class="btn btn-success" (change)="statusBaithak($event.target.value)">
+                    <option  disabled selected>Select Baithak</option>
                     <option value="all" >All</option>
                     <option value="1" >Active</option>
-                    <option value="0"  >InActive</option>
+                    <option value="0">InActive</option>
                     
                   </select>
                 
