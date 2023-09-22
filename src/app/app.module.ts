@@ -33,6 +33,9 @@ import { CreateBaithakComponent } from './pages/baithak-list/create-baithak/crea
 import { UpdateBaithakComponent } from './pages/baithak-list/update-baithak/update-baithak.component';
 import { BaithakListComponent } from './pages/baithak-list/baithak-list.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { SchedularComponent } from './pages/schedular/schedular.component';
+import { AddSchedularComponent } from './pages/schedular/add-schedular/add-schedular.component';
+import { UpdateScheduleComponent } from './pages/schedular/update-schedule/update-schedule.component';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -80,7 +83,10 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     UpdateMemberComponent,
     CreateBaithakComponent,
     UpdateBaithakComponent,
-    BaithakListComponent
+    BaithakListComponent,
+    SchedularComponent,
+    AddSchedularComponent,
+    UpdateScheduleComponent
     
     // ComponentComponent
   ],

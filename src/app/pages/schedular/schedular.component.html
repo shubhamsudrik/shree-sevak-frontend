@@ -7,7 +7,7 @@
             <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
               <li class="nav-item ml-auto">
                 <span class="d-none d-md-block form-group">
-                  <h2>{{ 'Member records!' | translate }}</h2>
+                  <h2>{{ 'Scheduled Record!' | translate }}</h2>
                 </span>
               </li>
               <li class="nav-item ml-auto">
@@ -24,7 +24,7 @@
               <!-- For screens less than 600px -->
               <li class="nav-item d-md-none"> <!-- Hide this for medium and larger scren -->
                 <span class="form-group">
-                  <h3>{{ 'Member records!' | translate }}</h3>
+                  <h3>{{ 'Scheduled Record!' | translate }}</h3>
                 </span>
               </li>
             </ul>            
@@ -40,15 +40,14 @@
               <!-- add new button -->
               <div class="form-group"><br>
               <ul class="nav nav-pills justify-content">
-
                 <li class="nav-item mr-2 mr-md-0">
-                  <select class="btn btn-success" (change)="statusLocation($event.target.value)">
+                  <select class="btn btn-success" (change)="statusSchedule($event.target.value)">
                     <option  disabled selected>Select Baithak</option>
                     <option value="all" >All</option>
                     <option value="1" >Active</option>
                     <option value="0">InActive</option>
                   </select>
-                </li>
+                </li><br>
                 <li class="nav-item mr-2 mr-md-0">
                     <span class="d-none d-md-block" class="form-group">
                       <button class="btn btn-success" (click)="onOpen()" > {{'Add New'|translate}}</button>
@@ -58,8 +57,8 @@
                 <!-- update button -->
                 <li class="nav-item mr-2 mr-md-0">
                     <span class="d-none d-md-block" class="form-group">
-                      <div  *ngFor="let member of defaultMembers; let i = index">
-                        <button *ngIf="member.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateMember(member.memberId)">{{'Update'|translate}}</button>
+                      <div  *ngFor="let schedule of defaultSchedules; let i = index">
+                        <button *ngIf="schedule.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateMember(schedule.bithakId)">{{'Updaate'|translate}}</button>
                       </div>
                     </span>
                 </li>
@@ -71,56 +70,33 @@
               <thead class="thead-light">
                 <tr>
                   <th scope="col">{{'Action'|translate}} </th>
-                  <th scope="col">{{'Member Id'|translate}} </th>
-                  <th scope="col">{{'First Name'|translate}}</th>
-                  <th scope="col">{{'Middle Name'|translate}}</th>
-                  <th scope="col">{{'Last Name'|translate}} </th>
-                  <th scope="col">{{'Gender'|translate}} </th>
-                  <th scope="col">{{'Mobile number'|translate}} </th>
-                  <th scope="col">{{'Own baithak id'|translate}}</th>
-                  <th scope="col">{{'Pincode'|translate}} </th>
-                  <th scope="col">{{'Status'|translate}} </th>   
-                  <!-- <th scope="col">{{'Status'|translate}} </th>
-                  <th scope="col">{{'Add2'|translate}} </th>
-                  <th scope="col">{{'City'|translate}} </th>
-                  <th scope="col">{{'State'|translate}} </th>
-                  <th scope="col">{{'Country'|translate}}</th>
-                  <th scope="col">{{'Division'|translate}}</th>
-                  <th scope="col">{{'DOB'|translate}} </th>
-                  <th scope="col">{{'Gender'|translate}}</th>
-                  <th scope="col">{{'Phone Number'|translate}}</th>
-                  <th scope="col">{{'Status'|translate}} </th>                   -->
+                  <th scope="col">{{'Baithak Type'|translate}}</th>
+                  <th scope="col">{{'Start Time'|translate}}</th>
+                  <th scope="col">{{'End Time'|translate}} </th>
+                  <th scope="col">{{'dayOfWeek'|translate}} </th>
+                  <th scope="col">{{'Members'|translate}}</th>
+                  <th scope="col">{{'Locations'|translate}}</th>
+                  <th scope="col">{{'Status'|translate}}</th>
+                  
                 </tr>
               </thead>
               <tbody>
                 <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
-                  <tr *ngFor="let member of defaultMembers |filter:searchText; let i = index ">
+                  <tr *ngFor="let schedule of defaultSchedules |filter:searchText; let i = index ">
   
                   <td>
-                    <input type="radio" name="operation" (click)="toggleButtons('edit', member)" value="edit"  (change)="selectedRow = i">
+                    <input type="radio" name="operation" (click)="toggleButtons('edit', schedule)" value="edit"  (change)="selectedRow = i">
                     <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->
                   </td>
-                  <td>{{ member.memberId }}</td>
-                  <td>{{ member.firstName }}</td>
-                  <td>{{ member.middleName }}</td>
-                  <td>{{ member.lastName }}</td>
-                  <td>{{ member.gender }}</td>
-                  <td>{{ member.mobile }}</td>
-                  <td>{{ member.ownbaithakid }}</td>
-                  <td>{{ member.pincode }}</td> 
-                  <td>{{ member.status }}</td> 
-                  <!-- <td>{{ member.email }}</td>
-                  <td>{{ member.hajeriNo }}</td>
-                  <td>{{ member.addharNumber }}</td>
-                  <td>{{ member.education }}</td>
-                  <td>{{ member.add1 }}</td>
-                  <td>{{ member.add2 }}</td>
-                  <td>{{ member.city }}</td>
-                  <td>{{ member.state }}</td>
-                  <td>{{ member.country }}</td>
-                  <td>{{ member.division }}</td>
-                  <td>{{ member.dob }}</td>
-                  <td>{{ member.gender }}</td>     -->           
+                 
+                  <td>{{ schedule.baithakType }}</td>
+                  <td>{{ schedule.toTime }}</td>
+                  <td>{{ schedule.fromTime }}</td>
+                  <td>{{ schedule.dayOfWeek }}</td>
+                  <td>{{ schedule.members.memberId }}</td>
+                  <td>{{ schedule.locationId }}</td>
+                  <td>{{ schedule.status }}</td> 
+                          
                 </tr>
               </tbody>
             </table>

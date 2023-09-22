@@ -37,6 +37,8 @@ export class MemberListService {
     return this.httpclient.post(`${this.baseUrl}/api/member/createmember`, member);
   }
 
+
+
   // For Get the record by id wise from database
   getMemberById(memberId: number): Observable<Member>{
    return this.httpclient.get<Member>(`${this.baseUrl}/api/member/${memberId}`);

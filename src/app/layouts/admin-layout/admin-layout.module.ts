@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LocationDataService } from 'src/app/services/location-data.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPopper } from 'angular-popper';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { ToastrModule } from 'ngx-toastr';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -22,10 +24,12 @@ import { NgxPopper } from 'angular-popper';
     FormsModule,
     HttpClientModule,
     NgbModule,
+    NgxMaterialTimepickerModule,
     NgxPopper,
     Ng2SearchPipeModule,
     ClipboardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [LocationDataService],
   declarations: [

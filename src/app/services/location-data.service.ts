@@ -13,7 +13,7 @@ export class LocationDataService {
   
 
   constructor(private httpclient: HttpClient) {
-   this.userPayLoad = this.decodedToken();
+  
   }
 
   // For Get the all record from database
@@ -85,24 +85,6 @@ export class LocationDataService {
 
    isLoggedIn(): boolean{
     return !!localStorage.getItem('token')
-  }
-
-  decodedToken() {
-    const jwtHelper = new JwtHelperService();
-    const token = this.getToken();
-    
-    try {
-      if (token) {
-        console.log(jwtHelper.decodeToken(token));
-        return jwtHelper.decodeToken(token);
-      } else {
-        console.error('Token is undefined.');
-        return null;
-      }
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
   }
  
 }

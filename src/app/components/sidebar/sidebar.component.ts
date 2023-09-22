@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/register', title: 'New Register',  icon:'ni-circle-08 text-pink', class: '' },
     { path: '/member-list', title: 'member',  icon:'ni-pin-3 text-red', class: '' },
     { path: '/baithak-list', title: 'Baithak',  icon:'ni-pin-3 text-red', class: '' },
+    { path: '/schedular', title: 'Schedule Baithak',  icon:'ni-pin-3 text-red', class: '' },
 ];
 
 @Component({

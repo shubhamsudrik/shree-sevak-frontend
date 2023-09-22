@@ -29,11 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // Call decodedToken to get the decoded token value
-    const decodedToken = this.locationDataService.decodedToken();
-    if (decodedToken) {
-      // Now you can access properties of the decoded token if needed.
-      console.log(decodedToken);
-    }
+    
   }
 
   hideShowPass() {
@@ -43,36 +39,22 @@ export class LoginComponent implements OnInit {
   }
 
   proceedLogin() {
-    if (this.loginForm.valid) {
-      const loginData = {
-        email: this.loginForm.get('email').value,
-        password: this.loginForm.get('password').value
-      };
+
+  //    if (this.loginForm.valid) {
+  //     const loginData = {
+  //       email: this.loginForm.get('email').value,
+  //       password: this.loginForm.get('password').value
+  //     };
   
-      this.locationDataService.logIn(loginData).subscribe({
-        next: (res) => {
-          console.log("res: " + res.message);
-          this.loginForm.reset();
-          this.locationDataService.storeToken(res.token);
-          this.toast.success({ detail: 'SUCCESS', summary: res.message, duration: 500 });
+  //     this.locationDataService.logIn(loginData).subscribe((
+  //       ((res: any) => {
+  //         localStorage.setItem('access_token',res.token);
+  //         this.
+  //         console.log("res: " + res.message);
+  //         this.loginForm.reset();
+  //         this.locationDataService.storeToken(res.token);
+  //         this.toast.success({ detail: 'SUCCESS', summary: res.message, duration: 500 });
   
-          // Call decodedToken after storing the token
-          const decodedToken = this.locationDataService.decodedToken();
-          if (decodedToken) {
-            // Now you can access properties of the decoded token if needed.
-            console.log(decodedToken);
-          }
-  
-          this.router.navigate(['/dashboard']);
-        },
-        error: (error) => {
-          this.toast.error({ detail: 'Error', summary: 'Login failed', duration: 500 });
-          console.error('Login Error:', error);
-          this.loginForm.reset();
-        },
-      });
-    } else {
-      // Handle form validation errors.
-    }
+  //     } ) 
   }
 }  

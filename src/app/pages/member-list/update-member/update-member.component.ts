@@ -39,9 +39,11 @@ export class UpdateMemberComponent implements OnInit {
   
       // Validatons
       this.memberform = this.formBuilder.group({
-        addharNumber: ['', [Validators.required, Validators.minLength(16)]],
+        addharNumber: ['', [Validators.required, Validators.minLength(12)]],
         add1: ['', Validators.required],
         add2: ['', Validators.required],
+        add3: ['', Validators.required],
+        add4: ['', Validators.required],
         additionalInfo: [''],
         city: ['', Validators.required],
         division: ['', Validators.required],
@@ -49,11 +51,28 @@ export class UpdateMemberComponent implements OnInit {
         country: ['', Validators.required],
         firstName: ['', Validators.required],
         dob: ['', Validators.required],
-        Education: ['', Validators.required],
+        education: ['', Validators.required],
         email: ['', Validators.required],
         middleName: ['', Validators.required],
         lastName: ['', Validators.required],
         gender: ['', Validators.required],
+        googleMapLink: ['', Validators.required],
+        hajeriNo: ['', Validators.required],
+        hajeriNoDetails: ['', Validators.required],
+        initial: ['', Validators.required],
+        languagesRead: ['', Validators.required],
+        languagesWrite: ['', Validators.required],
+        languagesSpeak: ['', Validators.required],
+        occupation: ['', Validators.required],
+        ownBaithakDay: ['', Validators.required],
+        ownBaithakId: ['', Validators.required],
+        panNo: ['', Validators.required],
+        phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+        photoBase64: ['', Validators.required],
+        roles: ['', Validators.required],
+        vehicleDetails: ['', Validators.required],
+        vehiclesType: ['', Validators.required],
+        weeklyOffs: ['', Validators.required],
         pincode: ['', [Validators.required, Validators.minLength(6)]],
         mobile: ['', [Validators.required, Validators.minLength(10)]],
         latitude: ['', Validators.required],
@@ -99,7 +118,7 @@ export class UpdateMemberComponent implements OnInit {
   
     saveMember() {
       this.MemberListService.createMember(this.Member).subscribe(
-        (data) => {
+        data => {
           console.log(data);
           this.router.navigate(['/member-list']);
         },
@@ -146,10 +165,25 @@ export class UpdateMemberComponent implements OnInit {
       validateAddharNumber(event){
       const input = event.target;
       const numericValue = input.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-      const truncatedValue = numericValue.slice(0, 16); // Truncate input to 10 characters
+      const truncatedValue = numericValue.slice(0, 12); // Truncate input to 10 characters
       input.value = truncatedValue;
     }
+    // addhar number validation
+    validateHajeriNumber(event){
+      const input = event.target;
+      const numericValue = input.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+      input.value = numericValue;
+    }
   
+      // addhar number validation
+      validatePanNumber(event){
+        const input = event.target;
+        const numericValue = input.value.replace(/[^0-9a-zA-Z]/g, '');
+       
+   // Remove non-numeric characters
+        const truncatedValue = numericValue.slice(0, 10); // Truncate input to 10 characters
+        input.value = truncatedValue;
+      }
   
     // isDuplicateData(newMember: Member): boolean {
     //   for (let item of this.defaultMembers) {

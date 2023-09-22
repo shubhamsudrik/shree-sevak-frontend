@@ -6,8 +6,9 @@ export class Member {
 	lastName:string;
 	email:string;
 	hajeriNo:string;
+	hajeriNoDetails:string;
 	addharNumber:string;
-	Education:string;
+	education:string;
 	add1:string;
 	add2:string;
 	add3:string;
@@ -16,10 +17,14 @@ export class Member {
 	country:string;
 	additionalInfo:string;
 	division:string;
-	DOB:string;
+	dob:string;
 	gender:string;
 	googleMapLink:string;
 	initial:string;
+	roles:string;
+	vehiclesType:string;
+	phoneNumber:string;
+	ownBaithakId:string;
  languagesRead:string;
  languagesSpeak:string;
  languagesWrite:string;
@@ -37,4 +42,6 @@ export class Member {
  vehicleDetails:string;
  vehicleType:string;
  weeklyOffs:string;
+ members:string;
+ locations:string;
 }

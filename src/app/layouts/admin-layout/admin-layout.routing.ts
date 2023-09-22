@@ -13,6 +13,9 @@ import { AddNewMemberComponent } from 'src/app/pages/member-list/add-new-member/
 import { BaithakListComponent } from 'src/app/pages/baithak-list/baithak-list.component';
 import { CreateBaithakComponent } from 'src/app/pages/baithak-list/create-baithak/create-baithak.component';
 import { UpdateBaithakComponent } from 'src/app/pages/baithak-list/update-baithak/update-baithak.component';
+import { SchedularComponent } from 'src/app/pages/schedular/schedular.component';
+import { AddSchedularComponent } from 'src/app/pages/schedular/add-schedular/add-schedular.component';
+import { UpdateScheduleComponent } from 'src/app/pages/schedular/update-schedule/update-schedule.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -29,7 +32,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'update-member/:id', component: UpdateMemberComponent },
     { path: 'baithak-list', component: BaithakListComponent },
     { path: 'create-baithak', component: CreateBaithakComponent },
-     { path: 'update-baithak/:id', component: UpdateBaithakComponent },
-  
-    
+    { path: 'update-baithak/:id', component: UpdateBaithakComponent },
+    { path: 'schedular', component: SchedularComponent },
+    { path: 'add-schedular', component: AddSchedularComponent },
+    { path: 'update-schedule/:id', component: UpdateScheduleComponent },
+
 ];

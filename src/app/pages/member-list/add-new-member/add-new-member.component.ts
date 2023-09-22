@@ -40,6 +40,8 @@ export class AddNewMemberComponent implements OnInit {
       addharNumber: ['', [Validators.required, Validators.minLength(16)]],
       add1: ['', Validators.required],
       add2: ['', Validators.required],
+      add3: ['', Validators.required],
+      add4: ['', Validators.required],
       additionalInfo: [''],
       city: ['', Validators.required],
       division: ['', Validators.required],
@@ -47,13 +49,29 @@ export class AddNewMemberComponent implements OnInit {
       country: ['', Validators.required],
       firstName: ['', Validators.required],
       dob: ['', Validators.required],
-      Education: ['', Validators.required],
+      education: ['', Validators.required],
       email: ['', Validators.required],
       middleName: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: ['', Validators.required],
-     pincode: ['', [Validators.required, Validators.minLength(6)]],
-
+      googleMapLink: ['', Validators.required],
+      hajeriNo: ['', Validators.required],
+      hajeriNoDetails: ['', Validators.required],
+      initial: ['', Validators.required],
+      languagesRead: ['', Validators.required],
+      languagesWrite: ['', Validators.required],
+      languagesSpeak: ['', Validators.required],
+      occupation: ['', Validators.required],
+      ownBaithakDay: ['', Validators.required],
+      ownBaithakId: ['', Validators.required],
+      panNo: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+      photoBase64: ['', Validators.required],
+      roles: ['', Validators.required],
+      vehicleDetails: ['', Validators.required],
+      vehiclesType: ['', Validators.required],
+      weeklyOffs: ['', Validators.required],
+      pincode: ['', [Validators.required, Validators.minLength(6)]],
       mobile: ['', [Validators.required, Validators.minLength(10)]],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
@@ -84,9 +102,10 @@ export class AddNewMemberComponent implements OnInit {
     if (isDuplicate) {
       // Data already exists error message
       alert(
-        'Data already exists with the same city, state, and division.'
+        'Data already exists with the same Email, Pan Number,Mobile Number ,and Aadhar Number.'
       );
-    } else if (this.memberform.valid) {
+    }
+     else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
       console.log(this.Member);
       this.saveMember();
@@ -144,9 +163,28 @@ export class AddNewMemberComponent implements OnInit {
     validateAddharNumber(event){
     const input = event.target;
     const numericValue = input.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-    const truncatedValue = numericValue.slice(0, 16); // Truncate input to 10 characters
+    const truncatedValue = numericValue.slice(0, 12); // Truncate input to 12 characters
     input.value = truncatedValue;
   }
+    // addhar number validation
+    validateHajeriNumber(event){
+    const input = event.target;
+    const numericValue = input.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    input.value = numericValue;
+  }
+
+
+
+    // addhar number validation
+    validatePanNumber(event){
+      const input = event.target;
+      const numericValue = input.value.replace(/[^0-9a-zA-Z]/g, '');
+     
+ // Remove non-numeric characters
+      const truncatedValue = numericValue.slice(0, 10); // Truncate input to 10 characters
+      input.value = truncatedValue;
+    }
+
 
 
   isDuplicateData(newMember: Member): boolean {
@@ -154,11 +192,11 @@ export class AddNewMemberComponent implements OnInit {
       if (
         
         // item.city === newMember.city &&
-        item.state === newMember.state 
-        // item.email === newMember.email &&
-        // item.mobile === newMember.mobile &&
-        // item.addharNumber === newMember.addharNumber 
-        // item.division === newMember.division 
+        // item.state === newMember.state &&
+        item.email === newMember.email &&
+        item.panNo === newMember.panNo &&
+        item.addharNumber === newMember.addharNumber &&
+        item.mobile === newMember.mobile 
         // item.id !== newMember.MemberId
       ) {
         return true; // Data already exists
