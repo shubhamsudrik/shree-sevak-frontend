@@ -37,11 +37,11 @@ export class AddNewMemberComponent implements OnInit {
 
     // Validatons
     this.memberform = this.formBuilder.group({
-      addharNumber: ['', [Validators.required, Validators.minLength(16)]],
+      addharNumber: ['', [Validators.required, Validators.minLength(12)]],
       add1: ['', Validators.required],
       add2: ['', Validators.required],
-      add3: ['', Validators.required],
-      add4: ['', Validators.required],
+      add3: [''],
+      add4: [''],
       additionalInfo: [''],
       city: ['', Validators.required],
       division: ['', Validators.required],
@@ -56,26 +56,32 @@ export class AddNewMemberComponent implements OnInit {
       gender: ['', Validators.required],
       googleMapLink: ['', Validators.required],
       hajeriNo: ['', Validators.required],
-      hajeriNoDetails: ['', Validators.required],
+      hajeriNoDetails: [''],
       initial: ['', Validators.required],
-      languagesRead: ['', Validators.required],
-      languagesWrite: ['', Validators.required],
-      languagesSpeak: ['', Validators.required],
+      marathiRead:[''],
+      marathiSpeak:[''],
+      marathiWrite:[''],
+      englishRead:[''],
+      englishSpeak:[''],
+      englishWrite:[''],
+      hindiRead:[''],
+      hindiSpeak:[''],
+      hindiWrite:[''],
       occupation: ['', Validators.required],
       ownBaithakDay: ['', Validators.required],
       ownBaithakId: ['', Validators.required],
       panNo: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+      phoneNumber: [''],
       photoBase64: ['', Validators.required],
       roles: ['', Validators.required],
       vehicleDetails: ['', Validators.required],
       vehiclesType: ['', Validators.required],
       weeklyOffs: ['', Validators.required],
       pincode: ['', [Validators.required, Validators.minLength(6)]],
-      mobile: ['', [Validators.required, Validators.minLength(10)]],
+      mobile: ['',[Validators.required, Validators.minLength(10)]],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
-      status: ['', Validators.required],
+      // status: ['', Validators.required],
     });
 
     this.getMembers();
@@ -191,12 +197,7 @@ export class AddNewMemberComponent implements OnInit {
     for (let item of this.defaultMembers) {
       if (
         
-        // item.city === newMember.city &&
-        // item.state === newMember.state &&
-        item.email === newMember.email &&
-        item.panNo === newMember.panNo &&
-        item.addharNumber === newMember.addharNumber &&
-        item.mobile === newMember.mobile 
+        item.addharNumber === newMember.addharNumber 
         // item.id !== newMember.MemberId
       ) {
         return true; // Data already exists

@@ -25,9 +25,15 @@ export class Member {
 	vehiclesType:string;
 	phoneNumber:string;
 	ownBaithakId:string;
- languagesRead:string;
- languagesSpeak:string;
- languagesWrite:string;
+ marathiRead:string;
+ marathiSpeak:string;
+ marathiWrite:string;
+ englishRead:string;
+ englishSpeak:string;
+ englishWrite:string;
+ hindiRead:string;
+ hindiSpeak:string;
+ hindiWrite:string;
  longitude:string;
  latitude:string;
  mobile:string;
