@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -36,6 +36,9 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { SchedularComponent } from './pages/schedular/schedular.component';
 import { AddSchedularComponent } from './pages/schedular/add-schedular/add-schedular.component';
 import { UpdateScheduleComponent } from './pages/schedular/update-schedule/update-schedule.component';
+import { LoginService } from './services/login.service';
+import { AuthGuard } from 'shree-sevak-frontend/src/app/guard/auth.guard';
+import { AuthInterceptor } from './guard/auth.interceptor';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -91,7 +94,7 @@ import { UpdateScheduleComponent } from './pages/schedular/update-schedule/updat
     // ComponentComponent
   ],
  
-  providers: [LocationDataService],
+  providers: [LocationDataService,LoginService,AuthGuard,[{provider:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
   bootstrap: [AppComponent]
 })
 

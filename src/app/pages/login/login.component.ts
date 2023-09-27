@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { error } from 'console';
 import { NgToastService } from 'ng-angular-popup';
 import { LocationDataService } from 'src/app/services/location-data.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +12,56 @@ import { LocationDataService } from 'src/app/services/location-data.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  credentials={
+    email:'',
+    password:''
+  }
+constructor(private loginservice:LoginService,private  router: Router,){
+
+}
+
+  ngOnInit(): void {
+ 
+  }
+
+  onSubmit(){
+    console.log("form is submited");
+    if(this.credentials.email !='' && this.credentials.password !=''  ){
+      this.loginservice.generateToken(this.credentials).subscribe(
+       (response:any)=>{
+  console.log(response.jwtToken)
+  this.loginservice.loginUser(response.jwtToken)
+  this.router.navigate(['/dashboard']);
+        console.log('hello')
+        },error=>{
+          console.log(error);
+        }
+      )
+      console.log('We have to submit form to console');
+    }else{
+      this.router.navigate(['/register']);
+      console.log('fields are empty');
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*
   public loginForm: FormGroup;
   type: string = 'password';
   isText: boolean = false;
@@ -40,21 +92,24 @@ export class LoginComponent implements OnInit {
 
   proceedLogin() {
 
-  //    if (this.loginForm.valid) {
-  //     const loginData = {
-  //       email: this.loginForm.get('email').value,
-  //       password: this.loginForm.get('password').value
-  //     };
+     if (this.loginForm.valid) {
+      const loginData = {
+        email: this.loginForm.get('email').value,
+        password: this.loginForm.get('password').value
+      };
   
-  //     this.locationDataService.logIn(loginData).subscribe((
-  //       ((res: any) => {
-  //         localStorage.setItem('access_token',res.token);
-  //         this.
-  //         console.log("res: " + res.message);
-  //         this.loginForm.reset();
-  //         this.locationDataService.storeToken(res.token);
-  //         this.toast.success({ detail: 'SUCCESS', summary: res.message, duration: 500 });
+      this.locationDataService.logIn(loginData).subscribe((
+        ((res: any) => {
+          localStorage.setItem('access_token',res.token);
+         
+          console.log("res: " + res.message);
+          this.loginForm.reset();
+          this.locationDataService.storeToken(res.token);
+          this.toast.success({ detail: 'SUCCESS', summary: res.message, duration: 500 });
   
-  //     } ) 
+      } ))) 
   }
-}  
+}
+
+*/
+}
