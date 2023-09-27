@@ -44,13 +44,13 @@ export class EditLocationComponent implements OnInit {
       state: ['', Validators.required],
       country: ['', Validators.required],
       pincode: ['', [Validators.required, Validators.minLength(6)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+     
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
       googleMapLink: ['', Validators.required],
-      add3: ['', Validators.required],
-      add4: ['', Validators.required],
-      additionalInfo: ['', Validators.required],
+      add3: [''],
+      add4: [''],
+      additionalInfo: [''],
       contact1Email: ['', Validators.required],
       contact1Initial: ['', Validators.required],
       contact1Name: ['', Validators.required],
@@ -63,7 +63,7 @@ export class EditLocationComponent implements OnInit {
       contact2Occupation: ['', Validators.required],
       contact2Phone1: ['', Validators.required],
       contact2Phone2: ['', Validators.required],
-      status: ['', Validators.required],
+     
     });
 
     this.getLocations();

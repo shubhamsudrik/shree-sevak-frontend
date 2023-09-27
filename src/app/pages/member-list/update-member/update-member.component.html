@@ -11,7 +11,7 @@
         <div class="card-body px-lg-10 py-lg-5">
           
           <form role="form" [formGroup]="memberform" (ngSubmit)="onSubmit()" class="needs-validation">
-            <h2 class="text-center">{{'Add new member records!' | translate }}</h2><br>
+            <h2 class="text-center">{{'Update member records!' | translate }}</h2><br>
 
             <!-- Head -->
             <div>
@@ -220,9 +220,9 @@
                   }"
                 >
                   <option value="" disabled>Select gender</option>
-                  <option value="Pune">Male</option>
-                  <option value="Mumbai">Female</option>
-                  <option value="kolhapur">Other</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
                 </select>
                 <div class="invalid-feedback">
                   {{ 'gender is required.' | translate }}
@@ -612,7 +612,7 @@
 
         <!-- latitude -->
         <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
         <div class="form-group">
           <label for="latitude">{{ 'Latitude' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -636,7 +636,7 @@
          </div>
          </div>
           <!-- longitude -->
-          <div class="col-md-4">
+          <div class="col-md-3">
         <div class="form-group">
           <label for="longitude">{{ 'Longitude' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -660,7 +660,7 @@
          </div>
         </div>
         <!-- googleMapLink -->
-        <div class="col-md-4">
+        <div class="col-md-3">
         <div class="form-group">
           <label for="googleMapLink">{{ 'Google Map Link' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -682,6 +682,35 @@
                 </div>
           </div>
          </div>
+         </div>
+           <!-- status-->
+       
+          <div class="col-md-3">
+        <div class="form-group">
+          <label for="status">{{ 'Status' | translate }}</label>
+          <div class="input-group input-group-alternative mb-3">
+            <div class="input-group-prepend"></div>
+            <select
+                formControlName="status"
+                type="text"
+                class="form-control"
+               id="status"
+              name="status"
+              [(ngModel)]="Member.status"
+              [ngClass]="{
+               'is-invalid': (submitted && MemberFormControl.status.errors?.required)
+              }"
+                >
+              <option value="" disabled>Select Status</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+                
+                <div class="invalid-feedback">
+                  {{ 'Status is required.' | translate }}
+                </div>
+          </div>
+        </div>
          </div>
         </div>
 
@@ -789,8 +818,8 @@
               }"
                 >
               <option value="" disabled>Select Vehicle</option>
-                  <option value="Bike">Bike</option>
-                  <option value="Car">Car</option>
+                  <option value="2-Wheeler">2-Wheeler</option>
+                  <option value="4-Wheeler">4-Wheeler</option>
                 </select>
                 
                 <div class="invalid-feedback">
@@ -1065,7 +1094,7 @@
            
            <!-- additional info -->
            <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
            <div class="form-group">
             <label for="additionalInfo">{{ 'Additional Info' | translate }}</label>
             <div class="input-group input-group-alternative mb-3">
@@ -1090,9 +1119,9 @@
 
              <!-- Button -->
              <div class="text-center"><br>
-              <button type="submit" class="btn btn-success mx-3" >{{'Save'|translate}}</button>
-              <button type="button" class="btn btn-primary mx-3" (click)="Clear()">{{'Clear'|translate}} </button>
-              <button type="button" class="btn btn-danger mx-3" (click)="CancelChanges()">{{'Back'|translate}} </button>
+              <button type="submit" class="btn btn-success btn-lg mx-3" >{{'Save'|translate}}</button>
+              <button type="button" class="btn btn-primary btn-lg mx-3" (click)="Clear()">{{'Clear'|translate}} </button>
+              <button type="button" class="btn btn-danger btn-lg mx-3" (click)="CancelChanges()">{{'Back'|translate}} </button>
              </div>
         
             </form>
@@ -1102,4 +1131,3 @@
     </div>
   </div>
   </div>
-  

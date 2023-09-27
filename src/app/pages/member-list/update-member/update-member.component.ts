@@ -64,37 +64,31 @@ export class UpdateMemberComponent implements OnInit {
         latitude: ['', Validators.required],
         longitude: ['', Validators.required],
         googleMapLink: ['', Validators.required],
+        status: ['', Validators.required],
 
-        // mobile: ['', [Validators.required, Validators.minLength(10)]],
-        // phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
-        // email: ['', Validators.required],
-               
-        // hajeriNo: ['', Validators.required],
-        // hajeriNoDetails: ['', Validators.required],
-
-        // vehicleDetails: ['', Validators.required],
-        // vehiclesType: ['', Validators.required],
+        mobile: ['', [Validators.required, Validators.minLength(10)]],
+        phoneNumber: [''],
+        email: ['', Validators.required],
        
-        // marathiRead:[''],
-        // marathiSpeak:[''],
-        // marathiWrite:[''],
-        // englishRead:[''],
-        // englishSpeak:[''],
-        // englishWrite:[''],
-        // hindiRead:[''],
-        // hindiSpeak:[''],
-        // hindiWrite:[''],
-        // ownBaithakDay: ['', Validators.required],
-        // ownBaithakId: ['', Validators.required],
+        vehiclesType: ['', Validators.required],
+        vehicleDetails: ['', Validators.required],                 
        
-      
-       
-       
-        // weeklyOffs: ['', Validators.required],
-        // additionalInfo: [''],
-       
-       
+        hindiRead:[''],
+        hindiWrite:[''],
+        hindiSpeak:[''],
+        marathiRead:[''],
+        marathiWrite:[''],
+        marathiSpeak:[''],        
+        englishRead:[''],
+        englishWrite:[''],
+        englishSpeak:[''],
         
+        ownBaithakDay: ['', Validators.required],
+        ownBaithakId: ['', Validators.required],          
+        hajeriNo: ['', Validators.required],
+        hajeriNoDetails: [''],
+        weeklyOffs: ['', Validators.required],
+        additionalInfo: [''],
       });
   
       this.getMembers();
@@ -116,14 +110,14 @@ export class UpdateMemberComponent implements OnInit {
     onSubmit() {
       this.submitted = true;
   
-      // const isDuplicate = this.isDuplicateData(this.Member);
+      const isDuplicate = this.isDuplicateData(this.Member);
   
-      // if (isDuplicate) {
+      if (isDuplicate) {
         // Data already exists error message
-        // alert(
-          // 'Data already exists with the same city, state, and division.'
-        // );
-      // } else 
+        alert(
+          'Data already exists with the same Aaddhar card Number.'
+        );
+      } else 
       if (this.memberform.valid) {
         // Data doesn't exist and the form is valid, save the Member
         console.log(this.Member);
@@ -202,22 +196,17 @@ export class UpdateMemberComponent implements OnInit {
         input.value = truncatedValue;
       }
   
-    // isDuplicateData(newMember: Member): boolean {
-    //   for (let item of this.defaultMembers) {
-    //     if (
-    //       console.log
-    //       // item.city === newMember.city &&
-    //       // item.state === newMember.state 
-    //       // item.email === newMember.email &&
-    //       // item.mobile === newMember.mobile &&
-    //       // item.addharNumber === newMember.addharNumber 
-    //       // item.division === newMember.division 
-    //       // item.id !== newMember.MemberId
-    //     ) {
-    //       return true; // Data already exists
-    //     }
-    //   }
-    //   return false; // Data does not exist
-    // }
+    isDuplicateData(newMember: Member): boolean {
+      for (let item of this.defaultMembers) {
+        if (
+                 
+          item.addharNumber === newMember.addharNumber 
+          
+        ) {
+          return true; // Data already exists
+        }
+      }
+      return false; // Data does not exist
+    }
   }
   

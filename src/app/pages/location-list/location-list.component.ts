@@ -27,7 +27,7 @@ export class LocationListComponent implements OnInit {
     
   }
 
-  private getLocations() {
+  private getLocationList() {
     this.locationDataService.getLocationList().subscribe(
       (data: Location[]) => {
         this.defaultLocations = data;
@@ -44,7 +44,7 @@ export class LocationListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllLocationList()
+    this.getLocationList()
     }
   
 

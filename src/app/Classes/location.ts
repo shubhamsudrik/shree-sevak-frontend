@@ -9,7 +9,7 @@ export class Location{
     state : string;
     country : string;
     pincode : number;
-    phoneNumber : number;
+    locId: number;
     latitude : string;
     longitude : string;
     status : number;

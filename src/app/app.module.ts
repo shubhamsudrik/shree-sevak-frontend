@@ -36,7 +36,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { SchedularComponent } from './pages/schedular/schedular.component';
 import { AddSchedularComponent } from './pages/schedular/add-schedular/add-schedular.component';
 import { UpdateScheduleComponent } from './pages/schedular/update-schedule/update-schedule.component';
-
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -53,6 +53,7 @@ import { UpdateScheduleComponent } from './pages/schedular/update-schedule/updat
     RouterModule,
     AppRoutingModule,
     BrowserModule,
+    ScheduleModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule,
     MatFormFieldModule, 

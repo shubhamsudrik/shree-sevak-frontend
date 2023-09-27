@@ -1,16 +1,25 @@
 <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
   <div class="py-7 py-lg-8"></div>
   <!-- Page content -->
-  <div class="container mt--8 pb-5">
+  <div class="container mt--8 pb-5 ">
     <!-- Table -->
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
-        <div class="card bg-secondary shadow border-0">
-          <div class="card-body px-lg-5 py-lg-5">
+        <div class="custom-width">
+        <div class="card bg-secondary shadow border-0 w-500">
+          <div class="card-body px-lg-5 py-lg-5 text-color">
            
             <form [formGroup]="locationform" (ngSubmit)="onSubmit()">
               <h2 class="text-center">{{ 'Update location record!' | translate }}</h2><br>
+
+               <!-- Header -->
+             <div>
+              <h2 class="form-section-header text-center">Location information</h2>
+            </div>            
+
               <!-- Location Name -->
+              <div class="row">
+                <div class="col-md-12">
               <div class="form-group">
                 <label for="locationName">{{ 'Location' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
@@ -25,17 +34,22 @@
                     [ngClass]="{
                       'is-invalid': submitted && locationFormControl.locationName.errors?.required
                     }"
-                    maxlength="25"
+                    maxlength="30"
                   />
                   <div class="invalid-feedback">
                     Location name is required.
                   </div>
                 </div>
+                </div>
+                </div>
+
               </div>
 
               <!-- add 1 -->
+              <div class="row">
+              <div class="col-md-3">
               <div class="form-group">
-                <label for="add1">{{ 'Add1' | translate }}</label>
+                <label for="add1">{{ 'Address-1' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
@@ -48,17 +62,19 @@
                     [ngClass]="{
                       'is-invalid': submitted && locationFormControl.add1.errors?.required
                     }"
-                    maxlength="25"
+                    maxlength="30"
                   />
                   <div class="invalid-feedback">
-                    add1 is required.
+                    Address-1 is required.
                   </div>
+                </div>
                 </div>
               </div>
 
-              <!-- add2  -->
+              <!-- add2  -->              
+              <div class="col-md-3">
               <div class="form-group">
-                <label for="add2">{{ 'Add2' | translate }}</label>
+                <label for="add2">{{ 'Address-2' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
@@ -71,15 +87,19 @@
                     [ngClass]="{
                       'is-invalid': submitted && locationFormControl.add2.errors?.required
                     }"
-                    maxlength="25"
+                    maxlength="30"
                   />
                   <div class="invalid-feedback">
-                    add2  is required.
+                    Address-2  is required.
+                  </div>
                   </div>
                 </div>
-              </div>
+                </div>
+             
+              
                <!-- Add3 -->
-
+              
+               <div class="col-md-3">
                <div class="form-group">
                 <label for="add3">{{ 'Address-3 ' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
@@ -100,9 +120,11 @@
                         {{ 'Address 3 is required.' | translate }}
                       </div>
                 </div>
+                </div>                
                </div>
+
                    <!-- Address 4 -->
-    
+                   <div class="col-md-3">
                    <div class="form-group">
                     <label for="add4">{{ 'Address-4 ' | translate }}</label>
                     <div class="input-group input-group-alternative mb-3">
@@ -114,18 +136,18 @@
                          id="add4"
                         name="add4"
                         [(ngModel)]="location.add4"
-                        [ngClass]="{
-                         'is-invalid': (submitted && locationFormControl.add4.errors?.required)
-                        }"
+                        
                         maxlength="20" 
                           />
-                          <div class="invalid-feedback">
-                            {{ 'Address 4 is required.' | translate }}
-                          </div>
+                        </div>
+                      </div>
+                      </div>
                     </div>
-                   </div>
+                   
 
-              <!-- City -->
+              <!-- City -->   
+              <div class="row">           
+              <div class="col-md-3">
               <div class="form-group">
                 <label for="city">{{ 'City' | translate }}</label><br>
                 <div class="input-group input-group-alternative mb-3">
@@ -151,9 +173,11 @@
                     City is required.
                   </div>
                 </div>
+                </div>
               </div>
 
               <!-- Division -->
+              <div class="col-md-3">
               <div class="form-group">
                 <label>{{ 'Division' | translate }}</label><br>
                 <div class="input-group input-group-alternative mb-3">
@@ -179,10 +203,12 @@
                   <div class="invalid-feedback">
                     Division is required.
                   </div>
+                 </div>
                 </div>
               </div>
 
-              <!-- State -->
+              <!-- State -->              
+              <div class="col-md-3">
               <div class="form-group">
                 <label>{{ 'State' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
@@ -233,9 +259,11 @@
                     State is required.
                   </div>
                 </div>
+                </div>
               </div>
 
               <!-- Country -->
+              <div class="col-md-3">
               <div class="form-group">
                 <label>{{ 'Country' | translate }}</label><br>
                 <div class="input-group input-group-alternative mb-3">
@@ -259,8 +287,12 @@
                   </div>
                 </div>
               </div>
+              </div>
+              </div>
 
               <!-- Pincode -->
+              <div class="row">
+              <div class="col" style="width: 20%;">
               <div class="form-group">
                 <label for="pincode">{{ 'Pincode' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
@@ -282,32 +314,11 @@
                     <div *ngIf="locationFormControl.pincode.errors?.minlength">{{ 'Pincode must be at least 6 characters long.' | translate }}</div>
                   </div>
                 </div>
-              </div>
-
-              <!-- Phone phonephoneNumber -->
-              <div class="form-group">
-                <label for="phoneNumber">{{ 'Phone Number' | translate }}</label>
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend"></div>
-                  <input
-                    formControlName="phoneNumber"
-                    type="text"
-                    class="form-control"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    [(ngModel)]="location.phoneNumber"
-                    [ngClass]="{
-                      'is-invalid': (submitted && (locationFormControl.phoneNumber.errors?.required || locationFormControl.phoneNumber.errors?.minlength))
-                    }"
-                    (input)="ValidatephoneNumber($event)"
-                  />
-                  <div class="invalid-feedback">
-                    <div *ngIf="locationFormControl.phoneNumber.errors?.required">{{ 'Phone Number is required.' | translate }}</div>
-                    <div *ngIf="locationFormControl.phoneNumber.errors?.minlength">{{ 'Phone Number must be at least 10 characters long.' | translate }}</div>
-                  </div>
                 </div>
               </div>
+
               <!-- latitude -->
+          <div class="col" style="width: 20%;">
           <div class="form-group">
             <label for="latitude">{{ 'Latitude' | translate }}</label>
             <div class="input-group input-group-alternative mb-3">
@@ -328,9 +339,11 @@
                     {{ 'Latitude  is required.' | translate }}
                   </div>
             </div>
+            </div>
            </div>
 
            <!-- longitude -->
+          <div class="col" style="width: 20%;">
           <div class="form-group">
             <label for="longitude">{{ 'Longitude' | translate }}</label>
             <div class="input-group input-group-alternative mb-3">
@@ -351,12 +364,13 @@
                     {{ 'Longitude  is required.' | translate }}
                   </div>
             </div>
+            </div>
            </div>
 
             <!-- Google map link -->
-
+            <div class="col" style="width: 20%;">
             <div class="form-group">
-              <label for="googleMapLink">{{ 'googleMapLink' | translate }}</label>
+              <label for="googleMapLink">{{ 'Google Map Link' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -376,80 +390,76 @@
                     </div>
               </div>
              </div>
-
-            
-                 <!-- additional info -->
-
-         <div class="form-group">
-          <label for="additionalInfo">{{ 'additional Info' | translate }}</label>
-          <div class="input-group input-group-alternative mb-3">
-            <div class="input-group-prepend"></div>
-            <input
-                formControlName="additionalInfo"
-                type="text"
-                class="form-control"
-               id="additionalInfo"
-              name="additionalInfo"
-              [(ngModel)]="location.additionalInfo"
-              [ngClass]="{
-               'is-invalid': (submitted && locationFormControl.additionalInfo.errors?.required)
-              }"
-              maxlength="20" 
-                />
-                <div class="invalid-feedback">
-                  {{ 'additional Info is required.' | translate }}
-                </div>
-          </div>
-         </div>
-             <!-- contact1 Email -->
-
-             <div class="form-group">
-              <label for="contact1Email">{{ 'Contact1 Email' | translate }}</label>
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend"></div>
-                <input
-                    formControlName="contact1Email"
-                    type="email"
-                    class="form-control"
-                   id="contact1Email"
-                  name="contact1Email"
-                  [(ngModel)]="location.contact1Email"
-                  [ngClass]="{
-                   'is-invalid': (submitted && locationFormControl.contact1Email.errors?.required)
-                  }"
-                    />
-                    <div class="invalid-feedback">
-                      {{ 'contact1 Email is required.' | translate }}
-                    </div>
-              </div>
              </div>
-                 <!-- contact1Initial-->
+             
+               <!-- Status -->
+               <div class="col" style="width: 20%;">
+                <div class="form-group">
+                 <label>{{ 'Status' | translate }}</label><br>
+                 <div class="input-group input-group-alternative mb-3">
+                   <div class="input-group-prepend"></div>
+                   <select
+                     formControlName="status"
+                     class="form-control"
+                     id="status"
+                     name="status"
+                     [(ngModel)]="location.status"
+                     required
+                     [ngClass]="{
+                       'is-invalid': submitted && locationFormControl.status.errors?.required
+                     }"
+                   >
+                     <option value="" disabled>Select Status</option>
+                     <option value="1">{{ 'Active' | translate }}</option>
+                     <option value="0">{{ 'Inactive' | translate }}</option>
+                   </select>
+                   <div class="invalid-feedback">
+                     Status is required.
+                   </div>
+                 </div>
+               </div>
+               </div> 
+            </div>
 
-         <div class="form-group">
-          <label for="contact1Initial">{{ 'Contact1 Initial' | translate }}</label>
-          <div class="input-group input-group-alternative mb-3">
-            <div class="input-group-prepend"></div>
-            <input
-                formControlName="contact1Initial"
-                type="text"
-                class="form-control"
-               id="contact1Initial"
-              name="contact1Initial"
-              [(ngModel)]="location.contact1Initial"
-              [ngClass]="{
+
+               <!-- Header -->
+             <div>
+              <h2 class="form-section-header text-center">Contact-1</h2>
+            </div>
+
+                <!-- initial -->
+         <div class="row">
+          <div class="col-md-2">
+        <div class="form-group">
+         <label for="contact1Initial">{{ 'Initial' | translate }}</label><br>
+         <div class="input-group input-group-alternative mb-3">
+           <div class="input-group-prepend"></div>
+           <select
+             formControlName="contact1Initial"
+             class="form-control"
+             type="text"
+             id="contact1Initial"
+             name="contact1Initial"
+             [(ngModel)]="location.contact1Initial" 
+             required
+             [ngClass]="{
                'is-invalid': (submitted && locationFormControl.contact1Initial.errors?.required)
-              }"
-              maxlength="25" 
-                />
-                <div class="invalid-feedback">
-                  {{ 'contact1 Initial is required.' | translate }}
-                </div>
-          </div>
+             }"
+           >
+             <option value="" disabled>Select initial</option>
+             <option value="Mr.">Mr.</option>
+             <option value="Ms.">Ms.</option>
+           </select>
+           <div class="invalid-feedback">
+             {{ 'Initial is required.' | translate }}
+           </div>
          </div>
+       </div>
+        </div>
              <!-- contact1Name-->
-
+             <div class="col-md-5">
              <div class="form-group">
-              <label for="contact1Name">{{ 'Contact1 Name' | translate }}</label>
+              <label for="contact1Name">{{ 'Name' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -469,10 +479,11 @@
                     </div>
               </div>
              </div>
+             </div>
                  <!-- contact1Occupation -->
-
+                 <div class="col-md-5">
          <div class="form-group">
-          <label for="contact1Occupation">{{ 'Contact1 Occupation' | translate }}</label>
+          <label for="contact1Occupation">{{ 'Occupation' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <input
@@ -490,14 +501,17 @@
                 <div class="invalid-feedback">
                   {{ 'contact1 Occupation is required.' | translate }}
                 </div>
+                </div>
+                </div>
           </div>
          </div>
 
-         
-         <!-- contact1Phone1 -->
-         
+
+               <!-- contact1Phone1 -->
+         <div class="row">
+          <div class="col-md-4">
          <div class="form-group">
-          <label for="contact1Phone1">{{ 'Contact1 Phone1' | translate }}</label>
+          <label for="contact1Phone1">{{ 'Mobile Number' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <input
@@ -518,13 +532,13 @@
                   <div *ngIf="locationFormControl.contact1Phone1.errors?.required">{{ 'contact1 Phone1 is required.' | translate }}</div>
                   <div *ngIf="locationFormControl.contact1Phone1.errors?.minlength">{{ 'contact1 Phone1 must be at least 10 characters long.' | translate }}</div>
                 </div>
-                
+                </div>
           </div>
          </div>
           <!-- contact1Phone2 -->
-         
+          <div class="col-md-4">
           <div class="form-group">
-            <label for="contact1Phone2">{{ 'Contact1 Phone2' | translate }}</label>
+            <label for="contact1Phone2">{{ 'Phone Number' | translate }}</label>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <input
@@ -534,69 +548,80 @@
                  id="contact1Phone2"
                 name="contact1Phone2"
                 [(ngModel)]="location.contact1Phone2"
-                [ngClass]="{
-                  'is-invalid': (submitted && (locationFormControl.contact1Phone2.errors?.required || locationFormControl.contact1Phone2.errors?.minlength))
-
-                }"
-                (input)="ValidatephoneNumber($event)"
+                
                 minlength="10"
                   />
-                  <div class="invalid-feedback">
-                    <div *ngIf="locationFormControl.contact1Phone2.errors?.required">{{ 'contact1 Phone2 is required.' | translate }}</div>
-                    <div *ngIf="locationFormControl.contact1Phone2.errors?.minlength">{{ 'contact1 Phone2 must be at least 10 characters long.' | translate }}</div>
-                  </div>
                   
+                  </div>
             </div>
            </div>
-            <!-- contact2 Email-->
 
-            <div class="form-group">
-              <label for="contact2Email">{{ 'Contact2 Email' | translate }}</label>
+            <!-- contact1 Email -->
+            <div class="col-md-4">
+             <div class="form-group">
+              <label for="contact1Email">{{ 'Email' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
-                    formControlName="contact2Email"
+                    formControlName="contact1Email"
                     type="email"
                     class="form-control"
-                   id="contact2Email"
-                  name="contact2Email"
-                  [(ngModel)]="location.contact2Email"
+                   id="contact1Email"
+                  name="contact1Email"
+                  [(ngModel)]="location.contact1Email"
                   [ngClass]="{
-                   'is-invalid': (submitted && locationFormControl.contact2Email.errors?.required)
+                   'is-invalid': (submitted && locationFormControl.contact1Email.errors?.required)
                   }"
                     />
                     <div class="invalid-feedback">
-                      {{ 'contact2 Email is required.' | translate }}
+                      {{ 'contact1 Email is required.' | translate }}
+                    </div>
+                    </div>
                     </div>
               </div>
              </div>
-                 <!-- contact2 Initial-->
 
-         <div class="form-group">
-          <label for="contact2Initial">{{ 'Contact2 Initial' | translate }}</label>
-          <div class="input-group input-group-alternative mb-3">
-            <div class="input-group-prepend"></div>
-            <input
-                formControlName="contact2Initial"
-                type="text"
-                class="form-control"
-               id="contact2Initial"
-              name="contact2Initial"
-              [(ngModel)]="location.contact2Initial"
-              [ngClass]="{
-               'is-invalid': (submitted && locationFormControl.contact2Initial.errors?.required)
-              }"
-              maxlength="25" 
-                />
-                <div class="invalid-feedback">
-                  {{ 'contact2 Initial is required.' | translate }}
+
+                <!-- Header -->
+                <div>
+                  <h2 class="form-section-header text-center">Contact-2</h2>
                 </div>
-          </div>
-         </div>
-             <!-- contact2 Name-->
 
+                 <!-- contact2 Initial-->
+         <!-- initial -->
+         <div class="row">
+          <div class="col-md-2">
+        <div class="form-group">
+         <label for="contact2Initial">{{ 'Initial' | translate }}</label><br>
+         <div class="input-group input-group-alternative mb-3">
+           <div class="input-group-prepend"></div>
+           <select
+             formControlName="contact2Initial"
+             class="form-control"
+             type="text"
+             id="contact2Initial"
+             name="contact2Initial"
+             [(ngModel)]="location.contact2Initial" 
+             required
+             [ngClass]="{
+               'is-invalid': (submitted && locationFormControl.contact2Initial.errors?.required)
+             }"
+           >
+             <option value="" disabled>Select initial</option>
+             <option value="Mr.">Mr.</option>
+             <option value="Ms.">Ms.</option>
+           </select>
+           <div class="invalid-feedback">
+             {{ 'Initial is required.' | translate }}
+           </div>
+         </div>
+       </div>
+        </div>
+
+             <!-- contact2 Name-->
+             <div class="col-md-10">
              <div class="form-group">
-              <label for="contact2Name">{{ 'Contact2 Name' | translate }}</label>
+              <label for="contact2Name">{{ 'Name' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -614,37 +639,16 @@
                     <div class="invalid-feedback">
                       {{ 'contact2 Name is required.' | translate }}
                     </div>
+                    </div>
+                    </div>
               </div>
              </div>
-                 <!-- contact2 Occupation -->
 
+              <!-- contact2 Phone1 -->
+         <div class="row">
+          <div class="col-md-4">
          <div class="form-group">
-          <label for="contact2Occupation">{{ 'Contact2 Occupation' | translate }}</label>
-          <div class="input-group input-group-alternative mb-3">
-            <div class="input-group-prepend"></div>
-            <input
-                formControlName="contact2Occupation"
-                type="text"
-                class="form-control"
-               id="contact2Occupation"
-              name="contact2Occupation"
-              [(ngModel)]="location.contact2Occupation"
-              [ngClass]="{
-               'is-invalid': (submitted && locationFormControl.contact2Occupation.errors?.required)
-              }"
-              maxlength="25" 
-                />
-                <div class="invalid-feedback">
-                  {{ 'contact2 Occupation is required.' | translate }}
-                </div>
-          </div>
-         </div>
-
-         
-         <!-- contact2 Phone1 -->
-         
-         <div class="form-group">
-          <label for="contact2Phone1">{{ 'Contact2 Phone1' | translate }}</label>
+          <label for="contact2Phone1">{{ 'Mobile Number' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <input
@@ -665,13 +669,13 @@
                   <div *ngIf="locationFormControl.contact2Phone1.errors?.required">{{ 'contact2 Phone1 is required.' | translate }}</div>
                   <div *ngIf="locationFormControl.contact2Phone1.errors?.minlength">{{ 'contact2 Phone1 must be at least 10 characters long.' | translate }}</div>
                 </div>
-                
+                </div>
           </div>
          </div>
           <!-- contact2 Phone2 -->
-         
+          <div class="col-md-4">
           <div class="form-group">
-            <label for="contact2Phone2">{{ 'Contact2 Phone2' | translate }}</label>
+            <label for="contact2Phone2">{{ 'Phone Number' | translate }}</label>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <input
@@ -681,56 +685,81 @@
                  id="contact2Phone2"
                 name="contact2Phone2"
                 [(ngModel)]="location.contact2Phone2"
-                [ngClass]="{
-                  'is-invalid': (submitted && (locationFormControl.contact2Phone2.errors?.required || locationFormControl.contact2Phone2.errors?.minlength))
-
-                }"
-                (input)="ValidatephoneNumber($event)"
+                
                 minlength="10"
                   />
-                  <div class="invalid-feedback">
-                    <div *ngIf="locationFormControl.contact2Phone2.errors?.required">{{ 'contact2 Phone2 is required.' | translate }}</div>
-                    <div *ngIf="locationFormControl.contact2Phone2.errors?.minlength">{{ 'contact2 Phone2 must be at least 10 characters long.' | translate }}</div>
-                  </div>
                   
+                  </div>
             </div>
            </div>
-              <!-- Status -->
-              <div class="form-group">
-                <label>{{ 'Status' | translate }}</label><br>
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend"></div>
-                  <select
-                    formControlName="status"
+            <!-- contact2 Email-->
+            <div class="col-md-4">
+            <div class="form-group">
+              <label for="contact2Email">{{ 'Email' | translate }}</label>
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend"></div>
+                <input
+                    formControlName="contact2Email"
+                    type="email"
                     class="form-control"
-                    id="status"
-                    name="status"
-                    [(ngModel)]="location.status"
-                    required
-                    [ngClass]="{
-                      'is-invalid': submitted && locationFormControl.status.errors?.required
-                    }"
-                  >
-                    <option value="" disabled>Select Status</option>
-                    <option value="1">{{ 'Active' | translate }}</option>
-                    <option value="0">{{ 'Inactive' | translate }}</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Status is required.
-                  </div>
-                </div>
+                   id="contact2Email"
+                  name="contact2Email"
+                  [(ngModel)]="location.contact2Email"
+                  [ngClass]="{
+                   'is-invalid': (submitted && locationFormControl.contact2Email.errors?.required)
+                  }"
+                    />
+                    <div class="invalid-feedback">
+                      {{ 'contact2 Email is required.' | translate }}
+                    </div>
+                    </div>
+                    </div>
               </div>
+             </div>
+   
+               <!-- Header -->
+               <div>
+                <h2 class="form-section-header text-center">Additional information</h2>
+              </div>
+                 <!-- additional info -->
 
+              <div class="row">
+                <div class="col-md-12">
+         <div class="form-group">
+          <label for="additionalInfo">{{ 'Additional Information' | translate }}</label>
+          <div class="input-group input-group-alternative mb-3">
+            <div class="input-group-prepend"></div>
+            <input
+                formControlName="additionalInfo"
+                type="text"
+                class="form-control"
+               id="additionalInfo"
+              name="additionalInfo"
+              [(ngModel)]="location.additionalInfo"
+              
+              maxlength="50" 
+                />
+                </div>
+                </div>
+          </div>
+         </div>
+
+         <!-- Header -->
+         <div>
+          <h2 class="form-section-header text-center"></h2>
+        </div>
+             
               <!-- Button -->
-              <div><br />
-                <button type="submit" class="btn btn-success mx-2">{{ 'Save' | translate }}</button>
-                <button type="button" class="btn btn-primary mx-2" (click)="Clear()">{{ 'Clear' | translate }}</button>
-                <button type="button" class="btn btn-danger mx-2" (click)="CancelChanges()">{{ 'Back' | translate }}</button>
+              <div class="text-center"><br />
+                <button type="submit" class="btn btn-success btn-lg mx-2">{{ 'Save' | translate }}</button>
+                <button type="button" class="btn btn-primary btn-lg mx-2" (click)="Clear()">{{ 'Clear' | translate }}</button>
+                <button type="button" class="btn btn-danger btn-lg mx-2" (click)="CancelChanges()">{{ 'Back' | translate }}</button>
               </div>
             </form>
           </div>
         </div>
       </div>
+     </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DayService, WeekService, WorkWeekService, MonthService, AgendaService } from '@syncfusion/ej2-angular-schedule';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MemberListService } from 'src/app/services/member-list.service';
@@ -11,8 +12,10 @@ import { Location } from 'src/app/Classes/location';
 
 @Component({
   selector: 'app-add-schedular',
-  templateUrl: './add-schedular.component.html',
-  styleUrls: ['./add-schedular.component.css']
+  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService],
+  template: `<ejs-schedule> </ejs-schedule>`,
+  // templateUrl: './add-schedular.component.html',
+  // styleUrls: ['./add-schedular.component.css']
 })
 export class AddSchedularComponent implements OnInit {
 
