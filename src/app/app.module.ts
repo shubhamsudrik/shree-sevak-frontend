@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -36,7 +36,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { SchedularComponent } from './pages/schedular/schedular.component';
 import { AddSchedularComponent } from './pages/schedular/add-schedular/add-schedular.component';
 import { UpdateScheduleComponent } from './pages/schedular/update-schedule/update-schedule.component';
-import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -92,7 +92,7 @@ import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
     // ComponentComponent
   ],
  
-  providers: [LocationDataService],
+  providers: [LocationDataService,LoginService,AuthGuard,[{provider:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
   bootstrap: [AppComponent]
 })
 

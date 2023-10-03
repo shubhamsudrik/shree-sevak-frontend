@@ -1,30 +1,32 @@
 import { Injectable } from '@angular/core';
-import {  CanActivate, Router, } from '@angular/router';
-import { LocationDataService } from '../services/location-data.service';
-
-
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { LoginService } from '../services/login.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
+  constructor(private loginService:LoginService,private router:Router,private toast:NgToastService){
 
-constructor( private locationDataService: LocationDataService,
-   private router: Router,
-  ){
-
-}
-
-  canActivate(): boolean{
-
-   if(this.locationDataService.isLoggedIn){
-           return true;
-   }else{
-   
-    this.router.navigate(['/login']);
-          return false;
+  }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    
+   if(this.loginService.isLoggedIn()){
+    return true
    }
+else{
+
+  this.router.navigate(["login"])
+  return false;
+}
+   
+   
+
   }
   
 }
