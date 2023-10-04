@@ -1,14 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor,
-} from "@angular/common/http";
-import { LoginService } from "../services/login.service";
+  HttpInterceptor
+} from '@angular/common/http';
+
+import { LoginService } from '../services/login.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
   constructor(private loginService: LoginService) {}
 
   intercept(
@@ -16,6 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ) {
     let newReq = request;
+    console.log(newReq);
     let token = this.loginService.getToken();
     console.log(token)
     console.log("INTERCEPTOR", token);
