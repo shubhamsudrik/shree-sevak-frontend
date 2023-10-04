@@ -34,11 +34,12 @@ import { UpdateBaithakComponent } from './pages/baithak-list/update-baithak/upda
 import { BaithakListComponent } from './pages/baithak-list/baithak-list.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { SchedularComponent } from './pages/schedular/schedular.component';
-import { AddSchedularComponent } from './pages/schedular/add-schedular/add-schedular.component';
+
 import { UpdateScheduleComponent } from './pages/schedular/update-schedule/update-schedule.component';
 import { LoginService } from './services/login.service';
-import { AuthGuard } from 'shree-sevak-frontend/src/app/guard/auth.guard';
+import { AuthGuard } from './guard/auth.guard';
 import { AuthInterceptor } from './guard/auth.interceptor';
+import { AddSchedularComponent } from './pages/schedular/add-schedular/add-schedular.component';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -89,12 +90,13 @@ import { AuthInterceptor } from './guard/auth.interceptor';
     BaithakListComponent,
     SchedularComponent,
     AddSchedularComponent,
-    UpdateScheduleComponent
+    UpdateScheduleComponent,
+
     
-    // ComponentComponent
+    
   ],
  
-  providers: [LocationDataService,LoginService,AuthGuard,[{provider:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
+  providers: [LocationDataService,LoginService,AuthGuard,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
   bootstrap: [AppComponent]
 })
 

@@ -30,6 +30,7 @@ constructor(private loginservice:LoginService,private  router: Router,){
     if(this.credentials.email !='' && this.credentials.password !=''  ){
       this.loginservice.generateToken(this.credentials).subscribe(
        (response:any)=>{
+        console.log(response)
   console.log(response.jwtToken)
   this.loginservice.loginUser(response.jwtToken)
   this.router.navigate(['/dashboard']);

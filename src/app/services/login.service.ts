@@ -17,10 +17,11 @@ generateToken(credentials:any){
   return this.http.post(`${this.url}/auth/login`,credentials);
 
 
+
 }
 
 
-  loginUser(token) {
+  loginUser(token: string) {
     localStorage.setItem("token",token);
     console.log(token);
     return true;
@@ -28,6 +29,7 @@ generateToken(credentials:any){
 //to check that user is logged in or not 
   isLoggedIn() {
     let token = localStorage.getItem("token");
+    console.log("form is loogedIn  "+token);
     
     if (token == undefined || token == "" || token == null) {
       return false;
