@@ -93,7 +93,9 @@ export class LocationListComponent implements OnInit {
   }
 
 
+
   // show all data and handl using active in active button 
+  
   statusLocation(status: string){
     if (status === "all") {
       this.getAllLocationList();
