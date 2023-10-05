@@ -86,7 +86,10 @@ export class LocationListComponent implements OnInit {
       (data: Location[]) => {
         this.defaultLocations =data;
         console.log(this.defaultLocations)
-      },)
+      },error=>{
+        console.log(error)
+      })
+    
   }
 
 
