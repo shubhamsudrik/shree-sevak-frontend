@@ -20,7 +20,7 @@ generateToken(credentials:any){
 }
 
 
-  loginUser(token) {
+  loginUser(token:string) {
     localStorage.setItem("token",token);
     console.log(token);
     return true;

@@ -1,209 +1,111 @@
-import { Component, OnInit } from '@angular/core';
-import { DayService, WeekService, WorkWeekService, MonthService, AgendaService } from '@syncfusion/ej2-angular-schedule';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MemberListService } from 'src/app/services/member-list.service';
-import { Schedule } from 'src/app/Classes/schedule';
-import { ScheduleDataService } from 'src/app/services/schedule-data.service';
-import { LocationDataService } from 'src/app/services/location-data.service';
-import { Member } from 'src/app/Classes/member';
-import { Location } from 'src/app/Classes/location';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 
+export class CalendarDay {
+  public date: Date;
+  public title: string;
+  public isPastDate: boolean;
+  public isToday: boolean;
+
+  public getDateString() {
+    return this.date.toISOString().split("T")[0]
+  }
+
+  constructor(d: Date) {
+    this.date = d;
+    this.isPastDate = d.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
+    this.isToday = d.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0);
+  }
+
+}
+
+@Pipe({
+  name: 'chunk'
+})
+export class ChunkPipe implements PipeTransform {
+
+  transform(calendarDaysArray: any, chunkSize: number): any {
+    let calendarDays = [];
+    let weekDays = [];
+
+    calendarDaysArray.map((day,index) => {
+        weekDays.push(day);
+        if (++index % chunkSize  === 0) {
+          calendarDays.push(weekDays);
+          weekDays = [];
+        }
+    });
+    return calendarDays;
+  }
+}
 
 @Component({
-  selector: 'app-add-schedular',
-  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService],
-  template: `<ejs-schedule> </ejs-schedule>`,
-  // templateUrl: './add-schedular.component.html',
-  // styleUrls: ['./add-schedular.component.css']
+  selector: 'add-schedular',
+  templateUrl: './add-schedular.component.html',
+  styleUrls: [ './add-schedular.component.css' ]
 })
 export class AddSchedularComponent implements OnInit {
+  public calendar: CalendarDay[] = [];
+  public monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  public displayMonth: string;
+  private monthIndex: number = 0;
 
-    scheduleform: FormGroup;
-    submitted = false;
-    defaultMembers: Member[] = [];
-    defaultSchedule: Schedule[] = [];
-    defaultlocations: Location[] = [];
-    Schedule: Schedule = new Schedule();
-    id: number;
-    showTable = false;
-    searchText: any;
-    
-  
-    constructor(
-      private ScheduledataService: ScheduleDataService,
-      private memberListService : MemberListService,
-      private locationDataService: LocationDataService,
-      private router: Router,
-      private route: ActivatedRoute,
-      private formBuilder: FormBuilder,
-  
-    ) {
-      
-    }
-  
-    ngOnInit(): void {
-     
-
-      this.id = this.route.snapshot.params['id'];
-      this.ScheduledataService.getScheduleById(this.id).subscribe({
-        next: (data) => {
-          this.Schedule = data;
-          console.log(data);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
-  
-      // Validatons
-      this.scheduleform = this.formBuilder.group({
-          baithakType: ['',Validators.required ],
-          dayOfWeek: ['',Validators.required],
-          fromTime: ['',Validators.required],
-          status: ['',Validators.required],
-          toTime: ['',Validators.required],
-          hajeriGhenara: ['',Validators.required],
-          vachanGhenara: ['',Validators.required],
-          locations: ['',Validators.required]
-      },
-      { validator: this.compareFieldsValidator }
-      
-      );
-  
-      this.getMembers();
-      this.getLocations();
-    }
-
-  
-// compare hajerighenara === vachanghenara
- compareFieldsValidator(formGroup: FormGroup) {
-  const field1Value = formGroup.get('hajeriGhenara').value;
-  const field2Value = formGroup.get('vachanGhenara').value;
-
-  if (field1Value === field2Value) {
-    
-    return { sameValue: true };
-   
+  ngOnInit(): void {
+    this.generateCalendarDays(this.monthIndex);
   }
 
-  return null;
+  private generateCalendarDays(monthIndex: number): void {
+    // we reset our calendar
+    this.calendar = [];
+
+    // we set the date 
+    let day: Date = new Date(new Date().setMonth(new Date().getMonth() + monthIndex));
+
+    // set the dispaly month for UI
+    this.displayMonth = this.monthNames[day.getMonth()];
+
+    let startingDateOfCalendar = this.getStartDateForCalendar(day);
+
+    let dateToAdd = startingDateOfCalendar;
+
+    for (var i = 0; i < 42; i++) {
+      this.calendar.push(new CalendarDay(new Date(dateToAdd)));
+      dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
+    }
+  }
+
+  private getStartDateForCalendar(selectedDate: Date){
+    // for the day we selected let's get the previous month last day
+    let lastDayOfPreviousMonth = new Date(selectedDate.setDate(0));
+
+    // start by setting the starting date of the calendar same as the last day of previous month
+    let startingDateOfCalendar: Date = lastDayOfPreviousMonth;
+
+    // but since we actually want to find the last Monday of previous month
+    // we will start going back in days intil we encounter our last Monday of previous month
+    if (startingDateOfCalendar.getDay() != 1) {
+      do {
+        startingDateOfCalendar = new Date(startingDateOfCalendar.setDate(startingDateOfCalendar.getDate() - 1));
+      } while (startingDateOfCalendar.getDay() != 1);
+    }
+
+    return startingDateOfCalendar;
+  }
+
+   public increaseMonth() {
+    this.monthIndex++;
+    this.generateCalendarDays(this.monthIndex);
+  }
+
+  public decreaseMonth() {
+    this.monthIndex--
+    this.generateCalendarDays(this.monthIndex);
+  }
+
+  public setCurrentMonth() {
+    this.monthIndex = 0;
+    this.generateCalendarDays(this.monthIndex);
+  }
+
 }
-
-// Gender check
-
-compareGender(formGroup: FormGroup){
-  const field1Value = formGroup.get('member.gender').value;
-  const field2Value = formGroup.get('vachanGhenara').value;
-
- if (field1Value === field2Value) {
-    return { sameValue: true };
-  }
-
-  return null;
-}
-
-
-
-  
-    get scheduleFormControl() {
-      return this.scheduleform.controls;
-    }
-  
-    onsubmit1() {
-      this.submitted = true;
-      if (this.scheduleform.valid) {
-        return;
-      }
-      alert('unsuccessful');
-    }
-  
-    onSubmit() {
-      this.submitted = true;
-  
-      const isDuplicate = this.isDuplicateData(this.Schedule);
- 
-
-      if (isDuplicate) {
-        // Data already exists error message
-        alert(
-          'Data already exists with the same city, state, and division.'
-        );
-      } 
-      
-      else if (this.scheduleform.valid) {
-        // Data doesn't exist and the form is valid, save the Member
-        console.log(this.Schedule);
-        this.saveMember();
-      } else {
-        alert('Please fill all fields: कृपया सर्व फील्ड भरा');
-      }
-    }
-  
-    saveMember() {
-      this.ScheduledataService.setAllData(this.Schedule).subscribe(
-        (data) => {
-          console.log(data);
-          this.router.navigate(['/schedular']);
-        },
-        (error) => console.log(error)
-      );
-    }
-  
-    CancelChanges() {
-      this.router.navigate(['/member-list']);
-    }
-  
-    Clear() {
-      this.scheduleform.reset();
-    }
-  
-    // getting member data
-    getMembers() {
-      this.memberListService.getMemberList().subscribe(
-        (data: Member[]) => {
-          this.defaultMembers = data;
-          console.log(this.defaultMembers);
-          console.log(this.defaultlocations);
-        },
-        (error) => {
-          console.error('Error fetching Members:', error);
-        }
-      );
-    }
-
-     // getting location data
-     getLocations() {
-      this.locationDataService.getLocationList().subscribe(
-        (data: Location[]) => {
-          this.defaultlocations = data;
-          console.log(this.defaultlocations);
-        },
-        (error) => {
-          console.error('Error fetching Locations:', error);
-        }
-      );
-    }
-  
-  
-    
-  
-    isDuplicateData(newMember: Schedule): boolean {
-      for (let item of this.defaultSchedule) {
-        if (
-          
-          // item.city === newMember.city &&
-          item.baithakType === newMember.baithakType 
-          // item.email === newMember.email &&
-          // item.mobile === newMember.mobile &&
-          // item.addharNumber === newMember.addharNumber 
-          // item.division === newMember.division 
-          // item.id !== newMember.MemberId
-        ) {
-          return true; // Data already exists
-        }
-      }
-      return false; // Data does not exist
-    }
-  }
-  

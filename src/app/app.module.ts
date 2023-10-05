@@ -34,8 +34,12 @@ import { UpdateBaithakComponent } from './pages/baithak-list/update-baithak/upda
 import { BaithakListComponent } from './pages/baithak-list/baithak-list.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { SchedularComponent } from './pages/schedular/schedular.component';
-import { AddSchedularComponent } from './pages/schedular/add-schedular/add-schedular.component';
+import { AddSchedularComponent, ChunkPipe } from './pages/schedular/add-schedular/add-schedular.component';
 import { UpdateScheduleComponent } from './pages/schedular/update-schedule/update-schedule.component';
+import { LoginService } from './services/login.service';
+import { AuthInterceptor } from './guard/auth.interceptor';
+import { AuthGuard } from './guard/auth.guard';
+import { HelloComponent } from './pages/schedular/add-schedular/hello.component';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -53,7 +57,6 @@ import { UpdateScheduleComponent } from './pages/schedular/update-schedule/updat
     RouterModule,
     AppRoutingModule,
     BrowserModule,
-    ScheduleModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule,
     MatFormFieldModule, 
@@ -87,8 +90,9 @@ import { UpdateScheduleComponent } from './pages/schedular/update-schedule/updat
     BaithakListComponent,
     SchedularComponent,
     AddSchedularComponent,
-    UpdateScheduleComponent
-    
+    UpdateScheduleComponent,
+    HelloComponent,
+    ChunkPipe,
     // ComponentComponent
   ],
  

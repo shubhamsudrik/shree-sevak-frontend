@@ -1,252 +1,52 @@
-<div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
-  <div class="py-7 py-lg-8">
-  </div>
-  <!-- Page content -->
-  <div class="container mt--8 pb-5">
-  <!-- Table -->
-  <div class="row justify-content-center">
-    <div class="col-lg-6 col-md-8">
-      <div class="card bg-secondary shadow border-0">
-        <div class="card-body px-lg-5 py-lg-5">
+<div class="container-fluid mt--7 pb-8 pt-50 pt-md-8">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
           
-          <form role="form" [formGroup]="scheduleform" (ngSubmit)="onSubmit()">
-            <h2 class="text-center">{{'Add new member record!' | translate }}</h2><br>
-            
-           
+          <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
+            <li class="nav-item ml-auto">
+              <span class="d-none d-md-block form-group">
+                <h2>{{ 'Create new schedule' | translate }}</h2>
+              </span>
+            </li>
+          </ul>
 
-             <!-- BaithakType -->
-          <div class="form-group">
-            <label>{{ 'Baithak Type' | translate }}</label><br>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <select
-                formControlName="baithakType"
-                class="form-control"
-                id="baithakType"
-                name="baithakType"
-                [(ngModel)]="Schedule.baithakType" 
-                required
-                [ngClass]="{
-                  'is-invalid': (submitted && scheduleFormControl.baithakType.errors?.required)
-                }"
-              >
-              <option value="" disabled>Select Baithak</option>
-              <option value="Child">Child</option>
-              <option value="Man">Man</option>
-              <option value="Women">Women</option>
-              <option value="Any">Any</option>
-              </select>
-              <div class="invalid-feedback">
-                {{ 'Baithak Type is required.' | translate }}
-              </div>
-            </div>
-          </div>
-
-
-             <!-- dayOfWeek -->
-          <div class="form-group">
-            <label>{{ 'Day Of Week' | translate }}</label><br>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <select
-                formControlName="dayOfWeek"
-                class="form-control"
-                id="dayOfWeek"
-                name="dayOfWeek"
-                [(ngModel)]="Schedule.dayOfWeek" 
-                required
-                [ngClass]="{
-                  'is-invalid': (submitted && scheduleFormControl.dayOfWeek.errors?.required)
-                }"
-              >
-              <option value="" disabled>Select Day</option>
-                  <option value="SUNDAY">SUNDAY</option>
-                  <option value="MONDAY">MONDAY</option>
-                  <option value="TUESDAY">TUESDAY</option>
-                  <option value="WEDNESDAY">WEDNESDAY</option>
-                  <option value="THURSDAY">THURSDAY</option>
-                  <option value="FRIDAY">FRIDAY</option>
-                  <option value="SATURDAY">SATURDAY</option>
-              </select>
-              <div class="invalid-feedback">
-                {{ 'Day Of Week is required.' | translate }}
-              </div>
-            </div>
-          </div>
-
-             <!-- fromTime -->
-          <div class="form-group">
-            <label>{{ 'Started Time' | translate }}</label><br>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <input [ngxTimepicker]="picker"
-                formControlName="fromTime"
-                class="form-control"
-                id="fromTime"
-                name="fromTime"
-                [(ngModel)]="Schedule.fromTime" 
-                required
-                [ngClass]="{
-                  'is-invalid': (submitted && scheduleFormControl.fromTime.errors?.required)
-                }"
-              >
-              <ngx-material-timepicker #picker></ngx-material-timepicker>
-              <div class="invalid-feedback">
-                {{ 'Stared time is required.' | translate }}
-              </div>
-            </div>
-          </div>
-
-           <!-- toTime -->
-           <div class="form-group">
-            <label>{{ 'End Time' | translate }}</label><br>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <input [ngxTimepicker]="picker1"
-                formControlName="toTime"
-                class="form-control"
-                id="toTime"
-                name="toTime"
-                [(ngModel)]="Schedule.toTime" 
-                required
-                [ngClass]="{
-                  'is-invalid': (submitted && scheduleFormControl.toTime.errors?.required)
-                }"
-              >
-              <ngx-material-timepicker #picker1></ngx-material-timepicker>
-              <div class="invalid-feedback">
-                {{ 'Stared time is required.' | translate }}
-              </div>
-            </div>
-          </div>
-         
-            <!-- vachanGhenara -->
+          <div>
             <div>
-            <div class="form-group">
-              <label>{{ 'Vachan Ghenara' | translate }}</label><br>
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend"></div>
-                <select
-                  formControlName="vachanGhenara" 
-                  class="form-control"
-                  id="vachanGhenara"
-                  name="vachanGhenara"
-                  [(ngModel)]="Schedule.vachanGhenara" 
-                  required
-                  [ngClass]="{
-                    'is-invalid': (submitted && scheduleFormControl.vachanGhenara.errors?.required)
-                  }"
-                >
-                  <option value="" disabled>Select Member</option>
-                  <option *ngFor="let member of defaultMembers" [ngValue]="member.memberId">
-                    {{ 'Name- '+member.firstName}}{{member.lastName}}{{',  '+'Mobile- '+member.mobile}}
-                  
-                  </option>
-                </select>
-                <div class="invalid-feedback">
-                  {{ 'Vachan Ghenara is required.' | translate }}
-                </div>
-              </div>
+              {{displayMonth}}
             </div>
-            
-             <!-- hajeriGhenara -->
-             <div class="form-group">
-              <label>{{ 'Hajeri Ghenara' | translate }}</label><br>
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend"></div>
-                <select
-                  formControlName="hajeriGhenara" 
-                  class="form-control"
-                  id="hajeriGhenara"
-                  name="hajeriGhenara"
-                  [(ngModel)]="Schedule.hajeriGhenara" 
-                  required
-                  [ngClass]="{
-                    'is-invalid': (submitted && scheduleFormControl.hajeriGhenara.errors?.required)
-                  }"
-                >
-                  <option value="" disabled>Select Member</option>
-                  <option *ngFor="let member of defaultMembers" [ngValue]="member.memberId">
-                    {{ 'Name- '+member.firstName}}{{member.lastName}}{{',  '+'Mobile- '+member.mobile}}
-                  
-                  </option>
-                </select>
-                <div class="invalid-feedback">
-                  {{ 'Vachan Ghenara is required.' | translate }}
-                </div>
-              </div>
+            <div>
+              <input type="button" (click)="setCurrentMonth()" value="Today" />
+              <input type="button" (click)="decreaseMonth()" value="<" />
+              <input type="button" (click)="increaseMonth()" value=">" />
             </div>
-            <div *ngIf="scheduleform.hasError('sameValue')">
-              <div ></div>
-              <p class="error-message" class="btn btn-danger">Both fields cannot have the same value.</p>
-            </div>
-            </div>
+          </div><br>
           
-          <!-- locations -->
-          <div class="form-group">
-            <label>{{ 'locations' | translate }}</label><br>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <select
-                formControlName="locations" 
-                class="form-control"
-                id="locations"
-                name="locations"
-                [(ngModel)]="Schedule.location" 
-                required
-                [ngClass]="{
-                  'is-invalid': (submitted && scheduleFormControl.locations.errors?.required)
-                }"
-              >
-                <option value="" disabled>Select Location</option>
-                <option *ngFor="let location of defaultlocations |filter:searchText;" [ngValue]="location.locationId">
-                  {{ 'City- '+location.city +' ' }}{{'Location Name- '+location.locationName}}
-                
-                </option>
-              </select>
-              <div class="invalid-feedback">
-                {{ 'locations is required.' | translate }}
-              </div>
-            </div>
-          </div>
-
-          <!-- status -->
-          <div class="form-group">
-            <label>{{ 'Status' | translate }}</label><br>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <select
-                formControlName="status"
-                class="form-control"
-                id="status"
-                name="status"
-                [(ngModel)]="Schedule.status"
-                required
-                [ngClass]="{
-                  'is-invalid': (submitted && scheduleFormControl.status.errors?.required)
-                }"
-              >
-                <option value="" disabled>Select Status</option>
-                <option value="1">{{'Active'|translate}}</option>
-                <option value="0">{{'Inactive'|translate}}</option>
-              </select>
-              <div class="invalid-feedback">
-                {{ 'Status is required.' | translate }}
-              </div>
-            </div>
-           </div>
-
-             <!-- Button -->
-             <div ><br>
-              <button type="submit" class="btn btn-success mx-2" >{{'Save'|translate}}</button>
-              <button type="button" class="btn btn-primary mx-2" (click)="Clear()">{{'Clear'|translate}} </button>
-              <button type="button" class="btn btn-danger mx-2" (click)="CancelChanges()">{{'Back'|translate}} </button>
-             </div>
-        
-            </form>
+          <table class='calendar-table' *ngIf="calendar">
+            <thead>
+              <tr>
+                <!-- <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th> -->
+                <th>Sunday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of calendar | chunk: 7; let i = index">
+                <td class="calendar-week" *ngFor="let c of row; let j = index">
+                  <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday && c.date.getDay() === 0}">
+                    <strong *ngIf="c.date.getDay() === 0">{{c.date.getDate()}} {{monthNames[c.date.getMonth()]}}</strong>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
-  </div>
-  
+</div>
