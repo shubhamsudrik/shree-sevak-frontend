@@ -96,7 +96,7 @@ import { HelloComponent } from './pages/schedular/add-schedular/hello.component'
     // ComponentComponent
   ],
  
-  providers: [LocationDataService,LoginService,AuthGuard,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
+  providers: [LocationDataService,LoginService,AuthGuard,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 

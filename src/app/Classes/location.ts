@@ -8,8 +8,7 @@ export class Location{
     city : string;
     state : string;
     country : string;
-    pincode : number;
-    locId: number;
+    pincode : String;
     latitude : string;
     longitude : string;
     status: string;

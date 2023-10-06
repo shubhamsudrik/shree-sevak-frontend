@@ -10,7 +10,7 @@
           <div class="card-body px-lg-5 py-lg-5 text-color">
            
             <form [formGroup]="locationform" (ngSubmit)="onSubmit()">
-              <h2 class="text-center">{{ 'Update location record!' | translate }}</h2><br>
+              <h2 class="text-center">{{ 'Create location record!' | translate }}</h2><br>
 
                <!-- Header -->
              <div>
@@ -25,7 +25,7 @@
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
-                    formControlName="locationName"
+                  formControlName="locationName"
                     type="text"
                     class="form-control"
                     id="locationName"
@@ -78,7 +78,7 @@
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
-                    formControlName="add2"
+                  formControlName="add2"
                     type="text"
                     class="form-control"
                     id="add2"
