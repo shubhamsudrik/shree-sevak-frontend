@@ -12,7 +12,7 @@ export class Location{
     locId: number;
     latitude : string;
     longitude : string;
-    status : number;
+    status: string;
     googleMapLink: string;
     add3:string;
     add4:string;
@@ -26,7 +26,6 @@ export class Location{
     contact2Email:string;
     contact2Initial:string;
     contact2Name:string;
-    contact2Occupation:string;
-    contact2Phone1:string;
+   contact2Phone1:string;
     contact2Phone2:string;
 }

@@ -24,19 +24,19 @@ export class EditLocationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.locationDataService.getLocationById(this.id).subscribe({
-      next: (data) => {
-        this.location = data;
-        console.log(data);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    // this.id = this.route.snapshot.params['id'];
+    // this.locationDataService.getLocationById(this.id).subscribe({
+    //   next: (data) => {
+    //     this.location = data;
+    //     console.log(data);
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //   },
+    // });
 
     this.locationform = this.formBuilder.group({
-      locationname: ['', Validators.required],
+      locationName: ['', Validators.required],
       add1: ['', Validators.required],
       add2: ['', Validators.required],
       city: ['', Validators.required],
@@ -44,7 +44,7 @@ export class EditLocationComponent implements OnInit {
       state: ['', Validators.required],
       country: ['', Validators.required],
       pincode: ['', [Validators.required, Validators.minLength(6)]],
-     
+      status:['', Validators.required],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
       googleMapLink: ['', Validators.required],
@@ -60,7 +60,6 @@ export class EditLocationComponent implements OnInit {
       contact2Email: ['', Validators.required],
       contact2Initial: ['', Validators.required],
       contact2Name: ['', Validators.required],
-      contact2Occupation: ['', Validators.required],
       contact2Phone1: ['', Validators.required],
       contact2Phone2: ['', Validators.required],
      
