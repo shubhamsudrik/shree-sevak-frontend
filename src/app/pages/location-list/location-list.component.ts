@@ -28,7 +28,7 @@ export class LocationListComponent implements OnInit {
   }
 
   private getLocationList() {
-    this.locationDataService.getLocationList().subscribe(
+    this.locationDataService.getAllLocationList().subscribe(
       (data: Location[]) => {
         this.defaultLocations = data;
         console.log(this.defaultLocations);
@@ -86,11 +86,16 @@ export class LocationListComponent implements OnInit {
       (data: Location[]) => {
         this.defaultLocations =data;
         console.log(this.defaultLocations)
-      },)
+      },error=>{
+        console.log(error)
+      })
+    
   }
 
 
+
   // show all data and handl using active in active button 
+  
   statusLocation(status: string){
     if (status === "all") {
       this.getAllLocationList();

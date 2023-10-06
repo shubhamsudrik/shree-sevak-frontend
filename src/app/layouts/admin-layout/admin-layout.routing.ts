@@ -14,8 +14,9 @@ import { BaithakListComponent } from 'src/app/pages/baithak-list/baithak-list.co
 import { CreateBaithakComponent } from 'src/app/pages/baithak-list/create-baithak/create-baithak.component';
 import { UpdateBaithakComponent } from 'src/app/pages/baithak-list/update-baithak/update-baithak.component';
 import { SchedularComponent } from 'src/app/pages/schedular/schedular.component';
-import { AddSchedularComponent } from 'src/app/pages/schedular/add-schedular/add-schedular.component';
+
 import { UpdateScheduleComponent } from 'src/app/pages/schedular/update-schedule/update-schedule.component';
+import { AddSchedularComponent } from 'src/app/pages/schedular/add-schedular/add-schedular.component';
 
 
 export const AdminLayoutRoutes: Routes = [
