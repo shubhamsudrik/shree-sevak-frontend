@@ -51,35 +51,36 @@ export class UpdateLocationComponent implements OnInit {
 
   initializeForm() {
     this.locationform = this.formBuilder.group({
-      locationName: [this.location.locationName, Validators.required],
+      
+      locationName: [this.location.locationName, Validators.required],         
       add1: [this.location.add1, Validators.required],
       add2: [this.location.add2, Validators.required],
+      add3: [''],
+      add4: [''],
       city: [this.location.city, Validators.required],
       division: [this.location.division, Validators.required],
       state: [this.location.state, Validators.required],
       country: [this.location.country, Validators.required],
       pincode: [this.location.pincode,  [Validators.required, Validators.minLength(6)]],
-      phoneNumber: [this.location.phoneNumber,  [Validators.required, Validators.minLength(10)]],
       latitude: [this.location.latitude, Validators.required],
       longitude: [this.location.longitude, Validators.required],
       googleMapLink: [this.location.googleMapLink, Validators.required],
-      additionalInfo: [this.location.additionalInfo, Validators.required],
-      add3: [this.location.add3, Validators.required],
-      add4: [this.location.add4, Validators.required],
+      status: [this.location.status, Validators.required],
       
-      contact1Email: [this.location.contact1Email, Validators.required],
       contact1Initial: [this.location.contact1Initial, Validators.required],
       contact1Name: [this.location.contact1Name, Validators.required],
       contact1Occupation: [this.location.contact1Occupation, Validators.required],
       contact1Phone1: [this.location.contact1Phone1, Validators.required],
-      contact1Phone2: [this.location.contact1Phone2, Validators.required],
-      contact2Email: [this.location.contact2Email, Validators.required],
+      contact1Phone2: [''],
+      contact1Email: [this.location.contact1Email, Validators.required],
+  
       contact2Initial: [this.location.contact2Initial, Validators.required],
-      contact2Name: [this.location.contact2Name, Validators.required],
-      contact2Occupation: [this.location.contact2Occupation, Validators.required],
+      contact2Name: [this.location.contact2Name, Validators.required],     
       contact2Phone1: [this.location.contact2Phone1, Validators.required],
-      contact2Phone2: [this.location.contact2Phone2, Validators.required],
-      status: [this.location.status, Validators.required]
+      contact2Phone2: [''],
+      contact2Email: [this.location.contact2Email, Validators.required],
+     
+      additionalInfo: [''],
     });
   }
 
@@ -148,8 +149,8 @@ export class UpdateLocationComponent implements OnInit {
       if (
         item.city === newLocation.city &&
         item.state === newLocation.state &&
-        item.division === newLocation.division 
-        // item.locationName === newLocation.locationName
+        item.division === newLocation.division &&
+        item.locationName === newLocation.locationName
       ) {
         return true; // Data already exists
       }

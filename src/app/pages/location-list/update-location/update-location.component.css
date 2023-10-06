@@ -1,0 +1,28 @@
+ /* for greater then 600 px */
+ .custom-width {
+    width: 200%; /* Adjust the width as needed, e.g., 150% */
+    margin-left: -60%; /* Adjust the negative margin to center the card */
+    margin-right: -60%;
+  }
+
+  /* for less then 600 px */
+  @media (max-width: 600px) {
+    .custom-width {
+    width: 100%; /* Adjust as needed for smaller screens */
+    margin-left: -3%;
+    margin-right: -25%;
+    }
+    /* Additional custom styles for smaller screens */
+  }
+
+  .form-section-header {
+  background-color: #e0fafc; /* Set the background color to blue (you can change it) */
+  color: #353232; /* Set the text color to white */
+  padding: 10px; /* Add some padding for spacing */
+  font-size: 18px; /* Adjust the font size */
+  margin-top: 20px; /* Add margin to separate sections */
+}
+
+.text-color{
+    color: whitesmoke;
+}

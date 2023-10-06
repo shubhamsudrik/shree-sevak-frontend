@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { AgendaService, DayService, MonthAgendaService, MonthService, TimelineMonthService, TimelineViewsService, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
 import { Schedule } from 'src/app/Classes/schedule';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
 
 
 @Component({
+  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService, TimelineViewsService, TimelineMonthService],
   selector: 'app-schedular',
   templateUrl: './schedular.component.html',
   styleUrls: ['./schedular.component.css']

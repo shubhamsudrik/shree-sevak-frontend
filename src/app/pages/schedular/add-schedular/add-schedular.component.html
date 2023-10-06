@@ -1,0 +1,52 @@
+<div class="container-fluid mt--7 pb-8 pt-50 pt-md-8">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          
+          <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
+            <li class="nav-item ml-auto">
+              <span class="d-none d-md-block form-group">
+                <h2>{{ 'Create new schedule' | translate }}</h2>
+              </span>
+            </li>
+          </ul>
+
+          <div>
+            <div>
+              {{displayMonth}}
+            </div>
+            <div>
+              <input type="button" (click)="setCurrentMonth()" value="Today" />
+              <input type="button" (click)="decreaseMonth()" value="<" />
+              <input type="button" (click)="increaseMonth()" value=">" />
+            </div>
+          </div><br>
+          
+          <table class='calendar-table' *ngIf="calendar">
+            <thead>
+              <tr>
+                <!-- <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th> -->
+                <th>Sunday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of calendar | chunk: 7; let i = index">
+                <td class="calendar-week" *ngFor="let c of row; let j = index">
+                  <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday && c.date.getDay() === 0}">
+                    <strong *ngIf="c.date.getDay() === 0">{{c.date.getDate()}} {{monthNames[c.date.getMonth()]}}</strong>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

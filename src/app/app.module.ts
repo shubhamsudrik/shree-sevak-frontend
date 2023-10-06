@@ -34,12 +34,12 @@ import { UpdateBaithakComponent } from './pages/baithak-list/update-baithak/upda
 import { BaithakListComponent } from './pages/baithak-list/baithak-list.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { SchedularComponent } from './pages/schedular/schedular.component';
-
+import { AddSchedularComponent, ChunkPipe } from './pages/schedular/add-schedular/add-schedular.component';
 import { UpdateScheduleComponent } from './pages/schedular/update-schedule/update-schedule.component';
 import { LoginService } from './services/login.service';
-import { AuthGuard } from './guard/auth.guard';
 import { AuthInterceptor } from './guard/auth.interceptor';
-import { AddSchedularComponent } from './pages/schedular/add-schedular/add-schedular.component';
+import { AuthGuard } from './guard/auth.guard';
+import { HelloComponent } from './pages/schedular/add-schedular/hello.component';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -91,9 +91,9 @@ import { AddSchedularComponent } from './pages/schedular/add-schedular/add-sched
     SchedularComponent,
     AddSchedularComponent,
     UpdateScheduleComponent,
-
-    
-    
+    HelloComponent,
+    ChunkPipe,
+    // ComponentComponent
   ],
  
   providers: [LocationDataService,LoginService,AuthGuard,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
