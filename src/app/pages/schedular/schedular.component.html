@@ -42,16 +42,24 @@
               <ul class="nav nav-pills justify-content">
                 <li class="nav-item mr-2 mr-md-0">
                   <select class="btn btn-success" (change)="statusSchedule($event.target.value)">
-                    <option  disabled selected>Select Baithak</option>
+                    <option  disabled selected>Scheduled Baithak</option>
                     <option value="all" >All</option>
                     <option value="1" >Active</option>
                     <option value="0">InActive</option>
                   </select>
                 </li><br>
                 <li class="nav-item mr-2 mr-md-0">
-                    <span class="d-none d-md-block" class="form-group">
+                  <span>
+                    <select class="btn btn-success" (change)="onOpen($event.target.value)">
+                      <option  disabled selected>{{'Schedule new baithak'|translate}}</option>
+                      <option value="child(8-9:15)" >Child</option>
+                      <!-- <option value="gents" >Gents</option>
+                      <option value="ladies">Ladies</option> -->
+                    </select>
+                  </span>
+                    <!-- <span class="d-none d-md-block" class="form-group">
                       <button class="btn btn-success" (click)="onOpen()" > {{'Create new schedule'|translate}}</button>
-                    </span>
+                    </span> -->
                 </li>
 
                 <!-- update button -->

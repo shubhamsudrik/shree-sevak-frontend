@@ -37,8 +37,7 @@ export class MemberListComponent implements OnInit {
     }
 
 
-    //get all location data
-
+    //get all member data
   private getAllMemberList(){
     this.memberListService.getAllMemberList().subscribe(
       (data: Member[]) => {

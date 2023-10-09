@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
-import { MapsComponent } from '../../pages/maps/maps.component';
-import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { TablesComponent } from '../../pages/tables/tables.component';
 import { LocationListComponent } from 'src/app/pages/location-list/location-list.component';
 import { EditLocationComponent } from 'src/app/pages/location-list/edit-location/edit-location.component';
 import { UpdateLocationComponent } from 'src/app/pages/location-list/update-location/update-location.component';
@@ -16,14 +13,13 @@ import { UpdateBaithakComponent } from 'src/app/pages/baithak-list/update-baitha
 import { SchedularComponent } from 'src/app/pages/schedular/schedular.component';
 import { AddSchedularComponent } from 'src/app/pages/schedular/add-schedular/add-schedular.component';
 import { UpdateScheduleComponent } from 'src/app/pages/schedular/update-schedule/update-schedule.component';
+import { ScheduleLadiesBaithakComponent } from 'src/app/pages/schedular/schedule-ladies-baithak/schedule-ladies-baithak.component';
+import { UserProfileComponent } from 'src/app/pages/user-profile/user-profile.component';
 
 
 export const AdminLayoutRoutes: Routes = [
  
     { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'tables',         component: TablesComponent },
-    { path: 'maps',           component: MapsComponent },
     { path: 'location-list', component: LocationListComponent},
     { path: 'edit-location', component: EditLocationComponent },
     { path: 'add-new-member', component: AddNewMemberComponent },
@@ -36,5 +32,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'schedular', component: SchedularComponent },
     { path: 'add-schedular', component: AddSchedularComponent },
     { path: 'update-schedule/:id', component: UpdateScheduleComponent },
+    { path: 'user-profile', component: UserProfileComponent },
+    { path: 'schedule-ladies-baithak', component: ScheduleLadiesBaithakComponent },
 
 ];

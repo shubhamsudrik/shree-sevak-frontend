@@ -7,17 +7,14 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
-export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
-    { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
-    { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
+export const ROUTES: RouteInfo[] = [ 
+    { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class:'' },  
     { path: '/location-list', title: 'Location',  icon:'ni-pin-3 text-red', class: '' },
-    { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
     { path: '/register', title: 'New Register',  icon:'ni-circle-08 text-pink', class: '' },
     { path: '/member-list', title: 'member',  icon:'ni-pin-3 text-red', class: '' },
     { path: '/baithak-list', title: 'Baithak',  icon:'ni-pin-3 text-red', class: '' },
     { path: '/schedular', title: 'Schedule Baithak',  icon:'ni-pin-3 text-red', class: '' },
+   
 ];
 
 @Component({

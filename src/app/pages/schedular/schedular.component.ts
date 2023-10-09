@@ -78,9 +78,13 @@ export class SchedularComponent implements OnInit {
       this.getMemberList();
     }
   
-    onOpen() {
-      console.log(this.schedule);
-      this.router.navigate(['/add-schedular']);
+    onOpen(type: string) {
+      if(type === "child(8-9:15)"){
+        console.log(this.schedule);
+        this.router.navigate(['/add-schedular']);
+      }else {
+        this.router.navigate(['/location-list']);
+      }
     }
     
     toggleButtons(operation: string, schedule: any) {

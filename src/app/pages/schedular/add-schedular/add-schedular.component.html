@@ -3,48 +3,121 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          
-          <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
-            <li class="nav-item ml-auto">
+          <ul class="nav nav-pills flex-column flex-md-row justify-content-center">
+            <li class="nav-item">
               <span class="d-none d-md-block form-group">
-                <h2>{{ 'Create new schedule' | translate }}</h2>
+                <h2>{{ 'Schedule child baithak' | translate }}</h2>
               </span>
             </li>
           </ul>
 
           <div>
             <div>
-              {{displayMonth}}
+              {{ displayMonth }} {{ displayYear }}
             </div>
             <div>
-              <input type="button" (click)="setCurrentMonth()" value="Today" />
-              <input type="button" (click)="decreaseMonth()" value="<" />
-              <input type="button" (click)="increaseMonth()" value=">" />
+              <button type="button" class="btn btn-info" (click)="setCurrentMonth()" value="today">Current month</button>
+              <button type="button" class="btn btn-info" (click)="decreaseMonth()" value="-">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button type="button" class="btn btn-info" (click)="increaseMonth()">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button type="button" class="btn btn-info" (click)="goBack()" value="back">Go on schedule</button>
             </div>
-          </div><br>
-          
-          <table class='calendar-table' *ngIf="calendar">
+          </div>
+          <br />
+          <div class="table-responsive">
+          <table class="calendar-table" *ngIf="calendar">
             <thead>
               <tr>
-                <!-- <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th> -->
+                <th>Sunday</th>
+                <th>Sunday</th>
+                <th>Sunday</th>
+                <th>Sunday</th>
                 <th>Sunday</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of calendar | chunk: 7; let i = index">
-                <td class="calendar-week" *ngFor="let c of row; let j = index">
-                  <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday && c.date.getDay() === 0}">
-                    <strong *ngIf="c.date.getDay() === 0">{{c.date.getDate()}} {{monthNames[c.date.getMonth()]}}</strong>
-                  </div>
-                </td>
+              <tr>
+                <!-- Display defaultLocations vertically -->
+                  <!-- <td>
+                    <div *ngFor="let location of defaultLocations | filter:searchText;">
+                      {{ location.locationName }}
+                    </div>
+                  </td> -->
+                  <!-- Display meeting data horizontally -->
+                  <td 
+                    class="calendar-day"
+                    [ngClass]="{ 'past-date': c.isPastDate, 'today': c.isToday }"
+                    *ngFor="let c of meetings; let j = index"
+                  >
+                    <div class="calendar-day-header" [ngClass]="{ 'blue-date': c.isToday }">
+                      <strong>{{ c.date.getDate() }}-</strong> <strong>{{ monthNames[c.date.getMonth()] }}</strong>
+                    </div>
+
+                    <!-- Get location data dropdown -->
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle btn-dropdown" type="button" data-toggle="dropdown">
+                        {{ c.selectedLocation ? c.selectedLocation.locationId : 'Select Location' }}
+                      </button>
+                      <div class="dropdown-menu">
+                        <a
+                          *ngFor="let location of defaultLocations"
+                          class="dropdown-item"
+                          (click)="onLocationSelect(location, c)"
+                        >
+                          {{ location.locationName }}
+                        </a>
+                      </div>
+                    </div>
+                    
+
+                     <!-- Get Reader data dropdown -->
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle btn-dropdown" type="button" data-toggle="dropdown">
+                        {{ c.selectedReader ? c.selectedReader.memberId : 'Select Reader' }}
+                      </button>
+                      <div class="dropdown-menu">
+                        <a
+                          *ngFor="let reader of defaultMembers"
+                          class="dropdown-item"
+                          (click)="onReaderSelect(reader, c)"
+                        >
+                          {{ reader.firstName }}
+                        </a>
+                      </div>
+                    </div>
+                    <!-- Get Writer data dropdown -->
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle btn-dropdown" type="button" data-toggle="dropdown">
+                        {{ c.selectedWriter ? c.selectedWriter.memberId : 'Select Writer' }}
+                      </button>
+                      <div class="dropdown-menu">
+                        <a
+                          *ngFor="let writer of defaultMembers"
+                          class="dropdown-item"
+                          (click)="onWriterSelect(writer, c)"
+                        >
+                          {{ writer.firstName }}
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <!-- <div class="meeting-dropdowns"> 
+                      <select *ngFor="location of defaultLocations">
+                        <option value=""> {{location.locationName}}</option>
+                      </select>                     
+                      <select [(ngModel)]="c.location" (change)="updateMeeting(j, c.member, c.location)">
+                        <option value="">Select Location</option>
+                        <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+                      </select>
+                    </div> -->
+                  </td>
               </tr>
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>
