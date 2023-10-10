@@ -25,7 +25,7 @@ export class MemberListComponent implements OnInit {
     }
   
     private getMemberList() {
-      this.memberListService.getMemberList().subscribe(
+      this.memberListService.getAllMemberList().subscribe(
         (data: Member[]) => {
           this.defaultMembers = data;
           console.log(this.defaultMembers);
