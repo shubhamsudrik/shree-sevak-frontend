@@ -10,7 +10,7 @@
           <div class="card-body px-lg-5 py-lg-5 text-color">
            
             <form [formGroup]="locationform" (ngSubmit)="onSubmit()">
-              <h2 class="text-center">{{ 'Update location record!' | translate }}</h2><br>
+              <h2 class="text-center">{{ 'Create location record!' | translate }}</h2><br>
 
                <!-- Header -->
              <div>
@@ -331,8 +331,8 @@
                 name="latitude"
                 [(ngModel)]="location.latitude"
                 [ngClass]="{
-                 'is-invalid': (submitted && locationFormControl.latitude.errors?.required)
-                }"
+                  'is-invalid': (submitted && locationFormControl.latitude.errors?.required)
+                 }"             
                
                   />
                   <div class="invalid-feedback">
@@ -355,13 +355,13 @@
                  id="longitude"
                 name="longitude"
                 [(ngModel)]="location.longitude"
+                
                 [ngClass]="{
-                 'is-invalid': (submitted && locationFormControl.longitude.errors?.required)
-                }"
-               
+                  'is-invalid': (submitted && locationFormControl.longitude.errors?.required)
+                 }"
                   />
                   <div class="invalid-feedback">
-                    {{ 'Longitude  is required.' | translate }}
+                    {{ 'longitude  is required.' | translate }}
                   </div>
             </div>
             </div>
@@ -380,14 +380,10 @@
                    id="googleMapLink"
                   name="googleMapLink"
                   [(ngModel)]="location.googleMapLink"
-                  [ngClass]="{
-                   'is-invalid': (submitted && locationFormControl.googleMapLink.errors?.required)
-                  }"
+                  
                   maxlength="50" 
                     />
-                    <div class="invalid-feedback">
-                      {{ 'googleMapLink is required.' | translate }}
-                    </div>
+                    
               </div>
              </div>
              </div>
@@ -427,7 +423,7 @@
               <h2 class="form-section-header text-center">Contact-1</h2>
             </div>
 
-                <!-- initial -->
+                <!--contact1 initial -->
          <div class="row">
           <div class="col-md-2">
         <div class="form-group">
@@ -493,14 +489,10 @@
                id="contact1Occupation"
               name="contact1Occupation"
               [(ngModel)]="location.contact1Occupation"
-              [ngClass]="{
-               'is-invalid': (submitted && locationFormControl.contact1Occupation.errors?.required)
-              }"
+              
               maxlength="25" 
                 />
-                <div class="invalid-feedback">
-                  {{ 'contact1 Occupation is required.' | translate }}
-                </div>
+                
                 </div>
                 </div>
           </div>
@@ -549,10 +541,10 @@
                 name="contact1Phone2"
                 [(ngModel)]="location.contact1Phone2"
                 
-                minlength="10"
+                
                   />
                   
-                  </div>
+                </div>                 
             </div>
            </div>
 
@@ -686,10 +678,8 @@
                 name="contact2Phone2"
                 [(ngModel)]="location.contact2Phone2"
                 
-                minlength="10"
                   />
-                  
-                  </div>
+            </div>               
             </div>
            </div>
             <!-- contact2 Email-->

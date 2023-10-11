@@ -1,6 +1,7 @@
 export class Member {
 
     memberId :number;
+	eligible:string;
 	firstName:string;
     middleName:string;
 	lastName:string;
@@ -25,15 +26,18 @@ export class Member {
 	vehiclesType:string;
 	phoneNumber:string;
 	ownBaithakId:string;
- marathiRead:string;
- marathiSpeak:string;
- marathiWrite:string;
- englishRead:string;
- englishSpeak:string;
- englishWrite:string;
- hindiRead:string;
- hindiSpeak:string;
- hindiWrite:string;
+	eligibleForChild:any;
+	eligibleForGents:any;
+	eligibleForLadies:any;
+ marathiRead:any;
+ marathiSpeak:any;
+ marathiWrite:any;
+ englishRead:any;
+ englishSpeak:any;
+ englishWrite:any;
+ hindiRead:any;
+ hindiSpeak:any;
+ hindiWrite:any;
  longitude:string;
  latitude:string;
  mobile:string;

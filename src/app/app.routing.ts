@@ -30,10 +30,16 @@ const routes: Routes =[
         path: '',
         loadChildren: () => import('src/app/layouts/auth-layout/auth-layout.module').then(m => m.AuthLayoutModule)
       }
-    ]
+      
+      
+    ],
+  
+    
+    
   }, {
     path: '**',
     redirectTo: 'dashboard'
+    
   }
 ];
 

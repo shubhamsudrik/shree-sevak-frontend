@@ -17,7 +17,7 @@ export class UpdateMemberComponent implements OnInit {
     defaultMembers: Member[] = [];
     Member: Member = new Member();
     id: number;
-  
+   
     constructor(
       private MemberListService: MemberListService,
       private router: Router,
@@ -27,71 +27,82 @@ export class UpdateMemberComponent implements OnInit {
   
     ngOnInit(): void {
       this.id = this.route.snapshot.params['id'];
+      this.initializeForm();
       this.MemberListService.getMemberById(this.id).subscribe({
-        next: (data) => {
-          this.Member = data;
+        next: (data : Member) => {
           console.log(data);
+          this.Member = data;
+          this.populateForm()
+         
         },
         error: (error) => {
           console.log(error);
         },
       });
-  
+    }
+      populateForm(){
+        this.memberform.patchValue({firstName:this.Member?.firstName,})
+      }
       // Validatons
+      initializeForm() {
       this.memberform = this.formBuilder.group({
-        initial: ['', Validators.required],
-        firstName: ['', Validators.required],
-        middleName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        education: ['', Validators.required],
-        occupation: ['', Validators.required],
-        dob: ['', Validators.required],
-        gender: ['', Validators.required],
-        roles: ['', Validators.required],
-        addharNumber: ['', [Validators.required, Validators.minLength(12)]],
-        panNo: ['', Validators.required],
-        photoBase64: ['', Validators.required],
+        initial: [this.Member?.initial, Validators.required],
+        firstName: [this.Member?.firstName, Validators.required],
+        middleName: [this.Member?.middleName, Validators.required],
+        lastName: [this.Member?.lastName, Validators.required],
+        education: [this.Member?.education, Validators.required],
+        occupation: [this.Member?.occupation, Validators.required],
+        dob: [this.Member?.dob, Validators.required],
+        gender: [this.Member?.gender, Validators.required],
+        // eligible: ['', Validators.required],
+        roles: [this.Member?.roles, Validators.required],
+        addharNumber: [this.Member?.addharNumber, [Validators.required, Validators.minLength(12)]],
+        panNo: [this.Member?.panNo, Validators.required],
+        photoBase64: [this.Member?.photoBase64, Validators.required],
 
-        add1: ['', Validators.required],
-        add2: ['', Validators.required],
-        add3: [''],
-        add4: [''],
-        city: ['', Validators.required],
-        division: ['', Validators.required],
-        state: ['', Validators.required],
-        country: ['', Validators.required],
-        pincode: ['', [Validators.required, Validators.minLength(6)]],
-        latitude: ['', Validators.required],
-        longitude: ['', Validators.required],
-        googleMapLink: ['', Validators.required],
-        status: ['', Validators.required],
+        add1: [this.Member?.add1, Validators.required],
+        add2: [this.Member?.add2, Validators.required],
+        add3: [this.Member?.add3],
+        add4: [this.Member?.add4],
+        city: [this.Member?.city, Validators.required],
+        division: [this.Member?.division, Validators.required],
+        state: [this.Member?.state, Validators.required],
+        country: [this.Member?.country, Validators.required],
+        pincode: [this.Member?.pincode, [Validators.required, Validators.minLength(6)]],
+        latitude: [this.Member?.latitude, Validators.required],
+        longitude: [this.Member?.longitude, Validators.required],
+        googleMapLink: [this.Member?.googleMapLink, Validators.required],
+        status: [this.Member?.state, Validators.required],
 
-        mobile: ['', [Validators.required, Validators.minLength(10)]],
-        phoneNumber: [''],
-        email: ['', Validators.required],
+        mobile: [this.Member?.mobile, [Validators.required, Validators.minLength(10)]],
+        phoneNumber: [this.Member?.phoneNumber],
+        email: [this.Member?.email, Validators.required],
        
-        vehiclesType: ['', Validators.required],
-        vehicleDetails: ['', Validators.required],                 
+        vehiclesType: [this.Member?.vehicleType, Validators.required],
+        vehicleDetails: [this.Member?.vehicleDetails, Validators.required],                 
        
-        hindiRead:[''],
-        hindiWrite:[''],
-        hindiSpeak:[''],
-        marathiRead:[''],
-        marathiWrite:[''],
-        marathiSpeak:[''],        
-        englishRead:[''],
-        englishWrite:[''],
-        englishSpeak:[''],
+        hindiRead:[this.Member?.hindiRead],
+        hindiWrite:[this.Member?.hindiWrite],
+        hindiSpeak:[this.Member?.hindiSpeak],
+        marathiRead:[this.Member?.marathiRead],
+        marathiWrite:[this.Member?.marathiWrite],
+        marathiSpeak:[this.Member?.marathiSpeak],        
+        englishRead:[this.Member?.englishRead],
+        englishWrite:[this.Member?.englishWrite],
+        englishSpeak:[this.Member?.englishSpeak],
+
+        eligibleForChild:[''],
+        eligibleForGents:[''],
+        eligibleForLadies:[''],
         
-        ownBaithakDay: ['', Validators.required],
-        ownBaithakId: ['', Validators.required],          
-        hajeriNo: ['', Validators.required],
-        hajeriNoDetails: [''],
-        weeklyOffs: ['', Validators.required],
-        additionalInfo: [''],
+        ownBaithakDay: [this.Member?.ownBaithakDay, Validators.required],
+        ownBaithakId: [this.Member?.ownBaithakId, Validators.required],          
+        hajeriNo: [this.Member?.hajeriNo, Validators.required],
+        hajeriNoDetails: [this.Member?.hajeriNoDetails],
+        weeklyOffs: [this.Member?.weeklyOffs, Validators.required],
+        additionalInfo: [this.Member?.additionalInfo],
       });
-  
-      this.getMembers();
+ 
     }
   
   
@@ -208,5 +219,6 @@ export class UpdateMemberComponent implements OnInit {
       }
       return false; // Data does not exist
     }
+
   }
   

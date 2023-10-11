@@ -37,6 +37,7 @@ export class UpdateBaithakComponent implements OnInit {
      this.baithakForm = this.formBuilder.group({
       baithakType: ['',Validators.required ],
       dayOfWeek: ['',Validators.required],
+      date: ['',Validators.required],
       fromTime: ['',Validators.required],
       status: ['',Validators.required],
       toTime: ['',Validators.required]
@@ -58,4 +59,8 @@ export class UpdateBaithakComponent implements OnInit {
   CancelChanges() {
     this.router.navigate(["/baithak-list"]);
   }
+
+  Clear(){
+    this.baithakForm.reset();
+    }
 }

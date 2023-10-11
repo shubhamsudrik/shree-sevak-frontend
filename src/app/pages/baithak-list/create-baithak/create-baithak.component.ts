@@ -26,9 +26,11 @@ export class CreateBaithakComponent implements OnInit {
      this.baithakForm = this.formBuilder.group({
       baithakType: ['',Validators.required ],
       dayOfWeek: ['',Validators.required],
+      date: ['',Validators.required],
+      toTime: ['',Validators.required],
       fromTime: ['',Validators.required],
       status: ['',Validators.required],
-      toTime: ['',Validators.required]
+      
   
     })
   }

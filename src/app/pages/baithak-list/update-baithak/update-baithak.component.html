@@ -1,13 +1,17 @@
-<div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+<div class="container-fluid mt--7 pb-4 pt-5 pt-md-8">
   <div class="py-7 py-lg-8"></div>
   <!-- Page content -->
   <div class="container mt--8 pb-5">
     <!-- Table -->
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
+        <div class="custom-width">
         <div class="card bg-secondary shadow border-0">
           <div class="card-body px-lg-5 py-lg-5">
-            <h3>Update Baithak Page</h3>
+
+            <!-- Header -->
+            <h2 class="text-center">{{ 'Update Baithak Record!' | translate }}</h2><br>
+            
             <form role="form" [formGroup]="baithakForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <label for="baithak-type">{{
@@ -48,6 +52,21 @@
                 </select>
               </div>
 
+              <!-- date -->
+                            
+               <div class="form-group">
+                <label for="dob">{{ 'Meeting Date' | translate }}</label>
+                  <input
+                      formControlName="date"
+                      type="date"
+                      class="form-control"
+                     id="date"
+                    name="date"
+                    [(ngModel)]="baithak.date"
+                    
+                      />
+                     
+               </div>
               <div class="form-group">
                 <label for="from-time">{{ "StartTime" | translate }}</label>
                 <input
@@ -87,22 +106,19 @@
                   <option value="1">{{ "Active" | translate }}</option>
                   <option value="0">{{ "Inactive" | translate }}</option>
                 </select>
-              </div>
+              </div><br>
 
+              <!-- buttons -->
               <div class="form-group">
-                <button type="submit" class="btn btn-success">
-                  {{ "save" | translate }}
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  (click)="CancelChanges()"
-                >
-                  {{ "Back" | translate }}
-                </button>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-success btn-lg mx-2">{{ 'Save' | translate }}</button>
+                  <button type="button" class="btn btn-primary btn-lg mx-2" (click)="Clear()">{{ 'Clear' | translate }}</button>
+                  <button type="button" class="btn btn-danger btn-lg mx-2" (click)="CancelChanges()">{{ 'Back' | translate }}</button>
+                </div>                
               </div>
             </form>
           </div>
+        </div>
         </div>
       </div>
     </div>

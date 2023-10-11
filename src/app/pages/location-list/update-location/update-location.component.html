@@ -10,7 +10,7 @@
           <div class="card-body px-lg-5 py-lg-5 text-color">
            
             <form [formGroup]="locationform" (ngSubmit)="onSubmit()">
-              <h2 class="text-center">{{ 'Update location record!' | translate }}</h2><br>
+              <h2 class="text-center">{{ 'Create location record!' | translate }}</h2><br>
 
                <!-- Header -->
              <div>
@@ -25,7 +25,7 @@
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
-                    formControlName="locationName"
+                  formControlName="locationName"
                     type="text"
                     class="form-control"
                     id="locationName"
@@ -49,7 +49,7 @@
               <div class="row">
               <div class="col-md-3">
               <div class="form-group">
-                <label for="add1">{{ 'Address Line 1' | translate }}</label>
+                <label for="add1">{{ 'Address-1' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
@@ -74,11 +74,11 @@
               <!-- add2  -->              
               <div class="col-md-3">
               <div class="form-group">
-                <label for="add2">{{ 'Address Line 2' | translate }}</label>
+                <label for="add2">{{ 'Address-2' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
-                    formControlName="add2"
+                  formControlName="add2"
                     type="text"
                     class="form-control"
                     id="add2"
@@ -101,7 +101,7 @@
               
                <div class="col-md-3">
                <div class="form-group">
-                <label for="add3">{{ 'Address Line 3' | translate }}</label>
+                <label for="add3">{{ 'Address-3 ' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
@@ -126,7 +126,7 @@
                    <!-- Address 4 -->
                    <div class="col-md-3">
                    <div class="form-group">
-                    <label for="add4">{{ 'Address Line 4' | translate }}</label>
+                    <label for="add4">{{ 'Address-4 ' | translate }}</label>
                     <div class="input-group input-group-alternative mb-3">
                       <div class="input-group-prepend"></div>
                       <input
@@ -380,14 +380,10 @@
                    id="googleMapLink"
                   name="googleMapLink"
                   [(ngModel)]="location.googleMapLink"
-                  [ngClass]="{
-                   'is-invalid': (submitted && locationFormControl.googleMapLink.errors?.required)
-                  }"
+                  
                   maxlength="50" 
                     />
-                    <div class="invalid-feedback">
-                      {{ 'googleMapLink is required.' | translate }}
-                    </div>
+                    
               </div>
              </div>
              </div>
@@ -493,14 +489,10 @@
                id="contact1Occupation"
               name="contact1Occupation"
               [(ngModel)]="location.contact1Occupation"
-              [ngClass]="{
-               'is-invalid': (submitted && locationFormControl.contact1Occupation.errors?.required)
-              }"
+              
               maxlength="25" 
                 />
-                <div class="invalid-feedback">
-                  {{ 'contact1 Occupation is required.' | translate }}
-                </div>
+                
                 </div>
                 </div>
           </div>

@@ -4,48 +4,51 @@
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
           <h1 class="text-white">Welcome!</h1>
-          <!-- <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p> -->
         </div>
       </div>
     </div>
   </div>
- 
 </div>
-<!-- Page content -->
-<div class="container mt--8 pb-5">
-  <!-- Table -->
+<div class="container mt--8 pb-4">
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8">
       <div class="card bg-secondary shadow border-0">
-       
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Or sign up with credentials</small>
+            <small>sign up with credentials</small>
           </div>
-          <!-- Form handling -->
-          <form [formGroup]="registerform" (ngSubmit)="proceedregisteration()">
-              <!-- name -->
-            <div class="form-group"  >
+          <form [formGroup]="registerform" (ngSubmit)="proceedregistration()">
+            <!-- Name -->
+            <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
                 <input formControlName="name" class="form-control" placeholder="Name" type="text">
               </div>
+              <!-- Display validation error for name -->
+              <div *ngIf="registerform.get('name').invalid && registerform.get('name').touched" class="text-danger">
+                Name is required.
+              </div>
             </div><br>
 
-            <!-- mobile number-->
+            <!-- Mobile Number -->
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                 </div>
-                <input formControlName="phoneNumber" class="form-control" placeholder="Mobile Number" type="number">
+                <input formControlName="phoneNumber" class="form-control" placeholder="Mobile Number" type="text"
+                  (input)="validatePhoneNumber($event)">
+              </div>
+              <!-- Display validation error for phoneNumber -->
+              <div *ngIf="registerform.get('phoneNumber').invalid && registerform.get('phoneNumber').touched" class="text-danger">
+                Mobile Number is required and must be 10 digits.
               </div>
             </div><br>
 
-             <!-- photo url-->
-             <div class="form-group">
+            <!-- Photo URL -->
+            <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-single-02"></i></span>
@@ -54,8 +57,7 @@
               </div>
             </div><br>
 
-
-            <!-- email -->
+            <!-- Email -->
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
@@ -63,36 +65,48 @@
                 </div>
                 <input formControlName="emailId" class="form-control" placeholder="Email" type="email">
               </div>
+              <!-- Display validation error for emailId -->
+              <div *ngIf="registerform.get('emailId').invalid && registerform.get('emailId').touched" class="text-danger">
+                Valid Email is required.
+              </div>
             </div><br>
 
-            <!-- password -->
+            <!-- Password -->
             <div class="form-group">
-              <div class="input-group input-group-alternative">
+              <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
                 <input formControlName="password" class="form-control" placeholder="Password" type="password">
               </div>
-            </div>
-            <!-- Confirm Password -->
-              <div class="form-group">
-                <div class="input-group input-group-alternative">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                  </div>
-                  <input [(ngModel)]="confirmPassword" class="form-control" placeholder="Confirm Password" type="password" id="confirmPassword" name="confirmPassword">
-                </div>
+              <!-- Display validation error for password -->
+              <div *ngIf="registerform.get('password').invalid && registerform.get('password').touched" class="text-danger">
+                Password is required.
               </div>
-            <!-- <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div> -->
-            
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input formControlName="confirmPassword" class="form-control" placeholder="Confirm Password"
+                  type="password">
+              </div>
+              <!-- Display validation error for confirmPassword -->
+             <div *ngIf="registerform.get('confirmPassword').invalid && registerform.get('confirmPassword').touched" class="text-danger">
+                Passwords do not match.
+              </div>
+            </div>
+
             <div class="text-center">
               <button type="submit" class="btn btn-primary mt-4">Create account</button><br><br>
-              <span class="" ><small>Already have account? </small><a href="/login">Log in</a></span>           
-          </div>
+              <span><small>Already have an account? </small><a href="/login">Log in</a></span>
+            </div>
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-

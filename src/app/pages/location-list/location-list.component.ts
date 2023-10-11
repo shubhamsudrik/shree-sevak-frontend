@@ -27,6 +27,7 @@ export class LocationListComponent implements OnInit {
     
   }
 
+  //get active data
   private getLocationList() {
     this.locationDataService.getLocationList().subscribe(
       (data: Location[]) => {

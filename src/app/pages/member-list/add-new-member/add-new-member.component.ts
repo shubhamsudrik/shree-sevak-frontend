@@ -21,35 +21,41 @@ export class AddNewMemberComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+
+    this.Member.marathiRead = true;
+    this.Member.marathiWrite = true;
+    this.Member.marathiSpeak = true;
+    this.Member.hindiRead = true;
+    this.Member.hindiWrite = true;
+    this.Member.hindiSpeak = true;          
+    this.Member.englishRead = true;
+    this.Member.englishWrite = true;
+    this.Member.englishSpeak = true;
+    this.Member.eligibleForChild= true;
+	  this.Member.eligibleForGents= false;
+	  this.Member.eligibleForLadies= false;
+    this.Member.status='1';
+  }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.MemberListService.getMemberById(this.id).subscribe({
-      next: (data) => {
-        this.Member = data;
-        console.log(data);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+  
 
     // Validatons
     this.memberform = this.formBuilder.group({
-      initial: ['', Validators.required],
-      firstName: ['', Validators.required],
-      middleName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      education: ['', Validators.required],
-      occupation: ['', Validators.required],
-      dob: ['', Validators.required],
-      gender: ['', Validators.required],
-      roles: ['', Validators.required],
+      initial: [this.Member?.initial, Validators.required],
+      firstName: [this.Member?.firstName, Validators.required],
+      middleName: [this.Member?.middleName, Validators.required],
+      lastName: [this.Member?.lastName, Validators.required],
+      education: [this.Member?.education, Validators.required],
+      occupation: [this.Member?.occupation, Validators.required],
+      dob: [this.Member?.dob, Validators.required],
+      gender: [this.Member?.gender, Validators.required],
+      roles: [this.Member?.roles, Validators.required],
       addharNumber: ['', [Validators.required, Validators.minLength(12)]],
       panNo: ['', Validators.required],
-      photoBase64: ['', Validators.required],
-
+      photoBase64: [''],
+      status :[''],
       add1: ['', Validators.required],
       add2: ['', Validators.required],
       add3: [''],
@@ -61,7 +67,7 @@ export class AddNewMemberComponent implements OnInit {
       pincode: ['', [Validators.required, Validators.minLength(6)]],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
-      googleMapLink: ['', Validators.required],
+      googleMapLink: [''],
 
       mobile: ['', [Validators.required, Validators.minLength(10)]],
       phoneNumber: [''],
@@ -79,6 +85,10 @@ export class AddNewMemberComponent implements OnInit {
       englishRead:[''],
       englishWrite:[''],
       englishSpeak:[''],
+
+      eligibleForChild:[''],
+	    eligibleForGents:[''],
+	    eligibleForLadies:[''],
       
       ownBaithakDay: ['', Validators.required],
       ownBaithakId: ['', Validators.required],          
@@ -115,7 +125,7 @@ export class AddNewMemberComponent implements OnInit {
         'Data already exists with the same Aaddhar card Number .'
       );
     }
-     else if (this.memberform.valid) {
+     else if (this.memberform) {
       // Data doesn't exist and the form is valid, save the Member
       console.log(this.Member);
       this.saveMember();

@@ -22,3 +22,9 @@
   font-size: 18px; /* Adjust the font size */
   margin-top: 20px; /* Add margin to separate sections */
 }
+.custom-margin {
+  margin-right: 65px; /* Add more margin as needed */
+}
+.custom-checkbox {
+  margin-left: 65px; /* Add more margin as needed */
+}
