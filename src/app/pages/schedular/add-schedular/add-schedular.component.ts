@@ -1,9 +1,11 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { Router } from '@angular/router';
-import { LocationDataService } from 'src/app/services/location-data.service';
-import { Location } from 'src/app/Classes/location';
-import { Member } from 'src/app/Classes/member';
-import { MemberListService } from 'src/app/services/member-list.service';
+import { Component, OnInit, Pipe, PipeTransform } from "@angular/core";
+import { Router } from "@angular/router";
+import { LocationDataService } from "src/app/services/location-data.service";
+import { Location } from "src/app/Classes/location";
+import { Member } from "src/app/Classes/member";
+import { MemberListService } from "src/app/services/member-list.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ScheduleDto } from "src/app/Classes/ScheduleDto";
 
 export class CalendarDay {
   public date: Date;
@@ -22,15 +24,17 @@ export class CalendarDay {
   }
 }
 
-
-
 export class MeetingDay extends CalendarDay {
-
   public selectedLocation: string;
   public selectedReader: string;
   public selectedWriter: string;
 
-  constructor(date: Date, reader: string = '', location: string = '',writer: string='') {
+  constructor(
+    date: Date,
+    reader: string = "",
+    location: string = "",
+    writer: string = ""
+  ) {
     super(date);
     this.selectedLocation = location;
     this.selectedReader = reader;
@@ -39,7 +43,7 @@ export class MeetingDay extends CalendarDay {
 }
 
 @Pipe({
-  name: 'chunk',
+  name: "chunk",
 })
 export class ChunkPipe implements PipeTransform {
   transform(calendarDaysArray: any, chunkSize: number): any {
@@ -58,51 +62,60 @@ export class ChunkPipe implements PipeTransform {
 }
 
 @Component({
-  selector: 'add-schedular',
-  templateUrl: './add-schedular.component.html',
-  styleUrls: ['./add-schedular.component.css'],
+  selector: "add-schedular",
+  templateUrl: "./add-schedular.component.html",
+  styleUrls: ["./add-schedular.component.css"],
 })
 export class AddSchedularComponent implements OnInit {
-  location: Location = new Location;
+  location: Location = new Location();
+  schedularForm: FormGroup;
+
+  scheduleDto: ScheduleDto = new ScheduleDto();
+
+  scheduleArray: ScheduleDto[] = [];
 
   defaultLocations: Location[] = [];
   defaultMembers: Member[] = [];
-  
-  searchText: string = '';
+
+  searchText: string = "";
   public calendar: CalendarDay[] = [];
   public meetings: MeetingDay[] = [];
   public monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
   public displayMonth: string;
   public displayYear: number;
   private monthIndex: number = 0;
   selectedLocation: any;
-  selectedReader: any ;
-  selectedWriter: any ;
+  selectedReader: any;
+  selectedWriter: any;
+  displayDayCount: any;
 
   constructor(
     private router: Router,
     private locationDataService: LocationDataService,
     private memberListService: MemberListService,
-    ) {}
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.initializingForm();
     this.generateCalendarDays(this.monthIndex);
     this.getLocationList();
     this.getMemberList();
-  
+    this.getNumberOfDaysInMonth();
+    this.creatingScheduleObjects();
   }
 
   private generateCalendarDays(monthIndex: number): void {
@@ -110,7 +123,11 @@ export class AddSchedularComponent implements OnInit {
     this.meetings = [];
 
     // Set the date
-    let day: Date = new Date(new Date().getFullYear(), new Date().getMonth() + monthIndex, 1);
+    let day: Date = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth() + monthIndex,
+      1
+    );
 
     // Set the display month and year for UI
     this.displayMonth = this.monthNames[day.getMonth()];
@@ -125,28 +142,40 @@ export class AddSchedularComponent implements OnInit {
       }
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
     }
+    console.log(dateToAdd);
   }
 
   public increaseMonth() {
     this.monthIndex++;
     this.generateCalendarDays(this.monthIndex);
+    this.getNumberOfDaysInMonth();
+    this.creatingScheduleObjects();
   }
 
   public decreaseMonth() {
     this.monthIndex--;
     this.generateCalendarDays(this.monthIndex);
+    this.getNumberOfDaysInMonth();
+    this.creatingScheduleObjects();
   }
 
   public setCurrentMonth() {
     this.monthIndex = 0;
     this.generateCalendarDays(this.monthIndex);
+    this.getNumberOfDaysInMonth();
+    this.creatingScheduleObjects();
   }
 
   goBack() {
-    this.router.navigate(['/schedular']);
+    this.router.navigate(["/schedular"]);
   }
 
-  public updateMeeting(index: number, reader: string, location: string, writer: string) {
+  public updateMeeting(
+    index: number,
+    reader: string,
+    location: string,
+    writer: string
+  ) {
     if (index >= 0 && index < this.meetings.length) {
       this.meetings[index].selectedReader = reader;
       this.meetings[index].selectedLocation = location;
@@ -155,36 +184,88 @@ export class AddSchedularComponent implements OnInit {
   }
 
   //get active location data
-  private getLocationList(){
-    this.locationDataService.getLocationList().subscribe(
-      (data: Location[]) => {
-        this.defaultLocations =data;
-        console.log(this.defaultLocations)
-      },)
-    }
-    
-    onLocationSelect(location: any, meeting: MeetingDay) {
-      this.selectedLocation=meeting
-      meeting.selectedLocation = location.locationId;
-    }
-
-      //get all member data
-  private getMemberList(){
-    this.memberListService.getAllMemberList().subscribe(
-      (data: Member[]) => {
-        this.defaultMembers =data;
-        console.log(this.defaultMembers)
-      },)
+  private getLocationList() {
+    this.locationDataService.getLocationList().subscribe((data: Location[]) => {
+      this.defaultLocations = data;
+      console.log(this.defaultLocations);
+    });
   }
-  onReaderSelect(reader: any, meeting: MeetingDay) {   
+
+  onLocationSelect(location: any, meeting: MeetingDay) {
+    this.selectedLocation = meeting;
+    meeting.selectedLocation = location.locationId;
+  }
+
+  //get all member data
+  private getMemberList() {
+    this.memberListService.getAllMemberList().subscribe((data: Member[]) => {
+      this.defaultMembers = data;
+      console.log(this.defaultMembers);
+    });
+  }
+  onReaderSelect(reader: any, meeting: MeetingDay) {
     meeting.selectedReader = reader.memberId;
-    console.log("meeting",meeting)
-    
+    console.log("meeting", meeting);
   }
   onWriterSelect(writer: any, meeting: MeetingDay) {
     meeting.selectedWriter = writer.memberId;
-    console.log("meeting",meeting)  
-    console.log(this.selectedLocation)
+    console.log("meeting", meeting);
+    console.log(this.selectedLocation);
   }
-  
+
+  initializingForm() {
+    this.schedularForm = this.formBuilder.group({
+      locationId: ["", Validators.required],
+
+      baithakId: ["", Validators.required],
+
+      hajeriGhenara: ["", Validators.required],
+      vachanGhenara: ["", Validators.required],
+      status: ["", Validators.required],
+
+      date: ["", Validators.required],
+    });
+  }
+
+  getNumberOfDaysInMonth() {
+    // let number=parseInt(10, 10);
+    let daysCount:number;
+    
+      for (let i = 0; i < this.monthNames.length; i++) {
+      
+        if (this.displayMonth==this.monthNames[i]) {
+          daysCount=i;
+         break;
+        }
+      }
+ 
+    
+    // Create a Date object for the first day of the next month
+    const date = new Date(this.displayYear, daysCount + 1, 1);
+
+    // Subtract one day from the first day of the next month to get the last day of the current month
+    date.setDate(date.getDate() - 1);
+    console.log(date.getDate());
+    // The date now holds the last day of the specified month
+    return date.getDate();
+  }
+
+  creatingScheduleObjects():any {
+    console.log(this.getNumberOfDaysInMonth());
+    for (let i = 0; i < this.getNumberOfDaysInMonth(); i++) {
+      const scheduleDto = new ScheduleDto();
+      console.log(scheduleDto);
+      this.scheduleArray.push(scheduleDto);
+    }
+  }
+ 
+
+  getFormControl() {
+    return this.schedularForm.controls;
+  }
+
+  onSubmit() {
+    console.log(this.schedularForm.value);
+    this.schedularForm.reset();
+  }
 }

@@ -11,7 +11,6 @@ import { LocationDataService } from 'src/app/services/location-data.service';
 })
 export class RegisterComponent implements OnInit {
   registerform: FormGroup;
-  confirmPassword = '';
 
   constructor(
     private router: Router,
@@ -26,14 +25,14 @@ export class RegisterComponent implements OnInit {
     this.registerform = this.fb.group({
       name: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      photoUrl: [''],
+      photoUrl: ['', Validators.required],
       password: [
         '',
         [
           Validators.required,
-          Validators.pattern(
-            '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{6,}'
-          )
+          // Validators.pattern(
+          //   '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}'
+          // )
         ]
       ],
       emailId: ['', [Validators.required, Validators.email]]

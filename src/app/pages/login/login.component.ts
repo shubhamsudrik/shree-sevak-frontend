@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { error } from 'console';
+import { NgToastService } from 'ng-angular-popup';
+import { LocationDataService } from 'src/app/services/location-data.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
