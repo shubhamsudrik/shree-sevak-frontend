@@ -24,17 +24,17 @@
                   [(ngModel)]="baithak.baithakType"
                 >
                   <option value="" disabled>Select Baithak</option>
-                  <option value="CHILD">CHILD</option>
-                  <option value="MAN">MAN</option>
-                  <option value="WOMEN">WOMEN</option>
-                  <option value="ANY">ANY</option>
+                  <option value="Child">Child</option>
+                  <option value="Man">Man</option>
+                  <option value="Woman">Woman</option>
+                  <option value="Any">Any</option>
                 </select>
               </div>
 
               <!-- day of week  -->
 
               <div class="form-group">
-                <label for="dayOfWeek">{{ "DayOfWeek" | translate }}</label>
+                <label for="dayOfWeek">{{ "Day" | translate }}</label>
                 <select
                   formControlName="dayOfWeek"
                   class="form-control"
@@ -43,19 +43,19 @@
                   [(ngModel)]="baithak.dayOfWeek"
                 >
                   <option value="" disabled>Select Day</option>
-                  <option value="SUNDAY">SUNDAY</option>
-                  <option value="MONDAY">MONDAY</option>
-                  <option value="TUESDAY">TUESDAY</option>
-                  <option value="WEDNESDAY">WEDNESDAY</option>
-                  <option value="THURSDAY">THURSDAY</option>
-                  <option value="FRIDAY">FRIDAY</option>
-                  <option value="SATURDAY">SATURDAY</option>
+                  <option value="Sunday">Sunday</option>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
                 </select>
               </div>
 
 
                <!-- date -->               
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="dob">{{ 'Meeting Date' | translate }}</label>
                     <input
                         formControlName="date"
@@ -67,7 +67,7 @@
                       
                         />
                        
-                 </div>
+                 </div> -->
                    
               <!-- start time -->
               <div class="form-group">

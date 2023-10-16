@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Location } from '@angular/common';
-import { EditLocationComponent } from '../pages/location-list/edit-location/edit-location.component';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import {  Observable } from 'rxjs';
+
 import { Baithak } from '../Classes/baithak';
 @Injectable({
   providedIn: 'root'

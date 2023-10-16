@@ -36,6 +36,12 @@ export class AddNewMemberComponent implements OnInit {
 	  this.Member.eligibleForGents= false;
 	  this.Member.eligibleForLadies= false;
     this.Member.status='1';
+    this.Member.initial='Mr.';
+    this.Member.education='Graduate';
+    this.Member.country='IN';
+    this.Member.state='Maharashtra';
+    this.Member.division='A';
+    this.Member.email='@gmail.com';
   }
 
   ngOnInit(): void {
@@ -125,7 +131,7 @@ export class AddNewMemberComponent implements OnInit {
         'Data already exists with the same Aaddhar card Number .'
       );
     }
-     else if (this.memberform) {
+     else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
       console.log(this.Member);
       this.saveMember();

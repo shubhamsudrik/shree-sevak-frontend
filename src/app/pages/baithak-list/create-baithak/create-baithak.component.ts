@@ -17,8 +17,15 @@ export class CreateBaithakComponent implements OnInit {
   constructor(
     private baithakService:BaithakDataService,
     private router:Router,
-     private formBuilder :FormBuilder
-  ) { }
+    private formBuilder :FormBuilder
+  ) { 
+    this.baithak.baithakType='Child';
+    this.baithak.dayOfWeek ='Sunday';
+    this.baithak.toTime='9:15 AM';
+    // this.baithak.date="2023-10-11"
+    this.baithak.fromTime='8:00 AM';
+    this.baithak.status='1';
+  }
 
   ngOnInit(): void {
      
@@ -26,7 +33,7 @@ export class CreateBaithakComponent implements OnInit {
      this.baithakForm = this.formBuilder.group({
       baithakType: ['',Validators.required ],
       dayOfWeek: ['',Validators.required],
-      date: ['',Validators.required],
+      // date: ['',Validators.required],
       toTime: ['',Validators.required],
       fromTime: ['',Validators.required],
       status: ['',Validators.required],

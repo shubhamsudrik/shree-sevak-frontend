@@ -21,7 +21,17 @@ export class EditLocationComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+    this.location.division='A';
+    this.location.country='IN';
+    this.location.state='Maharashtra';
+    this.location.status=1;
+    this.location.contact1Email='@gmail.com';
+    this.location.contact2Email='@gmail.com';
+    this.location.contact1Initial='Mr.';
+    this.location.contact2Initial='Mr.';
+    this.location.contact1Occupation='Graduate';
+  }
 
   ngOnInit(): void {
    

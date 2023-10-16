@@ -36,8 +36,8 @@ generateToken(credentials:any){
     }
   }
 
-  //to check that user is logout in or not 
-  logOut(){
+  //for user logout 
+  logoutUser(){
   localStorage.removeItem("token");
   return true;
   }
