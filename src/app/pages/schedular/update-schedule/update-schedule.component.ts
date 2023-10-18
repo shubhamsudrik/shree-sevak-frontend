@@ -119,6 +119,8 @@ export class UpdateScheduleComponent implements OnInit {
   ngOnInit(): void {
     
     this.initializingForm();
+    this.getLocationList();
+    this.getMemberList();
     this.getSaveScheduleList();
     this.generateCalendarDays(this.monthIndex);
     this.getNumberOfDaysInMonth();
