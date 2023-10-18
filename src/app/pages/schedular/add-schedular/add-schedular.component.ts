@@ -1,11 +1,20 @@
-import { Component, OnInit, Pipe, PipeTransform } from "@angular/core";
-import { Router } from "@angular/router";
+import {
+  Component,
+  OnInit,
+  Pipe,
+  PipeTransform,
+  ViewChild,
+} from "@angular/core";
+import { ActivatedRoute, Route, Router } from "@angular/router";
 import { LocationDataService } from "src/app/services/location-data.service";
 import { Location } from "src/app/Classes/location";
 import { Member } from "src/app/Classes/member";
 import { MemberListService } from "src/app/services/member-list.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ScheduleDto } from "src/app/Classes/ScheduleDto";
+import { DynamicformComponent } from "./dynamicform/dynamicform.component";
+import { ScheduleDataService } from "src/app/services/schedule-data.service";
+import { throws } from "assert";
 
 export class CalendarDay {
   public date: Date;
@@ -69,14 +78,16 @@ export class ChunkPipe implements PipeTransform {
 export class AddSchedularComponent implements OnInit {
   location: Location = new Location();
   schedularForm: FormGroup;
-
+ baithakId:string
   scheduleDto: ScheduleDto = new ScheduleDto();
 
   scheduleArray: ScheduleDto[] = [];
+  privousSchduleDto: ScheduleDto;
 
   defaultLocations: Location[] = [];
   defaultMembers: Member[] = [];
-
+  hajeriMembers: Member[];
+  vachanMembers: Member[];
   searchText: string = "";
   public calendar: CalendarDay[] = [];
   public meetings: MeetingDay[] = [];
@@ -106,64 +117,80 @@ export class AddSchedularComponent implements OnInit {
     private router: Router,
     private locationDataService: LocationDataService,
     private memberListService: MemberListService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private scheduleService: ScheduleDataService,
+    private route:ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+   this.baithakId= this.route.snapshot.queryParamMap.get('baithakId')
     this.initializingForm();
     this.generateCalendarDays(this.monthIndex);
     this.getLocationList();
     this.getMemberList();
     this.getNumberOfDaysInMonth();
-    this.creatingScheduleObjects();
+    // this.creatingScheduleObjects();
+    this.initializingForm();
+    
+ 
   }
 
   private generateCalendarDays(monthIndex: number): void {
     // Reset the calendar
     this.meetings = [];
-
     // Set the date
     let day: Date = new Date(
       new Date().getFullYear(),
-      new Date().getMonth() + monthIndex,
-      1
+      new Date().getMonth() + monthIndex
     );
+    console.log(day);
+    console.log(day.getDay);
 
     // Set the display month and year for UI
+    console.log(day.getMonth());
     this.displayMonth = this.monthNames[day.getMonth()];
     this.displayYear = day.getFullYear();
 
     let dateToAdd = day;
+    console.log(dateToAdd);
 
     // While adding dates to the calendar, ensure they belong to the selected month and are Sundays.
     while (dateToAdd.getMonth() === day.getMonth()) {
+      console.log(dateToAdd.getMonth(), day.getMonth());
+      //.getDay() is moday,sunday,saturday like week day
+      console.log(dateToAdd.getDay());
       if (dateToAdd.getDay() === 0) {
+        console.log(dateToAdd.getDay(), "inside if");
+        console.log(dateToAdd);
         this.meetings.push(new MeetingDay(new Date(dateToAdd)));
       }
+      console.log(dateToAdd.getDate());
+      console.log(dateToAdd.getDate() + 1);
+      //getDate() returns the current day means 11,12,28
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
+      console.log("inside while", dateToAdd);
     }
-    console.log(dateToAdd);
   }
 
   public increaseMonth() {
     this.monthIndex++;
     this.generateCalendarDays(this.monthIndex);
     this.getNumberOfDaysInMonth();
-    this.creatingScheduleObjects();
+    // this.creatingScheduleObjects();
   }
 
   public decreaseMonth() {
     this.monthIndex--;
     this.generateCalendarDays(this.monthIndex);
     this.getNumberOfDaysInMonth();
-    this.creatingScheduleObjects();
+    // this.creatingScheduleObjects();
   }
 
   public setCurrentMonth() {
     this.monthIndex = 0;
     this.generateCalendarDays(this.monthIndex);
     this.getNumberOfDaysInMonth();
-    this.creatingScheduleObjects();
+    // this.creatingScheduleObjects();
   }
 
   goBack() {
@@ -200,6 +227,18 @@ export class AddSchedularComponent implements OnInit {
   private getMemberList() {
     this.memberListService.getAllMemberList().subscribe((data: Member[]) => {
       this.defaultMembers = data;
+      this.hajeriMembers = data.filter((member: Member) => {
+        if (member.hajeriNo === "1") {
+          return member;
+        }
+      });
+      this.vachanMembers = data.filter((member: Member) => {
+        if (member.hajeriNo === "2") {
+          return member;
+        }
+      });
+      console.log(this.hajeriMembers);
+      console.log(this.vachanMembers);
       console.log(this.defaultMembers);
     });
   }
@@ -214,6 +253,7 @@ export class AddSchedularComponent implements OnInit {
   }
 
   initializingForm() {
+ 
     this.schedularForm = this.formBuilder.group({
       locationId: ["", Validators.required],
 
@@ -224,22 +264,33 @@ export class AddSchedularComponent implements OnInit {
       status: ["", Validators.required],
 
       date: ["", Validators.required],
+      // scheduleForms: this.formBuilder.array([
+      //   this.formBuilder.group({
+      //     locationId: ["", Validators.required],
+
+      //     baithakId: ["", Validators.required],
+
+      //     hajeriGhenara: ["", Validators.required],
+      //     vachanGhenara: ["", Validators.required],
+      //     status: ["", Validators.required],
+
+      //     date: ["", Validators.required],
+      //   }),
+      // ]),
     });
   }
 
   getNumberOfDaysInMonth() {
     // let number=parseInt(10, 10);
-    let daysCount:number;
-    
-      for (let i = 0; i < this.monthNames.length; i++) {
-      
-        if (this.displayMonth==this.monthNames[i]) {
-          daysCount=i;
-         break;
-        }
+    let daysCount: number;
+
+    for (let i = 0; i < this.monthNames.length; i++) {
+      if (this.displayMonth == this.monthNames[i]) {
+        daysCount = i;
+        break;
       }
- 
-    
+    }
+
     // Create a Date object for the first day of the next month
     const date = new Date(this.displayYear, daysCount + 1, 1);
 
@@ -250,22 +301,76 @@ export class AddSchedularComponent implements OnInit {
     return date.getDate();
   }
 
-  creatingScheduleObjects():any {
-    console.log(this.getNumberOfDaysInMonth());
-    for (let i = 0; i < this.getNumberOfDaysInMonth(); i++) {
-      const scheduleDto = new ScheduleDto();
-      console.log(scheduleDto);
-      this.scheduleArray.push(scheduleDto);
-    }
-  }
- 
+  // creatingScheduleObjects(): any {
+  //   console.log(this.getNumberOfDaysInMonth());
+  //   let daysCount = this.getNumberOfDaysInMonth();
+  //   for (let i = 0; i < daysCount; i++) {
+  //     const scheduleDto = new ScheduleDto();
+  //     // console.log(scheduleDto);
+  //     this.scheduleArray.push(scheduleDto);
+  //     // console.log(this.scheduleArray);
+  //   }
+  // }
 
   getFormControl() {
     return this.schedularForm.controls;
   }
 
-  onSubmit() {
-    console.log(this.schedularForm.value);
-    this.schedularForm.reset();
+  // onSubmit() {
+  //   console.log(this.schedularForm.value);
+  //   this.schedularForm.reset();
+  // }
+  /**
+   *
+   * @param scheduleArray
+   * @param newSchedule
+   */
+  updateOrPushSchedule(scheduleArray, newSchedule) {
+    // Find the index in the scheduleArray where locationId, baithakId, and date match
+    const index = scheduleArray.findIndex(
+      (schedule) =>
+        schedule.locationId === newSchedule.locationId &&
+        schedule.baithakId === newSchedule.baithakId &&
+        schedule.date === newSchedule.date
+    );
+
+    if (index !== -1) {
+      // If the schedule exists, update vachanGhenara and hajeriGhenara
+      scheduleArray[index].vachanGhenara = +newSchedule.vachanGhenara;
+      scheduleArray[index].hajeriGhenara = +newSchedule.hajeriGhenara;
+    } else {
+      // If the schedule doesn't exist, push the newSchedule into the array
+      scheduleArray.push(newSchedule);
+    }
   }
+
+  /**
+   *
+   * @param schedule
+   * @method updateOrPushSchedule()
+   */
+
+  saveChanges(schedule: ScheduleDto) {
+    this.updateOrPushSchedule(this.scheduleArray, schedule);
+    console.log(this.scheduleArray);
+  }
+  onSubmit() {
+  
+    this.scheduleService.createScheduleRecord(this.scheduleArray).subscribe(data => {
+      console.log(data);
+
+    },
+    (error) =>console.log(error)
+   
+  )}
+
+  updateSchedule(){
+   this.scheduleService.updateSchedule(this.scheduleArray).subscribe((data) => {
+  
+   console.log("Updating the schedule", data);
+   }
+  )}
+    
+  
+
 }

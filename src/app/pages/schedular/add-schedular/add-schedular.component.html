@@ -50,217 +50,65 @@
             </div>
           </div>
           <br />
-          <div class="table-responsive">
-            <table class="calendar-table" *ngIf="calendar">
-              <thead>
-                <tr>
-                  <th>Sunday</th>
-                  <th>Sunday</th>
-                  <th>Sunday</th>
-                  <th>Sunday</th>
-                  <th>Sunday</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <!-- Display defaultLocations vertically -->
-                  <!-- <td>
+          <form [formGroup]="schedularForm" (ngSubmit)="onSubmit()">
+            <div class="table-responsive">
+              <table class="calendar-table" *ngIf="calendar" border="2px solid">
+                <thead>
+                  <tr *ngFor="let c of meetings; let j = index">
+                    <th *ngIf="j == 0">Sr.no</th>
+                    <th *ngIf="j == 0">Locations</th>
+                    <th *ngIf="j == 0">Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let location of defaultLocations; let i = index">
+                    <!-- Display defaultLocations vertically -->
+                    <!-- <td>
                     <div *ngFor="let location of defaultLocations | filter:searchText;">
                       {{ location.locationName }}
                     </div>
                   </td> -->
-                  <!-- Display meeting data horizontally -->
-                  <!-- [formGroup]="SchduleForm" (ngSubmit)="onSubmit()" -->
-                  <td
-                    class="calendar-day"
-                    [ngClass]="{
-                      'past-date': c.isPastDate,
-                      today: c.isToday
-                    }"
-                    *ngFor="let c of meetings; let j = index"
-                  >
-                  <form [formGroup]="schedularForm" (ngSubmit)="onSubmit()">
-                    <div
-                      class="calendar-day-header"
-                      [ngClass]="{ 'blue-date': c.isToday }"
+                    <!-- Display meeting data horizontally -->
+                    <!-- [formGroup]="SchduleForm" (ngSubmit)="onSubmit()" -->
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ location.locationName }}</td>
+                    <td
+                      class="calendar-day"
+                      [ngClass]="{
+                        'past-date': c.isPastDate,
+                        today: c.isToday
+                      }"
+                      *ngFor="let c of meetings; let j = index"
                     >
-                      <strong  >{{ c.date.getDate() }}-</strong>
-                      <strong  >{{ monthNames[c.date.getMonth()] }}</strong>
+                      <div
+                        class="calendar-day-header"
+                        [ngClass]="{ 'blue-date': c.isToday }"
+                      >
+                        <strong>{{ c.date | date : "mediumDate" }}</strong>
+                      </div>
 
-                     
-                        <!-- Get location data dropdown -->
-                        <!-- <div class="dropdown" >
-                              <button
-                                class="btn btn-secondary dropdown-toggle btn-dropdown"
-                                type="button"
-                                data-toggle="dropdown"
-                              >
-                                {{
-                                  c.selectedLocation
-                                    ? c.selectedLocation.locationId
-                                    : "Select Location"
-                                }}
-                              </button>
-                              <div class="dropdown-menu">
-                                <a
-                                  *ngFor="let location of defaultLocations"
-                                  class="dropdown-item"
-                                  (click)="onLocationSelect(location, c)"
-                                 
-                                >
-                                  {{ location.locationName }}
-      
-                                </a>
-                              </div>
-                            </div>
-         -->
-
-                        <select
-                          formControlName="locationId"
-                          type="text"
-                          class="form-control"
-                          id="locationId"
-                          name="locationId"
-                         
-                          [(ngModel)]="scheduleArray[j].locationId"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              getFormControl.locationId.errors?.required
-                          }"
-                        >
-                          <option disabled>Select Location</option>
-                          <option
-                            *ngFor="let location of defaultLocations"
-                            [value]="location.locationId"
-                           
-                          >
-                            {{ location.locationName }}
-
-                            <!-- {{
-                                  c.selectedLocation
-                                    ? location.locationName
-                                    : "Select Location"
-                                }} -->
-                          </option>
-                        </select>
-
-                        <!-- Get Reader data dropdown -->
-                        <select
-                          formControlName="vachanGhenara"
-                          type="text"
-                          class="form-control"
-                          id="vachanGhenara"
-                          name="vachanGhenara"
-                          [(ngModel)]="scheduleArray[j].vachanGhenara"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              getFormControl.vachanGhenara.errors?.required
-                          }"
-                        >
-                          <option>Select Reader memeber</option>
-                          <option
-                            *ngFor="let reader of defaultMembers"
-                            [value]="reader.memberId"
-                          >
-                            {{ reader.firstName }}
-                          </option>
-                        </select>
-
-                        <!-- Get Reader data dropdown -->
-                        <!-- <div class="dropdown">
-                              <button
-                                class="btn btn-secondary dropdown-toggle btn-dropdown"
-                                type="button"
-                                data-toggle="dropdown"
-                              >
-                                {{
-                                  c.selectedReader
-                                    ? c.selectedReader.memberId
-                                    : "Select Reader"
-                                }}
-                              </button>
-                              <div class="dropdown-menu">
-                                <a
-                                  *ngFor="let reader of defaultMembers"
-                                  class="dropdown-item"
-                                  (click)="onReaderSelect(reader, c)"
-                               
-                                >
-                                  {{ reader.firstName }}
-                                </a>
-                              </div>
-                            </div> -->
-
-                        <!-- Get Writer data dropdown -->
-                        <select
-                          formControlName="hajeriGhenara"
-                          type="text"
-                          class="form-control"
-                          id="hajeriGhenara"
-                          name="hajeriGhenara"
-                          [(ngModel)]="scheduleArray[j].hajeriGhenara"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              getFormControl.hajeriGhenara.errors?.required
-                          }"
-                        >
-                          <option disabled>Select Reader member</option>
-                          <option
-                            *ngFor="let writer of defaultMembers"
-                            [value]="writer.memberId"
-                          >
-                            {{ writer.firstName }}
-                          </option>
-                        </select>
-
-                        <!-- Get Writer data dropdown -->
-                        <!-- <div class="dropdown">
-                              <button
-                                class="btn btn-secondary dropdown-toggle btn-dropdown"
-                                type="button"
-                                data-toggle="dropdown"
-                              >
-                                {{
-                                  c.selectedWriter
-                                    ? c.selectedWriter.memberId
-                                    : "Select Writer"
-                                }}
-                              </button>
-                              <div class="dropdown-menu">
-                                <a
-                                  *ngFor="let writer of defaultMembers"
-                                  class="dropdown-item"
-                                  (click)="onWriterSelect(writer, c)"
-                                  formControlName="memberId"
-                                  [(ngModel)]="ScheduleDto.memberId"
-                                >
-                                  {{ writer.firstName }}
-                                </a>
-                              </div>
-                            </div> -->
-                        <button type="submit" class="btn btn-info">
-                          SUBMIT
-                        </button>
-
-                        <!-- <div class="meeting-dropdowns"> 
-                            <select *ngFor="location of defaultLocations">
-                              <option value=""> {{location.locationName}}</option>
-                            </select>                     
-                            <select [(ngModel)]="c.location" (change)="updateMeeting(j, c.member, c.location)">
-                              <option value="">Select Location</option>
-                              <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-                            </select>
-                          </div> -->
-                        </div>
-                      </form>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                      <app-dynamicform
+                        (valueChanged)="saveChanges($event)"
+                        [baithakId]="baithakId"
+                        [locationId]="location.locationId"
+                        [hajeriMembers]="hajeriMembers"
+                        [vachanMembers]="vachanMembers"
+                        [date]="c.date | date : 'mediumDate'"
+                      >
+                      </app-dynamicform>
+                    </td>
+                  </tr>
+                  <button type="submit" class="btn btn-primary">SUBMIT</button>
+                  <div>  <button type="button" class="btn btn-danger" (click)="updateSchedule()">UPDATE</button></div>
+                
+                </tbody>
+              </table>
+            </div>
+          </form>
         </div>
       </div>
     </div>

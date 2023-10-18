@@ -40,6 +40,9 @@ import { LoginService } from './services/login.service';
 import { AuthInterceptor } from './guard/auth.interceptor';
 import { AuthGuard } from './guard/auth.guard';
 import { HelloComponent } from './pages/schedular/add-schedular/hello.component';
+import { DynamicformComponent } from './pages/schedular/add-schedular/dynamicform/dynamicform.component';
+
+
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -93,10 +96,11 @@ import { HelloComponent } from './pages/schedular/add-schedular/hello.component'
     UpdateScheduleComponent,
     HelloComponent,
     ChunkPipe,
+    DynamicformComponent,
     // ComponentComponent
   ],
  
-  providers: [LocationDataService,LoginService,AuthGuard,[{provider:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
+  providers: [LocationDataService,LoginService,AuthGuard,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
   bootstrap: [AppComponent]
 })
 

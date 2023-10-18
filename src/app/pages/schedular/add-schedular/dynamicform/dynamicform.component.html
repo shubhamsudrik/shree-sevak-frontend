@@ -1,0 +1,153 @@
+<form [formGroup]="schedularFormchild" (ngSubmit)="submitChildForm()">
+  <div class="d-flex flex-row justify-content-around">
+    <!-- Get location data dropdown -->
+    <!-- <div class="dropdown" >
+                                <button
+                                  class="btn btn-secondary dropdown-toggle btn-dropdown"
+                                  type="button"
+                                  data-toggle="dropdown"
+                                >
+                                  {{
+                                    c.selectedLocation
+                                      ? c.selectedLocation.locationId
+                                      : "Select Location"
+                                  }}
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a
+                                    *ngFor="let location of defaultLocations"
+                                    class="dropdown-item"
+                                    (click)="onLocationSelect(location, c)"
+                                   
+                                  >
+                                    {{ location.locationName }}
+        
+                                  </a>
+                                </div>
+                              </div>
+           -->
+
+    <!-- <select
+                          formControlName="locationId"
+                          type="text"
+                          class="form-control"
+                          id="locationId"
+                          name="locationId"
+                          [(ngModel)]="scheduleArray[j].locationId"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              getFormControl.locationId.errors?.required
+                          }"
+                        >
+                       
+                          <option disabled>Select Location</option>
+                          <option
+                            *ngFor="let location of defaultLocations"
+                            [value]="location.locationId"
+                          >
+  
+                            {{ location.locationName }}
+  
+                             {{
+                                    c.selectedLocation
+                                      ? location.locationName
+                                      : "Select Location"
+                                  }} 
+                          </option>
+                        </select> -->
+
+    <!-- Get Reader data dropdown -->
+
+    <span>Reader:</span>
+
+    <select
+      formControlName="vachanGhenara"
+      type="text"
+      id="vachanGhenara"
+      name="vachanGhenara"
+      [(ngModel)]="scheduleDto.vachanGhenara"
+    >
+      <option disabled>Select Reader memeber</option>
+      <option *ngFor="let reader of vachanMembers" [value]="reader.memberId">
+        {{ reader.firstName }}
+      </option>
+    </select>
+
+    <!-- Get Reader data dropdown -->
+    <!-- <div class="dropdown">
+                                <button
+                                  class="btn btn-secondary dropdown-toggle btn-dropdown"
+                                  type="button"
+                                  data-toggle="dropdown"
+                                >
+                                  {{
+                                    c.selectedReader
+                                      ? c.selectedReader.memberId
+                                      : "Select Reader"
+                                  }}
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a
+                                    *ngFor="let reader of defaultMembers"
+                                    class="dropdown-item"
+                                    (click)="onReaderSelect(reader, c)"
+                                 
+                                  >
+                                    {{ reader.firstName }}
+                                  </a>
+                                </div>
+                              </div> -->
+
+    <!-- Get Writer data dropdown -->
+    <span>writer:</span>
+    <select
+      formControlName="hajeriGhenara"
+      type="text"
+      id="hajeriGhenara"
+      name="hajeriGhenara"
+      [(ngModel)]="scheduleDto.hajeriGhenara"
+    >
+      <option disabled>Select writer member</option>
+      <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
+        {{ writer.firstName }}
+      </option>
+    </select>
+
+    <!-- Get Writer data dropdown -->
+    <!-- <div class="dropdown">
+                                <button
+                                  class="btn btn-secondary dropdown-toggle btn-dropdown"
+                                  type="button"
+                                  data-toggle="dropdown"
+                                >
+                                  {{
+                                    c.selectedWriter
+                                      ? c.selectedWriter.memberId
+                                      : "Select Writer"
+                                  }}
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a
+                                    *ngFor="let writer of defaultMembers"
+                                    class="dropdown-item"
+                                    (click)="onWriterSelect(writer, c)"
+                                    formControlName="memberId"
+                                    [(ngModel)]="ScheduleDto.memberId"
+                                  >
+                                    {{ writer.firstName }}
+                                  </a>
+                                </div>
+                              </div> -->
+  </div>
+
+  <!-- <div class="meeting-dropdowns"> 
+                              <select *ngFor="location of defaultLocations">
+                                <option value=""> {{location.locationName}}</option>
+                              </select>                     
+                              <select [(ngModel)]="c.location" (change)="updateMeeting(j, c.member, c.location)">
+                                <option value="">Select Location</option>
+                                <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+                              </select>
+                            </div> -->
+</form>
