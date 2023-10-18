@@ -8,6 +8,7 @@ import { MemberListService } from "src/app/services/member-list.service";
 import { ScheduleDataService } from "src/app/services/schedule-data.service";
 
 import { Location } from "src/app/Classes/location";
+import { Schedule } from "src/app/Classes/schedule";
 
 export class CalendarDay {
   public date: Date;
@@ -64,19 +65,19 @@ export class ChunkPipe implements PipeTransform {
 }
 
 @Component({
-  selector: 'app-update-schedule',
-  templateUrl: './update-schedule.component.html',
-  styleUrls: ['./update-schedule.component.css']
+  selector: "app-update-schedule",
+  templateUrl: "./update-schedule.component.html",
+  styleUrls: ["./update-schedule.component.css"],
 })
 export class UpdateScheduleComponent implements OnInit {
   location: Location = new Location();
   schedularFormUpdate: FormGroup;
- baithakId:string
+  baithakId: string;
   scheduleDto: ScheduleDto = new ScheduleDto();
 
   scheduleArray: ScheduleDto[] = [];
   privousSchduleDto: ScheduleDto;
-
+  saveSchduleArray: any[]=[];
   defaultLocations: Location[] = [];
   defaultMembers: Member[] = [];
   hajeriMembers: Member[];
@@ -112,20 +113,19 @@ export class UpdateScheduleComponent implements OnInit {
     private memberListService: MemberListService,
     private formBuilder: FormBuilder,
     private scheduleService: ScheduleDataService,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-   this.baithakId= this.route.snapshot.queryParamMap.get('baithakId')
+    
     this.initializingForm();
+    this.getSaveScheduleList();
     this.generateCalendarDays(this.monthIndex);
-    this.getLocationList();
-    this.getMemberList();
     this.getNumberOfDaysInMonth();
     // this.creatingScheduleObjects();
     this.initializingForm();
-    
- 
+
+   
   }
 
   private generateCalendarDays(monthIndex: number): void {
@@ -247,9 +247,8 @@ export class UpdateScheduleComponent implements OnInit {
   }
 
   initializingForm() {
- 
     this.schedularFormUpdate = this.formBuilder.group({
-      locationId: [, Validators.required],
+      locationId: ["", Validators.required],
 
       baithakId: ["", Validators.required],
 
@@ -348,13 +347,21 @@ export class UpdateScheduleComponent implements OnInit {
     this.updateOrPushSchedule(this.scheduleArray, schedule);
     console.log(this.scheduleArray);
   }
- 
 
-  updateSchedule(){
-    this.scheduleService.updateSchedule(this.scheduleArray).subscribe((data)=>{
-    console.log(data);
-    })
+  updateSchedule() {
+    this.scheduleService
+      .updateSchedule(this.scheduleArray)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+  GoBack() {
+    this.router.navigate(["/add-schedular"]);
+  }
+  getSaveScheduleList() {
+    this.scheduleService.getAllData().subscribe((data) => {
+      this.saveSchduleArray = data;
+      console.log(this.saveSchduleArray);
+    });
   }
 }
-
-

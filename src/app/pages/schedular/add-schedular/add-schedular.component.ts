@@ -78,7 +78,7 @@ export class ChunkPipe implements PipeTransform {
 export class AddSchedularComponent implements OnInit {
   location: Location = new Location();
   schedularForm: FormGroup;
- baithakId:string
+  baithakId: string;
   scheduleDto: ScheduleDto = new ScheduleDto();
 
   scheduleArray: ScheduleDto[] = [];
@@ -119,11 +119,11 @@ export class AddSchedularComponent implements OnInit {
     private memberListService: MemberListService,
     private formBuilder: FormBuilder,
     private scheduleService: ScheduleDataService,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-   this.baithakId= this.route.snapshot.queryParamMap.get('baithakId')
+    this.baithakId = this.route.snapshot.queryParamMap.get("baithakId");
     this.initializingForm();
     this.generateCalendarDays(this.monthIndex);
     this.getLocationList();
@@ -131,8 +131,6 @@ export class AddSchedularComponent implements OnInit {
     this.getNumberOfDaysInMonth();
     // this.creatingScheduleObjects();
     this.initializingForm();
-    
- 
   }
 
   private generateCalendarDays(monthIndex: number): void {
@@ -253,7 +251,6 @@ export class AddSchedularComponent implements OnInit {
   }
 
   initializingForm() {
- 
     this.schedularForm = this.formBuilder.group({
       locationId: ["", Validators.required],
 
@@ -355,22 +352,16 @@ export class AddSchedularComponent implements OnInit {
     console.log(this.scheduleArray);
   }
   onSubmit() {
-  
-    this.scheduleService.createScheduleRecord(this.scheduleArray).subscribe(data => {
-      console.log(data);
+    this.scheduleService.createScheduleRecord(this.scheduleArray).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => console.log(error)
+    );
+  }
 
-    },
-    (error) =>console.log(error)
-   
-  )}
+  updateSchedule() {
 
-  updateSchedule(){
-   this.scheduleService.updateSchedule(this.scheduleArray).subscribe((data) => {
-  
-   console.log("Updating the schedule", data);
-   }
-  )}
-    
-  
-
+    this.router.navigate(["/update-schedule"]);
+  }
 }
