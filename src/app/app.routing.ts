@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './guard/auth.guard';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes =[
   {
@@ -22,7 +23,13 @@ const routes: Routes =[
       }
     ],
     canActivate:[AuthGuard]
-  }, {
+  }, 
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [AuthGuard] // Apply the canActivate guard to the "Sign Up" route
+  },
+  {
     path: '',
     component: AuthLayoutComponent,
     children: [

@@ -14,17 +14,15 @@ export class LocService {
   private baseUrl = "http://localhost:8080";
   
 
+  // For Get the active record from database
+  getLocationList(): Observable<any[]> {
+    return this.httpclient.get<any[]>(`${this.baseUrl}/api/location/status/1`);
+  }
 
     // For Get all location
     getAllLocationList(): Observable<Location[]> {
       return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/`);
     }
-
-    // For Get the active record from database
-    getLocationList(): Observable<Location[]> {
-      return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/status/1`);
-    }
-
     
   // get active and Inactive by status
   getLocationByStatus(statustype: string): Observable<Location[]>{

@@ -12,8 +12,12 @@ export class ScheduleDataService {
 
 
  private baseUrl = "http://localhost:8080/api/baithak";
+ private url = "http://localhost:8080/api";
 
-
+  //for get schedular
+  getSchedul(): Observable<any[]> {
+    return this.httpclient.get<any[]>(`${this.url}/schedular/all-schedules`);
+  }
 
   // For Get the all record from database
   getAllData(): Observable<Schedule[]> {

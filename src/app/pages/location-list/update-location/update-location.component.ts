@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from 'src/app/Classes/location';
-import { LocationDataService } from 'src/app/services/location-data.service';
+import { LocService } from 'src/app/services/loc.service';
 
 @Component({
   selector: 'app-update-location',
@@ -12,13 +12,13 @@ import { LocationDataService } from 'src/app/services/location-data.service';
 export class UpdateLocationComponent implements OnInit {
   locationform: FormGroup;
   submitted = false;
-  location: Location = new Location();
+  location: any = new Location();
   id: number;
   defaultLocations: Location[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
-    private locationDataService: LocationDataService,
+    private locationDataService: LocService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -27,7 +27,7 @@ export class UpdateLocationComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.initializeForm();
     this.locationDataService.getLocationById(this.id).subscribe({
-      next: (data: Location) => {
+      next: (data: any) => {
         console.log(data)
         this.location = data;
         this.populateForm();
@@ -41,7 +41,7 @@ export class UpdateLocationComponent implements OnInit {
   // get All location
   getLocations() {
     this.locationDataService.getLocationList().subscribe(
-      (data: Location[]) => {
+      (data: any[]) => {
         this.defaultLocations = data;
         console.log(this.defaultLocations);
       },

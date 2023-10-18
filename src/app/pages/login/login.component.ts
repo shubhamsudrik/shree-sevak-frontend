@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit {
     email:'',
     password:''
   }
-constructor(private loginservice:LoginService,private  router: Router,){
+constructor(
+  private loginservice:LoginService,
+  private toast: ToastrService,
+  private  router: Router,){
 
 }
 
@@ -22,18 +26,20 @@ constructor(private loginservice:LoginService,private  router: Router,){
   }
 
   onSubmit(){
-    console.log("form is submited");
     if(this.credentials.email !='' && this.credentials.password !=''  ){
       this.loginservice.generateToken(this.credentials).subscribe(
        (response:any)=>{
   console.log(response.jwtToken)
+  this.toast.success('Login successfully')
   this.loginservice.loginUser(response.jwtToken)
   this.router.navigate(['/dashboard']);
         console.log('hello')
         },error=>{
+          this.toast.error('Log in crediantial is incorrect')
           console.log(error);
         }
       )
+     
       console.log('We have to submit form to console');
     }else{
       this.router.navigate(['/register']);

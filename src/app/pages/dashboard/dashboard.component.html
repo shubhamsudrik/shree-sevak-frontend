@@ -8,8 +8,23 @@
             <div class="card-body " style="height: 150px;">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Location</h5><br>
-                  <span class="h2 font-weight-bold mb-0">{{locationCount}}</span>
+      
+                  <!-- this for export to pdf -->
+                  <div class="container">
+                    <div id="pdfTable" #pdfTable>
+                     
+                    </div>
+                    <button class="btn btn-primary" (click)="downloadAsPDF()">Generate Report</button>
+                  </div>
+                  <!-- <div> -->
+                    <!-- ... other content ... -->
+                    <!-- <button (click)="generatePDF()">Generate PDF</button>
+                  </div> -->
+                  <!-- end -->           
+
+                 
+                  <h5 class="card-title text-uppercase text-muted mb-0 ">Location</h5><br>
+                  <span class="h2 font-weight-bold mb-0">{{locCount}}</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-danger text-white rounded-circle shadow">                    
@@ -24,6 +39,7 @@
             </div>
           </div>
         </div>
+        
         <div class="col-xl-4 col-lg-6">
           <div class="card card-stats mb-4 mb-xl-0">
             <div class="card-body"  style="height: 150px;">
@@ -67,7 +83,6 @@
           </div>
         </div>
       </div>        
-     
     </div>
   </div>
 </div>

@@ -1,3 +1,8 @@
+export interface ApiResponse {
+  success: boolean;
+  message: string;
+}
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,6 +14,7 @@ import { LocationDataService } from 'src/app/services/location-data.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent implements OnInit {
 
   registerform: FormGroup;
@@ -33,7 +39,9 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/)
         ]
       ],
-      confirmPassword: ['', Validators.required]
+      role: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      status:[],
     });
   }
 
@@ -45,10 +53,16 @@ export class RegisterComponent implements OnInit {
         console.log("password not match")
       } else {
         this.locationDataService.signUP(this.registerform.value).subscribe(
-          (res) => {
+          (res:ApiResponse) => {
+  
+            if (res.success === false) {
+              this.toast.warning('User Is Already Exit With Same Email,Mobile');
+              console.log('Response:', res);
+            } else {
             this.toast.success('Register Successfully');
             console.log('Response:', res);
             this.router.navigate(['/login']);
+            }
           },
           (error) => {
             console.error('Error:', error);

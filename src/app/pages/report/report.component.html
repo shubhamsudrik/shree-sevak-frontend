@@ -1,0 +1,71 @@
+<!-- your-component.component.html -->
+<div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+  <div class="py-7 py-lg-8"></div>
+  <!-- Page content -->
+  <!-- <div class="container mt--8 pb-5"> -->
+    <!-- Table -->
+    <!-- <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="custom-width">
+          <div class="shadow border-0 w-500">
+            <div class="card-body px-lg-5 py-lg-5 text-color">
+              <div class="container-a4">
+              <div class="content"> -->
+              <div id="contentToConvert">
+              <table id="pdfTable" style="text-align: center;" border="1">
+                <thead>
+                  <tr>
+                    <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ totalLocations }}</th>
+                    <th>
+                      <table>
+                        <tr>
+                          <th colspan="4" style="background-color: white; color: black; width: 200px; height: 28px;"></th>
+                        </tr>
+                        <tr>
+                          <th colspan="4" style="background-color:  rgba(193, 166, 47, 0.638); color: black; width: 200px;">Date: </th>
+                        </tr>
+                        <tr>                          
+                            <th colspan="2" style="background-color: white; color: black; width: 200px; height: 100%;">
+                              <input [(ngModel)]="Bhag" [style.width.%]="inputWidth" placeholder="Enter here section" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+                            </th>
+                          </tr>                       
+                                              
+                        <tr>
+                          <th colspan="4" style="background-color: rgb(42, 95, 42); color: black; width: 200px; height: 100%;">
+                            <input [(ngModel)]="Shlok" [style.width.%]="inputWidth" placeholder="Enter here shlok name" style="background-color: rgb(188, 246, 188);" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+                          </th>
+                        </tr>
+                      </table>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="background-color: rgb(195, 164, 164); color: white;">Sr No</th>
+                    <th style="background-color: rgb(195, 164, 164); color: white;">Location Name</th>
+                    <th style="background-color: rgb(195, 164, 164);">Reading</th>
+                    <th style="background-color: rgb(195, 164, 164);">Attendence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let schedule of locations; let i = index">
+                    <td style="background-color: rgb(192, 222, 167);">{{ i + 1 }}</td>
+                    <td style="background-color: rgb(192, 222, 167);">{{schedule.location}}</td>
+                    <td style="background-color: rgb(192, 222, 167);">{{ schedule.members.firstName }}</td>
+                    <td style="background-color: rgb(192, 222, 167);">{{ schedule.members.firstName }}</td>
+                  </tr>
+                </tbody>
+              
+              </table>
+            </div><br><br>
+            <div class="justify-content-center">
+              <input type="button"class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" />  
+            </div>
+              <!-- <button (click)="generatePDF()">Generate PDF</button> -->
+            </div>
+              <!-- </div> -->
+            <!-- </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -3,6 +3,7 @@ import { LocationDataService } from 'src/app/services/location-data.service';
 import { Router } from '@angular/router';
 import { Location } from 'src/app/Classes/location';
 import { TranslateService } from '@ngx-translate/core';
+import { LocService } from 'src/app/services/loc.service';
 
 @Component({
   selector: 'app-location-list',
@@ -17,7 +18,7 @@ export class LocationListComponent implements OnInit {
  
   
   constructor(
-    private locationDataService: LocationDataService,
+    private locationDataService: LocService,
     private router: Router,
     public translate: TranslateService
   ) {
@@ -30,7 +31,7 @@ export class LocationListComponent implements OnInit {
   //get active data
   private getLocationList() {
     this.locationDataService.getLocationList().subscribe(
-      (data: Location[]) => {
+      (data: any[]) => {
         this.defaultLocations = data;
         console.log(this.defaultLocations);
       },
@@ -84,7 +85,7 @@ export class LocationListComponent implements OnInit {
 
   private getAllLocationList(){
     this.locationDataService.getAllLocationList().subscribe(
-      (data: Location[]) => {
+      (data: any[]) => {
         this.defaultLocations =data;
         console.log(this.defaultLocations)
       },)
@@ -98,7 +99,7 @@ export class LocationListComponent implements OnInit {
     }else{
 
     this.locationDataService.getLocationByStatus(status).subscribe(
-      (data: Location[]) => {
+      (data: any[]) => {
         this.defaultLocations = data;
         console.log(data);
       },

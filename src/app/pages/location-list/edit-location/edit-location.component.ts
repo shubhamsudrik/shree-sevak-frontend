@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LocationDataService } from 'src/app/services/location-data.service';
 import { Location } from 'src/app/Classes/location';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocService } from 'src/app/services/loc.service';
 
 @Component({
   selector: 'app-edit-location',
@@ -13,11 +13,11 @@ export class EditLocationComponent implements OnInit {
   locationform: FormGroup;
   submitted = false;
   defaultLocations: Location[] = [];
-  location: Location = new Location();
+  location: any = new Location();
   id: number;
 
   constructor(
-    private locationDataService: LocationDataService,
+    private locationDataService: LocService,
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
@@ -121,7 +121,7 @@ export class EditLocationComponent implements OnInit {
 
   getLocations() {
     this.locationDataService.getLocationList().subscribe(
-      (data: Location[]) => {
+      (data: any[]) => {
         this.defaultLocations = data;
         console.log(this.defaultLocations);
       },

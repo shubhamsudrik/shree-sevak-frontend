@@ -231,22 +231,22 @@
              </div>
                </div>
              </div>
-              <!-- roles-->
+              <!-- role-->
               <div class="row">
               <div class="col" style="width: 20%;">
               <div class="form-group">
-                <label for="roles">{{ 'Role' | translate }}</label>
+                <label for="role">{{ 'Role' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <select
-                      formControlName="roles"
+                      formControlName="role"
                       type="text"
                       class="form-control"
-                     id="roles"
-                    name="roles"
-                    [(ngModel)]="Member.roles"
+                     id="role"
+                    name="role"
+                    [(ngModel)]="Member.role"
                     [ngClass]="{
-                     'is-invalid': (submitted && MemberFormControl.roles.errors?.required)
+                     'is-invalid': (submitted && MemberFormControl.role.errors?.required)
                     }"
                     maxlength="14" 
                       >
@@ -257,7 +257,7 @@
                   
                 </select>
                       <div class="invalid-feedback">
-                        {{ 'roles is required.' | translate }}
+                        {{ 'role is required.' | translate }}
                       </div>
                 </div>
                </div>
@@ -898,18 +898,18 @@
         <div class="row">
           <div class="col-md-6">
         <div class="form-group">
-          <label for="vehiclesType">{{ 'Vehicles Type' | translate }}</label>
+          <label for="vehicleType">{{ 'Vehicle Type' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <select
-                formControlName="vehiclesType"
+                formControlName="vehicleType"
                 type="text"
                 class="form-control"
-               id="vehiclesType"
-              name="vehiclesType"
-              [(ngModel)]="Member.vehiclesType"
+               id="vehicleType"
+              name="vehicleType"
+              [(ngModel)]="Member.vehicleType"
               [ngClass]="{
-               'is-invalid': (submitted && MemberFormControl.vehiclesType.errors?.required)
+               'is-invalid': (submitted && MemberFormControl.vehicleType.errors?.required)
               }"
                 >
               <option value="" disabled>Select Vehicle</option>
@@ -918,7 +918,7 @@
                 </select>
                 
                 <div class="invalid-feedback">
-                  {{ 'vehicles Type is required.' | translate }}
+                  {{ 'vehicle Type is required.' | translate }}
                 </div>
           </div>
         </div>
@@ -959,7 +959,7 @@
 
          <!-- ownBaithakDay -->
          <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
          <div class="form-group">
           <label>{{ 'Baithak Day' | translate }}</label><br>
           <div class="input-group input-group-alternative mb-3">
@@ -990,9 +990,10 @@
           </div>
          </div>
          </div>
+         </div>
 
          <!-- ownBaithakId -->
-         <div class="col-md-6">
+         <!-- <div class="col-md-6">
          <div class="form-group">
           <label for="ownBaithakId">{{ 'Baithak Id' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -1015,9 +1016,10 @@
                 </div>
           </div>
           </div>
-         </div>
+         </div> -->
 
          <!-- hajeriNo -->
+         <div class="row">
          <div class="col-md-4">
          <div class="form-group">
           <label for="hajeriNo">{{ 'Hajeri Number' | translate }}</label>

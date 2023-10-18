@@ -1,0 +1,44 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* Component styles */
+button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust this value for spacing between buttons */
+  }
+  
+  edit-button,
+  delete-button {
+    width: 100%;
+  }
+  .custom-dropdown {
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    align-items: right; /* Vertically center the label and select */
+  }
+  /* .justify-content-right {
+    padding-left: 950px;
+    
+  } */
+  .custom-width{
+    width: 500px;
+  }
+  /* Apply custom styles to make the UI resemble an A4 page */
+.container-a4 {
+  width: 210mm; /* A4 page width */
+  height: 297mm; /* A4 page height */
+  margin: 0 auto; /* Center the content on the page */
+  padding: 10mm; /* Add margin space within the A4 page */
+  background-color: white; /* White background like A4 paper */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow to mimic paper */
+}
+
+.content {
+  /* Set content width and height within the A4 page */
+  width: 190mm; /* Adjust based on your content size */
+  height: 277mm; /* Adjust based on your content size */
+  margin: 0 auto; /* Center the content within the A4 page */
+  background-color: white; /* White background for content */
+  padding: 20mm; /* Add padding space within the content area */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow to content */
+}

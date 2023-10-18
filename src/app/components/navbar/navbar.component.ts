@@ -1,7 +1,10 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Location } from '@angular/common';
+import { LoginService } from 'src/app/services/login.service';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +15,13 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  constructor(
+    private toast: ToastrService,
+    location: Location, 
+    private router: Router,   
+    private authService: LoginService
+    
+    ) {
     this.location = location;
   }
 
@@ -33,4 +42,10 @@ export class NavbarComponent implements OnInit {
     return 'Dashboard';
   }
 
+  logoutUser() {
+    this.authService.logoutUser();
+    this.toast.warning('Sign out succesfully');
+    this.router.navigate(['/login']);
+  }
+  
 }

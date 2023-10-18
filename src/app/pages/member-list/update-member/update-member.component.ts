@@ -41,7 +41,18 @@ export class UpdateMemberComponent implements OnInit {
       });
     }
       populateForm(){
-        this.memberform.patchValue({firstName:this.Member?.firstName,})
+        this.memberform.patchValue({
+        firstName:this.Member?.firstName,
+        hindiRead: this.Member.hindiRead,
+        hindiWrite: this.Member.hindiWrite,
+        hindiSpeak: this.Member.hindiSpeak,
+        marathiRead: this.Member.marathiRead,
+        marathiWrite: this.Member.marathiWrite,
+        marathiSpeak: this.Member.marathiSpeak,
+        englishRead: this.Member.englishRead,
+        englishWrite: this.Member.englishWrite,
+        englishSpeak: this.Member.englishSpeak,
+        })
       }
       // Validatons
       initializeForm() {
@@ -55,7 +66,7 @@ export class UpdateMemberComponent implements OnInit {
         dob: [this.Member?.dob, Validators.required],
         gender: [this.Member?.gender, Validators.required],
         // eligible: ['', Validators.required],
-        roles: [this.Member?.roles, Validators.required],
+        role: [this.Member?.role, Validators.required],
         addharNumber: [this.Member?.addharNumber, [Validators.required, Validators.minLength(12)]],
         panNo: [this.Member?.panNo, Validators.required],
         photoBase64: [this.Member?.photoBase64, Validators.required],
@@ -78,7 +89,7 @@ export class UpdateMemberComponent implements OnInit {
         phoneNumber: [this.Member?.phoneNumber],
         email: [this.Member?.email, Validators.required],
        
-        vehiclesType: [this.Member?.vehicleType, Validators.required],
+        vehicleType: [this.Member?.vehicleType, Validators.required], 
         vehicleDetails: [this.Member?.vehicleDetails, Validators.required],                 
        
         hindiRead:[this.Member?.hindiRead],
@@ -96,7 +107,7 @@ export class UpdateMemberComponent implements OnInit {
         eligibleForLadies:[''],
         
         ownBaithakDay: [this.Member?.ownBaithakDay, Validators.required],
-        ownBaithakId: [this.Member?.ownBaithakId, Validators.required],          
+        // ownBaithakId: [this.Member?.ownBaithakId, Validators.required],          
         hajeriNo: [this.Member?.hajeriNo, Validators.required],
         hajeriNoDetails: [this.Member?.hajeriNoDetails],
         weeklyOffs: [this.Member?.weeklyOffs, Validators.required],
@@ -122,13 +133,13 @@ export class UpdateMemberComponent implements OnInit {
       this.submitted = true;
   
       const isDuplicate = this.isDuplicateData(this.Member);
-  
-      if (isDuplicate) {
-        // Data already exists error message
-        alert(
-          'Data already exists with the same Aaddhar card Number.'
-        );
-      } else 
+
+    if (isDuplicate) {
+      // Data already exists error message
+      alert(
+        'Data already exists with the same Aaddhar card Number .'
+      );
+    } else 
       if (this.memberform.valid) {
         // Data doesn't exist and the form is valid, save the Member
         console.log(this.Member);
@@ -207,18 +218,17 @@ export class UpdateMemberComponent implements OnInit {
         input.value = truncatedValue;
       }
   
-    isDuplicateData(newMember: Member): boolean {
-      for (let item of this.defaultMembers) {
-        if (
-                 
-          item.addharNumber === newMember.addharNumber 
-          
-        ) {
-          return true; // Data already exists
+      isDuplicateData(newMember: Member): boolean {
+        for (let item of this.defaultMembers) {
+          if (
+            
+            item.addharNumber === newMember.addharNumber 
+            // item.id !== newMember.MemberId
+          ) {
+            return true; // Data already exists
+          }
         }
+        return false; // Data does not exist
       }
-      return false; // Data does not exist
-    }
-
   }
   

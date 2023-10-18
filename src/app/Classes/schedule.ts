@@ -9,5 +9,6 @@ export class Schedule {
    vachanGhenara: number;
    hajeriGhenara: number;
    location: string;
+   date:string;
 
 }

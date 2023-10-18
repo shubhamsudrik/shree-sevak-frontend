@@ -1,3 +1,15 @@
 .height1{
     height: 10px;
 }
+.custom-width {
+    width: 150%; /* Adjust the width as needed, e.g., 150% */
+    margin-left: -20%; /* Adjust the negative margin to center the card */
+    margin-right: -120%;
+  }
+  .inline-elements {
+    display: flex;
+    align-items: center;
+    margin-left: 200px; /* Vertically center elements */
+  }
+ 
+  

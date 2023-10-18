@@ -45,8 +45,12 @@ export class UpdateBaithakComponent implements OnInit {
     })
   }
   onSubmit() {
+    if(this.baithakForm.valid){
     console.log(this.baithak);
     this.saveBaithak();
+    }else{
+      alert("Please fill all fields : कृपया सर्व फील्ड भरा");
+    }
   }
   saveBaithak() {
     this.baithakService.createBaithak(this.baithak).subscribe((data) => {

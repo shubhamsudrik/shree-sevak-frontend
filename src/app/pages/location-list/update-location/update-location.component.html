@@ -10,7 +10,7 @@
           <div class="card-body px-lg-5 py-lg-5 text-color">
            
             <form [formGroup]="locationform" (ngSubmit)="onSubmit()">
-              <h2 class="text-center">{{ 'Create location record!' | translate }}</h2><br>
+              <h2 class="text-center">{{ 'Update location record!' | translate }}</h2><br>
 
                <!-- Header -->
              <div>
@@ -541,7 +541,6 @@
                 name="contact1Phone2"
                 [(ngModel)]="location.contact1Phone2"
                 
-                minlength="10"
                   />
                   
                   </div>
@@ -678,7 +677,6 @@
                 name="contact2Phone2"
                 [(ngModel)]="location.contact2Phone2"
                 
-                minlength="10"
                   />
                   
                   </div>

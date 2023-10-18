@@ -6,6 +6,7 @@ import { AuthLayoutRoutes } from './auth-layout.routing';import { ToastrModule }
 import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
 import { LocationDataService } from 'src/app/services/location-data.service';
+import { ForgotPasswordComponent } from 'src/app/pages/forgot-password/forgot-password.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,8 @@ import { LocationDataService } from 'src/app/services/location-data.service';
   
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgotPasswordComponent
   ]
 })
 export class AuthLayoutModule { }

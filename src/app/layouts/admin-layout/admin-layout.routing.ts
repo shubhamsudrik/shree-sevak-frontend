@@ -15,6 +15,8 @@ import { AddSchedularComponent } from 'src/app/pages/schedular/add-schedular/add
 import { UpdateScheduleComponent } from 'src/app/pages/schedular/update-schedule/update-schedule.component';
 import { ScheduleLadiesBaithakComponent } from 'src/app/pages/schedular/schedule-ladies-baithak/schedule-ladies-baithak.component';
 import { UserProfileComponent } from 'src/app/pages/user-profile/user-profile.component';
+import { ReportComponent } from 'src/app/pages/report/report.component';
+
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -33,6 +35,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-schedular', component: AddSchedularComponent },
     { path: 'update-schedule/:id', component: UpdateScheduleComponent },
     { path: 'user-profile', component: UserProfileComponent },
+    { path: 'report', component: ReportComponent },
     { path: 'schedule-ladies-baithak', component: ScheduleLadiesBaithakComponent },
+   
 
 ];

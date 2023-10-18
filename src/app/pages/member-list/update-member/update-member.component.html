@@ -231,22 +231,22 @@
              </div>
              </div>              
             </div>  
-              <!-- roles-->
+              <!-- role-->
               <div class="row">
                 <div class="col" style="width: 20%;">
               <div class="form-group">
-                <label for="roles">{{ 'Role' | translate }}</label>
+                <label for="role">{{ 'Role' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <select
-                      formControlName="roles"
+                      formControlName="role"
                       type="text"
                       class="form-control"
-                     id="roles"
-                    name="roles"
-                    [(ngModel)]="Member.roles"
+                     id="role"
+                    name="role"
+                    [(ngModel)]="Member.role"
                     [ngClass]="{
-                     'is-invalid': (submitted && MemberFormControl.roles.errors?.required)
+                     'is-invalid': (submitted && MemberFormControl.role.errors?.required)
                     }"
                     maxlength="14" 
                       >
@@ -385,13 +385,13 @@
               </div>
               <div class="col-md-1 custom-margin">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" formControlName="marathiRead" id="marathiRead" name="marathiRead[]" class="custom-control-input"  [(ngModel)]="Member.marathiRead" value="marathiRead">
+                  <input type="checkbox" formControlName="marathiRead" id="marathiRead" name="marathiRead[]" class="custom-control-input"  [(ngModel)]="Member.marathiRead" >
                   <label class="custom-control-label" for="marathiRead">Read</label>
                 </div>
               </div>
               <div class="col-md-1 custom-margin">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" id="marathiWrite" formControlName="marathiWrite" name="marathiWrite[]" class="custom-control-input"  [(ngModel)]="Member.marathiWrite" value="marathiWrite">
+                  <input type="checkbox" id="marathiWrite" formControlName="marathiWrite" name="marathiWrite[]" class="custom-control-input"  [(ngModel)]="Member.marathiWrite">
                   <label class="custom-control-label" for="marathiWrite">Write</label>
                 </div>
               </div>
@@ -930,22 +930,22 @@
           <h2 class="form-section-header text-center">Vehical information</h2>
         </div>
 
-        <!-- vehiclesType-->
+        <!-- vehicleType-->
         <div class="row">
           <div class="col-md-6">
         <div class="form-group">
-          <label for="vehiclesType">{{ 'Vehicles Type' | translate }}</label>
+          <label for="vehicleType">{{ 'Vehicle Type' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <select
-                formControlName="vehiclesType"
+                formControlName="vehicleType"
                 type="text"
                 class="form-control"
-               id="vehiclesType"
-              name="vehiclesType"
-              [(ngModel)]="Member.vehiclesType"
+               id="vehicleType"
+              name="vehicleType"
+              [(ngModel)]="Member.vehicleType"
               [ngClass]="{
-               'is-invalid': (submitted && MemberFormControl.vehiclesType.errors?.required)
+               'is-invalid': (submitted && MemberFormControl.vehicleType.errors?.required)
               }"
                 >
               <option value="" disabled>Select Vehicle</option>
@@ -954,7 +954,7 @@
                 </select>
                 
                 <div class="invalid-feedback">
-                  {{ 'vehicles Type is required.' | translate }}
+                  {{ 'vehicle Type is required.' | translate }}
                 </div>
           </div>
         </div>
@@ -986,92 +986,7 @@
             </div>
           </div>
 
-             <!-- Header -->
-        <div>
-          <h2 class="form-section-header text-center">Languages knows</h2>
-        </div>
-
-          <!-- Marathi lanng-->
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-3">
-            <label>Marathi</label>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" formControlName="marathiRead" id="marathiRead" name="marathiRead[]" class="custom-control-input"  [(ngModel)]="Member.marathiRead" value="marathiRead">
-                <label class="custom-control-label" for="marathiRead">Read</label>
-              </div>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="marathiWrite" formControlName="marathiWrite" name="marathiWrite[]" class="custom-control-input"  [(ngModel)]="Member.marathiWrite" value="marathiWrite">
-                <label class="custom-control-label" for="marathiWrite">Write</label>
-              </div>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="marathiSpeak" formControlName="marathiSpeak" name="marathiSpeak[]" class="custom-control-input"  [(ngModel)]="Member.marathiSpeak" value="marathiSpeak">
-                <label class="custom-control-label" for="marathiSpeak">Speak</label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hindi lang -->
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-3">
-            <label>Hindi</label>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="hindiRead" formControlName="hindiRead" name="hindiRead[]" class="custom-control-input"  [(ngModel)]="Member.hindiRead" value="hindiRead">
-                <label class="custom-control-label" for="hindiRead">Read</label>
-              </div>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="hindihWrite" formControlName="hindiWrite" name="hindihWrite[]" class="custom-control-input"  [(ngModel)]="Member.hindiWrite" value="hindihWrite">
-                <label class="custom-control-label" for="hindihWrite">Write</label>
-              </div>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="hindiSpeak" formControlName="hindiSpeak" name="hindiSpeak[]" class="custom-control-input"  [(ngModel)]="Member.hindiSpeak" value="hindiSpeak">
-                <label class="custom-control-label" for="hindiSpeak">Speak</label>
-              </div>
-            </div>
-          </div>
-        </div>
-                  
-        <!-- English lang -->
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-3">
-            <label>English</label>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="englishRead" formControlName="englishRead" name="englishRead[]" class="custom-control-input"  [(ngModel)]="Member.englishRead" value="englishRead">
-                <label class="custom-control-label" for="englishRead">Read</label>
-              </div>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="englishWrite" formControlName="englishWrite" name="englishWrite[]" class="custom-control-input"  [(ngModel)]="Member.englishWrite" value="englishWrite">
-                <label class="custom-control-label" for="englishWrite">Write</label>
-              </div>
-            </div>
-            <div class="col-md-1 custom-margin">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="englishSpeak" formControlName="englishSpeak" name="englishSpeak[]" class="custom-control-input"  [(ngModel)]="Member.englishSpeak" value="englishSpeak">
-                <label class="custom-control-label" for="englishSpeak">Speak</label>
-              </div>
-            </div>
-          </div>
-        </div>
-                      
+              
                <!-- Header -->
         <div>
           <h2 class="form-section-header text-center">Baithak details</h2>
@@ -1079,7 +994,7 @@
 
          <!-- ownBaithakDay -->
          <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
          <div class="form-group">
           <label>{{ 'Baithak Day' | translate }}</label><br>
           <div class="input-group input-group-alternative mb-3">
@@ -1112,7 +1027,7 @@
          </div>
 
          <!-- ownBaithakId -->
-         <div class="col-md-6">
+         <!-- <div class="col-md-6">
          <div class="form-group">
           <label for="ownBaithakId">{{ 'Baithak Id' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -1135,7 +1050,7 @@
                 </div>
           </div>
           </div>
-         </div>
+         </div> -->
 
          <!-- hajeriNo -->
          <div class="col-md-4">

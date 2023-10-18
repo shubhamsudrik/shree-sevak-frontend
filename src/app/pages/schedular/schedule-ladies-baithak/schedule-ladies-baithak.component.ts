@@ -2,6 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { LocationDataService } from 'src/app/services/location-data.service';
 import { Location } from 'src/app/Classes/location';
 import { Router } from '@angular/router';
+import { LocService } from 'src/app/services/loc.service';
 
 export class CalendarDay {
   public date: Date;
@@ -60,7 +61,7 @@ export class ScheduleLadiesBaithakComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private locationDataService: LocationDataService,
+    private locationDataService: LocService,
     ) {}
 
   ngOnInit(): void {
@@ -125,7 +126,7 @@ export class ScheduleLadiesBaithakComponent implements OnInit {
    //get active location data
    private getLocationList(){
     this.locationDataService.getLocationList().subscribe(
-      (data: Location[]) => {
+      (data: any[]) => {
         this.defaultLocations =data;
         console.log(this.defaultLocations)
       },)

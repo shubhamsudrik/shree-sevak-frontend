@@ -19,7 +19,6 @@ export class AddNewMemberComponent implements OnInit {
   constructor(
     private MemberListService: MemberListService,
     private router: Router,
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {
 
@@ -29,9 +28,9 @@ export class AddNewMemberComponent implements OnInit {
     this.Member.hindiRead = true;
     this.Member.hindiWrite = true;
     this.Member.hindiSpeak = true;          
-    this.Member.englishRead = true;
-    this.Member.englishWrite = true;
-    this.Member.englishSpeak = true;
+    this.Member.englishRead = false;
+    this.Member.englishWrite = false;
+    this.Member.englishSpeak = false;
     this.Member.eligibleForChild= true;
 	  this.Member.eligibleForGents= false;
 	  this.Member.eligibleForLadies= false;
@@ -57,7 +56,7 @@ export class AddNewMemberComponent implements OnInit {
       occupation: [this.Member?.occupation, Validators.required],
       dob: [this.Member?.dob, Validators.required],
       gender: [this.Member?.gender, Validators.required],
-      roles: [this.Member?.roles, Validators.required],
+      role: [this.Member?.role, Validators.required],
       addharNumber: ['', [Validators.required, Validators.minLength(12)]],
       panNo: ['', Validators.required],
       photoBase64: [''],
@@ -79,7 +78,7 @@ export class AddNewMemberComponent implements OnInit {
       phoneNumber: [''],
       email: ['', Validators.required],
      
-      vehiclesType: ['', Validators.required],
+      vehicleType: ['', Validators.required],
       vehicleDetails: ['', Validators.required],                 
      
       marathiRead:[''],
@@ -97,7 +96,7 @@ export class AddNewMemberComponent implements OnInit {
 	    eligibleForLadies:[''],
       
       ownBaithakDay: ['', Validators.required],
-      ownBaithakId: ['', Validators.required],          
+      // ownBaithakId: ['', Validators.required],          
       hajeriNo: ['', Validators.required],
       hajeriNoDetails: [''],
       weeklyOffs: ['', Validators.required],
