@@ -11,6 +11,9 @@ import htmlToPdfmake from 'html-to-pdfmake';
 import { LocService } from 'src/app/services/loc.service';
 import jsPDF from 'jspdf';
 import { Router } from '@angular/router';
+import { SchedularComponent } from '../schedular/schedular.component';
+import { ScheduleDataService } from 'src/app/services/schedule-data.service';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -24,20 +27,37 @@ constructor(
   private router: Router,
   private memberListService: MemberListService,
   private locService: LocService,
+  private scheduleDataService : ScheduleDataService,
+  private login : LoginService,
 ){}
 
   defaultLocations: Location[] = [];
   defaultMembers: Member[] = [];
   locdata:any[]=[];
+  defaultSchedular:any [] =[];
 
   locationCount: number ;
   memberCount: number ;
   locCount: number ;
+  scheduleCount: number;
 
   ngOnInit() {
     this.getMemberList();
     this.getloc();
-  }
+    this.getScheduleRecord();
+
+      // // Set the token in localStorage when the user logs in or obtains the token.
+      // const token = this.login.loginUser; // Replace with your actual token
+      // localStorage.setItem('token', token);
+  
+      // // Remove the token .
+      // setTimeout(() => {
+      //   localStorage.removeItem('token');
+      //   console.log('Token removed from localStorage.');
+      //   this.router.navigate(['/login']);
+      // }, 7.2e+6);
+    }
+
 
   //get active member data
   private getMemberList(){
@@ -48,7 +68,19 @@ constructor(
       
       },)
   }
-    //loc data
+  //get all schedule data
+
+  private getScheduleRecord(){
+    this.scheduleDataService.getAllData().subscribe(
+      (data: any[]) => {
+        this.defaultSchedular =data;
+        console.log(this.defaultSchedular)
+        this.scheduleCount=this.defaultSchedular.length;
+        console.log(this.scheduleCount)
+      },)
+  }
+  
+    //active loc data
     getloc(){
       this.locService.getLocationList().subscribe(
         (data:any[]) => {
@@ -105,69 +137,69 @@ constructor(
 
 
   
-    title = 'htmltopdf';
-    spac = ' ';
-    space ='                                               .';
+  //   title = 'htmltopdf';
+  //   spac = ' ';
+  //   space ='                                               .';
 
-    @ViewChild('pdfTable') pdfTable: ElementRef;
-    serialNumber: number = 1; 
-    totalLocations: number = 0; // Initialize the total count
+  //   @ViewChild('pdfTable') pdfTable: ElementRef;
+  //   serialNumber: number = 1; 
+  //   totalLocations: number = 0; // Initialize the total count
   
-    public downloadAsPDF() {
-      const doc = new jsPDF('landscape', 'mm', 'a3'); // Set A3 page size and landscape orientation
+  //   public downloadAsPDF() {
+  //     const doc = new jsPDF('landscape', 'mm', 'a3'); // Set A3 page size and landscape orientation
   
-      // Fetch data from your service
+  //     // Fetch data from your service
       
-      this.locService.getLocationList().subscribe(
-        (data: any[]) => {
-          console.log(data);
+  //     this.locService.getLocationList().subscribe(
+  //       (data: any[]) => {
+  //         console.log(data);
 
-          // Count the total number of locations
-        this.totalLocations = data.length;
-        this.serialNumber = 1;
+  //         // Count the total number of locations
+  //       this.totalLocations = data.length;
+  //       this.serialNumber = 1;
   
-          // Create an HTML table to display data
+  //         // Create an HTML table to display data
           
-          let tableHtml = `<table>
-              <thead style="text-align: center;">
-                <tr >
-                 <th colspan="2" style="background-color: white; text-center color: black;">Total Location: ${data.length}</th>
-                <th>
-                  <table>     
-                      <tr><th style="background-color: white; color: black; ">${this.spac}</th></tr>              
-                      <tr><th style="background-color: yellow; color: black;">Date: ${new Date().toLocaleDateString()}${this.space}</th></tr>
-                      <tr><th style="background-color: white; color: black; ">Section 2 ${this.spac}</th></tr>                    
-                      <tr><th style="background-color: green; color: black;">${this.spac}</th></tr>  
-                  </table>                    
-                </th>                
-                </tr>
-                <tr>
-                  <th>Sr No</th>
-                  <th>Location Name</th>
-                  <th>Add1</th>
-                </tr>
-              </thead>
-              <tbody>`;
-            data.forEach((location) => {
-              tableHtml += `<tr><td>${this.serialNumber}</td><td>${location.locationName}</td><td>${location.add1}</td></tr>`;
-              this.serialNumber++; // Increment the serial number for the next row
-            });
-            tableHtml += '</tbody></table>';
+  //         let tableHtml = `<table>
+  //             <thead style="text-align: center;">
+  //               <tr >
+  //                <th colspan="2" style="background-color: white; text-center color: black;">Total Location: ${data.length}</th>
+  //               <th>
+  //                 <table>     
+  //                     <tr><th style="background-color: white; color: black; ">${this.spac}</th></tr>              
+  //                     <tr><th style="background-color: yellow; color: black;">Date: ${new Date().toLocaleDateString()}${this.space}</th></tr>
+  //                     <tr><th style="background-color: white; color: black; ">Section 2 ${this.spac}</th></tr>                    
+  //                     <tr><th style="background-color: green; color: black;">${this.spac}</th></tr>  
+  //                 </table>                    
+  //               </th>                
+  //               </tr>
+  //               <tr>
+  //                 <th>Sr No</th>
+  //                 <th>Location Name</th>
+  //                 <th>Add1</th>
+  //               </tr>
+  //             </thead>
+  //             <tbody>`;
+  //           data.forEach((location) => {
+  //             tableHtml += `<tr><td>${this.serialNumber}</td><td>${location.locationName}</td><td>${location.add1}</td></tr>`;
+  //             this.serialNumber++; // Increment the serial number for the next row
+  //           });
+  //           tableHtml += '</tbody></table>';
 
-          // Add the total count to the PDF content
-        // tableHtml = `<p>Total Locations: ${this.totalLocations}</p>` + tableHtml;
+  //         // Add the total count to the PDF content
+  //       // tableHtml = `<p>Total Locations: ${this.totalLocations}</p>` + tableHtml;
   
-          // Convert the HTML table to PDF using pdfMake
-          var html = htmlToPdfmake(tableHtml , { defaultStyles: { font: 'Shivaji' } });
-          // var html = htmlToPdfmake('<p>मराठी टेक्स्ट</p>', { defaultStyles: { font: 'Mangal' } });
+  //         // Convert the HTML table to PDF using pdfMake
+  //         var html = htmlToPdfmake(tableHtml , { defaultStyles: { font: 'Shivaji' } });
+  //         // var html = htmlToPdfmake('<p>मराठी टेक्स्ट</p>', { defaultStyles: { font: 'Mangal' } });
 
-          const documentDefinition = { content: html };
-          pdfMake.createPdf(documentDefinition).open();
+  //         const documentDefinition = { content: html };
+  //         pdfMake.createPdf(documentDefinition).open();
 
-          this.serialNumber = 1;  
-          this.totalLocations = 0;
-        }
-      );
-    }
+  //         this.serialNumber = 1;  
+  //         this.totalLocations = 0;
+  //       }
+  //     );
+  //   }
     
   }

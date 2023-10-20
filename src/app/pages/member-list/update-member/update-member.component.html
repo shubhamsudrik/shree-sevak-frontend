@@ -331,14 +331,10 @@
                    id="photoBase64"
                   name="photoBase64"
                   [(ngModel)]="Member.photoBase64"
-                  [ngClass]="{
-                   'is-invalid': (submitted && MemberFormControl.photoBase64.errors?.required)
-                  }"
-                  maxlength="14" 
+                  
+                  maxlength="50" 
                     />
-                    <div class="invalid-feedback">
-                      {{ 'Photo Base64 is required.' | translate }}
-                    </div>
+                   
               </div>
              </div>
              </div>
@@ -832,14 +828,10 @@
                id="googleMapLink"
               name="googleMapLink"
               [(ngModel)]="Member.googleMapLink"
-              [ngClass]="{
-               'is-invalid': (submitted && MemberFormControl.googleMapLink.errors?.required)
-              }"
-              maxlength="25" 
+             
+              maxlength="50" 
                 />
-                <div class="invalid-feedback">
-                  {{ 'googleMapLink is required.' | translate }}
-                </div>
+                
           </div>
          </div>
          </div>
@@ -1055,10 +1047,10 @@
          <!-- hajeriNo -->
          <div class="col-md-4">
          <div class="form-group">
-          <label for="hajeriNo">{{ 'Hajeri Number' | translate }}</label>
+          <label for="hajeriNo">{{ 'Type' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
-              <input
+              <select
                   formControlName="hajeriNo"
                   type="text"
                   class="form-control"
@@ -1070,9 +1062,14 @@
                   }"
                   (input)="validateHajeriNumber($event)"
                   maxlength="6"
-              />
+              >
+              <option value="" disabled>Select Type</option>
+              <option value="1">{{'Attendence'|translate}}</option>
+              <option value="2">{{'Reader'|translate}}</option>
+              <option value="2">{{'Reader'|translate}}</option>
+            </select>
               <div class="invalid-feedback">
-                {{ 'Hajeri number is required.' | translate }}
+                {{ 'Type is required.' | translate }}
               </div>
           </div>
           </div>

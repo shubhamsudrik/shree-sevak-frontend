@@ -160,10 +160,157 @@
 // </div>
 
 
+// import { Component, OnInit } from '@angular/core';
+// import html2canvas from 'html2canvas';
+// import jsPDF from 'jspdf';
+// import { ScheduleDataService } from 'src/app/services/schedule-data.service';
+
+// @Component({
+//   selector: 'app-report',
+//   templateUrl: './report.component.html',
+//   styleUrls: ['./report.component.css']
+// })
+// export class ReportComponent implements OnInit {
+//   constructor(private scheduleDataService: ScheduleDataService) {}
+
+//   totalSchedule: number = 0;
+//   schedules: any[] = [];
+//   currentDate: string = new Date().toLocaleDateString();
+//   serialNumber: number = 1;
+
+//   Bhag: string = ''; // Property to store user input
+//   Shlok: string = '';
+//   inputWidth: number = 100; // Initial width percentage
+//   inputHeight: number = 100; // Initial height percentage
+
+//     // Event handler for when the input is in focus
+//   onFocus() {
+//     this.inputWidth = 100; // You can adjust the width when in focus
+//     this.inputHeight = 100; // You can adjust the height when in focus
+//   }
+
+//   // Event handler for when the input loses focus
+//   onBlur() {
+//     this.inputWidth = 100; // Reset to the original width when focus is lost
+//     this.inputHeight = 100; // Reset to the original height when focus is lost
+//   }
+
+//   ngOnInit(){
+//     this.getdata();
+//   }
+
+//   getdata(){
+//     // Fetch data from your service
+//     this.scheduleDataService.getAllData().subscribe((data: any[]) => {
+//       this.schedules = data;
+//       console.log(data);
+
+//       //  Count the total number of locations
+//       this.totalSchedule = data.length;
+//       console.log(this.totalSchedule)
+//       this.serialNumber = 1;
+//   });
+//   }
+
+//   public convertToPDF() {    
+  
+//     html2canvas(document.getElementById("contentToConvert")!).then(canvas =>{
+      
+//       const contentDataURL = canvas.toDataURL("image/png")
+//       let pdf = new jsPDF('p' , 'mm' , 'a3');
+//       var width = pdf.internal.pageSize.getWidth();
+//       var height =canvas.height * width / canvas.width;
+//       pdf.addImage(contentDataURL, 'PNG', 0, 0, width , height)
+//       pdf.save('output.pdf');
+//     });
+// }
+// }
+
+
+// <!-- your-component.component.html -->
+// <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+//   <div class="py-7 py-lg-8"></div>
+//   <!-- Page content -->
+//   <!-- <div class="container mt--8 pb-5"> -->
+//     <!-- Table -->
+//     <!-- <div class="row justify-content-center">
+//       <div class="col-lg-6 col-md-8">
+//         <div class="custom-width">
+//           <div class="shadow border-0 w-500">
+//             <div class="card-body px-lg-5 py-lg-5 text-color">
+//               <div class="container-a4">
+//               <div class="content"> -->
+//               <div id="contentToConvert">
+//               <table id="pdfTable" style="text-align: center;" border="1">
+//                 <thead>
+//                   <tr>
+//                     <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ totalSchedule }}</th>
+//                     <th colspan="2">
+//                       <table>
+//                         <thead>
+//                           <!-- <ng-container *ngFor="let schedule of schedules; let i = index"> -->
+//                         <tr>
+//                           <th style="background-color: white; color: black; width: 550px;  height: 28px;"></th>
+//                         </tr>
+//                         <tr>
+//                           <th  style="background-color:  rgba(193, 166, 47, 0.638); color: black;">date</th>
+//                         </tr>
+//                         <tr>                          
+//                             <th  style="background-color: white; color: black;  height: 100%;">
+//                               <input [(ngModel)]="Bhag" [style.width.%]="inputWidth" placeholder="Enter here section" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+//                             </th>
+//                           </tr>                       
+                                              
+//                         <tr>
+//                           <th style=" color: black; height: 100%;">
+//                             <input [(ngModel)]="Shlok" [style.width.%]="inputWidth" placeholder="Enter here shlok name" style="background-color: rgb(188, 246, 188);" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+//                           </th>
+//                         </tr>
+//                           <!-- </ng-container> -->
+//                         </thead>
+//                       </table>
+//                     </th>
+//                   </tr>
+//                   <tr>
+//                     <th style="background-color: rgb(195, 164, 164); color: white;">Sr No</th>
+//                     <th style="background-color: rgb(195, 164, 164); color: white;">Location Name</th>
+//                     <th style="background-color: rgb(195, 164, 164);">Reading</th>
+//                     <th style="background-color: rgb(195, 164, 164);">Attendence</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   <tr *ngFor="let schedule of schedules ; let i = index ">
+                  
+//                     <td style="background-color: rgb(192, 222, 167);">{{ i + 1 }}</td>
+//                     <td style="background-color: rgb(192, 222, 167);">{{schedule.location.locationName}}</td>
+//                     <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0].firstName }}</td>
+//                     <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0].firstName }}</td>
+//                   </tr>
+                
+//                 </tbody>
+              
+//               </table>
+//             </div><br><br>
+//             <div style="text-align: center;">
+//               <input type="button"class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" />  
+//             </div>
+//               <!-- <button (click)="generatePDF()">Generate PDF</button> -->
+//             </div>
+//               <!-- </div> -->
+//             <!-- </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div> -->
 import { Component, OnInit } from '@angular/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
+import { group } from 'console';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-report',
@@ -173,55 +320,146 @@ import { ScheduleDataService } from 'src/app/services/schedule-data.service';
 export class ReportComponent implements OnInit {
   constructor(private scheduleDataService: ScheduleDataService) {}
 
-  totalLocations: number = 0;
-  locations: any[] = [];
-  currentDate: string = new Date().toLocaleDateString();
-  serialNumber: number = 1;
+  totalSchedule: number = 0;
+  schedules: any[] = [];
+  groupedSchedules: any[] = [];
+  groupDate :  any[] = [];
+  a :  any[] = [];
+  b :  any[] = [];
+ 
 
-  Bhag: string = ''; // Property to store user input
+  Bhag: string = '';
   Shlok: string = '';
-  inputWidth: number = 100; // Initial width percentage
-  inputHeight: number = 100; // Initial height percentage
+  inputWidth: number = 100;
+  inputHeight: number = 100;
+  datelength:number;
 
-    // Event handler for when the input is in focus
-  onFocus() {
-    this.inputWidth = 100; // You can adjust the width when in focus
-    this.inputHeight = 100; // You can adjust the height when in focus
+  ngOnInit() {
+    this.getData();
   }
 
-  // Event handler for when the input loses focus
-  onBlur() {
-    this.inputWidth = 100; // Reset to the original width when focus is lost
-    this.inputHeight = 100; // Reset to the original height when focus is lost
-  }
-
-  ngOnInit(){
-    this.getdata();
-  }
-
-  getdata(){
+  getData() {
     // Fetch data from your service
-    this.scheduleDataService.getSchedul().subscribe((data: any[]) => {
-      this.locations = data;
+    this.scheduleDataService.getAllData().subscribe((data: any[]) => {
+      this.schedules = data;
+      this.totalSchedule = data.length;
+      this.groupSchedulesByDate();
       console.log(data);
-
-      //  Count the total number of locations
-      this.totalLocations = data.length;
-      console.log(this.totalLocations)
-      this.serialNumber = 1;
-  });
+      
+    });
   }
 
-  public convertToPDF() {    
-  
-    html2canvas(document.getElementById("contentToConvert")!).then(canvas =>{
-      
-      const contentDataURL = canvas.toDataURL("image/png")
-      let pdf = new jsPDF('p' , 'mm' , 'a3');
-      var width = pdf.internal.pageSize.getWidth();
-      var height =canvas.height * width / canvas.width;
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, width , height)
+  groupSchedulesByDate() {
+    const groupedSchedules = [];
+    this.schedules.forEach((schedule) => {
+      const existingGroup = groupedSchedules.find(
+        (group) => group.date === schedule.date
+      );
+      if (existingGroup) {
+        existingGroup.schedules.push(schedule);
+        console.log(existingGroup.schedules)
+        // console.log(group)
+        console.log(groupedSchedules[0].date)
+        console.log(groupedSchedules)
+       
+
+        this.groupDate.push(groupedSchedules[0])
+        console.log(this.groupDate)
+      } else {
+        groupedSchedules.push({ date: schedule.date, schedules: [schedule] });
+      }
+    });
+    this.groupedSchedules = groupedSchedules;
+  }
+
+  onFocus() {
+    this.inputWidth = 100;
+    this.inputHeight = 100;
+  }
+
+  onBlur() {
+    this.inputWidth = 100;
+    this.inputHeight = 100;
+  }
+
+  convertToPDF() {
+    const pdf = new jsPDF('p', 'mm', 'a3');
+    html2canvas(document.getElementById('contentToConvert')).then((canvas) => {
+      const contentDataURL = canvas.toDataURL('image/png');
+      const width = pdf.internal.pageSize.getWidth();
+      const height = canvas.height * (width / canvas.width);
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height);
       pdf.save('output.pdf');
     });
+  }
+
+//For convert into excel
+fileName= 'ExcelSheet.xlsx';
+  exportexcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('pdfTable');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
+  }
 }
-}
+
+
+
+
+// <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+//   <div class="py-7 py-lg-8"></div>
+//   <div id="contentToConvert">
+//     <div class="d-flex">
+//       <div *ngFor="let group of groupedSchedules" class="mx-2">
+//         <table style="text-align: center;" border="1">
+//           <thead>
+//             <tr>
+//               <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ totalSchedule }}</th>
+//             </tr>
+//             <tr>
+//               <th colspan="2" style="background-color: rgba(193, 166, 47, 0.638); color: black;">{{ group.date }}</th>
+//             </tr>
+//             <tr>
+//               <th style="background-color: white; color: black; width: 550px; height: 28px;"></th>
+//             </tr>
+//             <tr>
+//               <th style="background-color: white; color: black; height: 100%;">
+//                 <input [(ngModel)]="Bhag" [style.width.%]="inputWidth" placeholder="Enter here section" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+//               </th>
+//             </tr>
+//             <tr>
+//               <th style="color: black; height: 100%;">
+//                 <input [(ngModel)]="Shlok" [style.width.%]="inputWidth" placeholder="Enter here shlok name" style="background-color: rgb(188, 246, 188);" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+//               </th>
+//             </tr>
+//             <tr>
+//               <th style="background-color: rgb(195, 164, 164); color: white;">Sr No</th>
+//               <th style="background-color: rgb(195, 164, 164); color: white;">Location Name</th>
+//               <th style="background-color: rgb(195, 164, 164);">Reading</th>
+//               <th style="background-color: rgb(195, 164, 164);">Attendance</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             <tr *ngFor="let schedule of group.schedules; let i = index">
+//               <td style="background-color: rgb(192, 222, 167);">{{ i + 1 }}</td>
+//               <td style="background-color: rgb(192, 222, 167);">{{ schedule.location.locationName }}</td>
+//               <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0]?.firstName }}</td>
+//               <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[1]?.firstName }}</td>
+//             </tr>
+//           </tbody>
+//         </table>
+//       </div>
+//     </div>
+//   </div><br><br>
+//   <div style="text-align: center;">
+//     <input type="button" class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" />
+//   </div>
+// </div>

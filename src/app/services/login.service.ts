@@ -48,13 +48,6 @@ generateToken(credentials:any){
   localStorage.removeItem("token");
   return true;
   }
-  // auto logout
-   myTimeout = setTimeout(this.autoLogout, 7.2e+6);
-  //automatically & through signout logout
-  autoLogout(){
-    localStorage.removeItem("token")
-    return true;
-  }
 
   //to get the token 
 

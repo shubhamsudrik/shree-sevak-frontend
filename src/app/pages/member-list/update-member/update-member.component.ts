@@ -69,7 +69,7 @@ export class UpdateMemberComponent implements OnInit {
         role: [this.Member?.role, Validators.required],
         addharNumber: [this.Member?.addharNumber, [Validators.required, Validators.minLength(12)]],
         panNo: [this.Member?.panNo, Validators.required],
-        photoBase64: [this.Member?.photoBase64, Validators.required],
+        photoBase64: [this.Member?.photoBase64],
 
         add1: [this.Member?.add1, Validators.required],
         add2: [this.Member?.add2, Validators.required],
@@ -82,7 +82,7 @@ export class UpdateMemberComponent implements OnInit {
         pincode: [this.Member?.pincode, [Validators.required, Validators.minLength(6)]],
         latitude: [this.Member?.latitude, Validators.required],
         longitude: [this.Member?.longitude, Validators.required],
-        googleMapLink: [this.Member?.googleMapLink, Validators.required],
+        googleMapLink: [this.Member?.googleMapLink],
         status: [this.Member?.state, Validators.required],
 
         mobile: [this.Member?.mobile, [Validators.required, Validators.minLength(10)]],

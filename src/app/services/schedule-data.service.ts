@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Schedule } from '../Classes/schedule';
+import { ScheduleDto } from '../Classes/schedule-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,14 @@ export class ScheduleDataService {
   constructor( private httpclient: HttpClient) { }
 
 
- private baseUrl = "http://localhost:8080/api/baithak";
+ private baseUrl = "http://localhost:8080/api/schedular";
  private url = "http://localhost:8080/api";
 
-  //for get schedular
-  getSchedul(): Observable<any[]> {
-    return this.httpclient.get<any[]>(`${this.url}/schedular/all-schedules`);
-  }
 
-  // For Get the all record from database
+
+  // For Get the all schedule record from database 
   getAllData(): Observable<Schedule[]> {
-    return this.httpclient.get<Schedule[]>(`${this.baseUrl}/all-baithak`);
+    return this.httpclient.get<Schedule[]>(`${this.baseUrl}/all-schedules`);
   }
 
     // For Get the record by id wise from database
@@ -48,5 +46,23 @@ getScheduleByStatus(statustype: string): Observable<Schedule[]>{
   updateBaithak(scheduleId:number,schedule:Schedule,):Observable<Object>{
     return this.httpclient.put(`${this.baseUrl}/update-baithak/${scheduleId}`,schedule)
   }
+
+
+
+// create new record
+createScheduleRecord(schedulesarray:ScheduleDto[]):Observable<Object>{
+
+ console.log("Inside service")
+ console.log(schedulesarray)
+   return this.httpclient.post(`${this.baseUrl}/create-schedule`,schedulesarray);
+   
+
+ }
+
+ //update the excisting record
+ updateSchedule(schduleArray:ScheduleDto[]):Observable<Object>{
+   return this.httpclient.put(`${this.baseUrl}/update-schedule`,schduleArray)
+ }
+
 
 }
