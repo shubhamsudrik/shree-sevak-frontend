@@ -34,6 +34,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'schedular', component: SchedularComponent },
     { path: 'add-schedular', component: AddSchedularComponent },
     { path: 'update-schedule/:id', component: UpdateScheduleComponent },
+    { path: 'update-schedule', component: UpdateScheduleComponent },
     { path: 'user-profile', component: UserProfileComponent },
     { path: 'report', component: ReportComponent },
     { path: 'schedule-ladies-baithak', component: ScheduleLadiesBaithakComponent },

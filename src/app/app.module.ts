@@ -42,6 +42,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { HelloComponent } from './pages/schedular/add-schedular/hello.component';
 import { ScheduleLadiesBaithakComponent } from './pages/schedular/schedule-ladies-baithak/schedule-ladies-baithak.component';
 import { DynamicformComponent } from './pages/schedular/add-schedular/dynamicform/dynamicform.component';
+import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/update-dynamic-form/update-dynamic-form.component';
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -97,6 +98,7 @@ import { DynamicformComponent } from './pages/schedular/add-schedular/dynamicfor
     ChunkPipe,
     ScheduleLadiesBaithakComponent,
     DynamicformComponent,
+    UpdateDynamicFormComponent,
    
   
     // ComponentComponent

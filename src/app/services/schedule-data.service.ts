@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Schedule } from '../Classes/schedule';
 import { ScheduleDto } from '../Classes/schedule-dto';
+import { DateLocation } from '../Classes/DateLocation';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,10 @@ createScheduleRecord(schedulesarray:ScheduleDto[]):Observable<Object>{
    return this.httpclient.put(`${this.baseUrl}/update-schedule`,schduleArray)
  }
 
+ getscheduleByDateAndLocation(date:string,LocationId:number):Observable<Object>{
+
+  return this.httpclient.get<DateLocation>(`${this.baseUrl}/getByDateLocation/${date}/${LocationId}`)
+
+}
 
 }

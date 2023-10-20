@@ -1,5 +1,5 @@
 export class ScheduleDto {
-
+   scheduleId:number;
     locationId: Number;
     baithakId: Number;
   

@@ -309,8 +309,6 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
-import { group } from 'console';
-import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-report',
@@ -323,16 +321,12 @@ export class ReportComponent implements OnInit {
   totalSchedule: number = 0;
   schedules: any[] = [];
   groupedSchedules: any[] = [];
-  groupDate :  any[] = [];
-  a :  any[] = [];
-  b :  any[] = [];
- 
+  formattedSchedules: any[] = [];
 
   Bhag: string = '';
   Shlok: string = '';
   inputWidth: number = 100;
   inputHeight: number = 100;
-  datelength:number;
 
   ngOnInit() {
     this.getData();
@@ -345,7 +339,6 @@ export class ReportComponent implements OnInit {
       this.totalSchedule = data.length;
       this.groupSchedulesByDate();
       console.log(data);
-      
     });
   }
 
@@ -357,19 +350,29 @@ export class ReportComponent implements OnInit {
       );
       if (existingGroup) {
         existingGroup.schedules.push(schedule);
-        console.log(existingGroup.schedules)
-        // console.log(group)
-        console.log(groupedSchedules[0].date)
-        console.log(groupedSchedules)
-       
-
-        this.groupDate.push(groupedSchedules[0])
-        console.log(this.groupDate)
       } else {
         groupedSchedules.push({ date: schedule.date, schedules: [schedule] });
       }
     });
     this.groupedSchedules = groupedSchedules;
+
+    // Create the formatted data structure
+    this.formattedSchedules = this.groupedSchedules.map((group) => {
+      const locationName = group.schedules[0]?.location.locationName;
+      const reading = group.schedules[0]?.members[0]?.firstName;
+      const attendance = group.schedules[0]?.members[1]?.firstName;
+
+      return {
+        date: group.date,
+        locationName,
+        reading,
+        attendance,
+      };
+    });
+  }
+
+  getUniqueLocations() {
+    return [...new Set(this.formattedSchedules.map((schedule) => schedule.locationName))];
   }
 
   onFocus() {
@@ -393,23 +396,22 @@ export class ReportComponent implements OnInit {
     });
   }
 
-//For convert into excel
-fileName= 'ExcelSheet.xlsx';
-  exportexcel(): void
-  {
+  // For converting to Excel
+  fileName = 'ExcelSheet.xlsx';
+  exportexcel(): void {
     /* pass here the table id */
     let element = document.getElementById('pdfTable');
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
- 
-    /* generate workbook and add the worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate a workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
- 
-    /* save to file */  
+
+    /* save to file */
     XLSX.writeFile(wb, this.fileName);
- 
   }
 }
+
 
 
 

@@ -1,14 +1,13 @@
+import { Baithak } from "./baithak";
+import { Location } from "./location";
+import { Member } from "./member";
+
 export class Schedule {
-    
-   baithakType: string;
-   toTime: string;
-   status: string;
-   fromTime: string;
-   dayOfWeek: string;
-   memberId: string;
-   vachanGhenara: number;
-   hajeriGhenara: number;
-   location: string;
+ scheduleId:number;
+ baithak:Baithak;
+   members:Member[];
+   location: Location;
    date:string;
+ 
 
 }
