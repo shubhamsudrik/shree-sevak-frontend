@@ -61,9 +61,9 @@
               <div id="contentToConvert">
                 <table id="pdfTable" style="text-align: center;" border="1">
                   <thead>
-                    <tr>
+                    <tr >
                       <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ totalSchedule }}</th>
-                      <th  colspan="2" *ngFor="let dates of groupedSchedules">
+                      <th  colspan="2" *ngFor="let dates of groupedSchedules1">
                         <table>
                           <thead>
                             <tr>
@@ -75,12 +75,12 @@
                             </tr>
                             <tr>
                               <th style="background-color: white; color: black; height: 100%;">
-                                <input [(ngModel)]="Bhag" [style.width.%]="inputWidth" placeholder="Enter here section" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+                                <input  [style.width.%]="inputWidth" placeholder="Enter here section" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
                               </th>
                             </tr>
                             <tr>
                               <th style="color: black; height: 100%;">
-                                <input [(ngModel)]="Shlok" [style.width.%]="inputWidth" placeholder="Enter here shlok name" style="background-color: rgb(188, 246, 188);" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+                                <input  [style.width.%]="inputWidth" placeholder="Enter here shlok name" style="background-color: rgb(188, 246, 188);" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
                               </th>
                             </tr>
                           </thead>
@@ -90,53 +90,32 @@
                     <tr>
                       <th style="background-color: rgb(195, 164, 164); color: white;">Sr No</th>
                       <th style="background-color: rgb(195, 164, 164); color: white;">Location Name</th>
-                      <ng-container *ngFor="let group of groupedSchedules">
-                              <th style="background-color: rgb(195, 164, 164);">Reading</th>
-                              <th style="background-color: rgb(195, 164, 164);">Attendance</th>
+
+                      <ng-container *ngFor="let group of groupedSchedules1">
+                              <th style="background-color: rgb(195, 164, 164); width: 150px;">Reading</th>
+                              <th style="background-color: rgb(195, 164, 164); width: 150px;">Attendance</th>                         
                       </ng-container>
                     </tr>
                   </thead>
-                  <tbody>
-                    <ng-container *ngFor="let group of groupedSchedules; let i = index">
-                      <tr *ngFor="let schedule of group.schedules; let j = index">
-                        <td style="background-color: rgb(192, 222, 167);">{{ i + 1 }}</td>                     
-                        <td style="background-color: rgb(192, 222, 167);">{{ schedule.location.locationName }}</td>
-                        <!-- <ng-container *ngFor="let group of groupedSchedules"> -->
-                            <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0]?.firstName }}</td>
-                            <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[1]?.firstName }}</td>
-                      <!-- </ng-container> -->
+                
+                <tbody>
+                  <tr *ngFor="let location of groupedSchedules; let ind=index;">
+                    <td>{{ind+1}}</td>  
+                    <td class="col-3">
+                      {{location.location.locationName}}
+                    </td>
+                    <td *ngFor="let schedule of location.schedules" colspan="2" style="background-color: rgb(192, 222, 167);" >
+                      <tr style="border: none; ">
+                        <td style="width: 150px;background-color: rgb(192, 222, 167);">
+                          {{schedule.members[0]?.firstName}} {{schedule.members[0]?.lastName}}
+                        </td>
+                        <td style="width: 150px; background-color: rgb(192, 222, 167);" >
+                          {{schedule.members[1]?.firstName}} {{schedule.members[1]?.lastName}}
+                        </td>
                       </tr>
-                    </ng-container>                    
-                  </tbody>    
-                <!-- <tbody>
-                  <ng-container *ngFor="let dateGroup of groupedSchedules; let i = index">
-                    <tr *ngFor="let schedule of dateGroup.schedules; let j = index">
-                      <td style="background-color: rgb(192, 222, 167);">{{ j + 1 }}</td>
-                      <td style="background-color: rgb(192, 222, 167);">{{ schedule.location.locationName }}</td>
-                      <ng-container *ngFor="let dateGroup of groupedSchedules">
-                      <td style="background-color: rgb(192, 222, 167);"> {{ schedule.members[0]?.firstName }}</td>
-                      <td style="background-color: rgb(192, 222, 167);"> {{ schedule.members[1]?.firstName }}</td>
-                    </ng-container>
-                    </tr>
-                  </ng-container>
-                  </tbody> -->
-                  <!-- all data get -->                                   
-                   <!-- <tbody>
-                  <ng-container *ngFor="let dateGroup of groupedSchedules; let i = index">
-                    <tr *ngFor="let schedule of dateGroup.schedules; let j = index">
-                      <td style="background-color: rgb(192, 222, 167);">{{ j + 1 }}</td>
-                      <td style="background-color: rgb(192, 222, 167);">{{ schedule.location.locationName }}</td>
-                      <ng-container *ngFor="let dateGroup of groupedSchedules">
-                                               
-                        <td style="background-color: rgb(192, 222, 167);"> {{ schedule.members[0]?.firstName }}</td>
-                        <td style="background-color: rgb(192, 222, 167);"> {{ schedule.members[1]?.firstName }}</td>
-                        
-                      </ng-container>
-                    </tr>
-                  </ng-container>
-                </tbody> -->
-                  
-
+                    </td>
+                  </tr>
+                </tbody> 
                 </table>                
               </div><br><br>
               <div style="text-align: center;">
