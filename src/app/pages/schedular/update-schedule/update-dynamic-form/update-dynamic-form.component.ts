@@ -165,7 +165,7 @@ export class UpdateDynamicFormComponent implements OnInit {
   //   });
 
   // }
-
+//separting member 
   separatingMemebersOnType(): void {
     this.hajeriMembers = this.members.filter((member: Member) => {
       if (member.hajeriNo === "1") {
