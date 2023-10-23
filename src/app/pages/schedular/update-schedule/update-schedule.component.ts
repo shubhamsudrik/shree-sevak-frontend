@@ -269,7 +269,7 @@ export class UpdateScheduleComponent implements OnInit {
 
   public increaseMonth() {
     this.monthIndex++;
-
+    this.getMemberList();
     this.generateCalendarDays(this.monthIndex);
 
     this.getNumberOfDaysInMonth();
@@ -279,7 +279,7 @@ export class UpdateScheduleComponent implements OnInit {
 
   public decreaseMonth() {
     this.monthIndex--;
-
+    this.getMemberList();
     this.generateCalendarDays(this.monthIndex);
 
     this.getNumberOfDaysInMonth();
@@ -545,13 +545,16 @@ export class UpdateScheduleComponent implements OnInit {
 
     this.scheduleService
 
-      .updateSchedule(this.scheduleArray) .subscribe((data) => {
+      .updateSchedule(this.scheduleArray)
+      .subscribe((data) => {
         console.log(data);
       });
   }
 
   GoBack(value: number) {
-    this.router.navigate(["/add-schedular"] ,{queryParams: { baithakId: value }},);
+    this.router.navigate(["/add-schedular"], {
+      queryParams: { baithakId: value },
+    });
   }
 
   getSaveScheduleList() {
