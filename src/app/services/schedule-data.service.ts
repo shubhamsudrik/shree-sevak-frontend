@@ -65,9 +65,9 @@ createScheduleRecord(schedulesarray:ScheduleDto[]):Observable<Object>{
    return this.httpclient.put(`${this.baseUrl}/update-schedule`,schduleArray)
  }
 
- getscheduleByDateAndLocation(date:string,LocationId:number):Observable<Object>{
+ getscheduleByDateAndLocationBaithak(date:string,LocationId:number,BaithakId:number):Observable<Object>{
 
-  return this.httpclient.get<DateLocation>(`${this.baseUrl}/getByDateLocation/${date}/${LocationId}`)
+  return this.httpclient.get<DateLocation>(`${this.baseUrl}/getByDateLocationBaithak/${date}/${LocationId}/${BaithakId}`)
 
 }
 

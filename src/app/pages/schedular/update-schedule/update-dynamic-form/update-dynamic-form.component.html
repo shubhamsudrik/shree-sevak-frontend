@@ -1,12 +1,8 @@
 <form [formGroup]="schedularFormchild" (ngSubmit)="submitChildForm()">
+  <div class="d-flex flex-row justify-content-around">
+    <!-- Get location data dropdown -->
 
-    <div class="d-flex flex-row justify-content-around">
-
-
-
-        <!-- Get location data dropdown -->
-
-        <!-- <div class="dropdown" >
+    <!-- <div class="dropdown" >
 
                                   <button
 
@@ -56,9 +52,7 @@
 
              -->
 
-
-
-        <!-- <select
+    <!-- <select
 
                             formControlName="locationId"
 
@@ -116,34 +110,27 @@
 
                           </select> -->
 
+    <!-- Get Reader data dropdown -->
 
+    <span>Reader:</span>
 
-        <!-- Get Reader data dropdown -->
+    <select
+      formControlName="vachanGhenara"
+      type="text"
+      id="vachanGhenara"
+      name="vachanGhenara"
+      [(ngModel)]="scheduleDto.vachanGhenara"
+    >
+      <option disabled>Select Reader memeber</option>
 
+      <option *ngFor="let reader of vachanMembers" [value]="reader.memberId">
+        {{ reader.firstName }}
+      </option>
+    </select>
 
+    <!-- Get Reader data dropdown -->
 
-        <span>Reader:</span>
-
-
-
-        <select formControlName="vachanGhenara" type="text" id="vachanGhenara" name="vachanGhenara"
-            [(ngModel)]="scheduleDto.vachanGhenara" [value]="schedularFormchild.get('vachanGhenara').value">
-
-            <option disabled>Select Reader memeber</option>
-
-            <option *ngFor="let reader of vachanMembers" [value]="reader.memberId">
-
-                {{ reader.firstName }}
-
-            </option>
-
-        </select>
-
-
-
-        <!-- Get Reader data dropdown -->
-
-        <!-- <div class="dropdown">
+    <!-- <div class="dropdown">
 
                                   <button
 
@@ -189,32 +176,27 @@
 
                                 </div> -->
 
+    <!-- Get Writer data dropdown -->
 
+    <span>writer:</span>
 
-        <!-- Get Writer data dropdown -->
+    <select
+      formControlName="hajeriGhenara"
+      type="text"
+      id="hajeriGhenara"
+      name="hajeriGhenara"
+      [(ngModel)]="scheduleDto.hajeriGhenara"
+    >
+      <option disabled>Select writer member</option>
 
-        <span>writer:</span>
+      <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
+        {{ writer.firstName }}
+      </option>
+    </select>
 
-        <select formControlName="hajeriGhenara" type="text" id="hajeriGhenara" name="hajeriGhenara"
-            [(ngModel)]="scheduleDto.hajeriGhenara">
+    <!-- Get Writer data dropdown -->
 
-            <option disabled>Select writer member</option>
-
-            <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
-
-                {{ writer.firstName }}
-
-
-
-            </option>
-
-        </select>
-
-
-
-        <!-- Get Writer data dropdown -->
-
-        <!-- <div class="dropdown">
+    <!-- <div class="dropdown">
 
                                   <button
 
@@ -261,12 +243,9 @@
                                   </div>
 
                                 </div> -->
+  </div>
 
-    </div>
-
-
-
-    <!-- <div class="meeting-dropdowns">
+  <!-- <div class="meeting-dropdowns">
 
                                 <select *ngFor="location of defaultLocations">
 
@@ -283,5 +262,4 @@
                                 </select>
 
                               </div> -->
-
 </form>
