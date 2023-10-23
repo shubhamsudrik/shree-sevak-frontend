@@ -309,6 +309,8 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
+import { group } from 'console';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-report',
@@ -321,12 +323,17 @@ export class ReportComponent implements OnInit {
   totalSchedule: number = 0;
   schedules: any[] = [];
   groupedSchedules: any[] = [];
-  formattedSchedules: any[] = [];
+  groupedSchedules1: any[] = [];
+  groupDate :  any[] = [];
+  a :  any[] = [];
+  b :  any[] = [];
+ 
 
   Bhag: string = '';
   Shlok: string = '';
   inputWidth: number = 100;
   inputHeight: number = 100;
+  datelength:number;
 
   ngOnInit() {
     this.getData();
@@ -337,43 +344,72 @@ export class ReportComponent implements OnInit {
     this.scheduleDataService.getAllData().subscribe((data: any[]) => {
       this.schedules = data;
       this.totalSchedule = data.length;
+      // this.groupSchedulesByDate();
+      this.groupSchedulesByLocation();
       this.groupSchedulesByDate();
       console.log(data);
+      
     });
   }
+  
 
-  groupSchedulesByDate() {
+  groupSchedulesByLocation() {
     const groupedSchedules = [];
     this.schedules.forEach((schedule) => {
       const existingGroup = groupedSchedules.find(
+        (group) => schedule.location.locationId === group.location?.locationId
+      );
+      if (existingGroup) {
+        existingGroup.schedules.push(schedule);
+        console.log(existingGroup.schedules)
+        // console.log(group)
+        console.log(groupedSchedules[0].date)
+        console.log("groupedSchedules", groupedSchedules)
+        console.log("schedule", schedule)
+       
+
+        this.groupDate.push(groupedSchedules[0])
+        console.log(this.groupDate)
+      } else {  
+        groupedSchedules.push({ location:schedule.location, date: schedule.date, schedules: [schedule] });
+      }
+    });
+    this.groupedSchedules = groupedSchedules;
+    console.log(this.groupedSchedules);
+  
+  }
+  
+
+  groupSchedulesByDate() {
+    const groupedSchedules1 = [];
+    this.schedules.forEach((schedule) => {
+      const existingGroup = groupedSchedules1.find(
         (group) => group.date === schedule.date
       );
       if (existingGroup) {
         existingGroup.schedules.push(schedule);
-      } else {
-        groupedSchedules.push({ date: schedule.date, schedules: [schedule] });
+        console.log(existingGroup.schedules)
+        // console.log(group)
+        console.log(groupedSchedules1[0].date)
+        console.log("groupedSchedules", groupedSchedules1)
+        console.log("schedule", schedule)
+        console.log("existingGroup", existingGroup)
+       
+
+        this.groupDate.push(groupedSchedules1[0])
+        console.log(this.groupDate)
+      } else {  
+        groupedSchedules1.push({ date: schedule.date, schedules: [schedule] });
       }
     });
-    this.groupedSchedules = groupedSchedules;
+    this.groupedSchedules1 = groupedSchedules1;
+    this.a=groupedSchedules1[0].schedules;
+    this.b=this.a[0].date;
+    console.log("a",this.a);
+    console.log("b",this.b);
 
-    // Create the formatted data structure
-    this.formattedSchedules = this.groupedSchedules.map((group) => {
-      const locationName = group.schedules[0]?.location.locationName;
-      const reading = group.schedules[0]?.members[0]?.firstName;
-      const attendance = group.schedules[0]?.members[1]?.firstName;
-
-      return {
-        date: group.date,
-        locationName,
-        reading,
-        attendance,
-      };
-    });
   }
-
-  getUniqueLocations() {
-    return [...new Set(this.formattedSchedules.map((schedule) => schedule.locationName))];
-  }
+  
 
   onFocus() {
     this.inputWidth = 100;
@@ -396,19 +432,21 @@ export class ReportComponent implements OnInit {
     });
   }
 
-  // For converting to Excel
-  fileName = 'ExcelSheet.xlsx';
-  exportexcel(): void {
+//For convert into excel
+fileName= 'ExcelSheet.xlsx';
+  exportexcel(): void
+  {
     /* pass here the table id */
     let element = document.getElementById('pdfTable');
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    /* generate a workbook and add the worksheet */
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
+ 
+    /* save to file */  
     XLSX.writeFile(wb, this.fileName);
+ 
   }
 }
 
