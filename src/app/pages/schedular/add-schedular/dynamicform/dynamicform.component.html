@@ -60,7 +60,7 @@
       <!-- Get Reader data dropdown -->
   
       <span>Reader:</span>
- 
+  
       <select
         formControlName="vachanGhenara"
         type="text"
@@ -68,28 +68,11 @@
         name="vachanGhenara"
         [(ngModel)]="scheduleDto.vachanGhenara"
       >
-      
         <option disabled>Select Reader memeber</option>
         <option *ngFor="let reader of vachanMembers" [value]="reader.memberId">
           {{ reader.firstName }}
         </option>
-      
       </select>
-
-         <!-- Get Writer data dropdown -->
-         <span>writer:</span>
-         <select
-           formControlName="hajeriGhenara"
-           type="text"
-           id="hajeriGhenara"
-           name="hajeriGhenara"
-           [(ngModel)]="scheduleDto.hajeriGhenara"
-         >
-           <option disabled>Select writer member</option>
-           <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
-             {{ writer.firstName }}
-           </option>
-         </select>
   
       <!-- Get Reader data dropdown -->
       <!-- <div class="dropdown">
@@ -116,7 +99,20 @@
                                   </div>
                                 </div> -->
   
-   
+      <!-- Get Writer data dropdown -->
+      <span>writer:</span>
+      <select
+        formControlName="hajeriGhenara"
+        type="text"
+        id="hajeriGhenara"
+        name="hajeriGhenara"
+        [(ngModel)]="scheduleDto.hajeriGhenara"
+      >
+        <option disabled>Select writer member</option>
+        <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
+          {{ writer.firstName }}
+        </option>
+      </select>
   
       <!-- Get Writer data dropdown -->
       <!-- <div class="dropdown">

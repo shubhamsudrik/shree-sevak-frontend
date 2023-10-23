@@ -100,7 +100,7 @@
                     <ng-container *ngFor="let group of groupedSchedules; let i = index">
                       <tr *ngFor="let schedule of group.schedules; let j = index">
                         <td style="background-color: rgb(192, 222, 167);">{{ i + 1 }}</td>                     
-                        <td *ngIf="i==0" style="background-color: rgb(192, 222, 167);">{{ schedule.location.locationName }}</td>
+                        <td style="background-color: rgb(192, 222, 167);">{{ schedule.location.locationName }}</td>
                         <!-- <ng-container *ngFor="let group of groupedSchedules"> -->
                             <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0]?.firstName }}</td>
                             <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[1]?.firstName }}</td>

@@ -95,7 +95,7 @@ export class SchedularComponent implements OnInit {
   
     onOpen(value:any) {
       console.log(this.schedule);
-      this.router.navigate(['/add-schedular'], {queryParams:{baithakId:value}});
+      this.router.navigate(['/add-schedular'], { queryParams:{baithakId:value}});
     }
     
     toggleButtons(operation: string, schedule: any) {
@@ -105,8 +105,8 @@ export class SchedularComponent implements OnInit {
     }
 
   
-    updateSchedules(schedularId: number) {
-      this.router.navigate(["/update-schedule"] ,{queryParams: { baithakId: schedularId }},);
+    updateMember(schedularId: number) {
+      this.router.navigate(['/update-schedule', schedularId]);
     }
 
     // show all data and handl using active in active button 

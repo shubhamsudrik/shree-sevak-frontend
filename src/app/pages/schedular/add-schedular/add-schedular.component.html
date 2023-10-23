@@ -1,66 +1,75 @@
 <div class="container-fluid mt--7 pb-8 pt-50 pt-md-8">
+
   <div class="row">
+
     <div class="col">
+
       <div class="card shadow">
+
         <div class="card-header border-0">
-          <ul
-            class="nav nav-pills flex-column flex-md-row justify-content-center"
-          >
+
+          <ul class="nav nav-pills flex-column flex-md-row justify-content-center">
+
             <li class="nav-item">
+
               <span class="d-none d-md-block form-group">
+
                 <h2>{{ "Schedule child baithak" | translate }}</h2>
+
               </span>
+
             </li>
+
           </ul>
 
+
+
           <div>
+
             <div>{{ displayMonth }} {{ displayYear }}</div>
 
             <div>
-              <button
-                type="button"
-                class="btn btn-info"
-                (click)="setCurrentMonth()"
-                value="today"
-              >
+
+              <button type="button" class="btn btn-info" (click)="setCurrentMonth()" value="today">
+
                 Current month
+
               </button>
 
-              <button
-                type="button"
-                class="btn btn-info"
-                (click)="decreaseMonth()"
-                value="-"
-              >
+              <button type="button" class="btn btn-info" (click)="decreaseMonth()" value="-">
+
                 <i class="fas fa-chevron-left"></i>
+
               </button>
 
-              <button
-                type="button"
-                class="btn btn-info"
-                (click)="increaseMonth()"
-              >
+              <button type="button" class="btn btn-info" (click)="increaseMonth()">
+
                 <i class="fas fa-chevron-right"></i>
+
               </button>
 
-              <button
-                type="button"
-                class="btn btn-info"
-                (click)="goBack()"
-                value="back"
-              >
+              <button type="button" class="btn btn-info" (click)="goBack()" value="back">
+
                 Go on schedule
+
               </button>
+
             </div>
+
           </div>
 
           <br />
 
           <form [formGroup]="schedularForm" (ngSubmit)="onSubmit()">
+
             <div class="table-responsive">
+
               <table class="calendar-table" *ngIf="calendar" border="2px solid">
+
                 <thead>
+
                   <tr *ngFor="let c of meetings; let j = index">
+
                     <th *ngIf="j == 0">Sr.no</th>
 
                     <th *ngIf="j == 0">Locations</th>
@@ -74,11 +83,15 @@
                     <th *ngIf="j == 0">Sunday</th>
 
                     <th *ngIf="j == 0">Sunday</th>
+
                   </tr>
+
                 </thead>
 
                 <tbody>
+
                   <tr *ngFor="let location of defaultLocations; let i = index">
+
                     <!-- Display defaultLocations vertically -->
 
                     <!-- <td>
@@ -99,58 +112,53 @@
 
                     <td>{{ location.locationName }}</td>
 
-                    <td
-                      class="calendar-day"
-                      [ngClass]="{
+                    <td class="calendar-day" [ngClass]="{
+
                         'past-date': c.isPastDate,
 
                         today: c.isToday
-                      }"
-                      *ngFor="let c of meetings; let j = index"
-                    >
-                      <div
-                        class="calendar-day-header"
-                        [ngClass]="{ 'blue-date': c.isToday }"
-                      >
+
+                      }" *ngFor="let c of meetings; let j = index">
+
+                      <div class="calendar-day-header" [ngClass]="{ 'blue-date': c.isToday }">
+
                         <strong>{{ c.date | date : "mediumDate" }}</strong>
+
                       </div>
 
-                      <app-dynamicform
-                        (valueChanged)="saveChanges($event)"
-                        [baithakId]="baithakId"
-                        [locationId]="location.locationId"
-                        [hajeriMembers]="hajeriMembers"
-                        [vachanMembers]="vachanMembers"
-                        [date]="c.date | date : 'mediumDate'"
-                      >
+
+
+                      <app-dynamicform (valueChanged)="saveChanges($event)" [baithakId]="baithakId"
+                        [locationId]="location.locationId" [hajeriMembers]="hajeriMembers"
+                        [vachanMembers]="vachanMembers" [date]="c.date | date : 'mediumDate'">
+
                       </app-dynamicform>
+
                     </td>
+
                   </tr>
 
                   <button type="submit" class="btn btn-primary">SUBMIT</button>
 
-                 
-                    <button
-                      type="button"
-                      class="btn btn-danger"
-                      (click)="updateSchedule(baithakId)"
-                    >
-                      UPDATE
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-info"
-                      (click)="resetScheduleForm()"
-                    >
-                      RESET
-                    </button>
-                 
+                  <div> <button type="button" class="btn btn-danger" (click)="updateSchedule(baithakId)">UPDATE</button>
+                  </div>
+
+
+
                 </tbody>
+
               </table>
+
             </div>
+
           </form>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </div>

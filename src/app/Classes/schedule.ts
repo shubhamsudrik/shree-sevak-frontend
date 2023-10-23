@@ -8,7 +8,6 @@ export class Schedule {
    members:Member[];
    location: Location;
    date:string;
-
  
 
 }

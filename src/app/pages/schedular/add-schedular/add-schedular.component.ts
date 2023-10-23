@@ -1,9 +1,15 @@
 import {
+
   Component,
+
   OnInit,
+
   Pipe,
+
   PipeTransform,
+
   ViewChild,
+
 } from "@angular/core";
 
 import { ActivatedRoute, Route, Router } from "@angular/router";
@@ -18,12 +24,20 @@ import { MemberListService } from "src/app/services/member-list.service";
 
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+
+
+
 import { ScheduleDataService } from "src/app/services/schedule-data.service";
+
+
 
 import { LocService } from "src/app/services/loc.service";
 import { ScheduleDto } from "src/app/Classes/schedule-dto";
 
+
+
 export class CalendarDay {
+
   public date: Date;
 
   public title: string;
@@ -32,27 +46,42 @@ export class CalendarDay {
 
   public isToday: boolean;
 
+
+
   public getDateString() {
+
     return this.date.toISOString().split("T")[0];
+
   }
 
+
+
   constructor(d: Date) {
+
     this.date = d;
 
     this.isPastDate = d.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
 
     this.isToday = d.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0);
+
   }
+
 }
 
+
+
 export class MeetingDay extends CalendarDay {
+
   public selectedLocation: string;
 
   public selectedReader: string;
 
   public selectedWriter: string;
 
+
+
   constructor(
+
     date: Date,
 
     reader: string = "",
@@ -60,7 +89,9 @@ export class MeetingDay extends CalendarDay {
     location: string = "",
 
     writer: string = ""
+
   ) {
+
     super(date);
 
     this.selectedLocation = location;
@@ -68,40 +99,63 @@ export class MeetingDay extends CalendarDay {
     this.selectedReader = reader;
 
     this.selectedWriter = writer;
+
   }
+
 }
 
+
+
 @Pipe({
+
   name: "chunk",
+
 })
+
 export class ChunkPipe implements PipeTransform {
+
   transform(calendarDaysArray: any, chunkSize: number): any {
+
     let calendarDays = [];
 
     let weekDays = [];
 
+
+
     calendarDaysArray.map((day, index) => {
+
       weekDays.push(day);
 
       if (++index % chunkSize === 0) {
+
         calendarDays.push(weekDays);
 
         weekDays = [];
+
       }
+
     });
 
     return calendarDays;
+
   }
+
 }
 
+
+
 @Component({
+
   selector: "add-schedular",
 
   templateUrl: "./add-schedular.component.html",
 
   styleUrls: ["./add-schedular.component.css"],
+
 })
+
 export class AddSchedularComponent implements OnInit {
+
   location: Location = new Location();
 
   schedularForm: FormGroup;
@@ -110,9 +164,13 @@ export class AddSchedularComponent implements OnInit {
 
   scheduleDto: ScheduleDto = new ScheduleDto();
 
+
+
   scheduleArray: ScheduleDto[] = [];
 
   privousSchduleDto: ScheduleDto;
+
+
 
   defaultLocations: Location[] = [];
 
@@ -129,6 +187,7 @@ export class AddSchedularComponent implements OnInit {
   public meetings: MeetingDay[] = [];
 
   public monthNames = [
+
     "January",
 
     "February",
@@ -152,6 +211,7 @@ export class AddSchedularComponent implements OnInit {
     "November",
 
     "December",
+
   ];
 
   public displayMonth: string;
@@ -168,7 +228,10 @@ export class AddSchedularComponent implements OnInit {
 
   displayDayCount: any;
 
+
+
   constructor(
+
     private router: Router,
 
     private locationDataService: LocService,
@@ -180,9 +243,13 @@ export class AddSchedularComponent implements OnInit {
     private scheduleService: ScheduleDataService,
 
     private route: ActivatedRoute
-  ) {}
+
+  ) { }
+
+
 
   ngOnInit(): void {
+
     this.baithakId = this.route.snapshot.queryParamMap.get("baithakId");
 
     this.initializingForm();
@@ -198,9 +265,13 @@ export class AddSchedularComponent implements OnInit {
     // this.creatingScheduleObjects();
 
     this.initializingForm();
+
   }
 
+
+
   private generateCalendarDays(monthIndex: number): void {
+
     // Reset the calendar
 
     this.meetings = [];
@@ -208,14 +279,18 @@ export class AddSchedularComponent implements OnInit {
     // Set the date
 
     let day: Date = new Date(
+
       new Date().getFullYear(),
 
       new Date().getMonth() + monthIndex
+
     );
 
     console.log(day);
 
     console.log(day.getDay);
+
+
 
     // Set the display month and year for UI
 
@@ -225,13 +300,18 @@ export class AddSchedularComponent implements OnInit {
 
     this.displayYear = day.getFullYear();
 
+
+
     let dateToAdd = day;
 
     console.log(dateToAdd);
 
+
+
     // While adding dates to the calendar, ensure they belong to the selected month and are Sundays.
 
     while (dateToAdd.getMonth() === day.getMonth()) {
+
       console.log(dateToAdd.getMonth(), day.getMonth());
 
       //.getDay() is moday,sunday,saturday like week day
@@ -239,11 +319,13 @@ export class AddSchedularComponent implements OnInit {
       console.log(dateToAdd.getDay());
 
       if (dateToAdd.getDay() === 0) {
+
         console.log(dateToAdd.getDay(), "inside if");
 
         console.log(dateToAdd);
 
         this.meetings.push(new MeetingDay(new Date(dateToAdd)));
+
       }
 
       console.log(dateToAdd.getDate());
@@ -255,10 +337,15 @@ export class AddSchedularComponent implements OnInit {
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
 
       console.log("inside while", dateToAdd);
+
     }
+
   }
 
+
+
   public increaseMonth() {
+
     this.monthIndex++;
 
     this.generateCalendarDays(this.monthIndex);
@@ -266,9 +353,13 @@ export class AddSchedularComponent implements OnInit {
     this.getNumberOfDaysInMonth();
 
     // this.creatingScheduleObjects();
+
   }
 
+
+
   public decreaseMonth() {
+
     this.monthIndex--;
 
     this.generateCalendarDays(this.monthIndex);
@@ -276,9 +367,13 @@ export class AddSchedularComponent implements OnInit {
     this.getNumberOfDaysInMonth();
 
     // this.creatingScheduleObjects();
+
   }
 
+
+
   public setCurrentMonth() {
+
     this.monthIndex = 0;
 
     this.generateCalendarDays(this.monthIndex);
@@ -286,13 +381,21 @@ export class AddSchedularComponent implements OnInit {
     this.getNumberOfDaysInMonth();
 
     // this.creatingScheduleObjects();
+
   }
+
+
 
   goBack() {
+
     this.router.navigate(["/schedular"]);
+
   }
 
+
+
   public updateMeeting(
+
     index: number,
 
     reader: string,
@@ -300,48 +403,75 @@ export class AddSchedularComponent implements OnInit {
     location: string,
 
     writer: string
+
   ) {
+
     if (index >= 0 && index < this.meetings.length) {
+
       this.meetings[index].selectedReader = reader;
 
       this.meetings[index].selectedLocation = location;
 
       this.meetings[index].selectedWriter = writer;
+
     }
+
   }
+
+
 
   //get active location data
 
   private getLocationList() {
+
     this.locationDataService.getLocationList().subscribe((data: Location[]) => {
+
       this.defaultLocations = data;
 
       console.log(this.defaultLocations);
+
     });
+
   }
 
+
+
   onLocationSelect(location: any, meeting: MeetingDay) {
+
     this.selectedLocation = meeting;
 
     meeting.selectedLocation = location.locationId;
+
   }
+
+
 
   //get all member data
 
   private getMemberList() {
+
     this.memberListService.getAllMemberList().subscribe((data: Member[]) => {
+
       this.defaultMembers = data;
 
       this.hajeriMembers = data.filter((member: Member) => {
+
         if (member.hajeriNo === "1") {
+
           return member;
+
         }
+
       });
 
       this.vachanMembers = data.filter((member: Member) => {
+
         if (member.hajeriNo === "2") {
+
           return member;
+
         }
+
       });
 
       console.log(this.hajeriMembers);
@@ -349,34 +479,50 @@ export class AddSchedularComponent implements OnInit {
       console.log(this.vachanMembers);
 
       console.log(this.defaultMembers);
+
     });
+
   }
 
   onReaderSelect(reader: any, meeting: MeetingDay) {
+
     meeting.selectedReader = reader.memberId;
 
     console.log("meeting", meeting);
+
   }
 
   onWriterSelect(writer: any, meeting: MeetingDay) {
+
     meeting.selectedWriter = writer.memberId;
 
     console.log("meeting", meeting);
 
     console.log(this.selectedLocation);
+
   }
 
+
+
   initializingForm() {
+
     this.schedularForm = this.formBuilder.group({
+
       locationId: ["", Validators.required],
 
+
+
       baithakId: ["", Validators.required],
+
+
 
       hajeriGhenara: ["", Validators.required],
 
       vachanGhenara: ["", Validators.required],
 
       status: ["", Validators.required],
+
+
 
       date: ["", Validators.required],
 
@@ -386,7 +532,11 @@ export class AddSchedularComponent implements OnInit {
 
       //     locationId: ["", Validators.required],
 
+
+
       //     baithakId: ["", Validators.required],
+
+
 
       //     hajeriGhenara: ["", Validators.required],
 
@@ -394,30 +544,47 @@ export class AddSchedularComponent implements OnInit {
 
       //     status: ["", Validators.required],
 
+
+
       //     date: ["", Validators.required],
 
       //   }),
 
       // ]),
+
     });
+
   }
 
+
+
   getNumberOfDaysInMonth() {
+
     // let number=parseInt(10, 10);
 
     let daysCount: number;
 
+
+
     for (let i = 0; i < this.monthNames.length; i++) {
+
       if (this.displayMonth == this.monthNames[i]) {
+
         daysCount = i;
 
         break;
+
       }
+
     }
+
+
 
     // Create a Date object for the first day of the next month
 
     const date = new Date(this.displayYear, daysCount + 1, 1);
+
+
 
     // Subtract one day from the first day of the next month to get the last day of the current month
 
@@ -428,7 +595,10 @@ export class AddSchedularComponent implements OnInit {
     // The date now holds the last day of the specified month
 
     return date.getDate();
+
   }
+
+
 
   // creatingScheduleObjects(): any {
 
@@ -450,9 +620,15 @@ export class AddSchedularComponent implements OnInit {
 
   // }
 
+
+
   getFormControl() {
+
     return this.schedularForm.controls;
+
   }
+
+
 
   // onSubmit() {
 
@@ -473,27 +649,42 @@ export class AddSchedularComponent implements OnInit {
    */
 
   updateOrPushSchedule(scheduleArray, newSchedule) {
+
     // Find the index in the scheduleArray where locationId, baithakId, and date match
 
     const index = scheduleArray.findIndex(
+
       (schedule) =>
+
         schedule.locationId === newSchedule.locationId &&
+
         schedule.baithakId === newSchedule.baithakId &&
+
         schedule.date === newSchedule.date
+
     );
 
+
+
     if (index !== -1) {
+
       // If the schedule exists, update vachanGhenara and hajeriGhenara
 
       scheduleArray[index].vachanGhenara = +newSchedule.vachanGhenara;
 
       scheduleArray[index].hajeriGhenara = +newSchedule.hajeriGhenara;
+
     } else {
+
       // If the schedule doesn't exist, push the newSchedule into the array
 
       scheduleArray.push(newSchedule);
+
     }
+
   }
+
+
 
   /**
 
@@ -505,26 +696,40 @@ export class AddSchedularComponent implements OnInit {
 
    */
 
+
+
   saveChanges(schedule: ScheduleDto) {
+
     this.updateOrPushSchedule(this.scheduleArray, schedule);
 
     console.log(this.scheduleArray);
+
   }
 
   onSubmit() {
+
     this.scheduleService.createScheduleRecord(this.scheduleArray).subscribe(
+
       (data) => {
+
         console.log(data);
+
       },
 
       (error) => console.log(error)
+
     );
+
   }
 
+
+
   updateSchedule(value: any) {
-    this.router.navigate(["/update-schedule"], {
-      queryParams: { baithakId: value },
-    });
+
+
+
+    this.router.navigate(['/update-schedule'], { queryParams: { baithakId: value } });
+
   }
-  
+
 }
