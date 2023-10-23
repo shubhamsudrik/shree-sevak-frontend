@@ -1,14 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { Member } from "src/app/Classes/member";
+import { Schedule } from "src/app/Classes/schedule";
 import { ScheduleDto } from "src/app/Classes/schedule-dto";
+import { ScheduleDataService } from "src/app/services/schedule-data.service";
 
 @Component({
   selector: "app-dynamicform",
   templateUrl: "./dynamicform.component.html",
   styleUrls: ["./dynamicform.component.css"],
 })
-export class DynamicformComponent implements OnInit {
+export class DynamicformComponent implements OnInit, OnChanges {
   @Output() valueChanged: EventEmitter<ScheduleDto> = new EventEmitter();
   @Input() locationId: any;
 
@@ -20,36 +30,50 @@ export class DynamicformComponent implements OnInit {
   scheduleDto: ScheduleDto = new ScheduleDto();
 
   @Input() members: Member[] = [];
-  @Input() hajeriMembers: Member[] ;
-  @Input() vachanMembers: Member[] ;
-  backuphajeriMembers: Member[] ;
-  backupvachanMembers: Member[] ;
-  priviousMember
-  constructor(private formBuilder: FormBuilder) {}
+  @Input() hajeriMembers: Member[];
+  @Input() vachanMembers: Member[];
+
+  updateSchedule: Schedule;
+  constructor(
+    private formBuilder: FormBuilder,
+    private schedularService: ScheduleDataService
+  ) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
   ngOnInit(): void {
     // throw new Error("Method not implemented.");
+
     this.initializingForm();
-   
+    // this.individualScheduleRecord(this.date, this.locationId, this.baithakId);
+
     this.schedularFormchild.valueChanges.subscribe(() => {
       console.log(this.scheduleDto);
+      
       this.scheduleDto.baithakId = +this.baithakId;
+
       this.scheduleDto.locationId = +this.locationId;
+      // this.scheduleDto.vachanGhenara =
+      //   +this.updateSchedule.members[0]?.memberId;
+      // this.scheduleDto.hajeriGhenara =
+      //   +this.updateSchedule.members[1]?.memberId;
+
       this.scheduleDto.date = this.date;
+
       this.valueChanged.emit(this.scheduleDto);
     });
     console.log(this.scheduleDto);
   }
   initializingForm() {
     this.schedularFormchild = this.formBuilder.group({
-      locationId: [this?.locationId, Validators.required],
+      locationId: [this.locationId, Validators.required], 
 
-      baithakId: [this?.baithakId, Validators.required],
+      baithakId: [this.baithakId, Validators.required],
+      hajeriGhenara: ["", Validators.required],
 
-      hajeriGhenara: [this?.hajeriMembers, Validators.required],
-      vachanGhenara: [this?.vachanMembers, Validators.required],
+      vachanGhenara: ["", Validators.required],
       status: ["", Validators.required],
-
-      date: [this?.date, Validators.required],
+      date: [this.date, Validators.required],
       // scheduleForms: this.formBuilder.array([
       //   this.formBuilder.group({
       //     locationId: ["", Validators.required],
@@ -91,11 +115,43 @@ export class DynamicformComponent implements OnInit {
     console.log(this.vachanMembers);
   }
 
-
-
-  
   submitChildForm() {
     console.log(this.schedularFormchild.value);
     this.schedularFormchild.value;
+  }
+
+  /////////////////////////////////
+
+  individualScheduleRecord(
+    date: string,
+    locationId: number,
+    baithakId: number
+  ): void {
+    this.schedularService
+      .getscheduleByDateAndLocationBaithak(date, locationId, baithakId)
+      .subscribe(
+        (data: Schedule) => {
+          console.log(data);
+
+          this.updateSchedule = data;
+          this.scheduleDto.scheduleId = +this.updateSchedule.scheduleId;
+          this.scheduleDto.baithakId = +this.updateSchedule.baithak.bithakId;
+          this.scheduleDto.hajeriGhenara =
+            +this.updateSchedule?.members[0]?.memberId;
+
+          this.scheduleDto.vachanGhenara =
+            +this.updateSchedule?.members[1]?.memberId;
+
+          this.populateForm();
+        },
+        (error) => console.log(error)
+      );
+  }
+
+  populateForm() {
+    this.schedularFormchild.patchValue({
+      hajeriGhenara: this.scheduleDto.hajeriGhenara,
+      vachanGhenara: this.scheduleDto.vachanGhenara,
+    });
   }
 }

@@ -1,11 +1,11 @@
 export class ScheduleDto {
    scheduleId:number;
-    locationId: Number;
-    baithakId: Number;
+    locationId: number;
+    baithakId: number;
   
     vachanGhenara: number;
     hajeriGhenara: number;
   
-    date: Date;
+    date: string;
   }
   
