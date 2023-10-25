@@ -264,7 +264,7 @@ export class AddSchedularComponent implements OnInit {
     this.generateCalendarDays(this.monthIndex);
 
     this.getNumberOfDaysInMonth();
-
+    // this.getMemberList();
     // this.creatingScheduleObjects();
   }
 
@@ -276,6 +276,7 @@ export class AddSchedularComponent implements OnInit {
     this.getNumberOfDaysInMonth();
 
     // this.creatingScheduleObjects();
+    // this.getMemberList();
   }
 
   public setCurrentMonth() {
@@ -329,7 +330,7 @@ export class AddSchedularComponent implements OnInit {
   //get all member data
 
   private getMemberList() {
-    this.memberListService.getAllMemberList().subscribe((data: Member[]) => {
+    this.memberListService.getMemberList().subscribe((data: Member[]) => {
       this.defaultMembers = data;
 
       this.hajeriMembers = data.filter((member: Member) => {

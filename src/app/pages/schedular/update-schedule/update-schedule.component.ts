@@ -108,10 +108,12 @@ export class ChunkPipe implements PipeTransform {
   styleUrls: ["./update-schedule.component.css"],
 })
 export class UpdateScheduleComponent implements OnInit {
+
+  @ViewChild(UpdateDynamicFormComponent)updateDynamicFormComponent:UpdateDynamicFormComponent;
   location: Location = new Location();
 
   schedularFormUpdate: FormGroup;
-
+  collectionOfSchedule: Schedule[];
   baithakId: string;
 
   scheduleDto: ScheduleDto = new ScheduleDto();
@@ -174,6 +176,7 @@ export class UpdateScheduleComponent implements OnInit {
   selectedWriter: any;
 
   displayDayCount: any;
+ 
 
   constructor(
     private router: Router,
@@ -186,7 +189,8 @@ export class UpdateScheduleComponent implements OnInit {
 
     private scheduleService: ScheduleDataService,
 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private scheduleDataService: ScheduleDataService
   ) {}
 
   ngOnInit(): void {
@@ -222,13 +226,13 @@ export class UpdateScheduleComponent implements OnInit {
       new Date().getMonth() + monthIndex
     );
 
-    console.log(day);
+    // console.log(day);
 
-    console.log(day.getDay);
+    // console.log(day.getDay);
 
     // Set the display month and year for UI
 
-    console.log(day.getMonth());
+    // console.log(day.getMonth());
 
     this.displayMonth = this.monthNames[day.getMonth()];
 
@@ -236,7 +240,7 @@ export class UpdateScheduleComponent implements OnInit {
 
     let dateToAdd = day;
 
-    console.log(dateToAdd);
+    // console.log(dateToAdd);
 
     // While adding dates to the calendar, ensure they belong to the selected month and are Sundays.
 
@@ -248,22 +252,22 @@ export class UpdateScheduleComponent implements OnInit {
       console.log(dateToAdd.getDay());
 
       if (dateToAdd.getDay() === 0) {
-        console.log(dateToAdd.getDay(), "inside if");
+        // console.log(dateToAdd.getDay(), "inside if");
 
-        console.log(dateToAdd);
+        // console.log(dateToAdd);
 
         this.meetings.push(new MeetingDay(new Date(dateToAdd)));
       }
 
-      console.log(dateToAdd.getDate());
+      // console.log(dateToAdd.getDate());
 
-      console.log(dateToAdd.getDate() + 1);
+      // console.log(dateToAdd.getDate() + 1);
 
       //getDate() returns the current day means 11,12,28
 
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
 
-      console.log("inside while", dateToAdd);
+      // console.log("inside while", dateToAdd);
     }
   }
 
@@ -562,5 +566,39 @@ export class UpdateScheduleComponent implements OnInit {
       this.saveSchduleArray = data;
       console.log(this.saveSchduleArray);
     });
+  }
+
+  /**
+   * this method is used to load the cureent month data and passdown to report componet to generate report
+   * navigate to to the report page
+   */
+  generateSchedule(){
+  
+
+    const date=this.updateDynamicFormComponent.currentDate();
+      let regex = /(\w{3})\s\d{1,2},\s(\d{4})/;
+    const match = date.match(regex);
+    const desiredMonth=match[1]
+    const desiredYear=match[2]
+  
+    this.scheduleDataService.getScheduleByMonthAndYear(desiredMonth,desiredYear).subscribe((data:Schedule[])=>{
+      this.collectionOfSchedule=data;
+      console.log(this.collectionOfSchedule)
+      this.router.navigate(["/report"],{queryParams:{schedules:JSON.stringify(this.collectionOfSchedule)}})
+      
+    },error => console.log(error));
+  
+    // this.collectionOfSchedule=this.scheduleArray.filter((sc)=>{
+    //   const match=sc.date.match(regex);
+    //     if(desiredMonth==match[1] && desiredYear==match[2]){
+    //       return sc;
+    //     }
+
+
+    // })
+  
+   
+    
+
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
+import {  ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AgendaService, DayService, MonthAgendaService, MonthService, TimelineMonthService, TimelineViewsService, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
 import { Baithak } from 'src/app/Classes/baithak';
@@ -28,7 +28,8 @@ export class SchedularComponent implements OnInit {
       private scheduleDataService: ScheduleDataService,
       private router: Router,
       public translate: TranslateService,
-      private baithakService: BaithakDataService
+      private baithakService: BaithakDataService,
+      private route:ActivatedRoute
     ) {
       translate.addLangs(['English', 'Marathi']);
       translate.setDefaultLang('English');

@@ -159,7 +159,6 @@
 //   </div>
 // </div>
 
-
 // import { Component, OnInit } from '@angular/core';
 // import html2canvas from 'html2canvas';
 // import jsPDF from 'jspdf';
@@ -212,10 +211,10 @@
 //   });
 //   }
 
-//   public convertToPDF() {    
-  
+//   public convertToPDF() {
+
 //     html2canvas(document.getElementById("contentToConvert")!).then(canvas =>{
-      
+
 //       const contentDataURL = canvas.toDataURL("image/png")
 //       let pdf = new jsPDF('p' , 'mm' , 'a3');
 //       var width = pdf.internal.pageSize.getWidth();
@@ -225,7 +224,6 @@
 //     });
 // }
 // }
-
 
 // <!-- your-component.component.html -->
 // <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
@@ -255,12 +253,12 @@
 //                         <tr>
 //                           <th  style="background-color:  rgba(193, 166, 47, 0.638); color: black;">date</th>
 //                         </tr>
-//                         <tr>                          
+//                         <tr>
 //                             <th  style="background-color: white; color: black;  height: 100%;">
 //                               <input [(ngModel)]="Bhag" [style.width.%]="inputWidth" placeholder="Enter here section" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
 //                             </th>
-//                           </tr>                       
-                                              
+//                           </tr>
+
 //                         <tr>
 //                           <th style=" color: black; height: 100%;">
 //                             <input [(ngModel)]="Shlok" [style.width.%]="inputWidth" placeholder="Enter here shlok name" style="background-color: rgb(188, 246, 188);" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
@@ -280,19 +278,19 @@
 //                 </thead>
 //                 <tbody>
 //                   <tr *ngFor="let schedule of schedules ; let i = index ">
-                  
+
 //                     <td style="background-color: rgb(192, 222, 167);">{{ i + 1 }}</td>
 //                     <td style="background-color: rgb(192, 222, 167);">{{schedule.location.locationName}}</td>
 //                     <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0].firstName }}</td>
 //                     <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0].firstName }}</td>
 //                   </tr>
-                
+
 //                 </tbody>
-              
+
 //               </table>
 //             </div><br><br>
 //             <div style="text-align: center;">
-//               <input type="button"class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" />  
+//               <input type="button"class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" />
 //             </div>
 //               <!-- <button (click)="generatePDF()">Generate PDF</button> -->
 //             </div>
@@ -304,54 +302,66 @@
 //     </div>
 //   </div>
 // </div> -->
-import { Component, OnInit } from '@angular/core';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import * as XLSX from 'xlsx';
-import { ScheduleDataService } from 'src/app/services/schedule-data.service';
-import { group } from 'console';
-import { NgFor } from '@angular/common';
+import { Component, OnInit } from "@angular/core";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import * as XLSX from "xlsx";
+import { ScheduleDataService } from "src/app/services/schedule-data.service";
+import { group } from "console";
+import { NgFor } from "@angular/common";
+import { ActivatedRoute } from "@angular/router";
+import { Schedule } from "src/app/Classes/schedule";
 
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.css']
+  selector: "app-report",
+  templateUrl: "./report.component.html",
+  styleUrls: ["./report.component.css"],
 })
 export class ReportComponent implements OnInit {
-  constructor(private scheduleDataService: ScheduleDataService) {}
+  constructor(
+    private scheduleDataService: ScheduleDataService,
+    private route: ActivatedRoute
+  ) {}
 
   totalSchedule: number = 0;
   schedules: any[] = [];
   groupedSchedules: any[] = [];
   groupedSchedules1: any[] = [];
-  groupDate :  any[] = [];
-  a :  any[] = [];
-  b :  any[] = [];
- 
+  groupDate: any[] = [];
+  a: any[] = [];
+  b: any[] = [];
 
-  Bhag: string = '';
-  Shlok: string = '';
+  Bhag: string = "";
+  Shlok: string = "";
   inputWidth: number = 100;
   inputHeight: number = 100;
-  datelength:number;
+  datelength: number;
 
   ngOnInit() {
-    this.getData();
-  }
-
-  getData() {
-    // Fetch data from your service
-    this.scheduleDataService.getAllData().subscribe((data: any[]) => {
-      this.schedules = data;
-      this.totalSchedule = data.length;
-      // this.groupSchedulesByDate();
+    // this.getData();
+    this.route.queryParams.subscribe((params) => {
+      const schduleArray:string=params["schedules"];
+    
+      this.schedules = JSON.parse(schduleArray);
+      this.totalSchedule = this.schedules.length;
+      this.groupSchedulesByDate();
       this.groupSchedulesByLocation();
       this.groupSchedulesByDate();
-      console.log(data);
-      
+      console.log(this.schedules);
     });
   }
-  
+  // getData() {
+  //   // Fetch data from your service
+  //   this.scheduleDataService.getAllData().subscribe((data: any[]) => {
+  //     this.schedules = data;
+  //     this.totalSchedule = data.length;
+  //     // this.groupSchedulesByDate();
+  //     this.groupSchedulesByLocation();
+  //     this.groupSchedulesByDate();
+  //     console.log(data);
+
+  //   });
+  // }
 
   groupSchedulesByLocation() {
     const groupedSchedules = [];
@@ -361,24 +371,25 @@ export class ReportComponent implements OnInit {
       );
       if (existingGroup) {
         existingGroup.schedules.push(schedule);
-        console.log(existingGroup.schedules)
+        console.log(existingGroup.schedules);
         // console.log(group)
-        console.log(groupedSchedules[0].date)
-        console.log("groupedSchedules", groupedSchedules)
-        console.log("schedule", schedule)
-       
+        console.log(groupedSchedules[0].date);
+        console.log("groupedSchedules", groupedSchedules);
+        console.log("schedule", schedule);
 
-        this.groupDate.push(groupedSchedules[0])
-        console.log(this.groupDate)
-      } else {  
-        groupedSchedules.push({ location:schedule.location, date: schedule.date, schedules: [schedule] });
+        this.groupDate.push(groupedSchedules[0]);
+        console.log(this.groupDate);
+      } else {
+        groupedSchedules.push({
+          location: schedule.location,
+          date: schedule.date,
+          schedules: [schedule],
+        });
       }
     });
     this.groupedSchedules = groupedSchedules;
     console.log(this.groupedSchedules);
-  
   }
-  
 
   groupSchedulesByDate() {
     const groupedSchedules1 = [];
@@ -388,28 +399,25 @@ export class ReportComponent implements OnInit {
       );
       if (existingGroup) {
         existingGroup.schedules.push(schedule);
-        console.log(existingGroup.schedules)
+        console.log(existingGroup.schedules);
         // console.log(group)
-        console.log(groupedSchedules1[0].date)
-        console.log("groupedSchedules", groupedSchedules1)
-        console.log("schedule", schedule)
-        console.log("existingGroup", existingGroup)
-       
+        console.log(groupedSchedules1[0].date);
+        console.log("groupedSchedules", groupedSchedules1);
+        console.log("schedule", schedule);
+        console.log("existingGroup", existingGroup);
 
-        this.groupDate.push(groupedSchedules1[0])
-        console.log(this.groupDate)
-      } else {  
+        this.groupDate.push(groupedSchedules1[0]);
+        console.log(this.groupDate);
+      } else {
         groupedSchedules1.push({ date: schedule.date, schedules: [schedule] });
       }
     });
     this.groupedSchedules1 = groupedSchedules1;
-    this.a=groupedSchedules1[0].schedules;
-    this.b=this.a[0].date;
-    console.log("a",this.a);
-    console.log("b",this.b);
-
+    this.a = groupedSchedules1[0].schedules;
+    this.b = this.a[0].date;
+    console.log("a", this.a);
+    console.log("b", this.b);
   }
-  
 
   onFocus() {
     this.inputWidth = 100;
@@ -422,37 +430,31 @@ export class ReportComponent implements OnInit {
   }
 
   convertToPDF() {
-    const pdf = new jsPDF('p', 'mm', 'a3');
-    html2canvas(document.getElementById('contentToConvert')).then((canvas) => {
-      const contentDataURL = canvas.toDataURL('image/png');
+    const pdf = new jsPDF("p", "mm", "a3");
+    html2canvas(document.getElementById("contentToConvert")).then((canvas) => {
+      const contentDataURL = canvas.toDataURL("image/png");
       const width = pdf.internal.pageSize.getWidth();
       const height = canvas.height * (width / canvas.width);
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height);
-      pdf.save('output.pdf');
+      pdf.addImage(contentDataURL, "PNG", 0, 0, width, height);
+      pdf.save("output.pdf");
     });
   }
 
-//For convert into excel
-fileName= 'ExcelSheet.xlsx';
-  exportexcel(): void
-  {
+  //For convert into excel
+  fileName = "ExcelSheet.xlsx";
+  exportexcel(): void {
     /* pass here the table id */
-    let element = document.getElementById('pdfTable');
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
- 
+    let element = document.getElementById("pdfTable");
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
- 
-    /* save to file */  
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+    /* save to file */
     XLSX.writeFile(wb, this.fileName);
- 
   }
 }
-
-
-
-
 
 // <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
 //   <div class="py-7 py-lg-8"></div>

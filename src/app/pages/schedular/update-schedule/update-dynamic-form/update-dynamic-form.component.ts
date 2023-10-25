@@ -51,6 +51,7 @@ export class UpdateDynamicFormComponent implements OnInit {
     // throw new Error("Method not implemented.");
 
     this.baithakId = this.route.snapshot.queryParamMap.get("baithakId");
+    console.log(this.baithakId);
     this.individualScheduleRecord(this.date, this.locationId, this.baithakId);
     this.initializingForm();
 
@@ -61,8 +62,8 @@ export class UpdateDynamicFormComponent implements OnInit {
       console.log(this.scheduleDto);
 
       this.scheduleDto.scheduleId = this.updateSchedule.scheduleId;
-      this.scheduleDto.vachanGhenara = +this.updateSchedule.members[0]?.memberId;
-      this.scheduleDto.hajeriGhenara = +this.updateSchedule.members[1]?.memberId;
+      this.scheduleDto.vachanGhenara = +this.scheduleDto?.vachanGhenara;
+      this.scheduleDto.hajeriGhenara = +this.scheduleDto?.hajeriGhenara;
 
       this.scheduleDto.baithakId = +this.baithakId;
 
@@ -74,6 +75,11 @@ export class UpdateDynamicFormComponent implements OnInit {
     });
 
     console.log(this.scheduleDto);
+  }
+
+  currentDate(){
+    console.log(this.date)
+    return this.date
   }
 
   //get individual schedule base on location and date
@@ -93,10 +99,10 @@ export class UpdateDynamicFormComponent implements OnInit {
       this.scheduleDto.scheduleId   = this.updateSchedule.scheduleId
 
           this.scheduleDto.hajeriGhenara =
-            +this.updateSchedule.members[0]?.memberId;
+            +this.updateSchedule.members[1]?.memberId;
 
           this.scheduleDto.vachanGhenara =
-            +this.updateSchedule.members[1]?.memberId;
+            +this.updateSchedule.members[0]?.memberId;
 
           this.populateForm();
         },
