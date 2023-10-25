@@ -61,19 +61,19 @@
               <table class="calendar-table" *ngIf="calendar" border="2px solid">
                 <thead>
                   <tr *ngFor="let c of meetings; let j = index">
-                    <th>Sr.no</th>
+                    <th *ngIf="j == 0" >Sr.no</th>
 
-                    <th >Locations</th>
+                    <th *ngIf="j == 0">Locations</th>
 
-                    <th >Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
 
-                    <th >Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
 
-                    <th >Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
 
-                    <th >Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
 
-                    <th >Sunday</th>
+                    <th *ngIf="j == 0">Sunday</th>
                   </tr>
                 </thead>
 
