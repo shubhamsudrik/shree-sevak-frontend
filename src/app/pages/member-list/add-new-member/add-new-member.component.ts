@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/Classes/member';
 import { MemberListService } from 'src/app/services/member-list.service';
 
@@ -19,7 +20,8 @@ export class AddNewMemberComponent implements OnInit {
   constructor(
     private MemberListService: MemberListService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toast: ToastrService,
   ) {
 
     this.Member.marathiRead = true;
@@ -134,9 +136,11 @@ export class AddNewMemberComponent implements OnInit {
       // Data doesn't exist and the form is valid, save the Member
       console.log(this.Member);
       this.saveMember();
+      this.toast.success("New Member Created successfully ")
     } else {
       alert('Please fill all fields: कृपया सर्व फील्ड भरा');
     }
+    
   }
 
   saveMember() {

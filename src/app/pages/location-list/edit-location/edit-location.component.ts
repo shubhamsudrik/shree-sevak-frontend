@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from 'src/app/Classes/location';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocService } from 'src/app/services/loc.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-location',
@@ -20,14 +21,15 @@ export class EditLocationComponent implements OnInit {
     private locationDataService: LocService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toast: ToastrService,
   ) {
     this.location.division='A';
     this.location.country='IN';
     this.location.state='Maharashtra';
     this.location.status=1;
-    this.location.contact1Email='@gmail.com';
-    this.location.contact2Email='@gmail.com';
+    // this.location.contact1Email='@gmail.com';
+    // this.location.contact2Email='@gmail.com';
     this.location.contact1Initial='Mr.';
     this.location.contact2Initial='Mr.';
     this.location.contact1Occupation='Graduate';
@@ -96,6 +98,7 @@ export class EditLocationComponent implements OnInit {
       console.log(this.location.locationName);
       console.log(this.location);
       this.saveLocation();
+      this.toast.success("Location Added successfully")
     } else {
       alert('Please fill all fields: कृपया सर्व फील्ड भरा');
     }
@@ -105,7 +108,9 @@ export class EditLocationComponent implements OnInit {
     this.locationDataService.createLocation(this.location).subscribe(
       (data) => {
         console.log(data);
+        this.toast.success("  Location Info Save Succesfully !")
         this.router.navigate(['/location-list']);
+
       },
       (error) => console.log(error)
     );

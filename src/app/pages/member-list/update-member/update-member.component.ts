@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/Classes/member';
 import { MemberListService } from 'src/app/services/member-list.service';
 
@@ -22,7 +23,8 @@ export class UpdateMemberComponent implements OnInit {
       private MemberListService: MemberListService,
       private router: Router,
       private route: ActivatedRoute,
-      private formBuilder: FormBuilder
+      private formBuilder: FormBuilder,
+      private toast:ToastrService
     ) {}
   
     ngOnInit(): void {
@@ -66,7 +68,7 @@ export class UpdateMemberComponent implements OnInit {
         dob: [this.Member?.dob, Validators.required],
         gender: [this.Member?.gender, Validators.required],
         // eligible: ['', Validators.required],
-        role: [this.Member?.role, Validators.required],
+        // role: [this.Member?.role, Validators.required],
         addharNumber: [this.Member?.addharNumber, [Validators.required, Validators.minLength(12)]],
         panNo: [this.Member?.panNo, Validators.required],
         photoBase64: [this.Member?.photoBase64],
@@ -144,8 +146,10 @@ export class UpdateMemberComponent implements OnInit {
         // Data doesn't exist and the form is valid, save the Member
         console.log(this.Member);
         this.saveMember();
+       this.toast.success("  Member Info Update Succesfully ")
       } else {
-        alert('Please fill all fields: कृपया सर्व फील्ड भरा');
+        // alert('Please fill all fields: कृपया सर्व फील्ड भरा');
+        this.toast.warning('Please fill all fields: कृपया सर्व फील्ड भरा')
       }
     }
   

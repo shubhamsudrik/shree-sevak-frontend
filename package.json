@@ -45,6 +45,7 @@
     "ng2-search-filter": "^0.5.1",
     "ngx-clipboard": "15.0.1",
     "ngx-material-timepicker": "^13.1.1",
+    "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^14.2.2",
     "nouislider": "15.5.1",
     "pdfmake": "^0.2.7",

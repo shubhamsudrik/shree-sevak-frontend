@@ -114,7 +114,7 @@
                         class="calendar-day-header"
                         [ngClass]="{ 'blue-date': c.isToday }"
                       >
-                        <strong>{{ c.date | date : "mediumDate" }}</strong>
+                        <strong *ngIf="i<=0">{{ c.date | date : "mediumDate" }}</strong>
                       </div>
 
                       <app-update-dynamic-form

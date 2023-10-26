@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Location } from 'src/app/Classes/location';
 import { LocService } from 'src/app/services/loc.service';
 
@@ -20,7 +21,8 @@ export class UpdateLocationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private locationDataService: LocService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toaster:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -109,6 +111,7 @@ export class UpdateLocationComponent implements OnInit {
       console.log(this.location.locationName);
       console.log(this.location);
       this.saveLocation();
+      this.toaster.success("Location Updated Successfully !")
     } else {
       alert('Please fill all fields: कृपया सर्व फील्ड भरा');
     }
