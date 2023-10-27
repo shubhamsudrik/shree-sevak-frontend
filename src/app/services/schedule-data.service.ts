@@ -14,7 +14,7 @@ export class ScheduleDataService {
 
 
  private baseUrl = "http://localhost:8080/api/schedular";
- private url = "http://localhost:8080/api";
+//  private url = "http://localhost:8080/api";
 
 
 
@@ -70,7 +70,7 @@ createScheduleRecord(schedulesarray:ScheduleDto[]):Observable<Object>{
   return this.httpclient.get<DateLocation>(`${this.baseUrl}/getByDateLocationBaithak/${date}/${LocationId}/${BaithakId}`)
 
 }
-getScheduleByMonthAndYear(month:string,year:string):Observable<Object>{
-  return  this.httpclient.get<Schedule[]>(`${this.baseUrl}/getByMonthAndYear/${month}/${year}`)
+getScheduleByMonthAndYearAndBaithak(month:string,year:string,BaithakId:number):Observable<Object>{
+  return  this.httpclient.get<Schedule[]>(`${this.baseUrl}/getByMonthAndYearAndBaithak/${month}/${year}/${BaithakId}`)
 }
 }
