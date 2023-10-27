@@ -11,30 +11,31 @@
               </span>
             </li>
             <li class="nav-item ml-auto">
-              <span class="d-none d-md-block form-group align-items-right">
+              <!-- <span class="d-none d-md-block form-group align-items-right">
                 <label>{{ 'Choose Language' | translate }}</label>
                 <select name="" class="form-control ml-auto" #selectedLang (change)="switchLang(selectedLang.value)">
                   <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
                     {{ language }}
                   </option>
                 </select>
-              </span>
+              </span> -->
             </li>
             <!-- For screens less than 600px -->
-            <li class="nav-item d-md-none"> <!-- Hide this for medium and larger scren -->
+            <!-- Hide this for medium and larger scren -->
+            <li class="nav-item d-md-none"> 
               <span class="form-group">
                 <h3>{{ 'location' | translate }}</h3>
               </span>
             </li>
             <li class="nav-item d-md-none"> <!-- Hide this item on medium and larger screen -->
-              <span class="form-group align-items-right">
+              <!-- <span class="form-group align-items-right">
                 <label>{{ 'Choose Language' | translate }}</label>
                 <select name="" class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
                   <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
                     {{ language }}
                   </option>
                 </select>
-              </span>
+              </span> -->
             </li>
           </ul>
           

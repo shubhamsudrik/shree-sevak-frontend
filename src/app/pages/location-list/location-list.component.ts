@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationDataService } from 'src/app/services/location-data.service';
 import { Router } from '@angular/router';
 import { Location } from 'src/app/Classes/location';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,7 +13,7 @@ export class LocationListComponent implements OnInit {
   location: Location = new Location;
   defaultLocations: Location[] = [];
   public focus;
-  searchText: any;
+  searchText= '';
  
   
   constructor(

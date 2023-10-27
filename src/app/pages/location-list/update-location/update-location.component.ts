@@ -68,8 +68,8 @@ export class UpdateLocationComponent implements OnInit {
       state: [this.location?.state, Validators.required],
       country: [this.location?.country, Validators.required],
       pincode: [this.location?.pincode,  [Validators.required, Validators.minLength(6)]],
-      latitude: [this.location?.latitude, Validators.required],
-      longitude: [this.location?.longitude, Validators.required],
+      latitude: [this.location?.latitude],
+      longitude: [this.location?.longitude],
       googleMapLink: [this.location?.googleMapLink],
       status: [this.location?.status, Validators.required],
       
