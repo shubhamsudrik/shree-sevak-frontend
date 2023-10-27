@@ -100,7 +100,7 @@ export class EditLocationComponent implements OnInit {
       this.saveLocation();
       this.toast.success("Location Added successfully")
     } else {
-      alert('Please fill all fields: कृपया सर्व फील्ड भरा');
+      this.toast.warning('Please fill all fields');
     }
   }
 

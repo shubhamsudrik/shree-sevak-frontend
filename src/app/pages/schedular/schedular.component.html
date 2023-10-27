@@ -8,7 +8,7 @@
           >
             <li class="nav-item ml-auto">
               <span class="d-none d-md-block form-group">
-                <h2>{{ "Scheduled Record!" | translate }}</h2>
+                <h2>{{ "Available Scheduled!" | translate }}</h2>
               </span>
             </li>
             <li class="nav-item ml-auto">
@@ -79,7 +79,7 @@
                       class="btn btn-success"
                       (change)="onOpen($event.target.value)"
                     >
-                      <option disabled selected>Select Baithak</option>
+                      <option disabled selected>Schedule New Baithak!</option>
                       <option
                         style="background-color: gray"
                         *ngFor="let baithak of baithakList; let i = index"
@@ -122,8 +122,7 @@
                 <th scope="col">{{ "End Time" | translate }}</th>
                 <th scope="col">{{ "dayOfWeek" | translate }}</th>
                 <th scope="col">{{ "Members" | translate }}</th>
-                <th scope="col">{{ "Locations" | translate }}</th>
-                <th scope="col">{{ "Status" | translate }}</th>
+                <th scope="col">{{ "Locations" | translate }}</th>                
               </tr>
             </thead>
             <tbody>
@@ -166,8 +165,7 @@
                     </tr>
                   </table>
                 </td>
-                <td>{{ schedule.location.city }}</td>
-                <td>{{ schedule.baithak.status }}</td>
+                <td>{{ schedule.location.city }}</td>               
               </tr>
             </tbody>
           </table>

@@ -6,6 +6,7 @@ export class Member {
     middleName:string;
 	lastName:string;
 	email:string;
+	type:string;
 	hajeriNo:string;
 	hajeriNoDetails:string;
 	addharNumber:string;

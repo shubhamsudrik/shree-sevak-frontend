@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { error } from "console";
+import { ToastrService } from "ngx-toastr";
 import { Baithak } from "src/app/Classes/baithak";
 import { BaithakDataService } from "src/app/services/baithak-data.service";
 @Component({
@@ -19,7 +20,8 @@ export class UpdateBaithakComponent implements OnInit {
     private baithakService: BaithakDataService,
     private router: Router,
     private route: ActivatedRoute, 
-    private formBuilder :FormBuilder
+    private formBuilder :FormBuilder,
+    private toast : ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -48,8 +50,9 @@ export class UpdateBaithakComponent implements OnInit {
     if(this.baithakForm.valid){
     console.log(this.baithak);
     this.saveBaithak();
+    this.toast.success("Baithak update successfully");
     }else{
-      alert("Please fill all fields : कृपया सर्व फील्ड भरा");
+      this.toast.warning("Please fill all fields");
     }
   }
   saveBaithak() {

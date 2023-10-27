@@ -11,7 +11,7 @@ import { MemberListService } from 'src/app/services/member-list.service';
 })
 export class MemberListComponent implements OnInit {
     member: Member = new Member;
-    defaultMembers: Member[] = [];
+    defaultMembers: any[] = [];
     public focus;
     searchText: any;
     
@@ -27,7 +27,7 @@ export class MemberListComponent implements OnInit {
     private getMemberList() {
       this.memberListService.getMemberList().subscribe(
         (data: Member[]) => {
-          this.defaultMembers = data;
+          
           console.log(this.defaultMembers);
         },
         (error) => {
@@ -35,7 +35,7 @@ export class MemberListComponent implements OnInit {
         }
       );
     }
-
+    
 
     //get all member data
   private getAllMemberList(){

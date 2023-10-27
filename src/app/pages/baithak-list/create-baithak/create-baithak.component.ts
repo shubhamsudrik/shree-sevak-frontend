@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import {  Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Baithak } from 'src/app/Classes/baithak';
 import { BaithakDataService } from 'src/app/services/baithak-data.service';
 @Component({
@@ -17,7 +18,8 @@ export class CreateBaithakComponent implements OnInit {
   constructor(
     private baithakService:BaithakDataService,
     private router:Router,
-    private formBuilder :FormBuilder
+    private formBuilder :FormBuilder,
+    private toast :ToastrService
   ) { 
     this.baithak.baithakType='Child';
     this.baithak.dayOfWeek ='Sunday';
@@ -50,8 +52,9 @@ export class CreateBaithakComponent implements OnInit {
       console.log(this.baithak);
 
       this.saveBaithak();
+      this.toast.success("Baithak created successfully!");
     } else {
-      alert("Please fill all fields : कृपया सर्व फील्ड भरा");
+      this.toast.warning("Please fill all fields");
     }
 
   }

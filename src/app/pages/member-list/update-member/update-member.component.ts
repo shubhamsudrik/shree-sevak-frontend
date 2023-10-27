@@ -82,8 +82,8 @@ export class UpdateMemberComponent implements OnInit {
         state: [this.Member?.state, Validators.required],
         country: [this.Member?.country, Validators.required],
         pincode: [this.Member?.pincode, [Validators.required, Validators.minLength(6)]],
-        latitude: [this.Member?.latitude, Validators.required],
-        longitude: [this.Member?.longitude, Validators.required],
+        latitude: [this.Member?.latitude],
+        longitude: [this.Member?.longitude],
         googleMapLink: [this.Member?.googleMapLink],
         status: [this.Member?.state, Validators.required],
 
@@ -109,7 +109,8 @@ export class UpdateMemberComponent implements OnInit {
         eligibleForLadies:[''],
         
         ownBaithakDay: [this.Member?.ownBaithakDay, Validators.required],
-        // ownBaithakId: [this.Member?.ownBaithakId, Validators.required],          
+        // ownBaithakId: [this.Member?.ownBaithakId, Validators.required], 
+        type: [this.Member?.type, Validators.required],         
         hajeriNo: [this.Member?.hajeriNo, Validators.required],
         hajeriNoDetails: [this.Member?.hajeriNoDetails],
         weeklyOffs: [this.Member?.weeklyOffs, Validators.required],
@@ -149,7 +150,7 @@ export class UpdateMemberComponent implements OnInit {
        this.toast.success("  Member Info Update Succesfully ")
       } else {
         // alert('Please fill all fields: कृपया सर्व फील्ड भरा');
-        this.toast.warning('Please fill all fields: कृपया सर्व फील्ड भरा')
+        this.toast.warning('Please fill all fields')
       }
     }
   

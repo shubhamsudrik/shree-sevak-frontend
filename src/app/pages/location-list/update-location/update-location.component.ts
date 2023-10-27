@@ -113,7 +113,7 @@ export class UpdateLocationComponent implements OnInit {
       this.saveLocation();
       this.toaster.success("Location Updated Successfully !")
     } else {
-      alert('Please fill all fields: कृपया सर्व फील्ड भरा');
+      this.toaster.warning('Please fill all fields');
     }
   }
 

@@ -1,10 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { LocationDataService } from "src/app/services/location-data.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Location } from "@angular/common";
 import { TranslateService } from "@ngx-translate/core";
 import { Baithak } from "src/app/Classes/baithak";
-import { HttpClient } from "@angular/common/http";
 import { BaithakDataService } from "src/app/services/baithak-data.service";
 
 @Component({
@@ -15,14 +12,14 @@ import { BaithakDataService } from "src/app/services/baithak-data.service";
 export class BaithakListComponent implements OnInit {
   baithak: Baithak = new Baithak();
 
-  baithakList: Baithak[] = [];
+  baithakList: any[] = [];
   status: string;
   public focus;
   searchText: any;
 
   ngOnInit(): void {
-    this.statusBaithak("0");
-    // this.getAllBaithakList();
+    this.statusBaithak("1");
+    // this.getBaithakList();
   }
 
   constructor(
@@ -35,7 +32,9 @@ export class BaithakListComponent implements OnInit {
     translate.setDefaultLang("English");
   }
 
-  getAllBaithakList() {
+  
+  //get baithak data
+  getBaithakList() {
     this.baithakService.getBaithakList().subscribe(
       (data: Baithak[]) => {
         this.baithakList = data;
@@ -50,7 +49,7 @@ export class BaithakListComponent implements OnInit {
   //method calling base on baithak status
   statusBaithak(status: string) {
     if (status === "all") {
-      this.getAllBaithakList();
+      this.getBaithakList();
     }
     this.baithakService.getBaithakByStatus(status).subscribe(
       (data: Baithak[]) => {

@@ -30,13 +30,11 @@ export class SchedularComponent implements OnInit {
       private router: Router,
       public translate: TranslateService,
       private baithakService: BaithakDataService,
-      private route:ActivatedRoute,
       private spinner: NgxSpinnerService
     ) {
       translate.addLangs(['English']);
       translate.setDefaultLang('English');
     }
-  
 
      //get all schedule data
 
@@ -44,6 +42,7 @@ export class SchedularComponent implements OnInit {
     this.scheduleDataService.getAllData().subscribe(
       (data: Schedule[]) => {
         this.defaultSchedules =data;
+       
         console.log(this.defaultSchedules)
       },)
   }

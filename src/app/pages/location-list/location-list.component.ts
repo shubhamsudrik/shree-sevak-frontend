@@ -11,7 +11,8 @@ import { LocService } from 'src/app/services/loc.service';
 })
 export class LocationListComponent implements OnInit {
   location: Location = new Location;
-  defaultLocations: Location[] = [];
+  defaultLocations: any[] = [];
+  // sortedDefaultLocations: any[] = []; 
   public focus;
   searchText= '';
  
@@ -26,6 +27,10 @@ export class LocationListComponent implements OnInit {
 
     
   }
+  //for location convert to descending order
+  // sortDefaultLocationsDescending() {
+  //   this.sortedDefaultLocations = this.defaultLocations.slice().sort((a, b) => b.locationId - a.locationId);
+  // }
 
   //get active data
   private getLocationList() {
@@ -45,7 +50,8 @@ export class LocationListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getLocationList()
+    this.getLocationList();   
+   
     }
   
 
@@ -91,7 +97,7 @@ export class LocationListComponent implements OnInit {
   }
 
 
-  // show all data and handl using active in active button 
+  // show all data and handl using active inactive through button 
   statusLocation(status: string){
     if (status === "all") {
       this.getAllLocationList();
@@ -99,7 +105,7 @@ export class LocationListComponent implements OnInit {
 
     this.locationDataService.getLocationByStatus(status).subscribe(
       (data: any[]) => {
-        this.defaultLocations = data;
+        this.defaultLocations = data;       
         console.log(data);
       },
       (error) => {
