@@ -21,7 +21,8 @@ export class BaithakListComponent implements OnInit {
   searchText: any;
 
   ngOnInit(): void {
-    this.getAllBaithakList();
+    this.statusBaithak("0");
+    // this.getAllBaithakList();
   }
 
   constructor(
@@ -30,7 +31,7 @@ export class BaithakListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    translate.addLangs(["English", "Marathi"]);
+    translate.addLangs(["English"]);
     translate.setDefaultLang("English");
   }
 

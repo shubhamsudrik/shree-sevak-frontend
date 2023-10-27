@@ -18,7 +18,7 @@ import { ScheduleDataService } from "src/app/services/schedule-data.service";
   templateUrl: "./dynamicform.component.html",
   styleUrls: ["./dynamicform.component.css"],
 })
-export class DynamicformComponent implements OnInit, OnChanges {
+export class DynamicformComponent implements OnInit {
   @Output() valueChanged: EventEmitter<ScheduleDto> = new EventEmitter();
   @Input() locationId: any;
 
@@ -38,9 +38,9 @@ export class DynamicformComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder,
     private schedularService: ScheduleDataService
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log(changes);
+  // }
   ngOnInit(): void {
     // throw new Error("Method not implemented.");
 
@@ -51,11 +51,11 @@ export class DynamicformComponent implements OnInit, OnChanges {
       console.log(this.scheduleDto);
       
       this.scheduleDto.baithakId = +this.baithakId;
-
+       
       this.scheduleDto.locationId = +this.locationId;
-      // this.scheduleDto.vachanGhenara =
+      // this.scheduleDto.vachanGhenara =undefined
       //   +this.updateSchedule.members[0]?.memberId;
-      // this.scheduleDto.hajeriGhenara =
+      // this.scheduleDto.hajeriGhenara =undefined
       //   +this.updateSchedule.members[1]?.memberId;
 
       this.scheduleDto.date = this.date;
@@ -66,14 +66,14 @@ export class DynamicformComponent implements OnInit, OnChanges {
   }
   initializingForm() {
     this.schedularFormchild = this.formBuilder.group({
-      locationId: [this.locationId, Validators.required], 
+      locationId: ["", Validators.required], 
 
-      baithakId: [this.baithakId, Validators.required],
+      baithakId: ["", Validators.required],
       hajeriGhenara: ["", Validators.required],
 
       vachanGhenara: ["", Validators.required],
       status: ["", Validators.required],
-      date: [this.date, Validators.required],
+      date: ["", Validators.required],
       // scheduleForms: this.formBuilder.array([
       //   this.formBuilder.group({
       //     locationId: ["", Validators.required],
@@ -132,7 +132,7 @@ export class DynamicformComponent implements OnInit, OnChanges {
       .subscribe(
         (data: Schedule) => {
           console.log(data);
-
+          
           this.updateSchedule = data;
           this.scheduleDto.scheduleId = +this.updateSchedule.scheduleId;
           this.scheduleDto.baithakId = +this.updateSchedule.baithak.bithakId;
@@ -154,4 +154,9 @@ export class DynamicformComponent implements OnInit, OnChanges {
       vachanGhenara: this.scheduleDto.vachanGhenara,
     });
   }
+  currentDate(){
+    console.log(this.date)
+    return this.date
+  }
+
 }

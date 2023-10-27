@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -43,6 +43,8 @@ import { HelloComponent } from './pages/schedular/add-schedular/hello.component'
 import { ScheduleLadiesBaithakComponent } from './pages/schedular/schedule-ladies-baithak/schedule-ladies-baithak.component';
 import { DynamicformComponent } from './pages/schedular/add-schedular/dynamicform/dynamicform.component';
 import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/update-dynamic-form/update-dynamic-form.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -63,8 +65,16 @@ import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/up
     ReactiveFormsModule,
     MatFormFieldModule, 
     MatSelectModule, 
+    BrowserAnimationsModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
     NgFor,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        timeOut: 3500,
+        positionClass: 'toast-top-center',
+        preventDuplicates: true,
+      }
+    ),
     MatInputModule,
     MatButtonModule,
     BrowserModule,
@@ -77,6 +87,7 @@ import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/up
             }
         })
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
@@ -99,6 +110,7 @@ import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/up
     ScheduleLadiesBaithakComponent,
     DynamicformComponent,
     UpdateDynamicFormComponent,
+   
    
   
     // ComponentComponent

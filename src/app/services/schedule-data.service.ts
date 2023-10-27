@@ -70,5 +70,7 @@ createScheduleRecord(schedulesarray:ScheduleDto[]):Observable<Object>{
   return this.httpclient.get<DateLocation>(`${this.baseUrl}/getByDateLocationBaithak/${date}/${LocationId}/${BaithakId}`)
 
 }
-
+getScheduleByMonthAndYear(month:string,year:string):Observable<Object>{
+  return  this.httpclient.get<Schedule[]>(`${this.baseUrl}/getByMonthAndYear/${month}/${year}`)
+}
 }

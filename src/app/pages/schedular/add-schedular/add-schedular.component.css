@@ -54,3 +54,7 @@
   margin-right: 100px; /* Add margin to create space between buttons */
   margin-bottom: 10px;
 }
+table{
+  box-sizing: content-box;
+width: 100%;
+}

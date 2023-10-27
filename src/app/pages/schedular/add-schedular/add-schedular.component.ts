@@ -22,6 +22,8 @@ import { ScheduleDataService } from "src/app/services/schedule-data.service";
 
 import { LocService } from "src/app/services/loc.service";
 import { ScheduleDto } from "src/app/Classes/schedule-dto";
+import { DynamicformComponent } from "./dynamicform/dynamicform.component";
+import { ToastrService } from "ngx-toastr";
 
 export class CalendarDay {
   public date: Date;
@@ -103,7 +105,7 @@ export class ChunkPipe implements PipeTransform {
 })
 export class AddSchedularComponent implements OnInit {
   location: Location = new Location();
-
+  @ViewChild(DynamicformComponent) dynamicformcomponent: DynamicformComponent;
   schedularForm: FormGroup;
 
   baithakId: string;
@@ -179,7 +181,8 @@ export class AddSchedularComponent implements OnInit {
 
     private scheduleService: ScheduleDataService,
 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -213,21 +216,21 @@ export class AddSchedularComponent implements OnInit {
       new Date().getMonth() + monthIndex
     );
 
-    console.log(day);
+    // console.log(day);
 
-    console.log(day.getDay);
+    // console.log(day.getDay);
 
     // Set the display month and year for UI
 
-    console.log(day.getMonth());
+    // console.log(day.getMonth());
 
     this.displayMonth = this.monthNames[day.getMonth()];
 
-    this.displayYear = day.getFullYear();
+    // this.displayYear = day.getFullYear();
 
     let dateToAdd = day;
 
-    console.log(dateToAdd);
+    // console.log(dateToAdd);
 
     // While adding dates to the calendar, ensure they belong to the selected month and are Sundays.
 
@@ -239,16 +242,16 @@ export class AddSchedularComponent implements OnInit {
       console.log(dateToAdd.getDay());
 
       if (dateToAdd.getDay() === 0) {
-        console.log(dateToAdd.getDay(), "inside if");
+        // console.log(dateToAdd.getDay(), "inside if");
 
-        console.log(dateToAdd);
+        // console.log(dateToAdd);
 
         this.meetings.push(new MeetingDay(new Date(dateToAdd)));
       }
 
-      console.log(dateToAdd.getDate());
+      // console.log(dateToAdd.getDate());
 
-      console.log(dateToAdd.getDate() + 1);
+      // console.log(dateToAdd.getDate() + 1);
 
       //getDate() returns the current day means 11,12,28
 
@@ -264,7 +267,7 @@ export class AddSchedularComponent implements OnInit {
     this.generateCalendarDays(this.monthIndex);
 
     this.getNumberOfDaysInMonth();
-
+    // this.getMemberList();
     // this.creatingScheduleObjects();
   }
 
@@ -276,6 +279,7 @@ export class AddSchedularComponent implements OnInit {
     this.getNumberOfDaysInMonth();
 
     // this.creatingScheduleObjects();
+    // this.getMemberList();
   }
 
   public setCurrentMonth() {
@@ -329,7 +333,7 @@ export class AddSchedularComponent implements OnInit {
   //get all member data
 
   private getMemberList() {
-    this.memberListService.getAllMemberList().subscribe((data: Member[]) => {
+    this.memberListService.getMemberList().subscribe((data: Member[]) => {
       this.defaultMembers = data;
 
       this.hajeriMembers = data.filter((member: Member) => {
@@ -511,14 +515,56 @@ export class AddSchedularComponent implements OnInit {
     console.log(this.scheduleArray);
   }
 
-  onSubmit() {
-    this.scheduleService.createScheduleRecord(this.scheduleArray).subscribe(
-      (data) => {
-        console.log(data);
-      },
+  modifyScheduleArray(): any {
+    const date = this.dynamicformcomponent.currentDate();
+    console.log(date);
+    let regex = /(\w{3})\s\d{1,2},\s(\d{4})/;
+    const match = date.match(regex);
+    const desiredMonth = match[1];
+    const desiredYear = match[2];
+    let modifyScheduleArray: ScheduleDto[] = [];
 
-      (error) => console.log(error)
-    );
+    modifyScheduleArray = this.scheduleArray
+      .map((schedule) => {
+        const scheduleMonthYear = schedule.date.match(regex);
+        if (
+          desiredMonth === scheduleMonthYear[1] &&
+          desiredYear === scheduleMonthYear[2] &&
+          ( !isNaN(+schedule.hajeriGhenara) || !isNaN(+schedule.vachanGhenara))
+        ) {
+          return schedule;
+        } else {
+          return null;
+        }
+      })
+      .filter((schedule) => {
+        return schedule !== null;
+      });
+
+    console.log(modifyScheduleArray);
+
+    if (modifyScheduleArray.length === 0) {
+      this.toast.warning("please filled record");
+     
+    } else {
+      this.scheduleService.getscheduleByDateAndLocationBaithak(modifyScheduleArray[0].date, modifyScheduleArray[0].locationId, modifyScheduleArray[0].baithakId).subscribe((data)=>{
+        if(data){
+          this.toast.warning("This month Record All ready present go to Update ");
+        }else{
+          this.scheduleService.createScheduleRecord(modifyScheduleArray).subscribe(
+            (data) => {
+              console.log(data);
+            },
+            (error) => console.log(error)
+          );
+        }
+      })
+     
+    }
+  }
+
+  onSubmit() {
+    this.modifyScheduleArray();
   }
 
   updateSchedule(value: any) {
@@ -526,5 +572,4 @@ export class AddSchedularComponent implements OnInit {
       queryParams: { baithakId: value },
     });
   }
-  
 }

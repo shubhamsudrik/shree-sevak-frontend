@@ -232,8 +232,8 @@
              </div>              
             </div>  
               <!-- role-->
-              <div class="row">
-                <div class="col" style="width: 20%;">
+              <div class="row d-flex flex-row">
+                <!-- <div class="col" style="width: 20%;">
               <div class="form-group">
                 <label for="role">{{ 'Role' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
@@ -261,10 +261,10 @@
                       </div>
                 </div>
                </div>
-               </div>
+               </div> -->
 
               <!-- aadhar number-->
-              <div class="col" style="width: 20%;">
+              <div class="col">
                 <div class="form-group">
                  <label for="addharNumber">{{ 'Addhar Number' | translate }}</label>
                  <div class="input-group input-group-alternative mb-3">
@@ -291,7 +291,7 @@
                 </div>
                 </div>
              <!-- panNo -->
-             <div class="col" style="width: 20%;">
+             <div class="col">
                 <div class="form-group">
                  <label for="panNo">{{ 'Pan Number' | translate }}</label>
                  <div class="input-group input-group-alternative mb-3">
@@ -319,7 +319,7 @@
                </div>
 
              <!-- photoBase64  -->
-             <div class="col" style="width: 20%;">
+             <div class="col" >
              <div class="form-group">
               <label for="photoBase64">{{ 'Photo Base64' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
@@ -339,7 +339,7 @@
              </div>
              </div>
              <!-- status-->       
-             <div class="col" style="width: 20%;">
+             <div class="col" >
             <div class="form-group">
               <label for="status">{{ 'Status' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
@@ -1064,9 +1064,9 @@
                   maxlength="6"
               >
               <option value="" disabled>Select Type</option>
-              <option value="1">{{'Attendence'|translate}}</option>
-              <option value="2">{{'Reader'|translate}}</option>
-              <option value="2">{{'Reader'|translate}}</option>
+              <option value="1">{{'Reader'|translate}}</option>
+              <option value="2">{{'Attendence'|translate}}</option>
+              <option value="3">{{'Both'|translate}}</option>
             </select>
               <div class="invalid-feedback">
                 {{ 'Type is required.' | translate }}

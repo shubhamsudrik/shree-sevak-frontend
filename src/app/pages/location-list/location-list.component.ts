@@ -21,7 +21,7 @@ export class LocationListComponent implements OnInit {
     private router: Router,
     public translate: TranslateService
   ) {
-    translate.addLangs(['English', 'Marathi']);
+    translate.addLangs(['English']);
     translate.setDefaultLang('English');
 
     

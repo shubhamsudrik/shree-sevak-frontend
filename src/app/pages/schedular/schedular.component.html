@@ -78,18 +78,22 @@
                     <select
                       class="btn btn-success"
                       (change)="onOpen($event.target.value)"
-                      
                     >
                       <option disabled selected>Select Baithak</option>
-                      <option style="background-color: gray;" *ngFor="let baithak of baithakList; let i=index" [value]="baithak.bithakId">{{baithak.baithakType}}--{{baithak.fromTime}}--{{baithak.toTime}}-{{baithak.dayOfWeek}}</option>
-                     
+                      <option
+                        style="background-color: gray"
+                        *ngFor="let baithak of baithakList; let i = index"
+                        [value]="baithak.bithakId"
+                      >
+                        {{ baithak.baithakType }}--{{ baithak.fromTime }}--{{
+                          baithak.toTime
+                        }}-{{ baithak.dayOfWeek }}
+                      </option>
                     </select>
                   </li>
-
-
                 </span>
               </li>
-
+            
               <!-- update button -->
               <li class="nav-item mr-2 mr-md-0">
                 <span class="d-none d-md-block" class="form-group">

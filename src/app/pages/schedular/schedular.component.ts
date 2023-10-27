@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
+import {  ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AgendaService, DayService, MonthAgendaService, MonthService, TimelineMonthService, TimelineViewsService, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
 import { Baithak } from 'src/app/Classes/baithak';
 import { Schedule } from 'src/app/Classes/schedule';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
 import { BaithakDataService } from 'src/app/services/baithak-data.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService, TimelineViewsService, TimelineMonthService],
@@ -28,9 +29,11 @@ export class SchedularComponent implements OnInit {
       private scheduleDataService: ScheduleDataService,
       private router: Router,
       public translate: TranslateService,
-      private baithakService: BaithakDataService
+      private baithakService: BaithakDataService,
+      private route:ActivatedRoute,
+      private spinner: NgxSpinnerService
     ) {
-      translate.addLangs(['English', 'Marathi']);
+      translate.addLangs(['English']);
       translate.setDefaultLang('English');
     }
   
@@ -88,8 +91,14 @@ export class SchedularComponent implements OnInit {
     }
   
     ngOnInit(): void {
+      this.spinner.show();
+
       this.getAllData();
-      this.getBaithakList();
+      this.getBaithakList();                                    
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 5000);
 
     }
   
