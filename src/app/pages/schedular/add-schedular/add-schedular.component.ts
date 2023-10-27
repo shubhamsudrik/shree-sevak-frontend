@@ -553,6 +553,7 @@ export class AddSchedularComponent implements OnInit {
         }else{
           this.scheduleService.createScheduleRecord(modifyScheduleArray).subscribe(
             (data) => {
+              this.toast.warning("This month Record created successfully");
               console.log(data);
             },
             (error) => console.log(error)

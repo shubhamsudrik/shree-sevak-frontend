@@ -115,7 +115,7 @@ export class UpdateScheduleComponent implements OnInit {
 
   schedularFormUpdate: FormGroup;
   collectionOfSchedule: Schedule[];
-  baithakId: string;
+  baithakId: number;
 
   scheduleDto: ScheduleDto = new ScheduleDto();
 
@@ -196,7 +196,7 @@ export class UpdateScheduleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.baithakId = this.route.snapshot.queryParamMap.get("baithakId");
+    this.baithakId = +this.route.snapshot.queryParamMap.get("baithakId");
 
     this.initializingForm();
 
@@ -586,7 +586,7 @@ export class UpdateScheduleComponent implements OnInit {
     const desiredMonth=match[1]
     const desiredYear=match[2]
   
-    this.scheduleDataService.getScheduleByMonthAndYear(desiredMonth,desiredYear).subscribe((data:Schedule[])=>{
+    this.scheduleDataService.getScheduleByMonthAndYearAndBaithak(desiredMonth,desiredYear,this.baithakId).subscribe((data:Schedule[])=>{
       this.collectionOfSchedule=data;
       console.log(this.collectionOfSchedule)
       this.router.navigate(["/report"],{queryParams:{schedules:JSON.stringify(this.collectionOfSchedule)}})
