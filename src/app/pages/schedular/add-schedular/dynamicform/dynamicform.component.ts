@@ -53,9 +53,9 @@ export class DynamicformComponent implements OnInit {
       this.scheduleDto.baithakId = +this.baithakId;
        
       this.scheduleDto.locationId = +this.locationId;
-      // this.scheduleDto.vachanGhenara =
+      // this.scheduleDto.vachanGhenara =undefined
       //   +this.updateSchedule.members[0]?.memberId;
-      // this.scheduleDto.hajeriGhenara =
+      // this.scheduleDto.hajeriGhenara =undefined
       //   +this.updateSchedule.members[1]?.memberId;
 
       this.scheduleDto.date = this.date;
@@ -132,7 +132,7 @@ export class DynamicformComponent implements OnInit {
       .subscribe(
         (data: Schedule) => {
           console.log(data);
-
+          
           this.updateSchedule = data;
           this.scheduleDto.scheduleId = +this.updateSchedule.scheduleId;
           this.scheduleDto.baithakId = +this.updateSchedule.baithak.bithakId;
@@ -154,4 +154,9 @@ export class DynamicformComponent implements OnInit {
       vachanGhenara: this.scheduleDto.vachanGhenara,
     });
   }
+  currentDate(){
+    console.log(this.date)
+    return this.date
+  }
+
 }

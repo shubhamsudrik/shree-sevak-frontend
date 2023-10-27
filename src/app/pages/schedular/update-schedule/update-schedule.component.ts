@@ -28,6 +28,7 @@ import { LocService } from "src/app/services/loc.service";
 
 import { UpdateDynamicFormComponent } from "./update-dynamic-form/update-dynamic-form.component";
 import { ScheduleDto } from "src/app/Classes/schedule-dto";
+import { ToastrService } from "ngx-toastr";
 
 export class CalendarDay {
   public date: Date;
@@ -190,7 +191,8 @@ export class UpdateScheduleComponent implements OnInit {
     private scheduleService: ScheduleDataService,
 
     private route: ActivatedRoute,
-    private scheduleDataService: ScheduleDataService
+    private scheduleDataService: ScheduleDataService,
+    private toast:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -370,15 +372,15 @@ export class UpdateScheduleComponent implements OnInit {
   onReaderSelect(reader: any, meeting: MeetingDay) {
     meeting.selectedReader = reader.memberId;
 
-    console.log("meeting", meeting);
+    // console.log("meeting", meeting);
   }
 
   onWriterSelect(writer: any, meeting: MeetingDay) {
     meeting.selectedWriter = writer.memberId;
 
-    console.log("meeting", meeting);
+    // console.log("meeting", meeting);
 
-    console.log(this.selectedLocation);
+    // console.log(this.selectedLocation);
   }
 
   initializingForm() {
@@ -438,7 +440,7 @@ export class UpdateScheduleComponent implements OnInit {
 
     date.setDate(date.getDate() - 1);
 
-    console.log(date.getDate());
+    // console.log(date.getDate());
 
     // The date now holds the last day of the specified month
 
@@ -551,6 +553,9 @@ export class UpdateScheduleComponent implements OnInit {
 
       .updateSchedule(this.scheduleArray)
       .subscribe((data) => {
+       
+          this.toast.success("Record Updated succesfully")
+        
         console.log(data);
       });
   }
