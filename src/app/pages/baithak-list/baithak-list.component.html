@@ -7,18 +7,18 @@
           <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
             <li class="nav-item ml-auto">
               <span class="d-none d-md-block form-group">
-                <h3>{{ 'Baithak Record!' | translate  }}</h3>
+                <h3>{{ 'Available Baithak!' | translate  }}</h3>
               </span>
             </li>
             <li class="nav-item ml-auto">
-              <span class="d-none d-md-block form-group align-items-right">
+              <!-- <span class="d-none d-md-block form-group align-items-right">
                 <label>{{ 'Choose Language' | translate  }}</label>
                 <select name="" class="form-control ml-auto" >
                   <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
                     {{ language }}
                   </option>
                 </select>
-              </span>
+              </span> -->
             </li>
             <!-- For screens less than 600px -->
             <li class="nav-item d-md-none"> <!-- Hide this for medium and larger scren -->
@@ -27,14 +27,14 @@
               </span>
             </li>
             <li class="nav-item d-md-none"> <!-- Hide this item on medium and larger screen -->
-              <span class="form-group align-items-right">
+              <!-- <span class="form-group align-items-right">
                 <label>{{ 'Choose Language' | translate  }}</label>
                 <select name="" class="form-control"  >
                   <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
                     {{ language }}
                   </option>
                 </select>
-              </span>
+              </span> -->
             </li>
           </ul>
           
@@ -54,10 +54,10 @@
                  
                 <!-- showing baithak record  -->
                   <select class="btn btn-success" (change)="statusBaithak($event.target.value)">
-                    <option  disabled selected>Select Baithak</option>
+                    <option  disabled >Select Baithak</option>
                     <option value="all" >All</option>
-                    <option value="1" >Active</option>
-                    <option value="0" selected >InActive</option>
+                    <option value="1" selected >Active</option>
+                    <option value="0" >InActive</option>
                   </select>
                 </span>
               </li>
@@ -89,9 +89,7 @@
                 <th scope="col">{{'BaithakType' | translate}}</th>
                 <th scope="col">{{' Day' | translate}} </th>                
                 <th scope="col">{{' StarTime' | translate}} </th>
-                <th scope="col">{{'EndTime' | translate}}</th>
-                <th scope="col">{{'Status' | translate}} </th>
-      
+                <th scope="col">{{'EndTime' | translate}}</th>      
                 <!-- <th scope="col">{{'status'}}</th> -->
               </tr>
             </thead>
@@ -107,10 +105,7 @@
                 <td>{{ baithaData.baithakType| translate}}</td>
                 <td>{{ baithaData.dayOfWeek| translate}}</td>             
                 <td>{{ baithaData.fromTime | translate}}</td>
-                <td>{{ baithaData.toTime  | translate}}</td>
-                <td>{{ baithaData.status  | translate}}</td>
-            
-             
+                <td>{{ baithaData.toTime  | translate}}</td>          
                 <!-- <td>{{ location.status }}</td> -->
               </tr>
             </tbody>

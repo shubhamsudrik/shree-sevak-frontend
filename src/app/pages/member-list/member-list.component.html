@@ -7,24 +7,24 @@
             <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
               <li class="nav-item ml-auto">
                 <span class="d-none d-md-block form-group">
-                  <h2>{{ 'Member Records!' | translate }}</h2>
+                  <h2>{{ 'Available Member!' | translate }}</h2>
                 </span>
               </li>
               <li class="nav-item ml-auto">
-                <span class="d-none d-md-block form-group align-items-right">
+                <!-- <span class="d-none d-md-block form-group align-items-right">
                   <label>{{ 'Choose Language' | translate }}</label>
                   <select name="" class="form-control ml-auto" #selectedLang (change)="switchLang(selectedLang.value)">
                     <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
                       {{ language }}
                     </option>
                   </select>
-                </span>
+                </span> -->
               </li>          
              
               <!-- For screens less than 600px -->
               <li class="nav-item d-md-none"> <!-- Hide this for medium and larger scren -->
                 <span class="form-group">
-                  <h3>{{ 'Member records!' | translate }}</h3>
+                  <h3>{{ 'Available Member!' | translate }}</h3>
                 </span>
               </li>
             </ul>            
@@ -43,9 +43,9 @@
 
                 <li class="nav-item mr-2 mr-md-0">
                   <select class="btn btn-success" (change)="statusLocation($event.target.value)">
-                    <option  disabled selected>Select Member</option>
+                    <option  disabled >Select Member</option>
                     <option value="all" >All</option>
-                    <option value="1" >Active</option>
+                    <option value="1" selected >Active</option>
                     <option value="0">InActive</option>
                   </select>
                 </li>
@@ -84,7 +84,7 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
+                <!-- <tr *ngFor="let location of defaultMembers; trackBy: trackLocationByIndex"> -->
                   <tr *ngFor="let member of defaultMembers |filter:searchText; let i = index ">
   
                   <td>

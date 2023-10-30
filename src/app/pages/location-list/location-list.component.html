@@ -11,30 +11,31 @@
               </span>
             </li>
             <li class="nav-item ml-auto">
-              <span class="d-none d-md-block form-group align-items-right">
+              <!-- <span class="d-none d-md-block form-group align-items-right">
                 <label>{{ 'Choose Language' | translate }}</label>
                 <select name="" class="form-control ml-auto" #selectedLang (change)="switchLang(selectedLang.value)">
                   <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
                     {{ language }}
                   </option>
                 </select>
-              </span>
+              </span> -->
             </li>
             <!-- For screens less than 600px -->
-            <li class="nav-item d-md-none"> <!-- Hide this for medium and larger scren -->
+            <!-- Hide this for medium and larger scren -->
+            <li class="nav-item d-md-none"> 
               <span class="form-group">
                 <h3>{{ 'location' | translate }}</h3>
               </span>
             </li>
             <li class="nav-item d-md-none"> <!-- Hide this item on medium and larger screen -->
-              <span class="form-group align-items-right">
+              <!-- <span class="form-group align-items-right">
                 <label>{{ 'Choose Language' | translate }}</label>
                 <select name="" class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
                   <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">
                     {{ language }}
                   </option>
                 </select>
-              </span>
+              </span> -->
             </li>
           </ul>
           
@@ -51,9 +52,9 @@
             <ul class="nav nav-pills justify-content">
               <li class="nav-item mr-2 mr-md-0">
                 <select class="btn btn-success" (change)="statusLocation($event.target.value)">
-                  <option  disabled selected>Select Location</option>
+                  <option  disabled >Select Location</option>
                   <option value="all" >All</option>
-                  <option value="1" >Active</option>
+                  <option value="1" selected >Active</option>
                   <option value="0">InActive</option>
                 </select>
               </li><br>
@@ -68,7 +69,7 @@
                   <span class="d-none d-md-block" class="form-group">
                     <div  *ngFor="let location of defaultLocations; let i = index">
                       
-                      <button *ngIf="location.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'Update'|translate}}</button>
+                      <button *ngIf="location?.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'Update'|translate}}</button>
                       <!-- <button *ngIf="location.isDeleting" class="btn btn-danger" (click)="deleteLocation(location.locationId)">{{'delete'|translate}}</button> -->
                     </div>
                   </span>

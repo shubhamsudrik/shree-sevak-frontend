@@ -330,14 +330,10 @@
                  id="latitude"
                 name="latitude"
                 [(ngModel)]="location.latitude"
-                [ngClass]="{
-                  'is-invalid': (submitted && locationFormControl.latitude.errors?.required)
-                 }"             
+                             
                
                   />
-                  <div class="invalid-feedback">
-                    {{ 'Latitude  is required.' | translate }}
-                  </div>
+                  
             </div>
             </div>
            </div>
@@ -356,13 +352,8 @@
                 name="longitude"
                 [(ngModel)]="location.longitude"
                 
-                [ngClass]="{
-                  'is-invalid': (submitted && locationFormControl.longitude.errors?.required)
-                 }"
                   />
-                  <div class="invalid-feedback">
-                    {{ 'longitude  is required.' | translate }}
-                  </div>
+                  
             </div>
             </div>
            </div>

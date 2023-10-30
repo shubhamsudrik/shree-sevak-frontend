@@ -13,10 +13,10 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'fas fa-tachometer-alt ni-dashboard text-primary', class:'' },  
     { path: '/location-list', title: 'Location',  icon:'fas fa-map-marker-alt ni-location text-primary', class: '' },
     { path: '/register', title: 'Register User',  icon:'fas fa-user-plus ni-sign-up text-primary', class: '' },
-    { path: '/member-list', title: 'member',  icon: 'fas fa-user ni-user text-primary', class: '' },
+    { path: '/member-list', title: 'Member',  icon: 'fas fa-user ni-user text-primary', class: '' },
     { path: '/baithak-list', title: 'Baithak',  icon:'fas fa-calendar-check ni-already-scheduled-meeting text-primary', class: '' },
     { path: '/schedular', title: 'Schedule Baithak',  icon:'fas fa-clock ni-schedule-meeting text-primary', class: '' },
-    { path: '/report', title: 'report',  icon:'fas fa-clock ni-schedule-meeting text-primary', class: '' },
+    { path: '/report', title: 'Report',  icon:'fas fa-clock ni-schedule-meeting text-primary', class: '' },
    
    
 ];

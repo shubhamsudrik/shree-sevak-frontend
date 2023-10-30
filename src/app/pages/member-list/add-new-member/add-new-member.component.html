@@ -752,14 +752,10 @@
                id="latitude"
               name="latitude"
               [(ngModel)]="Member.latitude"
-              [ngClass]="{
-               'is-invalid': (submitted && MemberFormControl.latitude.errors?.required)
-              }"
+              
               maxlength="20" 
                 />
-                <div class="invalid-feedback">
-                  {{ 'latitudeis required.' | translate }}
-                </div>
+                
           </div>
          </div>
          </div>
@@ -776,14 +772,10 @@
                id="longitude"
               name="longitude"
               [(ngModel)]="Member.longitude"
-              [ngClass]="{
-               'is-invalid': (submitted && MemberFormControl.longitude.errors?.required)
-              }"
+              
               maxlength="20" 
                 />
-                <div class="invalid-feedback">
-                  {{ 'longitude is required.' | translate }}
-                </div>
+                
           </div>
          </div>
         </div>
@@ -1019,9 +1011,38 @@
          </div> -->
          
 
-     
+         <!-- type -->
          <div class="row">
-         <!-- <div class="col-md-4">
+       <div class="col-md-3">
+        <div class="form-group">
+         <label for="type">{{ 'Type' | translate }}</label>
+         <div class="input-group input-group-alternative mb-3">
+             <div class="input-group-prepend"></div>
+             <select
+                 formControlName="type"
+                 type="text"
+                 class="form-control"
+                 id="type"
+                 name="type"
+                 [(ngModel)]="Member.type"
+                 [ngClass]="{
+                     'is-invalid': (submitted && (MemberFormControl.type.errors?.required))
+                 }"
+             >
+             <option value="" disabled>Select Type</option>
+             <option value="1">{{'Reader'|translate}}</option>
+             <option value="2">{{'Attendence'|translate}}</option>
+             <option value="3">{{'Both'|translate}}</option>
+           </select>
+             <div class="invalid-feedback">
+               {{ 'Type is required.' | translate }}
+             </div>
+         </div>
+         </div>
+     </div>
+      <!-- hajeriNo -->
+         
+         <div class="col-md-3">
          <div class="form-group">
           <label for="hajeriNo">{{ 'Hajeri Number' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -1044,39 +1065,10 @@
               </div>
           </div>
           </div>
-      </div> -->
-       <!-- hajeriNo -->
-       <div class="col-md-4">
-        <div class="form-group">
-         <label for="hajeriNo">{{ 'Type' | translate }}</label>
-         <div class="input-group input-group-alternative mb-3">
-             <div class="input-group-prepend"></div>
-             <select
-                 formControlName="hajeriNo"
-                 type="text"
-                 class="form-control"
-                 id="hajeriNo"
-                 name="hajeriNo"
-                 [(ngModel)]="Member.hajeriNo"
-                 [ngClass]="{
-                     'is-invalid': (submitted && (MemberFormControl.hajeriNo.errors?.required))
-                 }"
-                 (input)="validateHajeriNumber($event)"
-                 maxlength="6"
-             >
-             <option value="" disabled>Select Type</option>
-             <option value="1">{{'Reader'|translate}}</option>
-             <option value="2">{{'Attendence'|translate}}</option>
-             <option value="3">{{'Both'|translate}}</option>
-           </select>
-             <div class="invalid-feedback">
-               {{ 'Type is required.' | translate }}
-             </div>
-         </div>
-         </div>
-     </div>
+      </div>
+       
          <!-- hajeriNoDetails -->
-         <div class="col-md-4">
+         <div class="col-md-3">
          <div class="form-group">
           <label for="hajeriNoDetails">{{ 'Hajeri Number Details' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -1096,7 +1088,7 @@
           </div>
          </div>
           <!-- weeklyOffs -->
-          <div class="col-md-4">
+          <div class="col-md-3">
           <div class="form-group">
             <label>{{ 'Weekly Offs' | translate }}</label><br>
             <div class="input-group input-group-alternative mb-3">

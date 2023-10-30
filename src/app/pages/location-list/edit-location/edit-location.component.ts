@@ -48,8 +48,8 @@ export class EditLocationComponent implements OnInit {
       country: ['', Validators.required],
       pincode: ['', [Validators.required, Validators.minLength(6)]],
       status:['', Validators.required],
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
+      latitude: [''],
+      longitude: [''],
       googleMapLink: [''],
       add3: [''],
       add4: [''],
@@ -100,7 +100,7 @@ export class EditLocationComponent implements OnInit {
       this.saveLocation();
       this.toast.success("Location Added successfully")
     } else {
-      alert('Please fill all fields: कृपया सर्व फील्ड भरा');
+      this.toast.warning('Please fill all fields');
     }
   }
 

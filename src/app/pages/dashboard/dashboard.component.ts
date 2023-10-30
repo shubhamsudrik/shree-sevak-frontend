@@ -52,12 +52,12 @@ constructor(
       // const token = this.login.loginUser; // Replace with your actual token
       // localStorage.setItem('token', token);
   
-      // // Remove the token .
-      // setTimeout(() => {
-      //   localStorage.removeItem('token');
-      //   console.log('Token removed from localStorage.');
-      //   this.router.navigate(['/login']);
-      // }, 7.2e+6);
+      // Remove the token .
+      setTimeout(() => {
+        localStorage.removeItem('token');
+        console.log('Token removed from localStorage.');
+        this.router.navigate(['/login']);
+      }, 7200000);
     }
 
 

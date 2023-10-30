@@ -70,8 +70,8 @@ export class UpdateLocationComponent implements OnInit {
       state: [this.location?.state, Validators.required],
       country: [this.location?.country, Validators.required],
       pincode: [this.location?.pincode,  [Validators.required, Validators.minLength(6)]],
-      latitude: [this.location?.latitude, Validators.required],
-      longitude: [this.location?.longitude, Validators.required],
+      latitude: [this.location?.latitude],
+      longitude: [this.location?.longitude],
       googleMapLink: [this.location?.googleMapLink],
       status: [this.location?.status, Validators.required],
       
@@ -113,7 +113,7 @@ export class UpdateLocationComponent implements OnInit {
       this.saveLocation();
       this.toaster.success("Location Updated Successfully !")
     } else {
-      alert('Please fill all fields: कृपया सर्व फील्ड भरा');
+      this.toaster.warning('Please fill all fields');
     }
   }
 

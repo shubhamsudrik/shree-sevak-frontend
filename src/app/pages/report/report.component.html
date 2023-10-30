@@ -118,8 +118,9 @@
                 </tbody> 
                 </table>                
               </div><br><br>
-              <div style="text-align: center;">
-                <input type="button" class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" />
-              </div>
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <input type="button" class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" style="margin-right: 10px;" />
+                <input type="button" class="btn-primary" style="background-color: rgb(48, 133, 48); margin-right: 10px;" value="Generate Excel" (click)="exportexcel()" />
+              </div>  
             </div>
             
