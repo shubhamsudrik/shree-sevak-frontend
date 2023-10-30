@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './guard/auth.guard';
 import { RegisterComponent } from './pages/register/register.component';
+import { HasRoleGuard } from './guard/has-role.guard';
 
 const routes: Routes =[
   {
@@ -27,7 +28,7 @@ const routes: Routes =[
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [AuthGuard] // Apply the canActivate guard to the "Sign Up" route
+    canActivate:[HasRoleGuard],data:{roles:['ADMIN']}// Apply the canActivate guard to the "Sign Up" route
   },
   {
     path: '',
