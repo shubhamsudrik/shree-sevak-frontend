@@ -42,8 +42,11 @@ constructor(
 
 
   console.log(response.jwtToken)
+  console.log(response.user.roles)
+
+
   this.toast.success('Login successfully')
-  this.loginservice.loginUser(response.jwtToken)
+  this.loginservice.loginUser(response)
   this.router.navigate(['/dashboard']);
         console.log('hello')
         },error=>{

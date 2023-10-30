@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { SchedularComponent } from '../schedular/schedular.component';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
 import { LoginService } from 'src/app/services/login.service';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ constructor(
   private locService: LocService,
   private scheduleDataService : ScheduleDataService,
   private login : LoginService,
+  private userDataService: UserDataService
 ){}
 
   defaultLocations: Location[] = [];
