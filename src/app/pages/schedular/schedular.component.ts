@@ -114,8 +114,11 @@ export class SchedularComponent implements OnInit {
     }
 
   
-    updateSchedules(schedularId: number) {
-      this.router.navigate(["/update-schedule"] ,{queryParams: { baithakId: schedularId }},);
+    updateSchedules(value: number) {
+      console.log(value);
+      this.router.navigate(["/update-schedule"], {
+        queryParams: { baithakId: value },
+      });
     }
 
     // show all data and handl using active in active button 

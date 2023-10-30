@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 declare interface RouteInfo {
     path: string;
     title: string;
     icon: string;
     class: string;
+
 }
 export const ROUTES: RouteInfo[] = [ 
     { path: '/dashboard', title: 'Dashboard',  icon: 'fas fa-tachometer-alt ni-dashboard text-primary', class:'' },  
@@ -29,7 +31,9 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router) {
+
+  constructor(private router: Router,
+    public userDataService: UserDataService) {
   }
 
   ngOnInit() {

@@ -58,3 +58,7 @@ table{
   box-sizing: content-box;
 width: 100%;
 }
+.scrollit {
+  overflow:scroll;
+  height:80%;
+}

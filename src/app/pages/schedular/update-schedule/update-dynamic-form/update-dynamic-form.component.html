@@ -1,5 +1,5 @@
 <form [formGroup]="schedularFormchild" (ngSubmit)="submitChildForm()">
-  <div class="d-flex flex-row justify-content-around">
+  <div class="d-flex flex-row justify-content-around" [ngClass]="{'selectedSchedule':scheduleDto.vachanGhenara && scheduleDto.hajeriGhenara}">
     <!-- Get location data dropdown -->
 
     <!-- <div class="dropdown" >

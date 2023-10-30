@@ -57,23 +57,20 @@
           <br />
 
           <form [formGroup]="schedularForm" (ngSubmit)="onSubmit()">
-            <div class="table-responsive">
+            <div class="table-responsive scrollit">
               <table class="calendar-table" *ngIf="calendar" border="2px solid">
                 <thead>
-                  <tr *ngFor="let c of meetings; let j = index">
-                    <th *ngIf="j == 0">Sr.no</th>
+                  <tr>
+                    <th>Sr.no</th>
 
-                    <th *ngIf="j == 0">Locations</th>
+                    <th>Locations</th>
 
-                    <th *ngIf="j == 0">Sunday</th>
-                   
-                    <th *ngIf="j == 0">Sunday</th>
-
-                    <th *ngIf="j == 0">Sunday</th>
-
-                    <th *ngIf="j == 0">Sunday</th>
-
-                    <th *ngIf="j == 0">Sunday</th>
+                    <th *ngFor="let meeting of meetings">
+                      Sunday
+                      <div>
+                        {{ meeting.date | date }}
+                      </div>
+                    </th>
                   </tr>
                 </thead>
 
@@ -97,7 +94,9 @@
 
                     <td>{{ i + 1 }}</td>
 
-                    <td class="text-uppercase" style="text-align: center">{{ location.locationName }}</td>
+                    <td class="text-uppercase" style="text-align: center">
+                      {{ location.locationName }}
+                    </td>
 
                     <td
                       class="calendar-day"
@@ -108,14 +107,6 @@
                       }"
                       *ngFor="let c of meetings; let j = index"
                     >
-                    
-                      <div
-                        class="calendar-day-header"
-                        [ngClass]="{ 'blue-date': c.isToday }"
-                      >
-                        <strong *ngIf="i<=0">{{ c.date | date : "mediumDate" }}</strong>
-                      </div>
-
                       <app-dynamicform
                         (valueChanged)="saveChanges($event)"
                         [baithakId]="baithakId"
@@ -128,9 +119,13 @@
                     </td>
                   </tr>
 
-                  <button type="submit" class="btn btn-primary">SUBMIT</button>
+                  <div
+                    class="d-flex flex flex flex-row justify-content-around ml-auto fixed-button"
+                  >
+                    <button type="submit" class="btn btn-primary">
+                      SUBMIT
+                    </button>
 
-                 
                     <button
                       type="button"
                       class="btn btn-danger"
@@ -145,7 +140,7 @@
                     >
                       RESET
                     </button>
-                 
+                  </div>
                 </tbody>
               </table>
             </div>

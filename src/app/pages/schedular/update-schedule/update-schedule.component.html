@@ -60,20 +60,17 @@
             <div class="table-responsive">
               <table class="calendar-table" *ngIf="calendar" border="2px solid">
                 <thead>
-                  <tr *ngFor="let c of meetings; let j = index">
-                    <th *ngIf="j == 0" >Sr.no</th>
+                  <tr>
+                    <th>Sr.no</th>
 
-                    <th *ngIf="j == 0">Locations</th>
+                    <th>Locations</th>
 
-                    <th *ngIf="j == 0">Sunday</th>
-
-                    <th *ngIf="j == 0">Sunday</th>
-
-                    <th *ngIf="j == 0">Sunday</th>
-
-                    <th *ngIf="j == 0">Sunday</th>
-
-                    <th *ngIf="j == 0">Sunday</th>
+                    <th *ngFor="let meeting of meetings">
+                      Sunday
+                      <div>
+                        {{ meeting.date | date }}
+                      </div>
+                    </th>
                   </tr>
                 </thead>
 
@@ -110,13 +107,6 @@
                       }"
                       *ngFor="let c of meetings; let j = index"
                     >
-                      <div
-                        class="calendar-day-header"
-                        [ngClass]="{ 'blue-date': c.isToday }"
-                      >
-                        <strong *ngIf="i<=0">{{ c.date | date : "mediumDate" }}</strong>
-                      </div>
-
                       <app-update-dynamic-form
                         (valueChanged)="saveChanges($event)"
                         [baithakId]="baithakId"
@@ -129,33 +119,29 @@
                       </app-update-dynamic-form>
                     </td>
                   </tr>
-
-                
                 </tbody>
-  <div
-                    class="d-flex flex flex flex-row justify-content-around ml-auto fixed-button"
-                  >
-                    <button type="submit" class="btn btn-danger">Save</button>
+                <div
+                  class="d-flex flex flex flex-row justify-content-around ml-auto fixed-button"
+                >
+                  <button type="submit" class="btn btn-danger">Save</button>
 
-                    <button
-                      type="button"
-                      class="btn btn-primary p-1"
-                      (click)="GoBack(baithakId)"
-                    >
-                      Go Back
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-secondary p-1"
-                      (click)="generateSchedule()"
-                    >
-                     GENERATE REPORT
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary p-1"
+                    (click)="GoBack(baithakId)"
+                  >
+                    Go Back
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary p-1"
+                    (click)="generateSchedule()"
+                  >
+                    GENERATE REPORT
+                  </button>
+                </div>
               </table>
-              
             </div>
-            
           </form>
         </div>
       </div>

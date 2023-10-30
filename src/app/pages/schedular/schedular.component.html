@@ -101,7 +101,7 @@
                     <button
                       *ngIf="schedule.isEditing && selectedRow === i"
                       class="btn btn-success"
-                      (click)="updateSchedules(schedule.bithakId)"
+                      (click)="updateSchedules(schedule.baithak.bithakId)"
                     >
                       {{ "Update" | translate }}
                     </button>
