@@ -69,7 +69,7 @@
                   <span class="d-none d-md-block" class="form-group">
                     <div  *ngFor="let location of defaultLocations; let i = index">
                       
-                      <button *ngIf="location.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'Update'|translate}}</button>
+                      <button *ngIf="location?.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'Update'|translate}}</button>
                       <!-- <button *ngIf="location.isDeleting" class="btn btn-danger" (click)="deleteLocation(location.locationId)">{{'delete'|translate}}</button> -->
                     </div>
                   </span>

@@ -121,7 +121,8 @@
                 <th scope="col">{{ "Start Time" | translate }}</th>
                 <th scope="col">{{ "End Time" | translate }}</th>
                 <th scope="col">{{ "dayOfWeek" | translate }}</th>
-                <th scope="col">{{ "Members" | translate }}</th>
+                <th scope="col">{{ "Reader" | translate }}</th>
+                <th scope="col">{{ "Attendence" | translate }}</th>
                 <th scope="col">{{ "Locations" | translate }}</th>                
               </tr>
             </thead>
@@ -146,26 +147,24 @@
 
                 <td>{{ schedule?.baithak?.baithakType }}</td>
                 <td>{{ schedule?.date }}</td>
-                
-                <td>{{ schedule?.baithak?.toTime }}</td>
                 <td>{{ schedule?.baithak?.fromTime }}</td>
+                <td>{{ schedule?.baithak?.toTime }}</td>
+               
                 <td>{{ schedule?.baithak?.dayOfWeek }}</td>
-                <td>
+                <!-- <td>
                   <table>
-                    <tr>
+                    <tr> -->
                       <td>
-                        {{ schedule.members[0]?.firstName
-                        }}{{ schedule.members[0]?.lastName }}
+                        {{ schedule.members[0]?.firstName}} {{ schedule.members[0]?.lastName }}
                       </td>
-                    </tr>
-                    <tr>
+                    <!-- </tr>
+                    <tr> -->
                       <td>
-                        {{ schedule.members[1]?.firstName
-                        }}{{ schedule.members[1]?.lastName }}
+                        {{ schedule.members[1]?.firstName }} {{ schedule.members[1]?.lastName }}
                       </td>
-                    </tr>
+                    <!-- </tr>
                   </table>
-                </td>
+                </td> -->
                 <td>{{ schedule.location.city }}</td>               
               </tr>
             </tbody>
