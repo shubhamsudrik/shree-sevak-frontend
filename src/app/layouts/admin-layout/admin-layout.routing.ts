@@ -38,6 +38,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile', component: UserProfileComponent },
     { path: 'report', component: ReportComponent },
     { path: 'schedule-ladies-baithak', component: ScheduleLadiesBaithakComponent },
-   
+    
 
 ];
