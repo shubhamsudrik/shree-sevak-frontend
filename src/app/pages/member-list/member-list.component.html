@@ -59,7 +59,8 @@
                 <li class="nav-item mr-2 mr-md-0">
                     <span class="d-none d-md-block" class="form-group">
                       <div  *ngFor="let member of defaultMembers; let i = index">
-                        <button *ngIf="member.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateMember(member.memberId)">{{'Update'|translate}}</button>
+                        <button *ngIf="selectedRow === i"  class="btn btn-success" (click)="updateMember(member.memberId)">{{'Update'|translate}}</button>
+                        <!-- <button *ngIf="member.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateMember(member.memberId)">{{'Update'|translate}}</button> -->
                       </div>
                     </span>
                 </li>

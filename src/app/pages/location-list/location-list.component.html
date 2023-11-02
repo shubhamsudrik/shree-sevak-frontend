@@ -69,7 +69,7 @@
                   <span class="d-none d-md-block" class="form-group">
                     <div  *ngFor="let location of defaultLocations; let i = index">
                       
-                      <button *ngIf="location?.isEditing && selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'Update'|translate}}</button>
+                      <button *ngIf="selectedRow === i"  class="btn btn-success" (click)="updateLocation(location.locationId)">{{'Update'|translate}}</button>
                       <!-- <button *ngIf="location.isDeleting" class="btn btn-danger" (click)="deleteLocation(location.locationId)">{{'delete'|translate}}</button> -->
                     </div>
                   </span>
@@ -77,10 +77,13 @@
             </ul>
           </div>
         </div>
-        <div class="table-responsive " >
-          <table  class="table align-items-center table-flush ">
+        <div style="max-height: 500px; overflow-y: auto;">
+          <table class="table table-bordered">
             <thead class="thead-light">
-              <tr>
+        <!-- <div class="table-responsive " >
+          <table  class="table align-items-center table-flush ">
+            <thead class="thead-light"> -->
+              <tr style="width: 10%;">
                 <th scope="col">{{'action'|translate}} </th>
                 <th scope="col">{{'locationId'|translate}}</th>
                 <th scope="col">{{'location name'|translate}}</th>
@@ -95,9 +98,12 @@
                 <!-- <th scope="col">{{'status'|translate}}</th> -->
               </tr>
             </thead>
-            <tbody>
+            </table>
+              <div style="max-height: 500px; overflow-y: auto;overflow-x: auto;">
+                <table class="table table-bordered">
+                    <tbody style="max-height: 500px; overflow: auto; overflow-x: scroll;">
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
-                <tr *ngFor="let location of defaultLocations |filter:searchText; let i = index ">
+                <tr style="width: 10%;" *ngFor="let location of defaultLocations |filter:searchText; let i = index ">
 
                 <td>
                   <input type="radio" name="operation" (click)="toggleButtons('edit', location)" value="edit"  (change)="selectedRow = i">

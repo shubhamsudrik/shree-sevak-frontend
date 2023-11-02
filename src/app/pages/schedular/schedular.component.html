@@ -99,7 +99,7 @@
                 <span class="d-none d-md-block" class="form-group">
                   <div *ngFor="let schedule of defaultSchedules; let i = index">
                     <button
-                      *ngIf="schedule.isEditing && selectedRow === i"
+                      *ngIf="selectedRow === i"
                       class="btn btn-success"
                       (click)="updateSchedules(schedule.baithak.bithakId)"
                     >
@@ -111,31 +111,36 @@
             </ul>
           </div>
         </div>
-        <div class="table-responsive">
-          <table class="table align-items-center table-flush">
+        <!-- <div class="table-responsive"> -->
+          <div style="max-height: 500px; overflow-y: hidden;">
+          <table class="table table-bordered">
             <thead class="thead-light">
-              <tr>
-                <th scope="col">{{ "Action" | translate }}</th>
-                <th scope="col">{{ "Baithak Type" | translate }}</th>
-                <th scope="col">{{ "Date" | translate }}</th>
-                <th scope="col">{{ "Start Time" | translate }}</th>
-                <th scope="col">{{ "End Time" | translate }}</th>
-                <th scope="col">{{ "dayOfWeek" | translate }}</th>
-                <th scope="col">{{ "Reader" | translate }}</th>
-                <th scope="col">{{ "Attendence" | translate }}</th>
-                <th scope="col">{{ "Locations" | translate }}</th>                
+              <tr >
+                <th style="width: 10%;" scope="col">{{ "Action" | translate }}</th>
+                <th style="width: 10%;" scope="col">{{ "Baithak Type" | translate }}</th>
+                <th style="width: 10%;" scope="col">{{ "Date" | translate }}</th>
+                <th style="width: 10%;"scope="col">{{ "Start Time" | translate }}</th>
+                <th style="width: 10%;" scope="col">{{ "End Time" | translate }}</th>
+                <th style="width: 10%;" scope="col">{{ "dayOfWeek" | translate }}</th>
+                <th style="width: 10%;" scope="col">{{ "Reader" | translate }}</th>
+                <th style="width: 10%;" scope="col">{{ "Attendence" | translate }}</th>
+                <th style="width: 10%;" scope="col">{{ "Locations" | translate }}</th>                
               </tr>
             </thead>
-            <tbody>
+          </table>
+          <!-- <div class="table-responsive"> -->
+            <div style="max-height: 500px; overflow-y: auto;overflow-x: hidden;">
+            <table class="table table-bordered">
+                <tbody style="max-height: 500px; overflow: hidden; overflow-x: scroll;">
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
-              <tr
+              <tr 
                 *ngFor="
                   let schedule of defaultSchedules | filter : searchText;
                   let i = index
                 "
               >
-                <td>
-                  <input
+                <td style="width: 11%;">
+                  <input 
                     type="radio"
                     name="operation"
                     (click)="toggleButtons('edit', schedule)"
@@ -145,27 +150,27 @@
                   <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->
                 </td>
 
-                <td>{{ schedule?.baithak?.baithakType }}</td>
-                <td>{{ schedule?.date }}</td>
-                <td>{{ schedule?.baithak?.fromTime }}</td>
-                <td>{{ schedule?.baithak?.toTime }}</td>
+                <td style="width: 11%;">{{ schedule?.baithak?.baithakType }}</td>
+                <td style="width: 10%;">{{ schedule?.date }}</td>
+                <td style="width: 10%;">{{ schedule?.baithak?.fromTime }}</td>
+                <td style="width: 10%;">{{ schedule?.baithak?.toTime }}</td>
                
-                <td>{{ schedule?.baithak?.dayOfWeek }}</td>
+                <td style="width: 10%;">{{ schedule?.baithak?.dayOfWeek }}</td>
                 <!-- <td>
                   <table>
                     <tr> -->
-                      <td>
+                      <td style="width: 10%;">
                         {{ schedule.members[0]?.firstName}} {{ schedule.members[0]?.lastName }}
                       </td>
                     <!-- </tr>
                     <tr> -->
-                      <td>
+                      <td style="width: 10%;">
                         {{ schedule.members[1]?.firstName }} {{ schedule.members[1]?.lastName }}
                       </td>
                     <!-- </tr>
                   </table>
                 </td> -->
-                <td>{{ schedule.location.city }}</td>               
+                <td style="width: 10%;">{{ schedule.location.city }}</td>               
               </tr>
             </tbody>
           </table>
@@ -174,3 +179,8 @@
     </div>
   </div>
 </div>
+</div>
+  <!-- </div>
+</div> -->
+
+

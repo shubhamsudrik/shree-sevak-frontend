@@ -307,10 +307,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { ScheduleDataService } from "src/app/services/schedule-data.service";
-import { group } from "console";
-import { NgFor } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { Schedule } from "src/app/Classes/schedule";
 
 @Component({
   selector: "app-report",
@@ -440,21 +437,293 @@ export class ReportComponent implements OnInit {
     });
   }
 
+  
   //For convert into excel
   fileName = "ExcelSheet.xlsx";
   exportexcel(): void {
-    /* pass here the table id */
-    let element = document.getElementById("pdfTable");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    /* Prepare data in the desired format */
+    const excelData = [];
+    let totalMeetings = 0;
+    
+      totalMeetings = this.groupedSchedules.length;
+    
+  //  // Blank Row
+  //  const blank =  [ ''];
+  //  for (const date of this.groupedSchedules1) {
+  //   blank.push('');
+  //   blank.push('');
+  //  }
+  //  excelData.push(blank);
 
-    /* generate workbook and add the worksheet */
+
+    // Create a row for "Total Meeting" and "Location Name" headers
+    const totalMeetingRow =  [ `Total Meeting: ${totalMeetings}`];
+    for (const date of this.groupedSchedules1) {
+      totalMeetingRow.push('');
+      totalMeetingRow.push('');
+    }
+    excelData.push(totalMeetingRow);
+  
+    // Create rows for "Date" and "Location Name" headers
+  const dateRow = ['',''];
+  for (const date of this.groupedSchedules1) {
+    dateRow.push(date.date);
+    dateRow.push('');
+  }
+  excelData.push(dateRow);
+
+   // Create two empty rows with placeholders
+   const placeholderRow1 = ['', ''];
+   const placeholderRow2 = ['', ''];
+   const placeholderRow3 = [];
+   for (const date of this.groupedSchedules1) {
+     placeholderRow1.push('Enter here section number');
+     placeholderRow1.push('');
+     
+     placeholderRow2.push('Enter here shlok name');
+     placeholderRow2.push('');
+
+     placeholderRow3.push('');
+     placeholderRow3.push('');
+   }
+   excelData.push(placeholderRow1);
+   excelData.push(placeholderRow2);
+   excelData.push(placeholderRow3);
+
+    // Create a row for 
+    const headerRow = ['Sr No', 'Location Name'];
+    for (const date of this.groupedSchedules1) {
+      headerRow.push('Reading');
+      headerRow.push('Attendance');
+    }
+    excelData.push(headerRow);
+  
+    // Create rows for each location and its data
+    for (let ind = 0; ind < this.groupedSchedules.length; ind++) {
+      const locationRow = [ind + 1, this.groupedSchedules[ind].location.locationName];
+      for (const schedule of this.groupedSchedules[ind].schedules) {
+        locationRow.push(schedule.members[0]?.firstName + ' ' + schedule.members[0]?.lastName);
+        locationRow.push(schedule.members[1]?.firstName + ' ' + schedule.members[1]?.lastName);
+      }
+      excelData.push(locationRow);
+    }
+  
+    /* Create a new workbook and add the worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(excelData);
+
+   // Merge only two columns by row wise
+  const numDates = this.groupedSchedules1.length;
+  for (let i = 0; i < numDates; i++) {
+    const startIndex = 2 + i * 2;
+    const endIndex = startIndex + 1;
+    const startCell = { r: 1, c: startIndex };
+    const endCell = { r: 1, c: endIndex };
+    ws['!merges'] = ws['!merges'] || [];
+    ws['!merges'].push({ s: startCell, e: endCell });
+  }
+   const numDates1 = this.groupedSchedules1.length;
+   for (let i = 0; i < numDates1; i++) {
+     const startIndex = 2 + i * 2;
+     const endIndex = startIndex + 1;
+     const startCell = { r: 2, c: startIndex };
+     const endCell = { r: 2, c: endIndex };
+     ws['!merges'] = ws['!merges'] || [];
+     ws['!merges'].push({ s: startCell, e: endCell });
+   }
+   const numDates2 = this.groupedSchedules1.length;
+   for (let i = 0; i < numDates2; i++) {
+     const startIndex = 2 + i * 2;
+     const endIndex = startIndex + 1;
+     const startCell = { r: 3, c: startIndex };
+     const endCell = { r: 3, c: endIndex };
+     ws['!merges'] = ws['!merges'] || [];
+     ws['!merges'].push({ s: startCell, e: endCell });
+   }
+  //  merge column
+  //  const numDates3 = this.groupedSchedules1.length;
+  //  for (let i = 0; i < numDates3; i++) {
+    //  const startIndex = 2 + i * 2;
+    //  const endIndex = startIndex + 1;
+     const startCell = { r: 0, c: 0};
+     const endCell = { r: 3, c: 1 };
+     ws['!merges'] = ws['!merges'] || [];
+     ws['!merges'].push({ s: startCell, e: endCell });
+  //  }
+
+    
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-    /* save to file */
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+    /* Save the Excel file */
     XLSX.writeFile(wb, this.fileName);
   }
-}
+}  
+
+// another structure
+// import { Component, OnInit } from "@angular/core";
+// import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
+// import * as XLSX from "xlsx";
+// import { ScheduleDataService } from "src/app/services/schedule-data.service";
+// import { group } from "console";
+// import { NgFor } from "@angular/common";
+// import { ActivatedRoute } from "@angular/router";
+// import { Schedule } from "src/app/Classes/schedule";
+
+// @Component({
+//   selector: "app-report",
+//   templateUrl: "./report.component.html",
+//   styleUrls: ["./report.component.css"],
+// })
+// export class ReportComponent implements OnInit {
+//   constructor(
+//     private scheduleDataService: ScheduleDataService,
+//     private route: ActivatedRoute
+//   ) {}
+
+//   totalSchedule: number = 0;
+//   schedules: any[] = [];
+//   groupedSchedules: any[] = [];
+//   groupedSchedules1: any[] = [];
+//   groupDate: any[] = [];
+//   a: any[] = [];
+//   b: any[] = [];
+
+//   Bhag: string = "";
+//   Shlok: string = "";
+//   inputWidth: number = 100;
+//   inputHeight: number = 100;
+//   datelength: number;
+
+//   ngOnInit() {
+//     // this.getData();
+//     this.route.queryParams.subscribe((params) => {
+//       const schduleArray:string=params["schedules"];
+    
+//       this.schedules = JSON.parse(schduleArray);
+//       this.totalSchedule = this.schedules.length;
+//       this.groupSchedulesByDate();
+//       this.groupSchedulesByLocation();
+//       this.groupSchedulesByDate();
+//       console.log(this.schedules);
+//     });
+//   }
+//   // getData() {
+//   //   // Fetch data from your service
+//   //   this.scheduleDataService.getAllData().subscribe((data: any[]) => {
+//   //     this.schedules = data;
+//   //     this.totalSchedule = data.length;
+//   //     // this.groupSchedulesByDate();
+//   //     this.groupSchedulesByLocation();
+//   //     this.groupSchedulesByDate();
+//   //     console.log(data);
+
+//   //   });
+//   // }
+
+//   groupSchedulesByLocation() {
+//     const groupedSchedules = [];
+//     this.schedules.forEach((schedule) => {
+//       const existingGroup = groupedSchedules.find(
+//         (group) => schedule.location.locationId === group.location?.locationId
+//       );
+//       if (existingGroup) {
+//         existingGroup.schedules.push(schedule);
+//         console.log(existingGroup.schedules);
+//         // console.log(group)
+//         console.log(groupedSchedules[0].date);
+//         console.log("groupedSchedules", groupedSchedules);
+//         console.log("schedule", schedule);
+
+//         this.groupDate.push(groupedSchedules[0]);
+//         console.log(this.groupDate);
+//       } else {
+//         groupedSchedules.push({
+//           location: schedule.location,
+//           date: schedule.date,
+//           schedules: [schedule],
+//         });
+//       }
+//     });
+//     this.groupedSchedules = groupedSchedules;
+//     console.log(this.groupedSchedules);
+//   }
+
+//   groupSchedulesByDate() {
+//     const groupedSchedules1 = [];
+//     this.schedules.forEach((schedule) => {
+//       const existingGroup = groupedSchedules1.find(
+//         (group) => group.date === schedule.date
+//       );
+//       if (existingGroup) {
+//         existingGroup.schedules.push(schedule);
+//         console.log(existingGroup.schedules);
+//         // console.log(group)
+//         console.log(groupedSchedules1[0].date);
+//         console.log("groupedSchedules", groupedSchedules1);
+//         console.log("schedule", schedule);
+//         console.log("existingGroup", existingGroup);
+
+//         this.groupDate.push(groupedSchedules1[0]);
+//         console.log(this.groupDate);
+//       } else {
+//         groupedSchedules1.push({ date: schedule.date, schedules: [schedule] });
+//       }
+//     });
+//     this.groupedSchedules1 = groupedSchedules1;
+//     this.a = groupedSchedules1[0].schedules;
+//     this.b = this.a[0].date;
+//     console.log("a", this.a);
+//     console.log("b", this.b);
+//   }
+
+//   onFocus() {
+//     this.inputWidth = 100;
+//     this.inputHeight = 100;
+//   }
+
+//   onBlur() {
+//     this.inputWidth = 100;
+//     this.inputHeight = 100;
+//   }
+
+//   convertToPDF() {
+//     const pdf = new jsPDF("landscape", "mm", "a3");
+//     html2canvas(document.getElementById("contentToConvert")).then((canvas) => {
+//       const contentDataURL = canvas.toDataURL("image/png");
+//       const width = pdf.internal.pageSize.getWidth();
+//       const height = canvas.height * (width / canvas.width);
+//       pdf.addImage(contentDataURL, "PNG", 0, 0, width, height);
+//       pdf.save("output.pdf");
+//     });
+//   }
+
+//   //For convert into excel
+//   fileName = "ExcelSheet.xlsx";
+//   exportexcel(): void {
+//     /* pass here the table id */
+//     let element = document.getElementById("pdfTable");
+//     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+//     const rowHeight = 100;
+
+//     ws["!rows"] = ws["!rows"] || [];
+//     ws["!rows"][0] = { hpt: rowHeight, hpx: rowHeight * 0.75 }; 
+
+//      // Set background color for the 1st row
+//      ws["A1"].s = { patternType: 'solid', fgColor: { rgb: 'Red' } }; // Yellow background
+
+//      // Set background color for the 4th row
+//      ws["A4"].s = { patternType: 'solid', fgColor: { rgb: 'FF0000' } }; // Red background
+
+//     /* generate workbook and add the worksheet */
+//     const wb: XLSX.WorkBook = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+//     /* save to file */
+//     XLSX.writeFile(wb, this.fileName);
+//   }
+// }
 
 // <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
 //   <div class="py-7 py-lg-8"></div>

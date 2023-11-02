@@ -1,46 +1,43 @@
+<!-- another structure -->
 <!-- 
-<div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+  
+  <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
   <div class="py-7 py-lg-8"></div>
                 <div id="contentToConvert">
                   <table id="pdfTable" style="text-align: center; width: 100%; height: 100%;" border="2">
                     <thead>
-                      <tr>
+                      <tr style="height: 100px;">
                         <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ totalSchedule }}</th>
                         <th colspan="3" style="color: rgba(232, 151, 2, 0.905); height: 55px; font-size: 30px; height: 50px;" ><b> !!!  SHRI SEVA  !!! </b></th>
-                      </tr>
-                      -- <tr>
-                        <th style="background-color: rgba(193, 166, 47, 0.638); color: black; width: 550px;">Date</th>
-                        <th style="background-color: rgba(193, 166, 47, 0.638); color: black;">&nbsp;</th>
-                        <th style="background-color: rgba(193, 166, 47, 0.638); color: black;">&nbsp;</th>
-                        <th style="background-color: rgba(193, 166, 47, 0.638); color: black;">&nbsp;</th>
-                      </tr> --
+                      </tr>                     
+                      
                       <tr>
                         <th style="background-color: rgb(195, 164, 164);color: black; ">Sr No</th>
-                        <th style="background-color: rgb(195, 164, 164); color: white;"></th>                      
+                        <th style="background-color: rgb(195, 164, 164); color: white;">Date</th>                      
                         <th style="background-color: rgb(195, 164, 164); color: black;">Location Name</th>
                         <th style="background-color: rgb(195, 164, 164);">Reading</th>
                         <th style="background-color: rgb(195, 164, 164);">Attendance</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <ng-container *ngFor="let group of groupedSchedules; let i = index">
+                      <ng-container *ngFor="let group of groupedSchedules1; let i = index">
+                        <tr><td>&nbsp;</td></tr>
                         <tr style="border: none;">                    
                           <td>&nbsp;</td>
                           <td colspan="1" >{{ group.date }}</td>
                           <td colspan="1" style="color: black; height: 100%;">
-                            <input  [style.width.%]="inputWidth" style="text-align: center;" placeholder="Enter here section number" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+                            <input  [style.width.%]="inputWidth" style="text-align: center;" placeholder="Enter here section number" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />Enter here section number
                             </td>
                           <td colspan="2" style="color: black; height: 100%;">
-                             <input  [style.width.%]="inputWidth" style="text-align: center;" placeholder="Enter here shlok name" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+                             <input  [style.width.%]="inputWidth" style="text-align: center;" placeholder="Enter here shlok name" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />Enter here shlok name
                              </td>
-                          -- <td>&nbsp;</td> --
                         </tr>
                         <tr *ngFor="let schedule of group.schedules; let j = index">                 
                           <td style="background-color: rgb(192, 222, 167);">{{ j + 1 }}</td>
-                          <td style="background-color: rgb(192, 222, 167);">&nbsp;</td>
+                          <td style="background-color: rgb(255, 255, 255);">&nbsp;</td>
                           <td style="background-color: rgb(192, 222, 167);">{{ schedule.location.locationName }}</td>
-                          <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0]?.firstName }}</td>
-                          <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[1]?.firstName }}</td>
+                          <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[0]?.firstName }} {{ schedule.members[0]?.lastName }}</td>
+                          <td style="background-color: rgb(192, 222, 167);">{{ schedule.members[1]?.firstName }} {{ schedule.members[1]?.lastName }}</td>
                         </tr>
                       </ng-container>
                     </tbody>
@@ -54,7 +51,7 @@
             </div> -->
 
 
-
+<!-- its original source code -->
 
             <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
               <div class="py-7 py-lg-8"></div>
@@ -62,12 +59,84 @@
                 <table id="pdfTable" style="text-align: center;" border="1">
                   <thead>
                     <tr >
-                      <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ totalSchedule }}</th>
+                      <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ groupedSchedules.length }}</th>
                       <th  colspan="2" *ngFor="let dates of groupedSchedules1">
                         <table>
                           <thead>
                             <tr>
                               <th style="background-color: white; color: black; width: 550px; height: 28px;"></th>
+                            </tr>
+                            <tr>
+                              <th style="background-color: rgba(193, 166, 47, 0.638); color: black;">{{dates.date}}</th>
+                              <th>&nbsp;</th>
+                            </tr>
+                            <tr>
+                              <th style="background-color: white; color: black; height: 100%;">
+                                <input  [style.width.%]="inputWidth" placeholder="Enter here section" style="border: none;" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+                              </th>
+                            </tr>
+                            <tr>
+                              <th style="color: black; height: 100%;">
+                                <input  [style.width.%]="inputWidth" placeholder="Enter here shlok name" style="background-color: rgb(188, 246, 188); border: none;" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
+                              </th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th style="background-color: rgb(195, 164, 164); color: white;">Sr No</th>
+                      <th style="background-color: rgb(195, 164, 164); color: white;">Location Name</th>
+
+                      <ng-container *ngFor="let group of groupedSchedules1">
+                              <th style="background-color: rgb(195, 164, 164); width: 150px; border: none;">Reading</th>
+                              <th style="background-color: rgb(195, 164, 164); width: 150px; border: none;">Attendance</th>                         
+                      </ng-container>
+                    </tr>
+                  </thead>
+                
+                <tbody>
+                  <tr *ngFor="let location of groupedSchedules; let ind=index;">
+                    <td>{{ind+1}}</td>  
+                    <td class="col-3">
+                      {{location.location.locationName}}
+                    </td>
+                    <td *ngFor="let schedule of location.schedules" colspan="2" style="background-color: rgb(192, 222, 167);" >
+                      <tr style="border: none; ">
+                        <td style="width: 150px;background-color: rgb(192, 222, 167); border: none;">
+                          {{schedule.members[0]?.firstName}} {{schedule.members[0]?.lastName}}
+                        </td>
+                        <td style="width: 150px; background-color: rgb(192, 222, 167); border: none;" >
+                          {{schedule.members[1]?.firstName}} {{schedule.members[1]?.lastName}}
+                        </td>
+                      </tr>
+                    </td>
+                  </tr>
+                </tbody> 
+                </table>                
+              </div><br><br>
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <input type="button" class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" style="margin-right: 10px;" />
+                <input type="button" class="btn-primary" style="background-color: rgb(48, 133, 48); margin-right: 10px;" value="Generate Excel" (click)="exportexcel()" />
+              </div>  
+            </div>
+            
+
+             <!-- for excel  -->
+             
+
+            <!-- <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+              <div class="py-7 py-lg-8"></div>
+              <div id="contentToConvert">
+                <table id="pdfTable" style="text-align: center;" border="1">
+                  <thead>
+                    <tr >
+                      <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ groupedSchedules.length }}</th>
+                      <th  colspan="2" *ngFor="let dates of groupedSchedules1">
+                        <table border="none">
+                          <thead>
+                            <tr>
+                              <th style="background-color: white; color: black; width: 570px; height: 28px;"></th>
                             </tr>
                             <tr>
                               <th style="background-color: rgba(193, 166, 47, 0.638); color: black;">{{dates.date}}</th>
@@ -119,8 +188,7 @@
                 </table>                
               </div><br><br>
               <div style="display: flex; justify-content: center; align-items: center;">
-                <input type="button" class="btn-primary" value="Generate Pdf" (click)="convertToPDF()" style="margin-right: 10px;" />
                 <input type="button" class="btn-primary" style="background-color: rgb(48, 133, 48); margin-right: 10px;" value="Generate Excel" (click)="exportexcel()" />
               </div>  
             </div>
-            
+             -->
