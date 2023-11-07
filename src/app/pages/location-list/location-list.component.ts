@@ -15,6 +15,8 @@ export class LocationListComponent implements OnInit {
   // sortedDefaultLocations: any[] = []; 
   public focus;
   searchText= '';
+  searchText1 ='';
+  searchText2 ='';
  
   
   constructor(

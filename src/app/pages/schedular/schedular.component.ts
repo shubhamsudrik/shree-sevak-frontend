@@ -20,6 +20,8 @@ export class SchedularComponent implements OnInit {
     defaultSchedules: Schedule[] = [];
     public focus;
     searchText: any;
+    searchText1: any;
+    searchText2: any;
     baithakList:Baithak[];
   baithakDataService: any;
 

@@ -14,6 +14,8 @@ export class MemberListComponent implements OnInit {
     defaultMembers: Member[] = [];
     public focus;
     searchText: any;
+    searchText1: any;
+    searchText2: any;
     
     constructor(
       private memberListService: MemberListService,

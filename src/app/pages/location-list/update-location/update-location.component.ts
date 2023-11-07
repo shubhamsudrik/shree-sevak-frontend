@@ -60,7 +60,8 @@ export class UpdateLocationComponent implements OnInit {
   initializeForm() {
     this.locationform = this.formBuilder.group({
       
-      locationName: [this.location?.locationName, Validators.required],         
+      locationName: [this.location?.locationName, Validators.required], 
+      area: [this.location?.area, Validators.required],          
       add1: [this.location?.add1, Validators.required],
       add2: [this.location?.add2, Validators.required],
       add3: [''],
@@ -113,7 +114,7 @@ export class UpdateLocationComponent implements OnInit {
       this.saveLocation();
       this.toaster.success("Location Updated Successfully !")
     } else {
-      this.toaster.warning('Please fill all fields');
+      this.toaster.warning('All field is mandatory.');
     }
   }
 

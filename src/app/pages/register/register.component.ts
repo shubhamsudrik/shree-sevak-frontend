@@ -18,6 +18,7 @@ import { LocationDataService } from 'src/app/services/location-data.service';
 export class RegisterComponent implements OnInit {
 
   registerform: FormGroup;
+  submitted = false;
 
   constructor(
     private router: Router,      
@@ -29,7 +30,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerform = this.fb.group({
       name: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
       photoUrl: [''],
       emailId: ['', [Validators.required]],
       password: [
@@ -45,7 +46,11 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  get registerFormControl() {
+    return this.registerform.controls;
+  }
   proceedregistration() {
+    this.submitted=true;
     if (this.registerform.valid) {
       if (this.registerform.get('password').value !== this.registerform.get('confirmPassword').value) {
         this.registerform.get('confirmPassword').setErrors({ passwordsDoNotMatch: true });
@@ -71,7 +76,7 @@ export class RegisterComponent implements OnInit {
         );
       }
     } else {
-      this.toast.error('Please enter valid data');
+      this.toast.warning('All field is mandatory.');
     }
   }
 

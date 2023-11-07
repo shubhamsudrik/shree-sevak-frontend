@@ -42,3 +42,13 @@ button-container {
   padding: 20mm; /* Add padding space within the content area */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow to content */
 }
+.custom-header-height {
+  height: 300px; /* Adjust the card height as needed */ 
+  display: flex; /* Enable Flexbox */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  overflow: hidden; /* To hide overflow content if needed */
+   /* margin-top: 5px; */ /* Adjust the margin-top value as needed */
+   /* margin-left: 40px; */
+   /* width: 1300px; */
+}

@@ -72,6 +72,7 @@ export class UpdateMemberComponent implements OnInit {
         addharNumber: [this.Member?.addharNumber, [Validators.required, Validators.minLength(12)]],
         panNo: [this.Member?.panNo, Validators.required],
         photoBase64: [this.Member?.photoBase64],
+        area: [this.Member?.area, Validators.required],
 
         add1: [this.Member?.add1, Validators.required],
         add2: [this.Member?.add2, Validators.required],
@@ -110,7 +111,7 @@ export class UpdateMemberComponent implements OnInit {
         
         ownBaithakDay: [this.Member?.ownBaithakDay, Validators.required],
         // ownBaithakId: [this.Member?.ownBaithakId, Validators.required], 
-        type: [this.Member?.type, Validators.required],         
+        // type: [this.Member?.type, Validators.required],         
         hajeriNo: [this.Member?.hajeriNo, Validators.required],
         hajeriNoDetails: [this.Member?.hajeriNoDetails],
         weeklyOffs: [this.Member?.weeklyOffs, Validators.required],
@@ -150,7 +151,7 @@ export class UpdateMemberComponent implements OnInit {
        this.toast.success("  Member Info Update Succesfully ")
       } else {
         // alert('Please fill all fields: कृपया सर्व फील्ड भरा');
-        this.toast.warning('Please fill all fields')
+        this.toast.warning('All field is mandatory.')
       }
     }
   

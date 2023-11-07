@@ -1,3 +1,11 @@
+<div class=" bg-gradient-danger py-7 py-lg-8 custom-header-height" style="margin-bottom: -300px;">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container-fluid mt--7 pb-8 pt-50 pt-md-8">
   <div class="row">
     <div class="col">
@@ -45,9 +53,14 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>    
               </div>
-              <input class="form-control" placeholder="{{ 'Search' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+              <input class="form-control col-md-4" placeholder="{{ 'Search city' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
               (blur)="focus = false">
-            </div >
+              <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+              (blur)="focus = false">
+              <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+              (blur)="focus = false">
+              </div>
+            
             <div class="form-group"><br>
             <ul class="nav nav-pills justify-content">
               <li class="nav-item mr-2 mr-md-0">
@@ -77,33 +90,33 @@
             </ul>
           </div>
         </div>
-        <div style="max-height: 500px; overflow-y: auto;">
+        <!-- <div style="max-height: 500px; overflow-y: auto;">
           <table class="table table-bordered">
-            <thead class="thead-light">
-        <!-- <div class="table-responsive " >
-          <table  class="table align-items-center table-flush ">
             <thead class="thead-light"> -->
+        <div class="table-responsive " >
+          <table  class="table align-items-center table-flush ">
+            <thead class="thead-light">
               <tr style="width: 10%;">
                 <th scope="col">{{'action'|translate}} </th>
-                <th scope="col">{{'locationId'|translate}}</th>
+                <th scope="col">{{'location Id'|translate}}</th>
                 <th scope="col">{{'location name'|translate}}</th>
                 <th scope="col">{{'address1'|translate}} </th>
                 <th scope="col">{{'address2'|translate}} </th>
                 <th scope="col">{{'division'|translate}} </th>
                 <th scope="col">{{'city'|translate}}</th>
                 <th scope="col">{{'state'|translate}} </th>
-                <th scope="col">{{'country'|translate}} </th>
+                <th scope="col">{{'Country'|translate}} </th>
+                <th scope="col">{{'Area'|translate}} </th>
                 <th scope="col">{{'pincode'|translate}} </th>
                
                 <!-- <th scope="col">{{'status'|translate}}</th> -->
               </tr>
             </thead>
-            </table>
-              <div style="max-height: 500px; overflow-y: auto;overflow-x: auto;">
-                <table class="table table-bordered">
+              <!-- <div style="max-height: 500px; overflow-y: auto;overflow-x: auto;">
+                <table class="table table-bordered"> -->
                     <tbody style="max-height: 500px; overflow: auto; overflow-x: scroll;">
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
-                <tr style="width: 10%;" *ngFor="let location of defaultLocations |filter:searchText; let i = index ">
+                <tr style="width: 10%;" *ngFor="let location of defaultLocations |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
 
                 <td>
                   <input type="radio" name="operation" (click)="toggleButtons('edit', location)" value="edit"  (change)="selectedRow = i">
@@ -113,10 +126,11 @@
                 <td>{{ location.locationName }}</td>
                 <td>{{ location.add1 }}</td>
                 <td>{{ location.add2 }}</td>
-                <td>{{ location.division }}</td>
+                <td>{{ location.division  }}</td>
                 <td>{{ location.city }}</td>
                 <td>{{ location.state }}</td>
                 <td>{{ location.country }}</td>
+                <td>{{ location.area }}</td>
                 <td>{{ location.pincode }}</td>
                
                 <!-- <td>{{ location.status }}</td> -->
@@ -124,7 +138,7 @@
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
-  </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
 <!-- </div> -->

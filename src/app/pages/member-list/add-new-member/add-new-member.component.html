@@ -4,10 +4,10 @@
   <!-- Page content -->
   <div class="container mt--8 pb-5">
   <!-- Table -->
-  <div class="row justify-content-center">
+  <div class="row justify-content-center ">
     <div class="col-lg-6 col-md-8">
       <div class="custom-width ">
-      <div class="card bg-secondary shadow border-0 w-500 ">
+      <div class="card shadow border-0 w-500 ">
         <div class="card-body px-lg-10 py-lg-5">
           
           <form role="form" [formGroup]="memberform" (ngSubmit)="onSubmit()" class="needs-validation">
@@ -39,10 +39,11 @@
                >
                  <option value="" disabled>Select initial</option>
                  <option value="Mr.">Mr.</option>
-                 <option value="Ms.">Ms.</option>
+                 <option value="Mrs.">Mrs.</option>
+                 <option value="Miss.">Miss.</option>  
                </select>
                <div class="invalid-feedback">
-                 {{ 'Initial is required.' | translate }}
+                 {{ 'This field is mandatory.' | translate }}
                </div>
              </div>
            </div>
@@ -69,7 +70,7 @@
                   maxlength="14" 
                     />
                     <div class="invalid-feedback">
-                      {{ 'First Name  is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
              </div>
@@ -93,7 +94,7 @@
                   maxlength="14" 
                     />
                     <div class="invalid-feedback">
-                      {{ 'Middle Name 1 is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
              </div>
@@ -118,7 +119,7 @@
                   maxlength="14" 
                     />
                     <div class="invalid-feedback">
-                      {{ 'Last Name is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
              </div>
@@ -147,7 +148,7 @@
                   maxlength="20" 
                     />
                     <div class="invalid-feedback">
-                      {{ 'Education is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
               </div>
@@ -172,7 +173,7 @@
                     maxlength="14" 
                       />
                       <div class="invalid-feedback">
-                        {{ 'occupationis required.' | translate }}
+                        {{ 'This field is mandatory.' | translate }}
                       </div>
                 </div>
                 </div>
@@ -196,7 +197,7 @@
                   }"
                     />
                     <div class="invalid-feedback">
-                      {{ 'Birth date is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
              </div>
@@ -225,7 +226,7 @@
                   <option value="Other">Other</option>
                 </select>
                 <div class="invalid-feedback">
-                  {{ 'gender is required.' | translate }}
+                  {{ 'This field is mandatory.' | translate }}
                 </div>
               </div>
              </div>
@@ -284,8 +285,8 @@
                      minlength="12"
                        />
                        <div class="invalid-feedback">
-                         <div *ngIf="MemberFormControl.addharNumber.errors?.required">{{ 'Addhar Number is required.' | translate }}</div>
-                         <div *ngIf="MemberFormControl.addharNumber.errors?.minlength">{{ 'Addhar Number must be at least 12 characters long.' | translate }}</div>
+                         <div *ngIf="MemberFormControl.addharNumber.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                         <div *ngIf="MemberFormControl.addharNumber.errors?.minlength">{{ 'Aaddhar number should be 12 digits.' | translate }}</div>
                        </div>
                  </div>
                 </div>
@@ -311,8 +312,8 @@
                      minlength="10"
                        />
                        <div class="invalid-feedback">
-                         <div *ngIf="MemberFormControl.panNo.errors?.required">{{ 'panNumber is required.' | translate }}</div>
-                         <div *ngIf="MemberFormControl.panNo.errors?.minlength">{{ 'panNumber must be 10 characters long.' | translate }}</div>
+                         <div *ngIf="MemberFormControl.panNo.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                         <div *ngIf="MemberFormControl.panNo.errors?.minlength">{{ 'Mobile number should be 10 digits' | translate }}</div>
                        </div>
                  </div>  
                  </div>
@@ -337,7 +338,38 @@
                     
               </div>
              </div>
-             </div>              
+             </div>
+             
+              <!-- Area -->
+              <div class="col">
+                <div class="form-group">
+                  <label for="area">{{ 'Area' | translate }}</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <select
+                      formControlName="area"
+                      type="text"
+                      class="form-control"
+                      id="area"
+                      name="area"
+                      [(ngModel)]="Member.area"
+                      [ngClass]="{
+                        'is-invalid': submitted && MemberFormControl.area.errors?.required
+                      }"                      
+                    >
+                    <option value="" disabled>Select Area</option>
+                    <option value="Chhatrpati shivaji nagar">Chhatrpati shivaji nagar</option>
+                    <option value="Peth area">Peth area</option>
+                    <option value="Pimpri">Pimpri</option>                      
+                  </select>
+
+                    <div class="invalid-feedback">
+                      This field is mandatory.
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+
              </div>
 
                <!-- Header -->
@@ -496,7 +528,7 @@
                   maxlength="20" 
                     />
                     <div class="invalid-feedback">
-                      {{ 'Address1  is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
              </div>
@@ -520,7 +552,7 @@
                   maxlength="20" 
                     />
                     <div class="invalid-feedback">
-                      {{ 'Address2  is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
              </div>
@@ -592,7 +624,7 @@
               <option value="Nagpur">Nagpur</option>
             </select>
             <div class="invalid-feedback">
-              {{ 'City is required.' | translate }}
+              {{ 'This field is mandatory.' | translate }}
             </div>
           </div>
          </div>
@@ -622,7 +654,7 @@
                 <option value="E">E</option>
               </select>
               <div class="invalid-feedback">
-                {{ 'Division is required.' | translate }}
+                {{ 'This field is mandatory.' | translate }}
               </div>
             </div>
           </div>
@@ -678,7 +710,7 @@
                    
             </select>
             <div class="invalid-feedback">
-              {{ 'State is required.' | translate }}
+              {{ 'This field is mandatory.' | translate }}
             </div>
           </div>
          </div>
@@ -704,7 +736,7 @@
               <option value="IN">IN</option>
             </select>
             <div class="invalid-feedback">
-              {{ 'Country is required.' | translate }}
+              {{ 'This field is mandatory.' | translate }}
             </div>
           </div>
          </div>
@@ -729,8 +761,8 @@
                     minlength="6"
                 />
                 <div class="invalid-feedback">
-                  <div *ngIf="MemberFormControl.pincode.errors?.required">{{ 'Pincode is required.' | translate }}</div>
-                  <div *ngIf="MemberFormControl.pincode.errors?.minlength">{{ 'Pincode must be at least 6 characters long.' | translate }}</div>
+                  <div *ngIf="MemberFormControl.pincode.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                  <div *ngIf="MemberFormControl.pincode.errors?.minlength">{{ 'Pincode should be 6 digits.' | translate }}</div>
                 </div>
             </div>
           </div>
@@ -828,8 +860,8 @@
                   minlength="10"
                     />
                     <div class="invalid-feedback">
-                      <div *ngIf="MemberFormControl.mobile.errors?.required">{{ 'Mobile number is required.' | translate }}</div>
-                      <div *ngIf="MemberFormControl.mobile.errors?.minlength">{{ 'Mobile number must be at least 10 characters long.' | translate }}</div>
+                      <div *ngIf="MemberFormControl.mobile.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                      <div *ngIf="MemberFormControl.mobile.errors?.minlength">{{ 'Mobile number should be 10 digits.' | translate }}</div>
                     </div>
               </div>
             </div>
@@ -873,7 +905,7 @@
                   }"
                     />
                     <div class="invalid-feedback">
-                      {{ 'Email is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
              </div>
@@ -910,7 +942,7 @@
                 </select>
                 
                 <div class="invalid-feedback">
-                  {{ 'vehicle Type is required.' | translate }}
+                  {{ 'This field is mandatory.' | translate }}
                 </div>
           </div>
         </div>
@@ -935,7 +967,7 @@
                 maxlength="14" 
                   />
                   <div class="invalid-feedback">
-                    {{ 'vehicle Details is required.' | translate }}
+                    {{ 'This field is mandatory.' | translate }}
                   </div>
             </div>
            </div>
@@ -977,7 +1009,7 @@
               <option value="Saturday">{{'Saturday'|translate}}</option>
             </select>
             <div class="invalid-feedback">
-              {{ 'ownBaithakDay is required.' | translate }}
+              {{ 'This field is mandatory.' | translate }}
             </div>
           </div>
          </div>
@@ -1012,7 +1044,7 @@
          
 
          <!-- type -->
-         <div class="row">
+         <!-- <div class="row">
        <div class="col-md-3">
         <div class="form-group">
          <label for="type">{{ 'Type' | translate }}</label>
@@ -1039,10 +1071,10 @@
              </div>
          </div>
          </div>
-     </div>
+     </div> -->
       <!-- hajeriNo -->
-         
-         <div class="col-md-3">
+         <div class="row">
+         <div class="col-md-4">
          <div class="form-group">
           <label for="hajeriNo">{{ 'Hajeri Number' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -1061,14 +1093,14 @@
                   maxlength="6"
               />
               <div class="invalid-feedback">
-                {{ 'Hajeri number is required.' | translate }}
+                {{ 'This field is mandatory.' | translate }}
               </div>
           </div>
           </div>
       </div>
        
          <!-- hajeriNoDetails -->
-         <div class="col-md-3">
+         <div class="col-md-4">
          <div class="form-group">
           <label for="hajeriNoDetails">{{ 'Hajeri Number Details' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
@@ -1088,7 +1120,7 @@
           </div>
          </div>
           <!-- weeklyOffs -->
-          <div class="col-md-3">
+          <div class="col-md-4">
           <div class="form-group">
             <label>{{ 'Weekly Offs' | translate }}</label><br>
             <div class="input-group input-group-alternative mb-3">
@@ -1114,7 +1146,7 @@
                 <option value="Saturday">{{'Saturday'|translate}}</option>
               </select>
               <div class="invalid-feedback">
-                {{ 'weeklyOffs is required.' | translate }}
+                {{ 'This field is mandatory.' | translate }}
               </div>
             </div>
            </div>
@@ -1148,11 +1180,6 @@
            </div>
            </div>  
              
-              <!-- Header -->
-             <div>
-              <h2 class="form-section-header text-center"> </h2>
-            </div>
-
              <!-- Button -->
              <div class="text-center"><br>
               <button type="submit" class="btn btn-success btn-lg mx-3" >{{'Save'|translate}}</button>

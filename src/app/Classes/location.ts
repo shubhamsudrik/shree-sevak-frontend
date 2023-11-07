@@ -2,6 +2,7 @@ export class Location{
     
     locationId : Number;
     locationName : string;
+    area : string;
     add1 : string;
     add2 : string;
     division : string;

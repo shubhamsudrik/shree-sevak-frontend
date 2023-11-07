@@ -52,7 +52,7 @@ export class UpdateBaithakComponent implements OnInit {
     this.saveBaithak();
     this.toast.success("Baithak update successfully");
     }else{
-      this.toast.warning("Please fill all fields");
+      this.toast.warning("All field is mandatory.");
     }
   }
   saveBaithak() {

@@ -58,6 +58,7 @@ export class AddNewMemberComponent implements OnInit {
       dob: [this.Member?.dob, Validators.required],
       gender: [this.Member?.gender, Validators.required],
       role: [this.Member?.role, Validators.required],
+      area: [this.Member?.area, Validators.required],
       addharNumber: ['', [Validators.required, Validators.minLength(12)]],
       panNo: ['', Validators.required],
       photoBase64: [''],
@@ -97,7 +98,7 @@ export class AddNewMemberComponent implements OnInit {
 	    eligibleForLadies:[''],
       
       ownBaithakDay: ['', Validators.required],
-      type: ['', Validators.required],          
+      // type: ['', Validators.required],          
       hajeriNo: ['', Validators.required],
       hajeriNoDetails: [''],
       weeklyOffs: ['', Validators.required],
@@ -137,7 +138,7 @@ export class AddNewMemberComponent implements OnInit {
       this.saveMember();
       this.toast.success("New Member Created successfully ")
     } else {
-      this.toast.warning('Please fill all fields');
+      this.toast.warning('All field is mandatory.');
     }
     
   }

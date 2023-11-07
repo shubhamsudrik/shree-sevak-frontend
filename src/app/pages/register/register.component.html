@@ -1,136 +1,193 @@
-<div class="header bg-gradient-danger py-7 py-lg-8">
-  <div class="container">
-    <div class="header-body text-center mb-7">
-      <div class="row justify-content-center">
-        <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Welcome!</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container mt--8 pb-4">
-  <div class="row justify-content-center">
-    <div class="col-lg-6 col-md-8 col-sm-10 col-12">
-      <div class="custom-width">
-        <div class="card bg-secondary shadow border-0">
-          <div class="card-body px-lg-5 py-lg-5">
-            <div class="text-center text-muted mb-4">
-              <small>Sign up with credentials</small>
-            </div>
+<div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
+  <div class="py-7 py-lg-8"></div>
+  <!-- Page content -->
+  <div class="container mt--8 pb-5 ">
+    <!-- Table -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="custom-width">
+        <div class="card shadow border-0 w-500">
+          <div class="card-body px-lg-5 py-lg-5 text-color">
+                      
           <form [formGroup]="registerform" (ngSubmit)="proceedregistration()">
-            <!-- Name -->
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                </div>
-                <input formControlName="name" class="form-control" placeholder="Enter full name" type="text">
-              </div>
-              <!-- Display validation error for name -->
-              <div *ngIf="registerform.get('name').invalid && registerform.get('name').touched" class="text-danger">
-                Name is required.
-              </div>
-            </div><br>
+            <h2 class="text-center">Register new user!</h2><br>
 
-            <!-- Mobile Number -->
+            <!-- Name -->            
+              <div class="col-md-12">
             <div class="form-group">
+              <label for="name">Full name*</label>
               <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+                <div class="input-group-prepend"></div>
+                <input
+                  formControlName="name"
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  [ngClass]="{
+                    'is-invalid': submitted && registerFormControl.name.errors?.required
+                  }"
+                  maxlength="30"
+                />
+                <div class="invalid-feedback">
+                  This field is mandatory.
                 </div>
-                <input formControlName="phoneNumber" class="form-control" placeholder="Mobile Number" type="text"
-                  (input)="validatePhoneNumber($event)">
               </div>
-              <!-- Display validation error for phoneNumber -->
-              <div *ngIf="registerform.get('phoneNumber').invalid && registerform.get('phoneNumber').touched" class="text-danger">
-                Mobile Number is required and must be 10 digits.
               </div>
-            </div><br>
+              </div>
 
-            <!-- Photo URL -->
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-single-02"></i></span>
-                </div>
-                <input formControlName="photoUrl" class="form-control" placeholder="Photo Url" type="string">
-              </div>
-            </div><br>
+               <!-- role -->            
+               <div class="col-md-12">
+                <div class="form-group">
+                  <label for="role">Role*</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <select
+                      formControlName="role"
+                      type="text"
+                      class="form-control"
+                      id="role"
+                      name="role"
+                      [ngClass]="{
+                        'is-invalid': submitted && registerFormControl.role.errors?.required
+                      }"
+                      maxlength="30"
+                    >
+                      <option value="Select role" disabled>Select role</option>
+                      <option value="user">User</option>
+                      <option value="Admin">Admin</option>
+                      <option value="SuperUser">Super User</option>                      
+                  </select>
+                    <div class="invalid-feedback">
+                      This field is mandatory.
+                    </div>
+                  </div>
+                  </div>
+                  </div>
 
-            <!-- role -->
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-single-02"></i>
-                  </span>
-                </div>
-                <select formControlName="role" class="form-control" placeholder="role" type="role"
-                >
-                <option value="" disabled>Select Role</option>
-                <option value="USER">User</option>
-                <option value="ADMIN">Admin</option>
-                <option value="SUPERADMIN">Superadmin</option>
-              </select>
-              </div>
-              <!-- Display validation error for role -->
-              <div *ngIf="registerform.get('role').invalid && registerform.get('role').touched" class="text-danger">
-                Role is required.
-              </div>
-            </div><br>
+               <!-- Mobile Number -->            
+               <div class="col-md-12">
+                <div class="form-group">
+                  <label for="phoneNumber">Mobile Number*</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <input
+                      formControlName="phoneNumber"
+                      type="text"
+                      class="form-control"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      [ngClass]="{
+                        'is-invalid': (submitted && (registerFormControl.phoneNumber.errors?.required || registerFormControl.phoneNumber.errors?.minlength))
+                      }"
+                      (input)="validatePhoneNumber($event)"
+                      maxlength="10"
+                    />
+                    <div class="invalid-feedback">
+                      <div *ngIf="registerFormControl.phoneNumber.errors?.required">This field is mandatory.</div>
+                      <div *ngIf="registerFormControl.phoneNumber.errors?.minlength">Mobile number should be 10 digits.</div>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
 
-            <!-- Email -->
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                </div>
-                <input formControlName="emailId" class="form-control" placeholder="Email" type="email">
-              </div>
-              <!-- Display validation error for emailId -->
-              <div *ngIf="registerform.get('emailId').invalid && registerform.get('emailId').touched" class="text-danger">
-                Valid Email is required.
-              </div>
-            </div><br>
+                  <!-- photoUrl -->            
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="photoUrl">Photo Url</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <input
+                      formControlName="photoUrl"
+                      type="text"
+                      class="form-control"
+                      id="photoUrl"
+                      name="photoUrl"                      
+                      maxlength="50"
+                    />
+                  </div>
+                  </div>
+                  </div>
 
-            <!-- Password -->
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                </div>
-                <input formControlName="password" class="form-control" placeholder="Password" type="password">
-              </div>
-              <!-- Display validation error for password -->
-              <div *ngIf="registerform.get('password').invalid && registerform.get('password').touched" class="text-danger">
-                Password should be capital,small letter & number.
-              </div>
-            </div>
+                   <!-- emailId -->            
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="emailId">Email*</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <input
+                      formControlName="emailId"
+                      type="text"
+                      class="form-control"
+                      id="emailId"
+                      name="emailId"
+                      [ngClass]="{
+                        'is-invalid': submitted && registerFormControl.emailId.errors?.required
+                      }"
+                      maxlength="30"
+                    />
+                    <div class="invalid-feedback">
+                      This field is mandatory.
+                    </div>
+                  </div>
+                  </div>
+                  </div>
 
-            <!-- Confirm Password -->
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                </div>
-                <input formControlName="confirmPassword" class="form-control" placeholder="Confirm Password"
-                  type="password">
-              </div>
-              <!-- Display validation error for confirmPassword -->
-             <div *ngIf="registerform.get('confirmPassword').invalid && registerform.get('confirmPassword').touched" class="text-danger">
-                Passwords do not match.
-              </div>
-            </div>
+                   <!-- password -->            
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="password">Password*</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <input
+                      formControlName="password"
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      name="password"
+                      [ngClass]="{
+                        'is-invalid': (submitted && (registerFormControl.password.errors?.required || registerFormControl.password.errors?.pattern))
+                      }"
+                    />
+                    <div class="invalid-feedback">
+                      This field is mandatory and Password should be capital,small letter & number.
+                    </div>
+                  </div>
+                  </div>
+                  </div>
 
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary mt-4">Create account</button><br><br>
+                   <!-- confirmPassword -->            
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm Password*</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <input
+                      formControlName="confirmPassword"
+                      type="text"
+                      class="form-control"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      [ngClass]="{
+                        'is-invalid': submitted && registerFormControl.confirmPassword.errors?.required
+                      }"
+                      maxlength="30"
+                    />
+                    <div class="invalid-feedback">
+                      This field is mandatory.
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+
+             <div class="text-center">
+              <button type="submit" class="btn btn-success mt-4">Create account</button><br><br>
               
-              <span class="inline-elements ">
-                <small>Already have an account? </small>
-                <a href="/login">Log in </a><small>Go to dashboard? </small>
-                <a class="nav-link nav-link-icon" routerLinkActive="active" class="text-blue" [routerLink]="['/dashboard']">dashboard</a>
-              </span>
-              
+              <span>
+                <small>Already have an account? Sign out this session and </small>
+                <a href="/login">sign in </a>
+                <!-- <a class="nav-link nav-link-icon" routerLinkActive="active" class="text-blue" [routerLink]="['/dashboard']">dashboard</a> -->
+              </span>              
             </div>
           </form>
         </div>
@@ -138,4 +195,5 @@
     </div>
     </div>
   </div>
+</div>
 </div>

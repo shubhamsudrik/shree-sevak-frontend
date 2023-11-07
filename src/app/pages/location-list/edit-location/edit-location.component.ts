@@ -40,6 +40,7 @@ export class EditLocationComponent implements OnInit {
 
     this.locationform = this.formBuilder.group({
       locationName: ['', Validators.required],
+      area: ['', Validators.required],
       add1: ['', Validators.required],
       add2: ['', Validators.required],
       city: ['', Validators.required],
@@ -100,7 +101,7 @@ export class EditLocationComponent implements OnInit {
       this.saveLocation();
       this.toast.success("Location Added successfully")
     } else {
-      this.toast.warning('Please fill all fields');
+      this.toast.warning('All field is mandatory.');
     }
   }
 

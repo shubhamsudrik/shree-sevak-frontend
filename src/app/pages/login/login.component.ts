@@ -19,12 +19,10 @@ export class LoginComponent implements OnInit {
 
   user: User;
 constructor(
-  private userService: UserDataService,
   private loginservice:LoginService,
   private toast: ToastrService,
   private  router: Router,){
   
-
 }
 
   ngOnInit(): void {
@@ -36,21 +34,17 @@ constructor(
      
       this.loginservice.generateToken(this.credentials).subscribe(
        (response:any)=>{
-        console.log(response)
-    
-      
-
+        console.log(response)        
 
   console.log(response.jwtToken)
   console.log(response.user.roles)
 
-
-  this.toast.success('Login successfully')
+  this.toast.success('Sign in successfully')
   this.loginservice.loginUser(response)
   this.router.navigate(['/dashboard']);
         console.log('hello')
         },error=>{
-          this.toast.error('Log in crediantial is incorrect')
+          this.toast.error('Sign in crediantial is incorrect')
           console.log(error);
         }
       )
@@ -58,8 +52,9 @@ constructor(
      
       console.log('We have to submit form to console');
     }else{
-      this.router.navigate(['/register']);
+      // this.router.navigate(['/register']);
       console.log('fields are empty');
+      this.toast.warning("Sign in crediantial is mandatory.")
     }
   }
 

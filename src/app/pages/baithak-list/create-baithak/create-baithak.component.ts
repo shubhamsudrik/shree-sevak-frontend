@@ -14,6 +14,7 @@ export class CreateBaithakComponent implements OnInit {
  
   baithakForm:FormGroup;
   baithak:Baithak=new Baithak();
+  
 
   constructor(
     private baithakService:BaithakDataService,
@@ -54,7 +55,7 @@ export class CreateBaithakComponent implements OnInit {
       this.saveBaithak();
       this.toast.success("Baithak created successfully!");
     } else {
-      this.toast.warning("Please fill all fields");
+      this.toast.warning("All field is mandatory.");
     }
 
   }

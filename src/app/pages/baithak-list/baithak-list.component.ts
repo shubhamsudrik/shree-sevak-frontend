@@ -16,6 +16,8 @@ export class BaithakListComponent implements OnInit {
   status: string;
   public focus;
   searchText: any;
+  searchText1: any;
+  searchText2: any;
 
   ngOnInit(): void {
     this.statusBaithak("1");

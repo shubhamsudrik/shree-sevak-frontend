@@ -18,3 +18,11 @@ button-container {
     padding-left: 950px;
     
   } */
+  .custom-header-height {
+    height: 300px; /* Adjust the card height as needed */ 
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    overflow: hidden; /* To hide overflow content if needed */
+     /* margin-top: 5px; */ /* Adjust the margin-top value as needed */
+}

@@ -1,4 +1,13 @@
-<div class="container-fluid mt--7 pb-8 pt-50 pt-md-8">
+<div class=" bg-gradient-danger py-7 py-lg-8 custom-header-height" style="margin-bottom: -300px;">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7 pb-8 pt-50 pt-md-8 ">
     <div class="row">
       <div class="col">
         <div class="card shadow">
@@ -29,13 +38,24 @@
               </li>
             </ul>            
                  <!-- search -->
-              <div class="input-group input-group-alternative">
+              <!-- <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>    
                 </div>
                 <input class="form-control" placeholder="{{ 'Search' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
                 (blur)="focus = false">
-              </div >
+              </div > -->
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>    
+                </div>
+                <input class="form-control col-md-4" placeholder="{{ 'Search city' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+                (blur)="focus = false">
+                <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+                (blur)="focus = false">
+                <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+                (blur)="focus = false">
+                </div>
 
               <!-- add new button -->
               <div class="form-group"><br>
@@ -78,7 +98,8 @@
                   <th scope="col">{{'Last Name'|translate}} </th>
                   <th scope="col">{{'Eligiblity'|translate}} </th>
                   <th scope="col">{{'Gender'|translate}} </th>
-                  <th scope="col">{{'Mobile number'|translate}} </th>                 
+                  <th scope="col">{{'Mobile number'|translate}} </th>     
+                  <th scope="col">{{'Area'|translate}} </th>            
                   <th scope="col">{{'Pincode'|translate}} </th>
                   <!-- <th scope="col">{{'Status'|translate}} </th>    -->
                   
@@ -86,7 +107,7 @@
               </thead>
               <tbody>
                 <!-- <tr *ngFor="let location of defaultMembers; trackBy: trackLocationByIndex"> -->
-                  <tr *ngFor="let member of defaultMembers |filter:searchText; let i = index ">
+                  <tr *ngFor="let member of defaultMembers |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
   
                   <td>
                     <input type="radio" name="operation" (click)="toggleButtons('edit', member)" value="edit"  (change)="selectedRow = i">
@@ -106,6 +127,7 @@
                   <td>{{ member.eligibleForChild ? 'Child ' : '' }} {{ member.eligibleForGents ? 'Gents ' : '' }} {{ member.eligibleForLadies ? 'Ladies ' : ''}}</td>
                   <td>{{ member.gender }}</td>
                   <td>{{ member.mobile }}</td>                 
+                  <td>{{ member.area }}</td> 
                   <td>{{ member.pincode }}</td> 
                           
                 </tr>

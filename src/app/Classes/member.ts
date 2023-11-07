@@ -1,6 +1,7 @@
 export class Member {
 
     memberId :number;
+	area : string;
 	eligible:string;
 	firstName:string;
     middleName:string;

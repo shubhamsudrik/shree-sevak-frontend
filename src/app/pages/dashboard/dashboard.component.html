@@ -23,7 +23,10 @@
                   <!-- end -->           
 
                  
-                  <h5 class="card-title text-uppercase text-muted mb-0 ">Location</h5><br>
+                  <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/location-list']">
+                  <!-- <i class="ni ni-key-25"></i>  -->
+                  <span class="nav-link-inner--text" style="font-size: x-large; color: black;">Active Location</span>
+                  </a>
                   <span class="h2 font-weight-bold mb-0">{{locCount}}</span>
                 </div>
                 <div class="col-auto">
@@ -45,7 +48,10 @@
             <div class="card-body"  style="height: 150px;">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Member</h5><br>
+                  <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/member-list']">
+                    <!-- <i class="ni ni-key-25"></i>  -->
+                    <span class="nav-link-inner--text" style="font-size: x-large; color: black;">Active Member</span>
+                    </a>
                   <span class="h2 font-weight-bold mb-0">{{memberCount}}</span>
                 </div>
                 <div class="col-auto">
@@ -66,7 +72,10 @@
             <div class="card-body"  style="height: 150px;">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Baithak</h5><br>
+                  <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/schedular']">
+                    <!-- <i class="ni ni-key-25"></i>  -->
+                    <span class="nav-link-inner--text" style="font-size: x-large; color: black;">Scheduled Baithak</span>
+                    </a>
                   <span class="h2 font-weight-bold mb-0">{{scheduleCount}}</span>
                 </div>
                 <div class="col-auto">

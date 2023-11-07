@@ -1,3 +1,11 @@
+<div class=" bg-gradient-danger py-7 py-lg-8 custom-header-height" style="margin-bottom: -300px;">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container-fluid mt--7 pb-8 pt-50 pt-md-8">
   <div class="row">
     <div class="col">
@@ -38,15 +46,17 @@
             </li>
           </ul>
           
-          
-
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>    
-              </div>
-              <input class="form-control" placeholder="{{ 'Search'  }}"  [(ngModel)]="searchText" type="text" 
-              >
-            </div >
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>    
+            </div>
+            <input class="form-control col-md-4" placeholder="{{ 'Search city' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+            (blur)="focus = false">
+            <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+            (blur)="focus = false">
+            <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+            (blur)="focus = false">
+            </div>
             <div class="form-group"><br>
             <ul class="nav nav-pills justify-content">      
               <li class="nav-item mr-2 mr-md-0">
@@ -86,7 +96,7 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">{{'action' | translate}} </th>
-                <th scope="col">{{'BaithakID' | translate}}</th>
+                <th scope="col">{{'Baithak ID' | translate}}</th>
                 <th scope="col">{{'BaithakType' | translate}}</th>
                 <th scope="col">{{' Day' | translate}} </th>                
                 <th scope="col">{{' StarTime' | translate}} </th>
@@ -96,7 +106,7 @@
             </thead>
             <tbody>
               <!-- <tr *ngFor="let baithak of baithakList; trackBy: trackLocatByIndex"> -->
-                <tr *ngFor="let baithaData of baithakList |filter:searchText; let i = index ">
+                <tr *ngFor="let baithaData of baithakList |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
 
                 <td>
                   <input type="radio" name="operation" (click)="toggleButtons('edit', baithaData)" value="edit"  (change)="selectedRow = i">

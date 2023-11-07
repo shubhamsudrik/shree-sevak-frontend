@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
         <div class="custom-width">
-        <div class="card bg-secondary shadow border-0 w-500">
+        <div class="card shadow border-0 w-500">
           <div class="card-body px-lg-5 py-lg-5 text-color">
             <h2 class="text-center">{{ ' Create Baithak Record!' | translate }}</h2><br>
             <form role="form" [formGroup]="baithakForm" (ngSubmit)="onSubmit()">
@@ -25,10 +25,14 @@
                 >
                   <option value="" disabled>Select Baithak</option>
                   <option value="Child">Child</option>
-                  <option value="Man">Man</option>
-                  <option value="Woman">Woman</option>
+                  <option value="Gents">Gents</option>
+                  <option value="Ladies">Ladies</option>
                   <option value="Any">Any</option>
                 </select>
+                <div class="text-danger" *ngIf="baithakForm.get('baithakType').hasError('required')">
+                  This field is mandatory.
+                </div>
+                
               </div>
 
               <!-- day of week  -->
@@ -51,6 +55,10 @@
                   <option value="Friday">Friday</option>
                   <option value="Saturday">Saturday</option>
                 </select>
+                <div class="text-danger" *ngIf="baithakForm.get('dayOfWeek').hasError('required')">
+                  This field is mandatory.
+                </div>
+                
               </div>
 
 
@@ -80,6 +88,9 @@
                   name="from-time"
                   [(ngModel)]="baithak.fromTime"
                 />
+                <div class="text-danger" *ngIf="baithakForm.get('fromTime').hasError('required')">
+                  This field is mandatory.
+                </div>
                 <ngx-material-timepicker #picker></ngx-material-timepicker>
               </div>
 
@@ -93,6 +104,9 @@
                   name="to-time"
                   [(ngModel)]="baithak.toTime"
                 />
+                <div class="text-danger" *ngIf="baithakForm.get('toTime').hasError('required')">
+                  This field is mandatory.
+                </div>
                 <ngx-material-timepicker #picker1></ngx-material-timepicker>
               </div>
 
@@ -109,6 +123,9 @@
                   <option value="1">{{ "Active" | translate }}</option>
                   <option value="0">{{ "Inactive" | translate }}</option>
                 </select>
+                <div class="text-danger" *ngIf="baithakForm.get('status').hasError('required')">
+                  This field is mandatory.
+                </div>
               </div>
 
               <div><br>

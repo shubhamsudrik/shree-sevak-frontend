@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
         <div class="custom-width">
-        <div class="card bg-secondary shadow border-0 w-500">
+        <div class="card shadow border-0 w-500">
           <div class="card-body px-lg-5 py-lg-5 text-color">
            
             <form [formGroup]="locationform" (ngSubmit)="onSubmit()">
@@ -19,7 +19,7 @@
 
               <!-- Location Name -->
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
               <div class="form-group">
                 <label for="locationName">{{ 'Location' | translate }}</label>
                 <div class="input-group input-group-alternative mb-3">
@@ -37,12 +37,41 @@
                     maxlength="30"
                   />
                   <div class="invalid-feedback">
-                    Location name is required.
+                    This field is mandatory.
                   </div>
                 </div>
                 </div>
                 </div>
 
+                 <!-- Area -->
+                 <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="area">{{ 'Area' | translate }}</label>
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <select
+                        formControlName="area"
+                        type="text"
+                        class="form-control"
+                        id="area"
+                        name="area"
+                        [(ngModel)]="location.area"
+                        [ngClass]="{
+                          'is-invalid': submitted && locationFormControl.area.errors?.required
+                        }"                      
+                      >
+                      <option value="" disabled>Select Area</option>
+                      <option value="Chhatrpati Shivaji">Chhatrpati Shivaji</option>
+                      <option value="Peth area">Peth area</option>
+                      <option value="Pimpri">Pimpri</option>                      
+                    </select>
+
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
+                    </div>
+                    </div>
+                    </div>
               </div>
 
               <!-- add 1 -->
@@ -65,7 +94,7 @@
                     maxlength="30"
                   />
                   <div class="invalid-feedback">
-                    Address-1 is required.
+                    This field is mandatory.
                   </div>
                 </div>
                 </div>
@@ -90,7 +119,7 @@
                     maxlength="30"
                   />
                   <div class="invalid-feedback">
-                    Address-2  is required.
+                    This field is mandatory.
                   </div>
                   </div>
                 </div>
@@ -111,14 +140,10 @@
                      id="add3"
                     name="add3"
                     [(ngModel)]="location.add3"
-                    [ngClass]="{
-                     'is-invalid': (submitted && locationFormControl.add3.errors?.required)
-                    }"
+                    
                     maxlength="20" 
                       />
-                      <div class="invalid-feedback">
-                        {{ 'Address 3 is required.' | translate }}
-                      </div>
+                      
                 </div>
                 </div>                
                </div>
@@ -170,7 +195,7 @@
                     <option value="Nagpur">Nagpur</option>
                   </select>
                   <div class="invalid-feedback">
-                    City is required.
+                    This field is mandatory.
                   </div>
                 </div>
                 </div>
@@ -201,7 +226,7 @@
                     <option value="E">E</option>
                   </select>
                   <div class="invalid-feedback">
-                    Division is required.
+                    This field is mandatory.
                   </div>
                  </div>
                 </div>
@@ -256,7 +281,7 @@
                                 
                   </select>
                   <div class="invalid-feedback">
-                    State is required.
+                    This field is mandatory.
                   </div>
                 </div>
                 </div>
@@ -283,7 +308,7 @@
                     <option value="IN">IN</option>
                   </select>
                   <div class="invalid-feedback">
-                    Country is required.
+                    This field is mandatory.
                   </div>
                 </div>
               </div>
@@ -310,8 +335,8 @@
                     (input)="validatePincode($event)"
                   />
                   <div class="invalid-feedback">
-                    <div *ngIf="locationFormControl.pincode.errors?.required">{{ 'Pincode is required.' | translate }}</div>
-                    <div *ngIf="locationFormControl.pincode.errors?.minlength">{{ 'Pincode must be at least 6 characters long.' | translate }}</div>
+                    <div *ngIf="locationFormControl.pincode.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                    <div *ngIf="locationFormControl.pincode.errors?.minlength">{{ 'Pincode should be 6 digits' | translate }}</div>
                   </div>
                 </div>
                 </div>
@@ -402,7 +427,7 @@
                      <option value="0">{{ 'Inactive' | translate }}</option>
                    </select>
                    <div class="invalid-feedback">
-                     Status is required.
+                    This field is mandatory.
                    </div>
                  </div>
                </div>
@@ -436,10 +461,11 @@
            >
              <option value="" disabled>Select initial</option>
              <option value="Mr.">Mr.</option>
-             <option value="Ms.">Ms.</option>
+             <option value="Mrs.">Mrs.</option>
+             <option value="Miss.">Miss.</option>             
            </select>
            <div class="invalid-feedback">
-             {{ 'Initial is required.' | translate }}
+             {{ 'This field is mandatory.' | translate }}
            </div>
          </div>
        </div>
@@ -463,7 +489,7 @@
                   maxlength="25" 
                     />
                     <div class="invalid-feedback">
-                      {{ 'contact1 Name is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
               </div>
              </div>
@@ -513,8 +539,8 @@
               minlength="10"
                 />
                 <div class="invalid-feedback">
-                  <div *ngIf="locationFormControl.contact1Phone1.errors?.required">{{ 'contact1 Phone1 is required.' | translate }}</div>
-                  <div *ngIf="locationFormControl.contact1Phone1.errors?.minlength">{{ 'contact1 Phone1 must be at least 10 characters long.' | translate }}</div>
+                  <div *ngIf="locationFormControl.contact1Phone1.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                  <div *ngIf="locationFormControl.contact1Phone1.errors?.minlength">{{ 'Mobile number should be 10 digits' | translate }}</div>
                 </div>
                 </div>
           </div>
@@ -557,7 +583,7 @@
                   }"
                     />
                     <div class="invalid-feedback">
-                      {{ 'contact1 Email is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
                     </div>
                     </div>
@@ -592,10 +618,11 @@
            >
              <option value="" disabled>Select initial</option>
              <option value="Mr.">Mr.</option>
-             <option value="Ms.">Ms.</option>
+             <option value="Mrs.">Mrs.</option>
+             <option value="Miss.">Miss.</option>  
            </select>
            <div class="invalid-feedback">
-             {{ 'Initial is required.' | translate }}
+             {{ 'This field is mandatory.' | translate }}
            </div>
          </div>
        </div>
@@ -620,7 +647,7 @@
                   maxlength="25" 
                     />
                     <div class="invalid-feedback">
-                      {{ 'contact2 Name is required.' | translate }}
+                      {{ 'This field is mandatory.' | translate }}
                     </div>
                     </div>
                     </div>
@@ -649,8 +676,8 @@
               minlength="10"
                 />
                 <div class="invalid-feedback">
-                  <div *ngIf="locationFormControl.contact2Phone1.errors?.required">{{ 'contact2 Phone1 is required.' | translate }}</div>
-                  <div *ngIf="locationFormControl.contact2Phone1.errors?.minlength">{{ 'contact2 Phone1 must be at least 10 characters long.' | translate }}</div>
+                  <div *ngIf="locationFormControl.contact2Phone1.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                  <div *ngIf="locationFormControl.contact2Phone1.errors?.minlength">{{ 'Mobile number should be 10 digits' | translate }}</div>
                 </div>
                 </div>
           </div>
@@ -692,7 +719,7 @@
                   }"
                     />
                     <div class="invalid-feedback">
-                      {{ 'contact2 Email is required.' | translate }}
+                      {{ ' This field is mandatory.' | translate }}
                     </div>
                     </div>
                     </div>
@@ -726,11 +753,6 @@
           </div>
          </div>
 
-         <!-- Header -->
-         <div>
-          <h2 class="form-section-header text-center"></h2>
-        </div>
-             
               <!-- Button -->
               <div class="text-center"><br />
                 <button type="submit" class="btn btn-success btn-lg mx-2">{{ 'Save' | translate }}</button>
