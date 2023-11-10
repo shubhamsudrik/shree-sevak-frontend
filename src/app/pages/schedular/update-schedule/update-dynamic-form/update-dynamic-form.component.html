@@ -124,7 +124,7 @@
       <option disabled>Select Reader memeber</option>
 
       <option *ngFor="let reader of vachanMembers" [value]="reader.memberId">
-        {{ reader.firstName }}
+        {{ reader.firstName }}{{ reader.lastName }}
       </option>
     </select>
 
@@ -142,7 +142,7 @@
       <option disabled>Select writer member</option>
 
       <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
-        {{ writer.firstName }}
+        {{ writer.firstName }}  {{ writer.lastName }}
       </option>
     </select>
     <!-- Get Reader data dropdown -->

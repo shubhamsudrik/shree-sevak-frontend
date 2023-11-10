@@ -22,7 +22,7 @@ export class UserDataService {
   roleMatch(allowedRoles): boolean {
     let isMatch = false;
     const userRoles: any = this.loginservice.getRoles();
-    console.log(userRoles);
+    // console.log(userRoles);
     if (userRoles != null && userRoles) {
       for (let i = 0; i < userRoles.length; i++) {
         for (let j = 0; j < allowedRoles.length; j++) {

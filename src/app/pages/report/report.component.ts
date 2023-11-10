@@ -601,10 +601,11 @@ export class ReportComponent implements OnInit {
       const schduleArray:string=params["schedules"];
     
       this.schedules = JSON.parse(schduleArray);
-      this.totalSchedule = this.schedules.length;
+    
       this.groupSchedulesByDate();
       this.groupSchedulesByLocation();
       this.groupSchedulesByDate();
+      this.totalSchedule = this.schedules.length;
       console.log(this.schedules);
     });
   }
