@@ -93,22 +93,22 @@
                   {{menuItems[1].title}}
               </a>
           </li>
-          <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[2].class}} nav-item">
-              <a  routerLinkActive="active" [routerLink]="[menuItems[2].path]" class="nav-link" >
-                  <i class="ni {{menuItems[2].icon}}"></i>
-                  {{menuItems[2].title}}
-              </a>
-          </li>
-          <li class="{{menuItems[3].class}} nav-item">
+          <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[3].class}} nav-item">
               <a  routerLinkActive="active" [routerLink]="[menuItems[3].path]" class="nav-link" >
                   <i class="ni {{menuItems[3].icon}}"></i>
                   {{menuItems[3].title}}
               </a>
           </li>
+          <li class="{{menuItems[2].class}} nav-item">
+              <a  routerLinkActive="active" [routerLink]="[menuItems[2].path]" class="nav-link" >
+                  <i class="ni {{menuItems[2].icon}}"></i>
+                  {{menuItems[2].title}}
+              </a>
+          </li>
           <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[4].class}} nav-item">
               <a  routerLinkActive="active" [routerLink]="[menuItems[4].path]" class="nav-link" >
                   <i class="ni {{menuItems[4].icon}}"></i>
-                  {{menuItems[4].title}}
+                  {{menuItems[4].title}}  
               </a>
           </li>
           <li class="{{menuItems[5].class}} nav-item">
