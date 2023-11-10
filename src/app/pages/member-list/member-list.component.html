@@ -49,11 +49,11 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>    
                 </div>
-                <input class="form-control col-md-4" placeholder="{{ 'Search city' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+                <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
                 (blur)="focus = false">
-                <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+                <input class="form-control col-md-4" placeholder="{{ 'Search eligiblity' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
                 (blur)="focus = false">
-                <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+                <input class="form-control col-md-4" placeholder="{{ 'Search name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
                 (blur)="focus = false">
                 </div>
 
@@ -107,7 +107,7 @@
               </thead>
               <tbody>
                 <!-- <tr *ngFor="let location of defaultMembers; trackBy: trackLocationByIndex"> -->
-                  <tr *ngFor="let member of defaultMembers |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
+                  <tr *ngFor="let member of pagedMembers |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
   
                   <td>
                     <input type="radio" name="operation" (click)="toggleButtons('edit', member)" value="edit"  (change)="selectedRow = i">
@@ -117,24 +117,22 @@
                   <td>{{ member.firstName }}</td>
                   <td>{{ member.middleName }}</td>
                   <td>{{ member.lastName }}</td>
-                  <!-- <td>
-                    <ng-container *ngIf="member.eligibleForGents">
-                      Gent
-                    </ng-container>
-                  </td> -->
-                  
-                 
                   <td>{{ member.eligibleForChild ? 'Child ' : '' }} {{ member.eligibleForGents ? 'Gents ' : '' }} {{ member.eligibleForLadies ? 'Ladies ' : ''}}</td>
                   <td>{{ member.gender }}</td>
                   <td>{{ member.mobile }}</td>                 
                   <td>{{ member.area }}</td> 
-                  <td>{{ member.pincode }}</td> 
-                          
+                  <td>{{ member.pincode }}</td>                           
                 </tr>
               </tbody>
-            </table>
-          </div>
+            </table>                      
+          </div>          
         </div>
+        <small><mat-paginator class="justify-content-md-end"
+            [length]="defaultMembers.length"
+            [pageIndex]="currentPage"
+            [pageSizeOptions]="[10]"
+            (page)="onPageChange($event)"
+          ></mat-paginator></small>
       </div>
     </div>
    </div> 

@@ -44,12 +44,16 @@ import { ScheduleLadiesBaithakComponent } from './pages/schedular/schedule-ladie
 import { DynamicformComponent } from './pages/schedular/add-schedular/dynamicform/dynamicform.component';
 import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/update-dynamic-form/update-dynamic-form.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 // import { ComponentComponent } from './pages/component/component.component';
 
 
-@NgModule({
+@NgModule
+({
   imports: [
+    MatPaginatorModule,
     NgxMaterialTimepickerModule,
     TranslateModule,
     BrowserAnimationsModule,
@@ -110,8 +114,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ScheduleLadiesBaithakComponent,
     DynamicformComponent,
     UpdateDynamicFormComponent,
-   
-   
   
     // ComponentComponent
   ],

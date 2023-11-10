@@ -1,22 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Location } from 'src/app/Classes/location';
 import { MemberListService } from 'src/app/services/member-list.service';
 import { Member } from 'src/app/Classes/member';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-import htmlToPdfmake from 'html-to-pdfmake';
 import { LocService } from 'src/app/services/loc.service';
-import jsPDF from 'jspdf';
 import { Router } from '@angular/router';
-import { SchedularComponent } from '../schedular/schedular.component';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
-import { LoginService } from 'src/app/services/login.service';
-import { UserDataService } from 'src/app/services/user-data.service';
-
-
+import { chartExample1 } from 'src/app/variables/charts';
+import Chart from 'chart.js';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -24,13 +14,17 @@ import { UserDataService } from 'src/app/services/user-data.service';
 })
 export class DashboardComponent implements OnInit {
 
+  @ViewChild('chartSalesCanvas', { static: true }) chartSalesCanvas: ElementRef;
+
+  public datasets: any;
+  public data: any;
+  public salesChart;
+
 constructor(
   private router: Router,
   private memberListService: MemberListService,
   private locService: LocService,
   private scheduleDataService : ScheduleDataService,
-  private login : LoginService,
-  private userDataService: UserDataService
 ){}
 
   defaultLocations: Location[] = [];
@@ -42,6 +36,8 @@ constructor(
   memberCount: number ;
   locCount: number ;
   scheduleCount: number;
+  a= 0;
+  sum;
 
   ngOnInit() {
     this.getMemberList();
@@ -57,17 +53,57 @@ constructor(
         localStorage.removeItem('token');
         console.log('Token removed from localStorage.');
         this.router.navigate(['/login']);
-      }, 600000);
-    }
+      }, 6000000);
 
+
+    this.datasets = [1,2,3,4,5,6,7,8,9]
+
+    console.log(this.datasets)
+    this.data = this.datasets;
+        
+   const memberIndexToShow = 0;
+
+   if (this.chartSalesCanvas) {
+    var chartSales = this.chartSalesCanvas.nativeElement;
+
+    this.salesChart = new Chart(chartSales, {
+      type: 'line',
+      options: chartExample1.options,
+      data: chartExample1.data
+    });
+
+    // Update the chart data
+    if (this.salesChart) {
+      this.salesChart.data.datasets[0].data = this.data;
+      this.salesChart.update();
+    }
+  }
+}
+
+
+// Function to update the chart
+updateChart() {
+  if (this.salesChart) {
+    this.salesChart.data.datasets[0].data = this.data;
+    this.salesChart.update();
+  }
+}
 
   //get active member data
   private getMemberList(){
     this.memberListService.getMemberList().subscribe(
       (data: Member[]) => {
         this.defaultMembers =data;
+        console.log(this.defaultMembers)
+        console.log(this.defaultMembers)
         this.memberCount=this.defaultMembers.length;
       
+        // Print the index numbers of the elements
+    for (let i = 0; i < this.defaultMembers.length; i++) {
+     this.sum = this.a+i
+      console.log(`Index ${i}:`);
+      console.log(this.sum)
+    }
       },)
   }
   //get all schedule data
@@ -87,121 +123,110 @@ constructor(
       this.locService.getLocationList().subscribe(
         (data:any[]) => {
           this.locdata=data;
+          console.log(this.locdata)
           this.locCount=this.locdata.length;
           console.log(data)
          } )
     }
-
-
-    // generatePDFReport() {
-    //   // Create a new jsPDF instance with A3 page size (you can set other options as needed)
-    //   const doc = new jsPDF('landscape', 'mm', 'a3');
-    
-    //    // Calculate the center of the page
-    //    const centerX = doc.internal.pageSize.width / 2;
-
-       
-    //   // Fetch data from your service
-    //   this.locService.getLocationList().subscribe(
-    //     (data: any[]) => {
-    //       console.log(data);
-    //       // Generate the PDF content based on your data
-    //       doc.text('Children Baithak Report', centerX, 10,{align:'center'});
-    //       doc.text('Location Name:', 10, 20); 
-    //       doc.text('Add1:', 60, 20); // Add the header
-    
-    //       // Define cell dimensions
-    //       const cellWidth = 40;
-    //       const cellHeight = 10;
-
-    //       // Add your data to the PDF content
-    //       let yPos = 30;     //adjust table height from header
-    //       data.forEach((location) => {
-
-    //          // Add borders
-    //         doc.rect(10, yPos, cellWidth, cellHeight); // for column size
-    //         doc.rect(50, yPos, cellWidth, cellHeight);
-    //         doc.rect(90, yPos, cellWidth, cellHeight);
-
-    //         // Add data to the cells
-    //         doc.text(location.locationName, 15, yPos+5);    //10 for text right-align       
-    //         doc.text(location.add1, 55, yPos+5); // add 50 for next column
-
-
-    //         yPos += cellHeight; // Increase the y-position to move to the next line
-    //       });
-    
-    //       // Save or open the PDF
-    //       doc.save('report.pdf');
-    //     }
-    //   );
-    // }
-
-
-  
-  //   title = 'htmltopdf';
-  //   spac = ' ';
-  //   space ='                                               .';
-
-  //   @ViewChild('pdfTable') pdfTable: ElementRef;
-  //   serialNumber: number = 1; 
-  //   totalLocations: number = 0; // Initialize the total count
-  
-  //   public downloadAsPDF() {
-  //     const doc = new jsPDF('landscape', 'mm', 'a3'); // Set A3 page size and landscape orientation
-  
-  //     // Fetch data from your service
-      
-  //     this.locService.getLocationList().subscribe(
-  //       (data: any[]) => {
-  //         console.log(data);
-
-  //         // Count the total number of locations
-  //       this.totalLocations = data.length;
-  //       this.serialNumber = 1;
-  
-  //         // Create an HTML table to display data
-          
-  //         let tableHtml = `<table>
-  //             <thead style="text-align: center;">
-  //               <tr >
-  //                <th colspan="2" style="background-color: white; text-center color: black;">Total Location: ${data.length}</th>
-  //               <th>
-  //                 <table>     
-  //                     <tr><th style="background-color: white; color: black; ">${this.spac}</th></tr>              
-  //                     <tr><th style="background-color: yellow; color: black;">Date: ${new Date().toLocaleDateString()}${this.space}</th></tr>
-  //                     <tr><th style="background-color: white; color: black; ">Section 2 ${this.spac}</th></tr>                    
-  //                     <tr><th style="background-color: green; color: black;">${this.spac}</th></tr>  
-  //                 </table>                    
-  //               </th>                
-  //               </tr>
-  //               <tr>
-  //                 <th>Sr No</th>
-  //                 <th>Location Name</th>
-  //                 <th>Add1</th>
-  //               </tr>
-  //             </thead>
-  //             <tbody>`;
-  //           data.forEach((location) => {
-  //             tableHtml += `<tr><td>${this.serialNumber}</td><td>${location.locationName}</td><td>${location.add1}</td></tr>`;
-  //             this.serialNumber++; // Increment the serial number for the next row
-  //           });
-  //           tableHtml += '</tbody></table>';
-
-  //         // Add the total count to the PDF content
-  //       // tableHtml = `<p>Total Locations: ${this.totalLocations}</p>` + tableHtml;
-  
-  //         // Convert the HTML table to PDF using pdfMake
-  //         var html = htmlToPdfmake(tableHtml , { defaultStyles: { font: 'Shivaji' } });
-  //         // var html = htmlToPdfmake('<p>मराठी टेक्स्ट</p>', { defaultStyles: { font: 'Mangal' } });
-
-  //         const documentDefinition = { content: html };
-  //         pdfMake.createPdf(documentDefinition).open();
-
-  //         this.serialNumber = 1;  
-  //         this.totalLocations = 0;
-  //       }
-  //     );
-  //   }
-    
   }
+
+
+
+
+// <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8 custom-header-height">
+//   <div class="container-fluid">
+//     <div class="header-body custom-header-height1">
+//       <!-- Card stats -->
+//       <div class="row ">
+//         <div class="col-xl-4 col-lg-6" >
+//           <div class="card card-stats mb-4 mb-xl-0">
+//             <div class="card-body " style="height: 150px;">
+//               <div class="row">
+//                 <div class="col">
+      
+//                   <!-- this for export to pdf -->
+//                   <!-- <div class="container">
+//                     <div id="pdfTable" #pdfTable>
+                     
+//                     </div>
+//                     <button class="btn btn-primary" (click)="downloadAsPDF()">Generate Report</button>
+//                   </div> -->
+//                   <!-- <div> -->
+//                     <!-- ... other content ... -->
+//                     <!-- <button (click)="generatePDF()">Generate PDF</button>
+//                   </div> -->
+//                   <!-- end -->           
+
+                 
+//                   <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/location-list']">
+//                   <!-- <i class="ni ni-key-25"></i>  -->
+//                   <span class="nav-link-inner--text" style="font-size: x-large; color: black;">Active Location</span>
+//                   </a>
+//                   <span class="h2 font-weight-bold mb-0">{{locCount}}</span>
+//                 </div>
+//                 <div class="col-auto">
+//                   <div class="icon icon-shape bg-danger text-white rounded-circle shadow">                    
+//                    <i class="fas fa-map-marker-alt"></i>
+//                   </div>
+//                 </div>
+//               </div>
+//               <!-- <p class="mt-3 mb-0 text-muted text-sm">
+//                 <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+//                 <span class="text-nowrap">Since last month</span>
+//               </p> -->
+//             </div>
+//           </div>
+//         </div>
+        
+//         <div class="col-xl-4 col-lg-6">
+//           <div class="card card-stats mb-4 mb-xl-0">
+//             <div class="card-body"  style="height: 150px;">
+//               <div class="row">
+//                 <div class="col">
+//                   <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/member-list']">
+//                     <!-- <i class="ni ni-key-25"></i>  -->
+//                     <span class="nav-link-inner--text" style="font-size: x-large; color: black;">Active Member</span>
+//                     </a>
+//                   <span class="h2 font-weight-bold mb-0">{{memberCount}}</span>
+//                 </div>
+//                 <div class="col-auto">
+//                   <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+//                     <i class="fas fa-users"></i>
+//                   </div>
+//                 </div>
+//               </div>
+//               <!-- <p class="mt-3 mb-0 text-muted text-sm">
+//                 <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+//                 <span class="text-nowrap">Since last week</span>
+//               </p> -->
+//             </div>
+//           </div>
+//         </div>
+//         <div class="col-xl-4 col-lg-6">
+//           <div class="card card-stats mb-4 mb-xl-0">
+//             <div class="card-body"  style="height: 150px;">
+//               <div class="row">
+//                 <div class="col">
+//                   <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/schedular']">
+//                     <!-- <i class="ni ni-key-25"></i>  -->
+//                     <span class="nav-link-inner--text" style="font-size: x-large; color: black;">Scheduled Baithak</span>
+//                     </a>
+//                   <span class="h2 font-weight-bold mb-0">{{scheduleCount}}</span>
+//                 </div>
+//                 <div class="col-auto">
+//                   <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+//                     <i class="fas fa-calendar-check"></i>
+//                   </div>
+//                 </div>
+//               </div>
+//               <!-- <p class="mt-3 mb-0 text-muted text-sm">
+//                 <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+//                 <span class="text-nowrap">Since yesterday</span>
+//               </p> -->
+//             </div>
+//           </div>
+//         </div>
+//       </div>        
+//     </div>
+//   </div>
+// </div>

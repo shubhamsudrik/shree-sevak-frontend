@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from 'src/app/Classes/location';
 import { TranslateService } from '@ngx-translate/core';
 import { LocService } from 'src/app/services/loc.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-location-list',
@@ -18,6 +19,19 @@ export class LocationListComponent implements OnInit {
   searchText1 ='';
   searchText2 ='';
  
+  // Pagination
+  currentPage: number = 0;
+  itemsPerPage: number = 10;
+
+  get pagedLocations(): any[] {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.defaultLocations.slice(startIndex, endIndex);
+  }
+
+  onPageChange(event: PageEvent): void {
+  this.currentPage = event.pageIndex ;
+}
   
   constructor(
     private locationDataService: LocService,

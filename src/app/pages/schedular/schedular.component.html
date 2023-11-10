@@ -52,9 +52,9 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-search"></i></span>    
             </div>
-            <input class="form-control col-md-4" placeholder="{{ 'Search city' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search baithak type' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
             (blur)="focus = false">
-            <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search date' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
             (blur)="focus = false">
             <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
             (blur)="focus = false">
@@ -107,10 +107,9 @@
             </ul>
           </div>
         </div>
-        <div class="table-responsive">
-          <div style="max-height: 500px; overflow-y: hidden;">
-          <table class="table table-bordered">
-            <thead class="thead-light">
+          <div class="table-responsive " >
+            <table  class="table align-items-center table-flush ">
+              <thead class="thead-light">
               <tr >
                 <th  style="width: 75px;" scope="col">{{ "Action" | translate }}</th>
                 <th style="width: 65px;" scope="col">{{ "Schedule Id" | translate }}</th>
@@ -124,18 +123,13 @@
                 <th style="width: 10%;" scope="col">{{ "Locations" | translate }}</th>                
               </tr>
             </thead>
-          </table>
-          <!-- <div class="table-responsive"> -->
-            <div style="max-height: 500px; overflow-y: auto;overflow-x: hidden;">
-            <table class="table table-bordered">
-                <tbody style="max-height: 500px; overflow: hidden; overflow-x: scroll;">
+                <tbody>
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
               <tr 
                 *ngFor="
-                  let schedule of defaultSchedules | filter : searchText | filter : searchText1 | filter : searchText2; 
+                  let schedule of pagedSchedules | filter : searchText | filter : searchText1 | filter : searchText2; 
                   let i = index
-                "
-              >
+                ">
                 <td >
                   <input 
                   style="width: 65px;"
@@ -174,8 +168,12 @@
           </table>
         </div>
       </div>
+      <small><mat-paginator class="justify-content-md-end"
+        [length]="defaultSchedules.length"
+        [pageIndex]="currentPage"
+        [pageSizeOptions]="[10]"
+        (page)="onPageChange($event)"
+      ></mat-paginator></small>
     </div>
   </div>
-</div>
-</div>
 </div>

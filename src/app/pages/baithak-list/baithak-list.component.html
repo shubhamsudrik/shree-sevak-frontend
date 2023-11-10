@@ -50,11 +50,11 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-search"></i></span>    
             </div>
-            <input class="form-control col-md-4" placeholder="{{ 'Search city' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search baithak type' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
             (blur)="focus = false">
-            <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search day' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
             (blur)="focus = false">
-            <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search time' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
             (blur)="focus = false">
             </div>
             <div class="form-group"><br>
@@ -106,7 +106,7 @@
             </thead>
             <tbody>
               <!-- <tr *ngFor="let baithak of baithakList; trackBy: trackLocatByIndex"> -->
-                <tr *ngFor="let baithaData of baithakList |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
+                <tr *ngFor="let baithaData of pagedBaithaks |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
 
                 <td>
                   <input type="radio" name="operation" (click)="toggleButtons('edit', baithaData)" value="edit"  (change)="selectedRow = i">
@@ -123,6 +123,12 @@
           </table>
         </div>
       </div>
+      <small><mat-paginator class="justify-content-md-end"
+        [length]="baithakList.length"
+        [pageIndex]="currentPage"
+        [pageSizeOptions]="[10]"
+        (page)="onPageChange($event)"
+      ></mat-paginator></small>
     </div>
   </div>
 <!-- </div> -->

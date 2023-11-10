@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
         <div class="custom-width">
-        <div class="card shadow border-0 w-500">
+        <div class="card shadow border-0 w-500" style="margin-top: -78px;">
           <div class="card-body px-lg-5 py-lg-5 text-color">
                       
           <form [formGroup]="registerform" (ngSubmit)="proceedregistration()">
@@ -15,7 +15,7 @@
             <!-- Name -->            
               <div class="col-md-12">
             <div class="form-group">
-              <label for="name">Full name*</label>
+              <label for="name">Full name<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -39,7 +39,7 @@
                <!-- role -->            
                <div class="col-md-12">
                 <div class="form-group">
-                  <label for="role">Role*</label>
+                  <label for="role">Role<span class="text-danger">*</span></label>
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend"></div>
                     <select
@@ -68,7 +68,7 @@
                <!-- Mobile Number -->            
                <div class="col-md-12">
                 <div class="form-group">
-                  <label for="phoneNumber">Mobile Number*</label>
+                  <label for="phoneNumber">Mobile Number<span class="text-danger">*</span></label>
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend"></div>
                     <input
@@ -105,6 +105,9 @@
                       name="photoUrl"                      
                       maxlength="50"
                     />
+                    <div class="invalid-feedback">
+                   
+                    </div>
                   </div>
                   </div>
                   </div>
@@ -112,7 +115,7 @@
                    <!-- emailId -->            
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="emailId">Email*</label>
+                  <label for="emailId">Email<span class="text-danger">*</span></label>
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend"></div>
                     <input
@@ -136,7 +139,7 @@
                    <!-- password -->            
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="password">Password*</label>
+                  <label for="password">Password<span class="text-danger">*</span></label>
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend"></div>
                     <input
@@ -159,7 +162,7 @@
                    <!-- confirmPassword -->            
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="confirmPassword">Confirm Password*</label>
+                  <label for="confirmPassword">Confirm Password<span class="text-danger">*</span></label>
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend"></div>
                     <input

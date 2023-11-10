@@ -22,7 +22,7 @@
              <div class="row">
               <div class="col-md-3">
             <div class="form-group">
-             <label for="initial">{{ 'Initial' | translate }}</label><br>
+             <label for="initial">{{ 'Initial' | translate }}<span class="text-danger">*</span></label><br>
              <div class="input-group input-group-alternative mb-3">
                <div class="input-group-prepend"></div>
                <select
@@ -54,7 +54,7 @@
                
                  <div class="col-md-3">
             <div class="form-group">
-              <label for="firstName">{{ 'First Name' | translate }}</label>
+              <label for="firstName">{{ 'First Name' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -78,7 +78,7 @@
              <!-- middle name -->
              <div class="col-md-3">
              <div class="form-group">
-              <label for="middleName">{{ 'Middle Name' | translate }}</label>
+              <label for="middleName">{{ 'Middle Name' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -103,7 +103,7 @@
              <!-- Last Name -->
              <div class="col-md-3">
              <div class="form-group">
-              <label for="lastName">{{ 'Last Name' | translate }}</label>
+              <label for="lastName">{{ 'Last Name' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -132,7 +132,7 @@
               <div class="row">
               <div class="col-md-3">
             <div class="form-group">
-              <label for="education">{{ 'Education' | translate }}</label>
+              <label for="education">{{ 'Education' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -157,7 +157,7 @@
               <!-- occupation -->
               <div class="col-md-3">
               <div class="form-group">
-                <label for="occupation">{{ 'Occupation' | translate }}</label>
+                <label for="occupation">{{ 'Occupation' | translate }}<span class="text-danger">*</span></label>
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend"></div>
                   <input
@@ -182,7 +182,7 @@
                <!-- dob -->
                <div class="col-md-3">
             <div class="form-group">
-              <label for="dob">{{ 'Bitrh Date' | translate }}</label>
+              <label for="dob">{{ 'Birth Date' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -206,7 +206,7 @@
                <!-- gender -->
                <div class="col-md-3">
              <div class="form-group">
-              <label for="gender">{{ 'Gender' | translate }}</label><br>
+              <label for="gender">{{ 'Gender' | translate }}<span class="text-danger">*</span></label><br>
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend"></div>
                 <select
@@ -267,7 +267,7 @@
               <!-- aadhar number-->
               <div class="col" >
                 <div class="form-group">
-                 <label for="addharNumber">{{ 'Addhar Number' | translate }}</label>
+                 <label for="addharNumber">{{ 'Addhar Number' | translate }}<span class="text-danger">*</span></label>
                  <div class="input-group input-group-alternative mb-3">
                    <div class="input-group-prepend"></div>
                    <input
@@ -294,7 +294,7 @@
              <!-- panNo -->
              <div class="col" >
                 <div class="form-group">
-                 <label for="panNo">{{ 'Pan Number' | translate }}</label>
+                 <label for="panNo">{{ 'Pan Number' | translate }}<span class="text-danger">*</span></label>
                  <div class="input-group input-group-alternative mb-3">
                    <div class="input-group-prepend"></div>
                    <input
@@ -343,7 +343,7 @@
               <!-- Area -->
               <div class="col">
                 <div class="form-group">
-                  <label for="area">{{ 'Area' | translate }}</label>
+                  <label for="area">{{ 'Area' | translate }}<span class="text-danger">*</span></label>
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend"></div>
                     <select
@@ -375,7 +375,8 @@
                <!-- Header -->
           <div class="row">
           <div class="col-6">
-          <h2 class="form-section-header text-center">Languages known</h2>         
+          <h2 class="form-section-header text-center">Languages known</h2>   
+          <span>  Atleast one language should be mandatory<span class="text-danger">*</span></span><br><br>      
 
           <!-- Marathi lanng-->
         <div class="form-group">
@@ -461,6 +462,7 @@
   
         <div class="col-6">
           <h2 class="form-section-header text-center">Eligible</h2>
+          <span>  Atleast one baithak should be mandatory<span class="text-danger">*</span></span><br><br>
 
           <!-- Eligible for child-->
         <div class="form-group">
@@ -512,7 +514,7 @@
               <div class="row">
                 <div class="col-md-3">
             <div class="form-group">
-              <label for="add1">{{ 'Address-1' | translate }}</label>
+              <label for="add1">{{ 'Address-1' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -536,7 +538,7 @@
             <!-- add2 -->
             <div class="col-md-3">
             <div class="form-group">
-              <label for="add2">{{ 'Address-2' | translate }}</label>
+              <label for="add2">{{ 'Address-2' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -603,7 +605,7 @@
         <div class="row">
           <div class="col" style="width: 20%;">
          <div class="form-group">
-          <label>{{ 'City' | translate }}</label><br>
+          <label>{{ 'City' | translate }}<span class="text-danger">*</span></label><br>
           <div class="input-group input-group-alternative">
             <div class="input-group-prepend"></div>
             <select
@@ -632,7 +634,7 @@
            <!-- division -->
            <div class="col" style="width: 20%;">
            <div class="form-group">
-            <label>{{ 'Division' | translate }}</label><br>
+            <label>{{ 'Division' | translate }}<span class="text-danger">*</span></label><br>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <select
@@ -663,7 +665,7 @@
 <!-- state -->
         <div class="col" style="width: 20%;">
          <div class="form-group">
-          <label>{{ 'State' | translate }}</label>
+          <label>{{ 'State' | translate }}<span class="text-danger">*</span></label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <select
@@ -718,7 +720,7 @@
          <!-- country -->
          <div class="col" style="width: 20%;">
          <div class="form-group">
-          <label>{{ 'Country' | translate }}</label><br>
+          <label>{{ 'Country' | translate }}<span class="text-danger">*</span></label><br>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <select
@@ -744,7 +746,7 @@
           <!-- pincode -->
           <div class="col" style="width: 20%;">
           <div class="form-group">
-            <label for="Pincode">{{ 'Pincode' | translate }}</label>
+            <label for="Pincode">{{ 'Pincode' | translate }}<span class="text-danger">*</span></label>
             <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -842,7 +844,7 @@
             <div class="row">
             <div class="col-md-4">
             <div class="form-group">
-              <label for="mobile">{{ 'Mobile Number' | translate }}</label>
+              <label for="mobile">{{ 'Mobile Number' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -890,7 +892,7 @@
              <!-- Email -->
              <div class="col-md-4">
              <div class="form-group">
-              <label for="email">{{ 'Email' | translate }}</label>
+              <label for="email">{{ 'Email' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -932,18 +934,13 @@
                id="vehicleType"
               name="vehicleType"
               [(ngModel)]="Member.vehicleType"
-              [ngClass]="{
-               'is-invalid': (submitted && MemberFormControl.vehicleType.errors?.required)
-              }"
+              
                 >
               <option value="" disabled>Select Vehicle</option>
                   <option value="2-Wheeler">2-Wheeler</option>
                   <option value="4-Wheeler">4-Wheeler</option>
                 </select>
                 
-                <div class="invalid-feedback">
-                  {{ 'This field is mandatory.' | translate }}
-                </div>
           </div>
         </div>
          </div>
@@ -961,14 +958,9 @@
                  id="vehicleDetails"
                 name="vehicleDetails"
                 [(ngModel)]="Member.vehicleDetails"
-                [ngClass]="{
-                 'is-invalid': (submitted && MemberFormControl.vehicleDetails.errors?.required)
-                }"
+                
                 maxlength="14" 
                   />
-                  <div class="invalid-feedback">
-                    {{ 'This field is mandatory.' | translate }}
-                  </div>
             </div>
            </div>
             </div>
@@ -985,7 +977,7 @@
          <div class="row">
           <div class="col-md-12">
          <div class="form-group">
-          <label>{{ 'Baithak Day' | translate }}</label><br>
+          <label>{{ 'Baithak Day' | translate }}<span class="text-danger">*</span></label><br>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <select
@@ -1076,7 +1068,7 @@
          <div class="row">
          <div class="col-md-4">
          <div class="form-group">
-          <label for="hajeriNo">{{ 'Hajeri Number' | translate }}</label>
+          <label for="hajeriNo">{{ 'Hajeri Number' | translate }}<span class="text-danger">*</span></label>
           <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <input
@@ -1122,7 +1114,7 @@
           <!-- weeklyOffs -->
           <div class="col-md-4">
           <div class="form-group">
-            <label>{{ 'Weekly Offs' | translate }}</label><br>
+            <label>{{ 'Weekly Offs' | translate }}<span class="text-danger">*</span></label><br>
             <div class="input-group input-group-alternative mb-3">
               <div class="input-group-prepend"></div>
               <select

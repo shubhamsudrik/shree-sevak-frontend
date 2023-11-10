@@ -116,7 +116,7 @@
                 <table class="table table-bordered"> -->
                     <tbody style="max-height: 500px; overflow: auto; overflow-x: scroll;">
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
-                <tr style="width: 10%;" *ngFor="let location of defaultLocations |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
+                <tr style="width: 10%;" *ngFor="let location of pagedLocations |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
 
                 <td>
                   <input type="radio" name="operation" (click)="toggleButtons('edit', location)" value="edit"  (change)="selectedRow = i">
@@ -138,7 +138,13 @@
             </tbody>
           </table>
         </div>
-      <!-- </div> -->
-    <!-- </div> -->
-  <!-- </div> -->
-<!-- </div> -->
+      </div> 
+      <small><mat-paginator class="justify-content-md-end"
+        [length]="defaultLocations.length"
+        [pageIndex]="currentPage"
+        [pageSizeOptions]="[10]"
+        (page)="onPageChange($event)"
+      ></mat-paginator></small>
+    </div>
+  </div>
+</div>

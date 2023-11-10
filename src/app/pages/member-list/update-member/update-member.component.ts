@@ -92,8 +92,8 @@ export class UpdateMemberComponent implements OnInit {
         phoneNumber: [this.Member?.phoneNumber],
         email: [this.Member?.email, Validators.required],
        
-        vehicleType: [this.Member?.vehicleType, Validators.required], 
-        vehicleDetails: [this.Member?.vehicleDetails, Validators.required],                 
+        vehicleType: [this.Member?.vehicleType], 
+        vehicleDetails: [this.Member?.vehicleDetails],                 
        
         hindiRead:[this.Member?.hindiRead],
         hindiWrite:[this.Member?.hindiWrite],

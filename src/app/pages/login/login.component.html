@@ -23,26 +23,37 @@
             Sign in with credentials
           </div>
 
-
           <!-- email -->
          <form (ngSubmit)="onSubmit()">
-            <div class="form-group mb-3">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend"></div>
+                <!-- <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                </div>
+                </div> -->
                 <input [(ngModel)]="credentials.email" class="form-control" placeholder="Email" id="email" type="email"  >
+                <div class="invalid-feedback">
+                  This field is mandatory.
+                </div>
               </div>
+            </div>
             </div><br>
 
             <!-- password -->
+            <div class="col-md-12">
             <div class="form-group">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend"></div>
+                <!-- <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                </div>
+                </div> -->
                 <input [(ngModel)]="credentials.password" class="form-control" placeholder="Password" type="password"  id="password" name="password" >
+                <div class="invalid-feedback">
+                  This field is mandatory.
+                </div>
               </div>
+            </div>
             </div>
             
             <!-- <div class="custom-control custom-control-alternative custom-checkbox">
@@ -57,11 +68,6 @@
             </div>
           </form>
         </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-6">
-          <!-- <span><a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/forgot-password']">Forgot password</a></span> -->
-        </div>      
       </div>
     </div>
     </div>

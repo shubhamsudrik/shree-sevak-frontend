@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from 'src/app/Classes/member';
@@ -17,6 +18,19 @@ export class MemberListComponent implements OnInit {
     searchText1: any;
     searchText2: any;
     
+    currentPage: number = 0;
+    itemsPerPage: number = 10;
+
+    get pagedMembers(): any[] {
+      const startIndex = this.currentPage * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.defaultMembers.slice(startIndex, endIndex);
+    }
+
+    onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex ;
+  }
+
     constructor(
       private memberListService: MemberListService,
       private router: Router,

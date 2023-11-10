@@ -80,8 +80,8 @@ export class AddNewMemberComponent implements OnInit {
       phoneNumber: [''],
       email: ['', Validators.required],
      
-      vehicleType: ['', Validators.required],
-      vehicleDetails: ['', Validators.required],                 
+      vehicleType: [''],
+      vehicleDetails: [''],                 
      
       marathiRead:[''],
       marathiWrite:[''],

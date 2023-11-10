@@ -15,7 +15,7 @@
               <div class="form-group">
                 <label for="baithak-type">{{
                   "BaithakType" | translate
-                }}</label>
+                }}<span class="text-danger">*</span></label>
                 <select
                   formControlName="baithakType"
                   class="form-control"
@@ -38,7 +38,7 @@
               <!-- day of week  -->
 
               <div class="form-group">
-                <label for="dayOfWeek">{{ "Day" | translate }}</label>
+                <label for="dayOfWeek">{{ "Day" | translate }}<span class="text-danger">*</span></label>
                 <select
                   formControlName="dayOfWeek"
                   class="form-control"
@@ -79,7 +79,7 @@
                    
               <!-- start time -->
               <div class="form-group">
-                <label for="from-time">{{ "StartTime" | translate }}</label>
+                <label for="from-time">{{ "StartTime" | translate }}<span class="text-danger">*</span></label>
                 <input
                   [ngxTimepicker]="picker"
                   formControlName="fromTime"
@@ -95,7 +95,7 @@
               </div>
 
               <div class="form-group">
-                <label for="to-time">{{ "EndTime" | translate }}</label>
+                <label for="to-time">{{ "EndTime" | translate }}<span class="text-danger">*</span></label>
                 <input
                   [ngxTimepicker]="picker1"
                   formControlName="toTime"
@@ -111,7 +111,7 @@
               </div>
 
               <div class="form-group">
-                <label for="status">{{ "Status" | translate }}</label>
+                <label for="status">{{ "Status" | translate }}<span class="text-danger">*</span></label>
                 <select
                   formControlName="status"
                   class="form-control"

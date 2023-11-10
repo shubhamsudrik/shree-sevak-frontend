@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AgendaService, DayService, MonthAgendaService, MonthService, TimelineMonthService, TimelineViewsService, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
 import { Baithak } from 'src/app/Classes/baithak';
@@ -7,6 +7,7 @@ import { Schedule } from 'src/app/Classes/schedule';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
 import { BaithakDataService } from 'src/app/services/baithak-data.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService, TimelineViewsService, TimelineMonthService],
@@ -26,6 +27,19 @@ export class SchedularComponent implements OnInit {
   baithakDataService: any;
 
 
+  // Pagination
+    currentPage: number = 0;
+    itemsPerPage: number = 10;
+
+    get pagedSchedules(): any[] {
+      const startIndex = this.currentPage * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.defaultSchedules.slice(startIndex, endIndex);
+    }
+
+    onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex ;
+  }
     
     constructor(
       private scheduleDataService: ScheduleDataService,

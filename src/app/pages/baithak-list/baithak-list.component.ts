@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { PageEvent } from "@angular/material/paginator";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { Baithak } from "src/app/Classes/baithak";
@@ -18,6 +19,21 @@ export class BaithakListComponent implements OnInit {
   searchText: any;
   searchText1: any;
   searchText2: any;
+
+
+  // Pagination
+  currentPage: number = 0;
+  itemsPerPage: number = 10;
+
+  get pagedBaithaks(): any[] {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.baithakList.slice(startIndex, endIndex);
+  }
+
+  onPageChange(event: PageEvent): void {
+  this.currentPage = event.pageIndex ;
+}
 
   ngOnInit(): void {
     this.statusBaithak("1");
