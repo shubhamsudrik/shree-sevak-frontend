@@ -9,3 +9,7 @@
 {
   background: darkseagreen;
 }
+.placeholder {
+  font-style: italic;
+  color: #999; /* Placeholder text color */
+}

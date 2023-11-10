@@ -99,7 +99,7 @@
                 <span class="d-none d-md-block" class="form-group">
                   <div *ngFor="let schedule of defaultSchedules; let i = index">
                     <button
-                      *ngIf="schedule.isEditing && selectedRow === i"
+                      *ngIf="selectedRow === i"
                       class="btn btn-success"
                       (click)="updateSchedules(schedule.baithak.bithakId)"
                     >
@@ -111,12 +111,12 @@
             </ul>
           </div>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive ">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
                 <th scope="col">{{ "Action" | translate }}</th>
-                <th scope="col">{{ "Baithak Type" | translate }}</th>
+                <th scope="col">{{ "Baithak Type" | translate}}</th>
                 <th scope="col">{{ "Date" | translate }}</th>
                 <th scope="col">{{ "Start Time" | translate }}</th>
                 <th scope="col">{{ "End Time" | translate }}</th>
@@ -126,7 +126,7 @@
                 <th scope="col">{{ "Locations" | translate }}</th>                
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
               <tr
                 *ngFor="

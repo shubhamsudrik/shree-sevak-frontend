@@ -1,29 +1,30 @@
-.calendar-table {
+ .calendar-table {
   border-collapse: collapse;
-  width: 100%;
-  max-width: 100%;
+  width: auto;
+
   margin-bottom: 1rem;
   border: 1px solid #dee2e6;
   background-color: #fff;
-}
+} 
 
-.calendar-table thead th {
+ .calendar-table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #dee2e6;
-  width: 14.2%;
-}
+  width: fit-content;
+} 
 
-.calendar-table td, .calendar-table th {
+ .calendar-table td, .calendar-table th {
   border: 1px solid #dee2e6;
+  width: fit-content;
 }
 
 .calendar-table td, .calendar-table th {
   padding: .75rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
-}
+} 
 
-.calendar-day {
+ .calendar-day {
   height: 12vh;
   max-height: 12vh;
   cursor: pointer;
@@ -33,7 +34,7 @@
   margin-left: -10px;
   margin-right: -10px;
   overflow-y: auto;
-  max-height: calc(100% - 20px);
+  max-height: calc(50% - 20px);
 }
 
 .calendar-day.past-date {
@@ -46,7 +47,7 @@
 
 .blue-date {
   color: rgb(16, 110, 190);
-}
+} 
 .btn-dropdown {
   width: 150px; /* Adjust the width as needed */
   height: 40px; /* Adjust the height as needed */
@@ -55,6 +56,8 @@
   margin-bottom: 10px;
 }
 table{
+
+  width: auto;
   box-sizing: content-box;
-width: 100%;
+  width: fit-content;
 }

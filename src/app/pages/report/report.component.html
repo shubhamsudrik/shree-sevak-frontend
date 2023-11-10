@@ -59,7 +59,7 @@
             <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
               <div class="py-7 py-lg-8"></div>
               <div id="contentToConvert">
-                <table id="pdfTable" style="text-align: center;" border="1">
+                <table id="pdfTable" style="text-align: center;" border="">
                   <thead>
                     <tr >
                       <th colspan="2" style="background-color: white; color: black;">Total Meeting: {{ totalSchedule }}</th>
@@ -70,11 +70,11 @@
                               <th style="background-color: white; color: black; width: 550px; height: 28px;"></th>
                             </tr>
                             <tr>
-                              <th style="background-color: rgba(193, 166, 47, 0.638); color: black;">{{dates.date}}</th>
+                              <th style="background-color:rgb(245, 245, 0); color: black;">{{dates.date}}</th>
                               <th>&nbsp;</th>
                             </tr>
                             <tr>
-                              <th style="background-color: white; color: black; height: 100%;">
+                              <th style="background-color: white; color: rgb(5, 126, 246); height: 100%;">
                                 <input  [style.width.%]="inputWidth" placeholder="Enter here section" [style.height.%]="inputHeight" (focus)="onFocus()" (blur)="onBlur()" />
                               </th>
                             </tr>
@@ -88,12 +88,12 @@
                       </th>
                     </tr>
                     <tr>
-                      <th style="background-color: rgb(195, 164, 164); color: white;">Sr No</th>
-                      <th style="background-color: rgb(195, 164, 164); color: white;">Location Name</th>
+                      <th style="background-color: rgb(16, 16, 16); color: white;">Sr No</th>
+                      <th style="background-color: rgb(16, 16, 16); color: white;">Location Name</th>
 
                       <ng-container *ngFor="let group of groupedSchedules1">
-                              <th style="background-color: rgb(195, 164, 164); width: 150px;">Reading</th>
-                              <th style="background-color: rgb(195, 164, 164); width: 150px;">Attendance</th>                         
+                              <th style="background-color: rgb(114, 148, 240); width: 150px;">Reading</th>
+                              <th style="background-color: rgb(238, 185, 63); width: 150px;">Attendance</th>                         
                       </ng-container>
                     </tr>
                   </thead>
@@ -101,7 +101,7 @@
                 <tbody>
                   <tr *ngFor="let location of groupedSchedules; let ind=index;">
                     <td>{{ind+1}}</td>  
-                    <td class="col-3">
+                    <td class="col-3" style="background-color: rgb(188, 246, 188);">
                       {{location.location.locationName}}
                     </td>
                     <td *ngFor="let schedule of location.schedules" colspan="2" style="background-color: rgb(192, 222, 167);" >

@@ -130,9 +130,9 @@ export class UpdateScheduleComponent implements OnInit {
   defaultMembers: Member[] = [];
 
   hajeriMembers: Member[];
-
+  scheduleMemeberArray=new Set<number>();
   vachanMembers: Member[];
-
+  
   searchText: string = "";
 
   public calendar: CalendarDay[] = [];
@@ -213,6 +213,7 @@ export class UpdateScheduleComponent implements OnInit {
     // this.creatingScheduleObjects();
 
     this.initializingForm();
+    
   }
 
   private generateCalendarDays(monthIndex: number): void {
@@ -491,7 +492,8 @@ export class UpdateScheduleComponent implements OnInit {
 
   updateOrPushSchedule(scheduleArray, newSchedule) {
     // Find the index in the scheduleArray where locationId, baithakId, and date match
-
+ 
+     
     const index = scheduleArray.findIndex(
       (schedule) =>
         schedule.locationId === newSchedule.locationId &&
@@ -554,7 +556,7 @@ export class UpdateScheduleComponent implements OnInit {
       .updateSchedule(this.scheduleArray)
       .subscribe((data) => {
        
-          this.toast.success("Record Updated succesfully")
+       this.toast.success("Record Updated succesfully")
         
         console.log(data);
       });
@@ -569,6 +571,7 @@ export class UpdateScheduleComponent implements OnInit {
   getSaveScheduleList() {
     this.scheduleService.getAllData().subscribe((data) => {
       this.saveSchduleArray = data;
+      this.uniqueMemeberSelection(this.scheduleArray);
       console.log(this.saveSchduleArray);
     });
   }
@@ -604,6 +607,39 @@ export class UpdateScheduleComponent implements OnInit {
   
    
     
+
+  }
+
+  /**
+   * this method accepting schedule Array of schdule from child componet
+   * process it and returns the seting the unique record of selected memebers in memeber array
+   * @param scheduleArray 
+   */
+  uniqueMemeberSelection(scheduleArray:ScheduleDto[]){
+    const date=this.updateDynamicFormComponent.currentDate();
+    let regex = /(\w{3})\s\d{1,2},\s(\d{4})/;
+  const match = date.match(regex);
+  const desiredMonth=match[1]
+  const desiredYear=match[2]
+
+  this.scheduleDataService.getScheduleByMonthAndYearAndBaithak(desiredMonth,desiredYear,this.baithakId).subscribe((data:Schedule[])=>{
+    const schdulerecord:Schedule[]=data;
+    schdulerecord.forEach((schedule)=>{
+      schedule.members.forEach((member)=>{
+        console.log("inside schedule",member);
+        this.scheduleMemeberArray.add(member.memberId);
+        console.log(this.scheduleMemeberArray)
+
+      })
+
+    })
+    console.log(this.collectionOfSchedule)
+    console.log(this.scheduleMemeberArray)
+
+
+   
+    
+  },error => console.log(error));
 
   }
 }
