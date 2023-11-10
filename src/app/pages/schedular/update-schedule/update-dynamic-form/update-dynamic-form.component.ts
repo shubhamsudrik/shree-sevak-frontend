@@ -9,6 +9,7 @@ import { Member } from "src/app/Classes/member";
 
 import { Schedule } from "src/app/Classes/schedule";
 import { ScheduleDto } from "src/app/Classes/schedule-dto";
+import { MemberListService } from "src/app/services/member-list.service";
 
 import { ScheduleDataService } from "src/app/services/schedule-data.service";
 
@@ -25,6 +26,7 @@ export class UpdateDynamicFormComponent implements OnInit {
   @Input() date: any;
 
   @Input() baithakId: any;
+  currentMonthSchedule: Schedule[];
 
   schedularFormchild: FormGroup;
 
@@ -37,14 +39,16 @@ export class UpdateDynamicFormComponent implements OnInit {
   @Input() hajeriMembers: Member[];
 
   @Input() vachanMembers: Member[];
-
-
+  @Input() scheduleArray: Schedule[] = [];
+  @Input() scheduleMemeberArray: number[];
   constructor(
     private formBuilder: FormBuilder,
 
     private route: ActivatedRoute,
 
-    private schedularService: ScheduleDataService
+    private schedularService: ScheduleDataService,
+    private memberListService: MemberListService,
+    private schedulerService: ScheduleDataService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +58,6 @@ export class UpdateDynamicFormComponent implements OnInit {
     console.log(this.baithakId);
     this.individualScheduleRecord(this.date, this.locationId, this.baithakId);
     this.initializingForm();
-
 
     this.separatingMemebersOnType();
 
@@ -70,16 +73,49 @@ export class UpdateDynamicFormComponent implements OnInit {
       this.scheduleDto.locationId = +this.locationId;
 
       this.scheduleDto.date = this.date;
-+
+      this.scheduleMemeberArray.forEach((memberids) => {
+        if (memberids === +this.scheduleDto.hajeriGhenara) {
+          alert(" member already selected" + memberids);
+        }
+        if (memberids === +this.scheduleDto.vachanGhenara) {
+          alert("this member already selected" + memberids);
+        }
+      });
+
+      console.log(this.scheduleArray);
+      console.log(this.scheduleMemeberArray);
+
+      // const index1= this.vachanMembers.findIndex((memebers)=>{
+      //   console.log('inside wachan member list')
+      // return  memebers.memberId===+this.scheduleDto.vachanGhenara
+
+      //  })
+      // const index2= this.hajeriMembers.findIndex((memebers)=>{
+      //   console.log('inside hajerimembers  list')
+      //   return memebers.memberId===+this.scheduleDto.hajeriGhenara
+      //  })
+      //  console.log(index1)
+      //  if(index1 !==-1){
+      //   console.log(index1)
+      //  console.log( this.vachanMembers.splice(index1,1))
+
+      //  }
+      //  console.log(index2)
+      //  if(index2 !==-1){
+      //   console.log(index2)
+      // console.log(  this.hajeriMembers.splice(index2,1));
+
+      //  }
+
       this.valueChanged.emit(this.scheduleDto);
     });
 
     console.log(this.scheduleDto);
   }
 
-  currentDate(){
-    console.log(this.date)
-    return this.date
+  currentDate() {
+    console.log(this.date);
+    return this.date;
   }
 
   //get individual schedule base on location and date
@@ -94,9 +130,9 @@ export class UpdateDynamicFormComponent implements OnInit {
       .subscribe(
         (data: Schedule) => {
           console.log(data);
-          this. updateSchedule = data
+          this.updateSchedule = data;
 
-      this.scheduleDto.scheduleId   = this.updateSchedule.scheduleId
+          this.scheduleDto.scheduleId = this.updateSchedule.scheduleId;
 
           this.scheduleDto.hajeriGhenara =
             +this.updateSchedule.members[1]?.memberId;
@@ -171,7 +207,7 @@ export class UpdateDynamicFormComponent implements OnInit {
   //   });
 
   // }
-//separting member 
+  //separting member
   separatingMemebersOnType(): void {
     this.hajeriMembers = this.members.filter((member: Member) => {
       if (member.hajeriNo === "1") {

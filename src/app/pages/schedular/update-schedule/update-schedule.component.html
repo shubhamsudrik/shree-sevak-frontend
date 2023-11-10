@@ -61,7 +61,7 @@
               <table class="calendar-table" *ngIf="calendar" border="2px solid">
                 <thead>
                   <tr>
-                    <th>Sr.no</th>
+                    <th >Sr.no</th>
 
                     <th>Locations</th>
 
@@ -76,24 +76,8 @@
 
                 <tbody>
                   <tr *ngFor="let location of defaultLocations; let i = index">
-                    <!-- Display defaultLocations vertically -->
-
-                    <!-- <td>
-  
-                        <div *ngFor="let location of defaultLocations | filter:searchText;">
-  
-                          {{ location.locationName }}
-  
-                        </div>
-  
-                      </td> -->
-
-                    <!-- Display meeting data horizontally -->
-
-                    <!-- [formGroup]="SchduleForm" (ngSubmit)="onSubmit()" -->
-
-                    <td>{{ i + 1 }}</td>
-
+                   <td>{{ i + 1 }}</td>
+                                   
                     <td class="text-uppercase" style="text-align: center">
                       {{ location.locationName }}
                     </td>
@@ -108,11 +92,13 @@
                       *ngFor="let c of meetings; let j = index"
                     >
                       <app-update-dynamic-form
+                        [scheduleArray]="scheduleArray"
+                        [scheduleMemeberArray]="scheduleMemeberArray"
                         (valueChanged)="saveChanges($event)"
                         [baithakId]="baithakId"
                         [locationId]="location.locationId"
-                        [hajeriMembers]="hajeriMembers"
-                        [vachanMembers]="vachanMembers"
+                        [hajeriMembers]="defaultMembers"
+                        [vachanMembers]="defaultMembers"
                         [date]="c.date | date : 'mediumDate'"
                         [scheduleDto]="scheduleDto"
                       >

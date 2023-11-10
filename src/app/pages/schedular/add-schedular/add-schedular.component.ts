@@ -8,15 +8,13 @@ import {
 
 import { ActivatedRoute, Route, Router } from "@angular/router";
 
-import { LocationDataService } from "src/app/services/location-data.service";
-
 import { Location } from "src/app/Classes/location";
 
 import { Member } from "src/app/Classes/member";
 
 import { MemberListService } from "src/app/services/member-list.service";
 
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { ScheduleDataService } from "src/app/services/schedule-data.service";
 
@@ -102,6 +100,7 @@ export class ChunkPipe implements PipeTransform {
   templateUrl: "./add-schedular.component.html",
 
   styleUrls: ["./add-schedular.component.css"],
+  providers: [ScheduleDataService],
 })
 export class AddSchedularComponent implements OnInit {
   location: Location = new Location();
@@ -112,6 +111,7 @@ export class AddSchedularComponent implements OnInit {
 
   scheduleDto: ScheduleDto = new ScheduleDto();
 
+  scheduleMemeberArray = new Set<number>();
   scheduleArray: ScheduleDto[] = [];
 
   privousSchduleDto: ScheduleDto;
@@ -119,10 +119,6 @@ export class AddSchedularComponent implements OnInit {
   defaultLocations: Location[] = [];
 
   defaultMembers: Member[] = [];
-
-  hajeriMembers: Member[];
-
-  vachanMembers: Member[];
 
   searchText: string = "";
 
@@ -169,6 +165,8 @@ export class AddSchedularComponent implements OnInit {
   selectedWriter: any;
 
   displayDayCount: any;
+  defaultVachanMembers: Member[];
+  defaultHajeriMembers: Member[];
 
   constructor(
     private router: Router,
@@ -335,22 +333,18 @@ export class AddSchedularComponent implements OnInit {
   private getMemberList() {
     this.memberListService.getMemberList().subscribe((data: Member[]) => {
       this.defaultMembers = data;
+      this.scheduleService.setMembers(this.defaultMembers);
+      // this.hajeriMembers = data.filter((member: Member) => {
+      //   if (member.hajeriNo === "1") {
+      //     return member;
+      //   }
+      // });
 
-      this.hajeriMembers = data.filter((member: Member) => {
-        if (member.hajeriNo === "1") {
-          return member;
-        }
-      });
-
-      this.vachanMembers = data.filter((member: Member) => {
-        if (member.hajeriNo === "2") {
-          return member;
-        }
-      });
-
-      console.log(this.hajeriMembers);
-
-      console.log(this.vachanMembers);
+      // this.vachanMembers = data.filter((member: Member) => {
+      //   if (member.hajeriNo === "2") {
+      //     return member;
+      //   }
+      // });
 
       console.log(this.defaultMembers);
     });
@@ -509,11 +503,66 @@ export class AddSchedularComponent implements OnInit {
 
    */
 
-  saveChanges(schedule: ScheduleDto) {
-    this.updateOrPushSchedule(this.scheduleArray, schedule);
+  saveChanges(scheduleDto: ScheduleDto) {
+    console.log(scheduleDto);
+    this.updateOrPushSchedule(this.scheduleArray, scheduleDto);
 
-    console.log(this.scheduleArray);
+    // const isHajeriMember =
+    //   this.scheduleService.validateHajerimember(scheduleDto);
+    //   console.log(isHajeriMember)
+    // const isVachanMember =
+    //   this.scheduleService.validateVachanMember(scheduleDto);
+    //   console.log(isVachanMember)
+    // if (isHajeriMember) {
+    //   this.toast.error("hajeriMember all ready selected");
+    // } else {
+    //   this.scheduleService.addMembersToSchduleHajeriGhenara(scheduleDto);
+    // }
+
+    // if (isVachanMember) {
+    //   this.toast.error("VachanMember All ready Selected");
+    // }
+    // {
+    //   this.scheduleService.addMembersToSchduleVachanGhenara(scheduleDto);
+    // }
   }
+
+  // vachanMemberChanged(value: any) {
+  //   this.checkVachanGhenara(value);
+
+  // }
+  // hajeriMemberChanged(value: any) {
+  //   this.checkHajeriMemeber(value);
+  // }
+  // checkHajeriMemeber(value: any) {
+  //   this.scheduleMemeberArray.forEach((memberids) => {
+  //     if (memberids === +value) {
+  //       this.toast.warning(
+  //         "Member All ready Selected in the place of Hajeri/writer"
+  //       );
+  //     }
+  //   });
+  //   console.log(this.scheduleMemeberArray);
+  //   if (!isNaN(+value)) {
+  //     this.scheduleMemeberArray.add(+value);
+  //   }
+  //   console.log(this.scheduleMemeberArray);
+  // }
+
+  // checkVachanGhenara(value: any) {
+  //   this.scheduleMemeberArray.forEach((memberids) => {
+  //     if (memberids === +value) {
+  //       this.toast.warning(
+  //         "Member All ready Selected in the place of vachanGenara/reader"
+  //       );
+  //     }
+  //   });
+  //   console.log(this.scheduleMemeberArray);
+  //   if (!isNaN(+value)) {
+  //     this.scheduleMemeberArray.add(+value);
+  //   }
+  //   console.log(this.scheduleMemeberArray);
+  // }
 
   modifyScheduleArray(): any {
     const date = this.dynamicformcomponent.currentDate();
@@ -530,7 +579,7 @@ export class AddSchedularComponent implements OnInit {
         if (
           desiredMonth === scheduleMonthYear[1] &&
           desiredYear === scheduleMonthYear[2] &&
-          ( !isNaN(+schedule.hajeriGhenara) || !isNaN(+schedule.vachanGhenara))
+          (!isNaN(+schedule.vachanGhenara) || !isNaN(+schedule.vachanGhenara))
         ) {
           return schedule;
         } else {
@@ -545,24 +594,32 @@ export class AddSchedularComponent implements OnInit {
 
     if (modifyScheduleArray.length === 0) {
       this.toast.warning("please filled record");
-     
     } else {
-      this.scheduleService.getscheduleByDateAndLocationBaithak(modifyScheduleArray[0].date, modifyScheduleArray[0].locationId, modifyScheduleArray[0].baithakId).subscribe((data)=>{
-        if(data){
-          this.toast.warning("This month Record All ready present go to Update ");
-        }else{
-          this.scheduleService.createScheduleRecord(modifyScheduleArray).subscribe(
-            (data) => {
-              this.toast.success("This month Record created successfully");
-              this.router.navigate(["/schedular"]);
+      this.scheduleService
+        .getscheduleByDateAndLocationBaithak(
+          modifyScheduleArray[0].date,
+          modifyScheduleArray[0].locationId,
+          modifyScheduleArray[0].baithakId
+        )
+        .subscribe((data) => {
+          if (data) {
+            this.toast.warning(
+              "This month Record All ready present go to Update "
+            );
+          } else {
+            this.scheduleService
+              .createScheduleRecord(modifyScheduleArray)
+              .subscribe(
+                (data) => {
+                  this.toast.success("This month Record created successfully");
+                  this.router.navigate(["/schedular"]);
 
-              console.log(data);
-            },
-            (error) => console.log(error)
-          );
-        }
-      })
-     
+                  console.log(data);
+                },
+                (error) => console.log(error)
+              );
+          }
+        });
     }
   }
 
