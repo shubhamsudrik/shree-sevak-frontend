@@ -101,7 +101,7 @@ export class EditLocationComponent implements OnInit {
       this.saveLocation();
       this.toast.success("Location Added successfully")
     } else {
-      this.toast.warning('All field is mandatory.');
+      this.toast.warning('Fill all mandatory field.');
     }
   }
 

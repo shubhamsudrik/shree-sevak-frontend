@@ -5,8 +5,8 @@ import { Member } from 'src/app/Classes/member';
 import { LocService } from 'src/app/services/loc.service';
 import { Router } from '@angular/router';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
-import { chartExample1 } from 'src/app/variables/charts';
-import Chart from 'chart.js';
+// import { chartExample1 } from 'src/app/variables/charts';
+// import Chart from 'chart.js';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,11 +14,12 @@ import Chart from 'chart.js';
 })
 export class DashboardComponent implements OnInit {
 
-  @ViewChild('chartSalesCanvas', { static: true }) chartSalesCanvas: ElementRef;
+  // @ViewChild('chartSalesCanvas', { static: true }) chartSalesCanvas: ElementRef;
+  // @ViewChild('chartSalesCanvas1', { static: true }) chartSalesCanvas1: ElementRef;
 
-  public datasets: any;
-  public data: any;
-  public salesChart;
+  // public datasets: any;
+  // public data: any;
+  // public salesChart;
 
 constructor(
   private router: Router,
@@ -56,38 +57,38 @@ constructor(
       }, 6000000);
 
 
-    this.datasets = [1,2,3,4,5,6,7,8,9]
+  //   this.datasets = [1,2,3,4,5,14,7,8,9]
 
-    console.log(this.datasets)
-    this.data = this.datasets;
+  //   console.log(this.datasets)
+  //   this.data = this.datasets;
         
-   const memberIndexToShow = 0;
+  //  const memberIndexToShow = 0;
 
-   if (this.chartSalesCanvas) {
-    var chartSales = this.chartSalesCanvas.nativeElement;
+  //  if (this.chartSalesCanvas) {
+  //   var chartSales = this.chartSalesCanvas.nativeElement;
 
-    this.salesChart = new Chart(chartSales, {
-      type: 'line',
-      options: chartExample1.options,
-      data: chartExample1.data
-    });
+  //   this.salesChart = new Chart(chartSales, {
+  //     type: 'line',
+  //     options: chartExample1.options,
+  //     data: chartExample1.data
+  //   });
 
-    // Update the chart data
-    if (this.salesChart) {
-      this.salesChart.data.datasets[0].data = this.data;
-      this.salesChart.update();
-    }
-  }
+  //   // Update the chart data
+  //   if (this.salesChart) {
+  //     this.salesChart.data.datasets[0].data = this.data;
+  //     this.salesChart.update();
+  //   }
+  // }
 }
 
 
-// Function to update the chart
-updateChart() {
-  if (this.salesChart) {
-    this.salesChart.data.datasets[0].data = this.data;
-    this.salesChart.update();
-  }
-}
+// // Function to update the chart
+// updateChart() {
+//   if (this.salesChart) {
+//     this.salesChart.data.datasets[0].data = this.data;
+//     this.salesChart.update();
+//   }
+// }
 
   //get active member data
   private getMemberList(){
@@ -98,16 +99,16 @@ updateChart() {
         console.log(this.defaultMembers)
         this.memberCount=this.defaultMembers.length;
       
-        // Print the index numbers of the elements
-    for (let i = 0; i < this.defaultMembers.length; i++) {
-     this.sum = this.a+i
-      console.log(`Index ${i}:`);
-      console.log(this.sum)
-    }
+  //       // Print the index numbers of the elements
+  //   for (let i = 0; i < this.defaultMembers.length; i++) {
+  //    this.sum = this.a+i
+  //     console.log(`Index ${i}:`);
+  //     console.log(this.sum)
+  //   }
       },)
   }
-  //get all schedule data
 
+  //get all schedule data
   private getScheduleRecord(){
     this.scheduleDataService.getAllData().subscribe(
       (data: any[]) => {

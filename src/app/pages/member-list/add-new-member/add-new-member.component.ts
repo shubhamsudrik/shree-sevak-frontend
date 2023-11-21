@@ -57,7 +57,7 @@ export class AddNewMemberComponent implements OnInit {
       occupation: [this.Member?.occupation, Validators.required],
       dob: [this.Member?.dob, Validators.required],
       gender: [this.Member?.gender, Validators.required],
-      role: [this.Member?.role, Validators.required],
+      // role: [this.Member?.role, Validators.required],
       area: [this.Member?.area, Validators.required],
       addharNumber: ['', [Validators.required, Validators.minLength(12)]],
       panNo: ['', Validators.required],
@@ -138,7 +138,7 @@ export class AddNewMemberComponent implements OnInit {
       this.saveMember();
       this.toast.success("New Member Created successfully ")
     } else {
-      this.toast.warning('All field is mandatory.');
+      this.toast.warning('Fill all mandatory.');
     }
     
   }
@@ -218,6 +218,8 @@ export class AddNewMemberComponent implements OnInit {
 
   isDuplicateData(newMember: Member): boolean {
     for (let item of this.defaultMembers) {
+      console.log('Existing Member Aadhar:', item.addharNumber);
+      console.log('New Member Aadhar:', newMember.addharNumber);
       if (
         
         item.addharNumber === newMember.addharNumber 

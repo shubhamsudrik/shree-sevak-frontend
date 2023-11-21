@@ -131,8 +131,7 @@
                   let i = index
                 ">
                 <td >
-                  <input 
-                  style="width: 65px;"
+                  <input                   
                     type="radio"
                     name="operation"
                     (click)="toggleButtons('edit', schedule)"
@@ -141,28 +140,27 @@
                   />
                   <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->
                 </td>
-                <td style="width: 65px;">{{ schedule.scheduleId }}</td>
-                <td style="width: 12%;">{{ schedule?.baithak?.baithakType }}</td>
-                <td style="width: 10%;">{{ schedule?.date }}</td>
-                <td style="width: 11%;">{{ schedule?.baithak?.fromTime }}</td>
-                <td style="width: 11%;">{{ schedule?.baithak?.toTime }}</td>
-               
-                <td style="width: 10%;">{{ schedule?.baithak?.dayOfWeek }}</td>
+                <td >{{ schedule.scheduleId }}</td>
+                <td >{{ schedule?.baithak?.baithakType }}</td>
+                <td >{{ schedule?.date }}</td>
+                <td >{{ schedule?.baithak?.fromTime }}</td>
+                <td >{{ schedule?.baithak?.toTime }}</td>               
+                <td >{{ schedule?.baithak?.dayOfWeek }}</td>
                 <!-- <td>
                   <table>
                     <tr> -->
-                      <td style="width: 11%;">
+                      <td>
                         {{ schedule.members[0]?.firstName}} {{ schedule.members[0]?.lastName }}
                       </td>
                     <!-- </tr>
                     <tr> -->
-                      <td style="width: 10%;">
+                      <td>
                         {{ schedule.members[1]?.firstName }} {{ schedule.members[1]?.lastName }}
                       </td>
                     <!-- </tr>
                   </table>
                 </td> -->
-                <td style="width: 8%;">{{ schedule.location.city }}</td>               
+                <td>{{ schedule.location.locationName }}</td>               
               </tr>
             </tbody>
           </table>
@@ -171,7 +169,7 @@
       <small><mat-paginator class="justify-content-md-end"
         [length]="defaultSchedules.length"
         [pageIndex]="currentPage"
-        [pageSizeOptions]="[10]"
+        [pageSizeOptions]="[9]"
         (page)="onPageChange($event)"
       ></mat-paginator></small>
     </div>

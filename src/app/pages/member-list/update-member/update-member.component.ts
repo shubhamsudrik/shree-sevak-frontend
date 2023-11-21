@@ -25,7 +25,7 @@ export class UpdateMemberComponent implements OnInit {
       private route: ActivatedRoute,
       private formBuilder: FormBuilder,
       private toast:ToastrService
-    ) {}
+    ) {  }
   
     ngOnInit(): void {
       this.id = this.route.snapshot.params['id'];
@@ -117,6 +117,8 @@ export class UpdateMemberComponent implements OnInit {
         weeklyOffs: [this.Member?.weeklyOffs, Validators.required],
         additionalInfo: [this.Member?.additionalInfo],
       });
+
+      this.getMembers();
  
     }
   
@@ -143,15 +145,14 @@ export class UpdateMemberComponent implements OnInit {
       alert(
         'Data already exists with the same Aaddhar card Number .'
       );
-    } else 
-      if (this.memberform.valid) {
+    } else if (this.memberform.valid) {
         // Data doesn't exist and the form is valid, save the Member
         console.log(this.Member);
         this.saveMember();
        this.toast.success("  Member Info Update Succesfully ")
       } else {
         // alert('Please fill all fields: कृपया सर्व फील्ड भरा');
-        this.toast.warning('All field is mandatory.')
+        this.toast.warning('Fill all mandatory.')
       }
     }
   
@@ -226,8 +227,14 @@ export class UpdateMemberComponent implements OnInit {
   
       isDuplicateData(newMember: Member): boolean {
         for (let item of this.defaultMembers) {
-          if (
-            
+          console.log('Existing Member Aadhar:', item.addharNumber);
+          console.log('New Member Aadhar:', newMember.addharNumber);
+
+          if (item.memberId === newMember.memberId) {
+            continue;
+          }
+
+          if (            
             item.addharNumber === newMember.addharNumber 
             // item.id !== newMember.MemberId
           ) {
