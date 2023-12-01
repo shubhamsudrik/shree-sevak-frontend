@@ -129,10 +129,11 @@ export class SchedularComponent implements OnInit {
     }
 
   
-    updateSchedules(value: number) {
+    updateSchedules(value: any) {
       console.log(value);
-      this.router.navigate(["/update-schedule"], {
-        queryParams: { baithakId: value },
+      this.router.navigate(['/add-schedular'], {
+        queryParams: { baithakId: value,date:value },
+       
       });
     }
 

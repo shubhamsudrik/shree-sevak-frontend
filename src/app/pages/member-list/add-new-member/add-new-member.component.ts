@@ -57,7 +57,7 @@ export class AddNewMemberComponent implements OnInit {
       occupation: [this.Member?.occupation, Validators.required],
       dob: [this.Member?.dob, Validators.required],
       gender: [this.Member?.gender, Validators.required],
-      role: [this.Member?.role, Validators.required],
+      // role: [this.Member?.role, Validators.required],
       area: [this.Member?.area, Validators.required],
       addharNumber: ['', [Validators.required, Validators.minLength(12)]],
       panNo: ['', Validators.required],

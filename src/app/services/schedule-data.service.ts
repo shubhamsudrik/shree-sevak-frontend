@@ -14,8 +14,13 @@ export class ScheduleDataService {
   public schduleVachanmember: any[] = [];
   public schduleHajeriMember: any[] = [];
   public serviceDefaultMember: any[] = [];
+  public serviceSelectedMember: any[] = [];
+  totalMembers: number;
 
-  constructor(private httpclient: HttpClient,private memberService:MemberListService) {}
+  constructor(
+    private httpclient: HttpClient,
+    private memberService: MemberListService
+  ) {}
 
   private baseUrl = "http://localhost:8080/api/schedular";
   //  private url = "http://localhost:8080/api";
@@ -88,117 +93,208 @@ export class ScheduleDataService {
     );
   }
 
-  async addMembersToSchduleHajeriGhenara(memberDetail: any) {
-  
+  addMembersToSchduleHajeriGhenara(memberDetail: any) {
     // Check if the member already exists in the array
     const index = this.schduleHajeriMember.findIndex(
       (member) =>
         // member.memberId === memberDetail.memberId &&
-        member.locationId === memberDetail.locationId &&
+        member.locationId === +memberDetail.locationId &&
         member.date === memberDetail.date &&
-        member.baithakId === memberDetail.baithakId
+        member.baithakId === +memberDetail.baithakId
     );
 
     if (index !== -1) {
       //update member if found
-      try{
-        if( this.schduleHajeriMember[index].memberId !==0  && memberDetail.memberId !==0){
-          const member:Member=await lastValueFrom(this.memberService.getMemberById(this.schduleHajeriMember[index].memberId))
-          this.serviceDefaultMember.push(member);
+      try {
+        if (
+          this.schduleHajeriMember[index].memberId !== 0 &&
+          memberDetail.memberId !== 0
+        ) {
+          console.log(
+            "List of serviceDefaultMemebr: ",
+            this.serviceDefaultMember
+          );
           this.schduleHajeriMember[index] = memberDetail;
         }
-       
-      }catch(err) {
+      } catch (err) {
         console.log(err);
       }
-      
-      
-    } else if (!isNaN(+memberDetail.memberId) && memberDetail.memberId !==0) {
+    } else if (!isNaN(+memberDetail.memberId) && memberDetail.memberId !== 0) {
       //Add a new Meber if not found
       this.schduleHajeriMember.push(memberDetail);
     }
 
-    const selectedHajeriMembers = this.schduleHajeriMember;
-    const hajeriMemberIdsToRemove = selectedHajeriMembers.map(
-      (member) => member.memberId
-    );
+    // const selectedHajeriMembers = this.schduleHajeriMember;
+    // const hajeriMemberIdsToRemove = selectedHajeriMembers.map(
+    //   (member) => member.memberId
+    // );
 
-    const updatedMembers = this.serviceDefaultMember.filter(
-      (member) => !hajeriMemberIdsToRemove.includes(member.memberId)
-    );
-    this.setMembers(updatedMembers);
+    // const updatedMembers = this.serviceDefaultMember.filter(
+    //   (member) => !hajeriMemberIdsToRemove.includes(member.memberId)
+    // );
+    // this.setMembers(updatedMembers);
     console.log("Array of HAJERIMEMBERS", this.schduleHajeriMember);
   }
 
-  async addMembersToSchduleVachanGhenara(memberDetail: any) {
+  addMembersToSchduleVachanGhenara(memberDetail: any) {
     const index = this.schduleVachanmember.findIndex(
       (member) =>
         // member.memberId === memberDetail.memberId &&
-        member.locationId === memberDetail.locationId &&
+        member.locationId === +memberDetail.locationId &&
         member.date === memberDetail.date &&
-        member.baithakId === memberDetail.baithakId
+        member.baithakId === +memberDetail.baithakId
     );
 
     if (index !== -1) {
-
       // Update the existing member if found
-     try{
-      if(this.schduleVachanmember[index].memberId !==0 && memberDetail.memberId !==0){
-        const member:Member=await lastValueFrom(this.memberService.getMemberById( this.schduleVachanmember[index] .memberId))
-        this.serviceDefaultMember.push(member);
-  
-        this.schduleVachanmember[index] = memberDetail;
+      try {
+        if (
+          this.schduleVachanmember[index].memberId !== 0 &&
+          memberDetail.memberId !== 0
+        ) {
+          console.log(
+            "List of serviceDefaultMemebr: ",
+            this.serviceDefaultMember
+          );
+          this.schduleVachanmember[index] = memberDetail;
+        }
+      } catch (err) {
+        console.error(err);
       }
-     
-
-     }catch(err) {
-      console.error(err);
-     }
-
-      
-    } else if (!isNaN(+memberDetail.memberId) && memberDetail.memberId !==0) {
+    } else if (!isNaN(+memberDetail.memberId) && memberDetail.memberId !== 0) {
       // Add a new member if not found
       this.schduleVachanmember.push(memberDetail);
     }
 
-     const selectedVachanMembers = this.schduleVachanmember;
-      const vachanMemberIdsToRemove = selectedVachanMembers.map((member) => member.memberId);
-      
-     const updatedMember= this.serviceDefaultMember.filter((member) => !vachanMemberIdsToRemove.includes(member.memberId));
-      this.setMembers(updatedMember);
+    // const selectedVachanMembers = this.schduleVachanmember;
+    // const vachanMemberIdsToRemove = selectedVachanMembers.map(
+    //   (member) => member.memberId
+    // );
+
+    // const updatedMember = this.serviceDefaultMember.filter(
+    //   (member) => !vachanMemberIdsToRemove.includes(member.memberId)
+    // );
+    // this.setMembers(updatedMember);
 
     console.log("Array of VACHANMEMBERS", this.schduleVachanmember);
   }
 
-  validateHajerimember(member: any) {
+  // validateHajerimember(member: any) {
+  //   const index1 = this.schduleHajeriMember.findIndex((value) => {
+  //     return (
+  //       value.memberId === +member.memberId &&
+  //       value.date === member.date &&
+  //       value.baithakId === +member.baithakId
+  //     );
+  //   });
+  //   console.log("for hajeri", index1);
+  //   if (index1 === -1) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+  validateMember(member: any) {
     const index1 = this.schduleHajeriMember.findIndex((value) => {
-      return value.memberId === member.memberId && value.date === member.date;
+      return (
+        value.memberId === +member.memberId &&
+        value.date === member.date &&
+        value.baithakId === +member.baithakId
+      );
+    });
+    const index2 = this.schduleVachanmember.findIndex((value) => {
+      return (
+        value.memberId === +member.memberId &&
+        value.date === member.date &&
+        value.baithakId === +member.baithakId
+      );
     });
     console.log("for hajeri", index1);
-    if (index1 === -1) {
+    if (index1 === -1 && index2 === -1) {
       return true;
     } else {
       return false;
     }
   }
 
-  validateVachanMember(member: any) {
-    const index1 = this.schduleVachanmember.findIndex((value) => {
-      return value.memberId === member.memberId && value.date === member.date;
-    });
-    console.log("for vachan", index1);
-    if (index1 === -1) {
-      return true;
-    } else {
-      return false;
-    }
+  // validateVachanMember(member: any) {
+  //   const index1 = this.schduleVachanmember.findIndex((value) => {
+  //     return (
+  //       value.memberId === +member.memberId &&
+  //       value.date === member.date &&
+  //       value.baithakId === +member.baithakId
+  //     );
+  //   });
+  //   console.log("for vachan", index1);
+  //   if (index1 === -1) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  setMembersLength(length: number) {
+    this.totalMembers = length;
   }
-  setMembers(members: Member[]) {
-    this.serviceDefaultMember = members;
-    console.log(this.serviceDefaultMember);
+  getMembersLength() {
+    return this.totalMembers;
+  }
+  setMembers(members: any[]) {
+    this.serviceDefaultMember = [...this.serviceDefaultMember, ...members];
+    console.log("list of members", this.serviceDefaultMember);
+  }
+  setSingleVachanMembers(member: any) {
+
+  this.schduleVachanmember.push(member);
+  console.log(this.schduleVachanmember)
+  }
+  setSingleHajeriMembers(member: any) {
+
+
+  this.schduleHajeriMember.push(member)
+  console.log("list of members", this.schduleHajeriMember);
+}
+
+  getMembers(date: string, baithakId: any, locationId: any): any[] {
+    const newServiceDefaultMember = this.serviceDefaultMember.filter(
+      (member) => {
+        // Check if member's date and baithakId match the provided parameters
+        return member.date === date && member.baithakId === +baithakId;
+      }
+    );
+
+    console.log(
+      "fillter members base on date memebers",
+      newServiceDefaultMember
+    );
+    const updatedServiceDefaultMember = newServiceDefaultMember.slice(
+      0,
+      this.getMembersLength()
+    );
+    const hajeriMember = this.schduleHajeriMember.filter(
+      (member) => member.date === date && member.baithakId === +baithakId
+    );
+    const vachanMember = this.schduleVachanmember.filter(
+      (member) => member.date === date && member.baithakId === +baithakId
+    );
+ 
+    const listOfhajeriAndVachanMember = [...vachanMember, ...hajeriMember];
+    const memberIdsToRemove = listOfhajeriAndVachanMember.map(
+      (member) => member.memberId
+    );
+
+    const sortedMemeberList = updatedServiceDefaultMember.filter(
+      (member) => !memberIdsToRemove.includes(member.memberId)
+    );
+    // const nonSelectHajeriMembers=updatedServiceDefaultMember.filter()
+    console.log(sortedMemeberList);
+    return sortedMemeberList;
   }
 
-  getMembers(){
-    return this.serviceDefaultMember
-  }
+  //  newServiceDefaultMember.filter((member) =>{
+  //   if(member.date === date && member.baithakId ===baithakId && member.locationId === locationId){
+
+  //     return member;
+  //   }
+  // });
 }
