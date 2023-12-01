@@ -5,9 +5,9 @@
   margin-bottom: 1rem;
   border: 1px solid #dee2e6;
   background-color: #fff;
-}
+} */
 
-.calendar-table thead th {
+ .calendar-table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #dee2e6;
   width: 14.2%;
@@ -18,14 +18,15 @@
 }
 
 .calendar-table td, .calendar-table th {
-  padding: .75rem;
+  
+  padding: .40rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }
 
 .calendar-day {
-  height: 12vh;
-  max-height: 12vh;
+  height: 1vh;
+  max-height: 1vh;
   cursor: pointer;
 }
 
@@ -46,7 +47,7 @@
 
 .blue-date {
   color: rgb(16, 110, 190);
-}
+} 
 .btn-dropdown {
   width: 150px; /* Adjust the width as needed */
   height: 40px; /* Adjust the height as needed */
@@ -54,11 +55,23 @@
   margin-right: 100px; /* Add margin to create space between buttons */
   margin-bottom: 10px;
 }
+
+
 table{
-  box-sizing: content-box;
+  box-sizing: border-box;
 width: 100%;
+}
+table thead tr th{
+ text-align: center;
 }
 .scrollit {
   overflow:scroll;
-  height:80%;
+  height:100%;
+  width: 100%;
+}
+.sticky-column {
+  position: sticky;
+  left: 0; /* Stick to the left side */
+  z-index: 1; /* Ensure it appears above the rest of the content */
+  background-color: #f2f2f2; /* Background color for the sticky column */
 }

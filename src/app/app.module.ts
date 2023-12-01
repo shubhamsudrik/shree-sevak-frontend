@@ -47,6 +47,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp-component.component';
 import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
+import { ScheduleDataService } from './services/schedule-data.service';
+
 // import { ComponentComponent } from './pages/component/component.component';
 
 

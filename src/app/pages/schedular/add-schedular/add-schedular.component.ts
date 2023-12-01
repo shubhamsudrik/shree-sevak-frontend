@@ -23,6 +23,9 @@ import { ScheduleDto } from "src/app/Classes/schedule-dto";
 import { DynamicformComponent } from "./dynamicform/dynamicform.component";
 import { ToastrService } from "ngx-toastr";
 
+import { firstValueFrom } from "rxjs";
+import { Schedule } from "src/app/Classes/schedule";
+
 export class CalendarDay {
   public date: Date;
 
@@ -100,7 +103,7 @@ export class ChunkPipe implements PipeTransform {
   templateUrl: "./add-schedular.component.html",
 
   styleUrls: ["./add-schedular.component.css"],
-  providers: [ScheduleDataService],
+  providers: [],
 })
 export class AddSchedularComponent implements OnInit {
   location: Location = new Location();
@@ -167,6 +170,8 @@ export class AddSchedularComponent implements OnInit {
   displayDayCount: any;
   defaultVachanMembers: Member[];
   defaultHajeriMembers: Member[];
+  hasSave: boolean ;
+  collectionOfSchedule: Schedule[];
 
   constructor(
     private router: Router,
@@ -199,6 +204,9 @@ export class AddSchedularComponent implements OnInit {
     // this.creatingScheduleObjects();
 
     this.initializingForm();
+    // To fetch schedules for the current month
+
+    this.toHideSaveandUpdateButton2(this.displayMonth, this.baithakId);
   }
 
   private generateCalendarDays(monthIndex: number): void {
@@ -214,7 +222,7 @@ export class AddSchedularComponent implements OnInit {
       new Date().getMonth() + monthIndex
     );
 
-    // console.log(day);
+    console.log(day);
 
     // console.log(day.getDay);
 
@@ -265,6 +273,7 @@ export class AddSchedularComponent implements OnInit {
     this.generateCalendarDays(this.monthIndex);
 
     this.getNumberOfDaysInMonth();
+    this.toHideSaveandUpdateButton(true);
     // this.getMemberList();
     // this.creatingScheduleObjects();
   }
@@ -274,8 +283,9 @@ export class AddSchedularComponent implements OnInit {
 
     this.generateCalendarDays(this.monthIndex);
 
+    this.toHideSaveandUpdateButton(false);
     this.getNumberOfDaysInMonth();
-
+    
     // this.creatingScheduleObjects();
     // this.getMemberList();
   }
@@ -285,7 +295,11 @@ export class AddSchedularComponent implements OnInit {
 
     this.generateCalendarDays(this.monthIndex);
 
+    this.toHideSaveandUpdateButton2(this.displayMonth, this.baithakId);
     this.getNumberOfDaysInMonth();
+    // To fetch schedules for the current month
+   
+  
 
     // this.creatingScheduleObjects();
   }
@@ -333,7 +347,7 @@ export class AddSchedularComponent implements OnInit {
   private getMemberList() {
     this.memberListService.getMemberList().subscribe((data: Member[]) => {
       this.defaultMembers = data;
-      this.scheduleService.setMembers(this.defaultMembers);
+      // this.scheduleService.setMembers(this.defaultMembers);
       // this.hajeriMembers = data.filter((member: Member) => {
       //   if (member.hajeriNo === "1") {
       //     return member;
@@ -506,63 +520,9 @@ export class AddSchedularComponent implements OnInit {
   saveChanges(scheduleDto: ScheduleDto) {
     console.log(scheduleDto);
     this.updateOrPushSchedule(this.scheduleArray, scheduleDto);
-
-    // const isHajeriMember =
-    //   this.scheduleService.validateHajerimember(scheduleDto);
-    //   console.log(isHajeriMember)
-    // const isVachanMember =
-    //   this.scheduleService.validateVachanMember(scheduleDto);
-    //   console.log(isVachanMember)
-    // if (isHajeriMember) {
-    //   this.toast.error("hajeriMember all ready selected");
-    // } else {
-    //   this.scheduleService.addMembersToSchduleHajeriGhenara(scheduleDto);
-    // }
-
-    // if (isVachanMember) {
-    //   this.toast.error("VachanMember All ready Selected");
-    // }
-    // {
-    //   this.scheduleService.addMembersToSchduleVachanGhenara(scheduleDto);
-    // }
+   
+    
   }
-
-  // vachanMemberChanged(value: any) {
-  //   this.checkVachanGhenara(value);
-
-  // }
-  // hajeriMemberChanged(value: any) {
-  //   this.checkHajeriMemeber(value);
-  // }
-  // checkHajeriMemeber(value: any) {
-  //   this.scheduleMemeberArray.forEach((memberids) => {
-  //     if (memberids === +value) {
-  //       this.toast.warning(
-  //         "Member All ready Selected in the place of Hajeri/writer"
-  //       );
-  //     }
-  //   });
-  //   console.log(this.scheduleMemeberArray);
-  //   if (!isNaN(+value)) {
-  //     this.scheduleMemeberArray.add(+value);
-  //   }
-  //   console.log(this.scheduleMemeberArray);
-  // }
-
-  // checkVachanGhenara(value: any) {
-  //   this.scheduleMemeberArray.forEach((memberids) => {
-  //     if (memberids === +value) {
-  //       this.toast.warning(
-  //         "Member All ready Selected in the place of vachanGenara/reader"
-  //       );
-  //     }
-  //   });
-  //   console.log(this.scheduleMemeberArray);
-  //   if (!isNaN(+value)) {
-  //     this.scheduleMemeberArray.add(+value);
-  //   }
-  //   console.log(this.scheduleMemeberArray);
-  // }
 
   modifyScheduleArray(): any {
     const date = this.dynamicformcomponent.currentDate();
@@ -572,6 +532,7 @@ export class AddSchedularComponent implements OnInit {
     const desiredMonth = match[1];
     const desiredYear = match[2];
     let modifyScheduleArray: ScheduleDto[] = [];
+    console.log(this.scheduleArray);
 
     modifyScheduleArray = this.scheduleArray
       .map((schedule) => {
@@ -594,42 +555,206 @@ export class AddSchedularComponent implements OnInit {
 
     if (modifyScheduleArray.length === 0) {
       this.toast.warning("please filled record");
+      this.hasSave=true
+      
     } else {
-      this.scheduleService
-        .getscheduleByDateAndLocationBaithak(
-          modifyScheduleArray[0].date,
-          modifyScheduleArray[0].locationId,
-          modifyScheduleArray[0].baithakId
-        )
-        .subscribe((data) => {
-          if (data) {
-            this.toast.warning(
-              "This month Record All ready present go to Update "
-            );
-          } else {
-            this.scheduleService
-              .createScheduleRecord(modifyScheduleArray)
-              .subscribe(
-                (data) => {
-                  this.toast.success("This month Record created successfully");
-                  this.router.navigate(["/schedular"]);
-
-                  console.log(data);
-                },
-                (error) => console.log(error)
-              );
-          }
-        });
+       // Handle the case where the record is not found
+              this.toast.success("Record not found. Creating a new record.");
+              this.scheduleService
+                .createScheduleRecord(modifyScheduleArray)
+                .subscribe(
+                  (data) => {
+                    this.toast.success(
+                      "This month Record created successfully"
+                    );
+                    this.router.navigate(["/schedular"]);
+                    console.log(data);
+                  },
+                  (createError) => console.log(createError)
+                );
+      // this.scheduleService
+      //   .getscheduleByDateAndLocationBaithak(
+      //     modifyScheduleArray[0].date,
+      //     modifyScheduleArray[0].locationId,
+      //     modifyScheduleArray[0].baithakId
+      //   )
+      //   .subscribe(
+      //     (data) => {
+      //       if (data) {
+      //         this.toast.warning(
+      //           "This month Record All ready present go to Update"
+      //         );
+      //       }
+      //     },
+      //     (error) => {
+      //       if (error.status === 404) {
+      //         // Handle the case where the record is not found
+      //         this.toast.success("Record not found. Creating a new record.");
+      //         this.scheduleService
+      //           .createScheduleRecord(modifyScheduleArray)
+      //           .subscribe(
+      //             (data) => {
+      //               this.toast.success(
+      //                 "This month Record created successfully"
+      //               );
+      //               this.router.navigate(["/schedular"]);
+      //               console.log(data);
+      //             },
+      //             (createError) => console.log(createError)
+      //           );
+      //       } else {
+      //         // Handle other types of errors
+      //         console.log(error);
+      //         this.toast.error(
+      //           "An error occurred while processing the request."
+      //         );
+      //       }
+      //     }
+      //   );
     }
   }
 
   onSubmit() {
     this.modifyScheduleArray();
+   
   }
 
-  updateSchedule(value: any) {
-    this.router.navigate(["/update-schedule"], {
-      queryParams: { baithakId: value },
-    });
+  updateSchedule() {
+    console.log(this.scheduleArray);
+
+    this.scheduleService
+
+      .updateSchedule(this.scheduleArray)
+      .subscribe((data) => {
+        this.toast.success("Record Updated succesfully");
+        this.schedularForm.reset();
+        console.log(data);
+      });
   }
+
+  /**
+   *
+   * @param displayMonth
+   * @param displayYear
+   * @param baithakId
+   */
+
+  toHideSaveandUpdateButton2(displayMonth: string, baithakId) {
+    const displayYear1 = new Date().getFullYear().toString();
+    const month = displayMonth.substring(0, 3);
+
+    console.log(month, displayYear1, baithakId);
+    this.scheduleService
+      .getScheduleByMonthAndYearAndBaithak(month, displayYear1, +baithakId)
+      .subscribe((data: Schedule[]) => {
+        if (data.length === 0) {
+          this.hasSave = true;
+        } else {
+          this.hasSave = false;
+        }
+      });
+  }
+  toHideSaveandUpdateButton(
+    increment: boolean = true,
+    setCurrentMonth: boolean = false
+  ) {
+    const currentDate = setCurrentMonth
+      ? this.dynamicformcomponent.currentDate()
+      : this.dynamicformcomponent.currentDate();
+    const currentMonthYearRegex = /(\w{3})\s(\d{1,2}),\s(\d{4})/;
+    const match = currentDate.match(currentMonthYearRegex);
+
+    if (!match) {
+      // Handle invalid date format
+      return;
+    }
+
+    const currentMonth = match[1];
+    const currentDay = parseInt(match[2], 10);
+    const currentYear = parseInt(match[3], 10);
+
+    let nextMonth, nextYear;
+
+    if (setCurrentMonth) {
+      // If fetching for the current month, use the current date without incrementing or decrementing
+      nextMonth = currentMonth;
+      nextYear = currentYear;
+    } else {
+      // Calculate the next or previous month and year
+      if (increment) {
+        nextMonth =
+          currentMonth === "Dec" ? "Jan" : this.getNextMonth(currentMonth);
+        nextYear = currentMonth === "Dec" ? currentYear + 1 : currentYear;
+      } else {
+        nextMonth =
+          currentMonth === "Jan" ? "Dec" : this.getPreviousMonth(currentMonth);
+        nextYear = currentMonth === "Jan" ? currentYear - 1 : currentYear;
+      }
+    }
+
+    // Fetch schedules for the next or previous month, or the current month
+    this.scheduleService
+      .getScheduleByMonthAndYearAndBaithak(
+        nextMonth,
+        nextYear.toString(),
+        +this.baithakId
+      )
+      .subscribe((data: Schedule[]) => {
+        if (data.length === 0) {
+          this.hasSave = true;
+        } else {
+          this.hasSave = false;
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.hasSave = true; // Handle error, show "Save and Continue" as a fallback
+      }
+      );
+  }
+
+  getNextMonth(currentMonth: string): string {
+    const monthNames = [ "Jan",  "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug",  "Sep",  "Oct",  "Nov",  "Dec",
+    ];
+    const currentMonthIndex = monthNames.indexOf(currentMonth);
+    const nextMonthIndex = (currentMonthIndex + 1) % 12;
+    return monthNames[nextMonthIndex];
+  }
+
+  // Method to get the previous month
+  getPreviousMonth(currentMonth: string): string {
+    const monthIndex = [ "Jan","Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    ].indexOf(currentMonth);
+    const previousMonthIndex = (monthIndex - 1 + 12) % 12;
+    return [  "Jan",  "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug",  "Sep",  "Oct",  "Nov",  "Dec",
+    ][previousMonthIndex];
+  }
+
+  generateSchedule(){
+  
+
+    const date=this.dynamicformcomponent.currentDate();
+      let regex = /(\w{3})\s\d{1,2},\s(\d{4})/;
+    const match = date.match(regex);
+    const desiredMonth=match[1]
+    const desiredYear=match[2]
+  
+    this.scheduleService.getScheduleByMonthAndYearAndBaithak(desiredMonth,desiredYear,+this.baithakId).subscribe((data:Schedule[])=>{
+      this.collectionOfSchedule=data;
+      console.log(this.collectionOfSchedule)
+      this.router.navigate(["/report"],{queryParams:{schedules:JSON.stringify(this.collectionOfSchedule)}})
+      
+    },error => console.log(error));
+  
+  
+  
+   
+    
+
+  }
+  // updateSchedule(value: any) {
+  //   this.router.navigate(["/update-schedule"], {
+  //     queryParams: { baithakId: value },
+  //   });
+  // }
 }
