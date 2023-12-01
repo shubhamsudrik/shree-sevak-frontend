@@ -1,5 +1,5 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8 custom-header-height">
-  <div class="container-fluid">
+  <div class="container">
     <div class="header-body custom-header-height1">
       <!-- Card stats -->
       <div class="row ">
@@ -94,11 +94,11 @@
       </div>        
     </div>
   </div>
-<!-- </div>
-<div class="container-fluid mt--7">
+</div>
+<!-- <div class="container-fluid mt--7">
   <div class="row">
     <div class="col-xl-8 mb-5 mb-xl-0">
-      <div class="card shadow">
+      <div class="card bg-gradient-default shadow">
         <div class="card-header bg-transparent">
           <div class="row align-items-center">
             <div class="col">
@@ -110,7 +110,7 @@
         <div class="card-body">
           Chart
           <div class="chart">
-            Chart wrapper
+            Chart wrapper 
             <canvas #chartSalesCanvas class="chart-canvas"></canvas>
           </div>
         </div>
@@ -119,3 +119,108 @@
     
   </div>
 </div> -->
+
+<div class="container-fluid mt--7"  style="margin-bottom: 100px;">
+  <div class="row">
+    <div class="col-xl-6 mb-5 mb-xl-0">
+      <div class="card bg-color shadow">
+        <div class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-dark ls-1 mb-1">Last Created Locations</h6>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive card shadow">
+          <table  class="table align-items-center table-flush">
+            <thead class="thead-light">
+            <tr class="text-uppercase text-dark">
+              <th>Location Name</th>
+              <th>Division</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Pincode</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-dark" *ngFor="let location of locdata.slice(-5)">
+              <td>{{ location.locationName }}</td>
+              <td>{{ location.division  }}</td>
+              <td>{{ location.city }}</td>
+              <td>{{ location.state }}</td>
+              <td>{{ location.pincode }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>    
+  </div>
+  <div class="col-xl-6 mb-5 mb-xl-0">
+    <div class="card bg-color shadow">
+      <div class="card-header bg-transparent">
+        <div class="row align-items-center">
+          <div class="col">
+            <h6 class="text-uppercase text-dark ls-1 mb-1">Last Created Members</h6>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive card shadow">
+        <table  class="table align-items-center table-flush">
+          <thead class="thead-light">
+          <tr class="text-uppercase text-dark">
+            <th>Member Name</th>
+            <th>area</th>            
+            <th>city</th>
+            <th>mobile number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-dark" *ngFor="let member of defaultMembers.slice(-5)">
+            <td>{{ member.initial+' ' }}{{ member.firstName+ " "}}{{ member.lastName}}</td>
+            <td>{{ member.area }}</td>            
+            <td>{{ member.city }}</td>
+            <td>{{ member.mobile }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>    
+</div>
+</div><br>
+<div class="row">
+  <div class="col-xl-8 mb-5 mb-xl-0">
+    <div class="card bg-color shadow">
+      <div class="card-header bg-transparent">
+        <div class="row align-items-center">
+          <div class="col">
+            <h6 class="text-uppercase text-dark ls-1 mb-1">Last Created Baithak</h6>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive card shadow">
+        <table  class="table align-items-center table-flush">
+          <thead class="thead-light">
+          <tr class="text-uppercase text-dark">
+            <th>Location of baithak</th>
+            <th>Reader Member</th>
+            <th>Attendence Member</th>            
+            <th>Baithak Time</th>
+            <th>Baithak Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-dark" *ngFor="let baithak of defaultSchedular.slice(0,5)">
+            <td>{{ baithak.location.locationName }}</td>
+            <td>{{ baithak.members[0].initial+' ' }} {{ baithak.members[0].firstName+' ' }} {{ baithak.members[0].lastName }}</td>
+            <td>{{ baithak.members[1].initial+' ' }} {{ baithak.members[1].firstName+' ' }} {{ baithak.members[1].lastName }}</td>
+            <td>{{ baithak.baithak.fromTime +' To ' }} {{ baithak.baithak.toTime }}</td>
+            <td>{{ baithak.date }}</td>
+            <!-- <td>{{ location.pincode }}</td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>    
+</div>
+</div>
+</div>

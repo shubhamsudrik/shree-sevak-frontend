@@ -28,6 +28,7 @@ export class UpdateLocationComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.initializeForm();
+    this.getLocations();
     this.locationDataService.getLocationById(this.id).subscribe({
       next: (data: any) => {
         console.log(data)
@@ -114,7 +115,7 @@ export class UpdateLocationComponent implements OnInit {
       this.saveLocation();
       this.toaster.success("Location Updated Successfully !")
     } else {
-      this.toaster.warning('All field is mandatory.');
+      this.toaster.warning('Fill all mandatory field.');
     }
   }
 
@@ -156,6 +157,13 @@ export class UpdateLocationComponent implements OnInit {
 
   isDuplicateData(newLocation: Location): boolean {
     for (let item of this.defaultLocations) {
+      console.log('existing location', item.city)
+      console.log('new location', newLocation.city)
+
+      if (item.locationId === newLocation.locationId){
+        continue;
+      }
+
       if (
         item.city === newLocation.city &&
         item.state === newLocation.state &&

@@ -335,7 +335,9 @@
                   
                   maxlength="20" 
                     />
-                    
+                    <div class="invalid-feedback">
+                      {{ 'This field is mandatory.' | translate }}
+                    </div>
               </div>
              </div>
              </div>
@@ -575,7 +577,9 @@
                   
                   maxlength="20" 
                     />
-                    
+                    <div class="invalid-feedback">
+                      {{ 'This field is mandatory.' | translate }}
+                    </div>
               </div>
              </div>
               </div>
@@ -596,7 +600,9 @@
                   
                   maxlength="20" 
                     />
-                   
+                    <div class="invalid-feedback">
+                      {{ 'This field is mandatory.' | translate }}
+                    </div>
               </div>
              </div>
               </div>
@@ -789,7 +795,9 @@
               
               maxlength="20" 
                 />
-                
+                <div class="invalid-feedback">
+                  {{ 'This field is mandatory.' | translate }}
+                </div>
           </div>
          </div>
          </div>
@@ -809,7 +817,9 @@
               
               maxlength="20" 
                 />
-                
+                <div class="invalid-feedback">
+                  {{ 'This field is mandatory.' | translate }}
+                </div>
           </div>
          </div>
         </div>
@@ -829,7 +839,9 @@
               
               maxlength="25" 
                 />
-                
+                <div class="invalid-feedback">
+                  {{ 'This field is mandatory.' | translate }}
+                </div>
           </div>
          </div>
          </div>
@@ -884,7 +896,9 @@
                 [(ngModel)]="Member.phoneNumber"
                
                   />
-                  
+                  <div class="invalid-feedback">
+                    {{ 'This field is mandatory.' | translate }}
+                  </div>
             </div>  
             </div>
            </div>
@@ -936,11 +950,14 @@
               [(ngModel)]="Member.vehicleType"
               
                 >
+
               <option value="" disabled>Select Vehicle</option>
                   <option value="2-Wheeler">2-Wheeler</option>
                   <option value="4-Wheeler">4-Wheeler</option>
                 </select>
-                
+                <div class="invalid-feedback">
+                  {{ 'This field is mandatory.' | translate }}
+                </div>
           </div>
         </div>
          </div>
@@ -961,6 +978,9 @@
                 
                 maxlength="14" 
                   />
+                  <div class="invalid-feedback">
+                    {{ 'This field is mandatory.' | translate }}
+                  </div>
             </div>
            </div>
             </div>
@@ -1107,7 +1127,9 @@
              
               maxlength="25" 
                 />
-               
+                <div class="invalid-feedback">
+                  {{ 'This field is mandatory.' | translate }}
+                </div>
           </div>
           </div>
          </div>
@@ -1167,6 +1189,9 @@
                 name="additionalInfo"
                 [(ngModel)]="Member.additionalInfo"
                  />
+                 <div class="invalid-feedback">
+                  {{ 'This field is mandatory.' | translate }}
+                </div>
             </div>
            </div>
            </div>

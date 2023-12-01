@@ -138,7 +138,7 @@ export class AddNewMemberComponent implements OnInit {
       this.saveMember();
       this.toast.success("New Member Created successfully ")
     } else {
-      this.toast.warning('All field is mandatory.');
+      this.toast.warning('Fill all mandatory field.');
     }
     
   }
@@ -218,6 +218,8 @@ export class AddNewMemberComponent implements OnInit {
 
   isDuplicateData(newMember: Member): boolean {
     for (let item of this.defaultMembers) {
+      console.log('Existing Member Aadhar:', item.addharNumber);
+      console.log('New Member Aadhar:', newMember.addharNumber);
       if (
         
         item.addharNumber === newMember.addharNumber 

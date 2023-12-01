@@ -24,12 +24,12 @@ export class SchedularComponent implements OnInit {
     searchText1: any;
     searchText2: any;
     baithakList:Baithak[];
-  baithakDataService: any;
+    baithakDataService: any;
 
 
   // Pagination
     currentPage: number = 0;
-    itemsPerPage: number = 10;
+    itemsPerPage: number = 9;
 
     get pagedSchedules(): any[] {
       const startIndex = this.currentPage * this.itemsPerPage;
