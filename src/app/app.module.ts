@@ -44,9 +44,9 @@ import { ScheduleLadiesBaithakComponent } from './pages/schedular/schedule-ladie
 import { DynamicformComponent } from './pages/schedular/add-schedular/dynamicform/dynamicform.component';
 import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/update-dynamic-form/update-dynamic-form.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp-component.component';
+import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -114,6 +114,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ScheduleLadiesBaithakComponent,
     DynamicformComponent,
     UpdateDynamicFormComponent,
+    OtpComponentComponent,
+    ChangePasswordComponent,
   
     // ComponentComponent
   ],

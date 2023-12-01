@@ -54,8 +54,8 @@ constructor(
         localStorage.removeItem('token');
         console.log('Token removed from localStorage.');
         this.router.navigate(['/login']);
-      }, 6000000);
-
+      }, 7200000);
+      // 7200000
 
   //   this.datasets = [1,2,3,4,5,14,7,8,9]
 

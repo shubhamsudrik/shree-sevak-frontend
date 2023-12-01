@@ -46,6 +46,21 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  // Success msg with info
+  showToastr() {
+    const message = `      
+      Your username: <strong>${this.registerform.value.emailId}</strong> <br>
+      Your password: <strong>${this.registerform.value.confirmPassword}<strong>
+    `;
+    this.toast.success(message, 'Register Successfully', { enableHtml: true ,
+      timeOut: 200000,
+      progressBar: true,
+      closeButton: true,
+    });
+
+  }
+
+
   get registerFormControl() {
     return this.registerform.controls;
   }
@@ -62,9 +77,13 @@ export class RegisterComponent implements OnInit {
   
             if (res.success === false) {
               this.toast.warning('User Is Already Exit With Same Email,Mobile');
+              console.log(this.registerform.value);
+              console.log(this.registerform.value.confirmPassword);
+              
               console.log('Response:', res);
             } else {
-            this.toast.success('Register Successfully');
+            // this.toast.success('Register Successfully');  
+            this.showToastr();
             console.log('Response:', res);
             this.router.navigate(['/login']);
             }
@@ -76,7 +95,7 @@ export class RegisterComponent implements OnInit {
         );
       }
     } else {
-      this.toast.warning('All field is mandatory.');
+      this.toast.warning('Fill all mandatory field.');
     }
   }
 

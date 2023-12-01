@@ -138,7 +138,7 @@ export class AddNewMemberComponent implements OnInit {
       this.saveMember();
       this.toast.success("New Member Created successfully ")
     } else {
-      this.toast.warning('Fill all mandatory.');
+      this.toast.warning('Fill all mandatory field.');
     }
     
   }

@@ -204,7 +204,7 @@
             <th>Location of baithak</th>
             <th>Reader Member</th>
             <th>Attendence Member</th>            
-            <th>Baithak Type</th>
+            <th>Baithak Time</th>
             <th>Baithak Date</th>
           </tr>
         </thead>
@@ -213,7 +213,7 @@
             <td>{{ baithak.location.locationName }}</td>
             <td>{{ baithak.members[0].initial+' ' }} {{ baithak.members[0].firstName+' ' }} {{ baithak.members[0].lastName }}</td>
             <td>{{ baithak.members[1].initial+' ' }} {{ baithak.members[1].firstName+' ' }} {{ baithak.members[1].lastName }}</td>
-            <td>{{ baithak.baithak.baithakType }}</td>
+            <td>{{ baithak.baithak.fromTime +' To ' }} {{ baithak.baithak.toTime }}</td>
             <td>{{ baithak.date }}</td>
             <!-- <td>{{ location.pincode }}</td> -->
           </tr>

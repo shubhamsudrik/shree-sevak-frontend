@@ -152,7 +152,7 @@ export class UpdateMemberComponent implements OnInit {
        this.toast.success("  Member Info Update Succesfully ")
       } else {
         // alert('Please fill all fields: कृपया सर्व फील्ड भरा');
-        this.toast.warning('Fill all mandatory.')
+        this.toast.warning('Fill all mandatory field.')
       }
     }
   
