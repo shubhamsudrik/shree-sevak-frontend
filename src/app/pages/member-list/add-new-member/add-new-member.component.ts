@@ -77,7 +77,7 @@ export class AddNewMemberComponent implements OnInit {
       googleMapLink: [''],
 
       mobile: ['', [Validators.required, Validators.minLength(10)]],
-      phoneNumber: [''],
+      phone: [''],
       email: ['', Validators.required],
      
       vehicleType: [''],

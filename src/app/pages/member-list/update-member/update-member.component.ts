@@ -89,7 +89,7 @@ export class UpdateMemberComponent implements OnInit {
         status: [this.Member?.state, Validators.required],
 
         mobile: [this.Member?.mobile, [Validators.required, Validators.minLength(10)]],
-        phoneNumber: [this.Member?.phoneNumber],
+        phone: [this.Member?.phoneNumber],
         email: [this.Member?.email, Validators.required],
        
         vehicleType: [this.Member?.vehicleType], 
