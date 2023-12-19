@@ -25,6 +25,7 @@ import { ToastrService } from "ngx-toastr";
 
 import { firstValueFrom } from "rxjs";
 import { Schedule } from "src/app/Classes/schedule";
+import { error } from "console";
 
 export class CalendarDay {
   public date: Date;
@@ -232,7 +233,7 @@ export class AddSchedularComponent implements OnInit {
 
     this.displayMonth = this.monthNames[day.getMonth()];
 
-    // this.displayYear = day.getFullYear();
+    this.displayYear = day.getFullYear();
 
     let dateToAdd = day;
 
@@ -272,8 +273,8 @@ export class AddSchedularComponent implements OnInit {
 
     this.generateCalendarDays(this.monthIndex);
 
-    this.getNumberOfDaysInMonth();
     this.toHideSaveandUpdateButton(true);
+    this.getNumberOfDaysInMonth();
     // this.getMemberList();
     // this.creatingScheduleObjects();
   }
@@ -540,7 +541,7 @@ export class AddSchedularComponent implements OnInit {
         if (
           desiredMonth === scheduleMonthYear[1] &&
           desiredYear === scheduleMonthYear[2] &&
-          (!isNaN(+schedule.vachanGhenara) || !isNaN(+schedule.vachanGhenara))
+          (!isNaN(+schedule.vachanGhenara) || !isNaN(+schedule.hajeriGhenara))
         ) {
           return schedule;
         } else {
@@ -559,7 +560,7 @@ export class AddSchedularComponent implements OnInit {
       
     } else {
        // Handle the case where the record is not found
-              this.toast.success("Record not found. Creating a new record.");
+              // this.toast.success("Record not found. Creating a new record.");
               this.scheduleService
                 .createScheduleRecord(modifyScheduleArray)
                 .subscribe(
@@ -567,8 +568,9 @@ export class AddSchedularComponent implements OnInit {
                     this.toast.success(
                       "This month Record created successfully"
                     );
-                    this.router.navigate(["/schedular"]);
-                    console.log(data);
+                    // this.router.navigate(["/schedular"]);
+                    // console.log(data);
+                    this.generateSchedule();
                   },
                   (createError) => console.log(createError)
                 );
@@ -614,9 +616,14 @@ export class AddSchedularComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    this.modifyScheduleArray();
-   
+  async onSubmit() {
+    try {
+      await this.modifyScheduleArray();
+      
+    } catch (error) {
+      // Handle errors if needed
+      console.error('An error occurred:', error);
+    }
   }
 
   updateSchedule() {
@@ -627,7 +634,7 @@ export class AddSchedularComponent implements OnInit {
       .updateSchedule(this.scheduleArray)
       .subscribe((data) => {
         this.toast.success("Record Updated succesfully");
-        this.schedularForm.reset();
+        // this.schedularForm.reset();
         console.log(data);
       });
   }
@@ -652,6 +659,8 @@ export class AddSchedularComponent implements OnInit {
         } else {
           this.hasSave = false;
         }
+      },(err) => {
+        this.hasSave = true;
       });
   }
   toHideSaveandUpdateButton(

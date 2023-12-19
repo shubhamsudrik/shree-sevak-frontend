@@ -314,8 +314,64 @@
                 </div>
               </div>
               </div>
+              <!-- Allow Memebr
+           <div class="col-md-3">
+                <div class="form-group">
+                  <label>{{ 'MemberAllow' | translate }}<span class="text-danger">*</span></label><br>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <select
+                      formControlName="memberAllow"
+                      class="form-control"
+                      id="memberAllow"
+                      name="memberAllow"
+                      [(ngModel)]="location.memberAllow"
+                      required
+                      [ngClass]="{
+                        'is-invalid': submitted && locationFormControl.memberAllow.errors?.required
+                      }"
+                    >
+                      <option value="" disabled>Allow Member</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Both">Both</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      This field is mandatory.
+                    </div>
+                  </div>
+                </div>
+                </div> -->
+                <div class="row">
+                  <div class="col custom-margin" style="width: 20%;">
+                      <div class="form-group">
+                          <div class="row">
+                            <!-- <div class="d-flex flex-row">
+                              <div class="col-md-6">
+                                <label class="" for="mixedGenderAllow">MixedGenderAllow</label>
+                             </div>
+                       
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="mixedGenderAllow" formControlName="mixedGenderAllow" name="mixedGenderAllow">
+                                
+                                  
+                                </div>
+                           
+                            </div> -->
+                            <div class="form-check">
+                              <label class="form-check-label" for="mixedGenderAllow">
+                                MixedGenderAllow
+                              <input class="form-check-input custom-checkbox" formControlName="mixedGenderAllow" type="checkbox"  [(ngModel)]="location.mixedGenderAllow" id="mixedGenderAllow" value="true" name="mixedGenderAllow">
+                          
+                              </label>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
-
+            </div>
+             
+  
               <!-- Pincode -->
               <div class="row">
               <div class="col" style="width: 20%;">

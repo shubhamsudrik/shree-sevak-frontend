@@ -23,7 +23,9 @@ export class UpdateLocationComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toaster:ToastrService
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -55,14 +57,16 @@ export class UpdateLocationComponent implements OnInit {
   }
 
   populateForm(){
-    this.locationform.patchValue({locationName:this.location?.locationName,})
+    this.locationform.patchValue({locationName:this.location?.locationName,
+      mixedGenderAllow:this.location?.mixedGenderAllow},)
+   
   }
 
   initializeForm() {
     this.locationform = this.formBuilder.group({
       
       locationName: [this.location?.locationName, Validators.required], 
-      area: [this.location?.area, Validators.required],          
+      area: [this.location?.area],          
       add1: [this.location?.add1, Validators.required],
       add2: [this.location?.add2, Validators.required],
       add3: [''],
@@ -91,7 +95,14 @@ export class UpdateLocationComponent implements OnInit {
       contact2Email: [this.location?.contact2Email, Validators.required],
      
       additionalInfo: [''],
+      mixedGenderAllow:[this.location?.mixedGenderAllow||false]
+      
     });
+  }
+
+  onChange(event: any){
+    console.log("mixedGenderAllow :",event.target.value);
+
   }
 
   get locationFormControl() {
@@ -121,7 +132,7 @@ export class UpdateLocationComponent implements OnInit {
 
   saveLocation() {
   
-    this.locationDataService.createLocation(this.location).subscribe(
+    this.locationDataService.updateLocation(this.location,this.id).subscribe(
       data => {
         console.log(data);
         this.router.navigate(['/location-list']);

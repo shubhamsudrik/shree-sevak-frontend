@@ -30,4 +30,5 @@ export class Location{
     contact2Occupation:string;
     contact2Phone1:string;
     contact2Phone2:string;
+    mixedGenderAllow:boolean
 }

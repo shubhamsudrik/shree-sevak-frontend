@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from 'src/app/Classes/location';
+import { Location } from "src/app/Classes/location"
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocService } from 'src/app/services/loc.service';
 import { ToastrService } from 'ngx-toastr';
@@ -66,6 +66,8 @@ export class EditLocationComponent implements OnInit {
       contact2Name: ['', Validators.required],
       contact2Phone1: ['', Validators.required],
       contact2Phone2: [''],
+      mixedGenderAllow:[false]
+   
      
     });
 
@@ -86,7 +88,7 @@ export class EditLocationComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
+  
     const isDuplicate = this.isDuplicateData(this.location);
 
     if (isDuplicate) {

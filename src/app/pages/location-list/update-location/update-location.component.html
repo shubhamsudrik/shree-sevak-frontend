@@ -313,8 +313,26 @@
                 </div>
               </div>
               </div>
-              </div>
-
+               <!-- Allow Memebr -->
+               <div class="row">
+                <div class="col custom-margin" style="width: 20%;">
+                    <div class="form-group">
+                        <div class="row">
+                          <div class="form-check">
+                            <label class="form-check-label" for="mixedGenderAllow">
+                              MixedGenderAllow
+                            <input class="form-check-input custom-checkbox" (change)="onChange($event)" formControlName="mixedGenderAllow" type="checkbox"  [(ngModel)]="location.mixedGenderAllow" id="mixedGenderAllow" value="true" name="mixedGenderAllow">
+                        
+                            </label>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+           
+             
+           
               <!-- Pincode -->
               <div class="row">
               <div class="col" style="width: 20%;">

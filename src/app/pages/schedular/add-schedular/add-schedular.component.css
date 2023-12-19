@@ -71,7 +71,7 @@ table thead tr th{
 }
 .sticky-column {
   position: sticky;
-  left: 0; /* Stick to the left side */
+  left: 0; /*Stick to the left side */
   z-index: 1; /* Ensure it appears above the rest of the content */
-  background-color: #f2f2f2; /* Background color for the sticky column */
+background-color: #f2f2f2;   /*Background color for the sticky column */
 }

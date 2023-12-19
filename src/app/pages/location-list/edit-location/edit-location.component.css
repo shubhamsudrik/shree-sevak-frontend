@@ -63,3 +63,11 @@ margin-top: 20px; /* Add margin to separate sections */
 .invalid-feedback {
   color: #f44336; /* Red error text color */
 }
+.custom-checkbox {
+  margin-left: 11px;
+  margin-top: 10px; /* Add more margin as needed */
+}
+.custom-margin {
+  margin-right: 65px; /* Add more margin as needed */
+  margin-left: 17px;
+}
