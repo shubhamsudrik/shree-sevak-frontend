@@ -45,10 +45,11 @@ import { DynamicformComponent } from './pages/schedular/add-schedular/dynamicfor
 import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/update-dynamic-form/update-dynamic-form.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp-component.component';
-import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
 import { ScheduleDataService } from './services/schedule-data.service';
 
+import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp-component.component';
+import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
+import { FilterPipe } from './filter.pipe';
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -82,6 +83,7 @@ import { ScheduleDataService } from './services/schedule-data.service';
       }
     ),
     MatInputModule,
+    Ng2SearchPipeModule,
     MatButtonModule,
     BrowserModule,
         HttpClientModule,
@@ -118,7 +120,7 @@ import { ScheduleDataService } from './services/schedule-data.service';
     UpdateDynamicFormComponent,
     OtpComponentComponent,
     ChangePasswordComponent,
-  
+    FilterPipe,
     // ComponentComponent
   ],
  

@@ -10,11 +10,11 @@
           <div class="card-body px-lg-5 py-lg-5 text-color">
            
             <form [formGroup]="locationform" (ngSubmit)="onSubmit()">
-              <h2 class="text-center">{{ 'Add location info!' | translate }}</h2><br>
+              <h2 class="text-center">{{ 'Add Location Information' | translate }}</h2><br>
 
                <!-- Header -->
              <div>
-              <h2 class="form-section-header text-center">Location information</h2>
+              <h2 class="form-section-header text-center">Location Information</h2>
             </div>            
 
               <!-- Location Name -->
@@ -314,8 +314,64 @@
                 </div>
               </div>
               </div>
+              <!-- Allow Memebr
+           <div class="col-md-3">
+                <div class="form-group">
+                  <label>{{ 'MemberAllow' | translate }}<span class="text-danger">*</span></label><br>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <select
+                      formControlName="memberAllow"
+                      class="form-control"
+                      id="memberAllow"
+                      name="memberAllow"
+                      [(ngModel)]="location.memberAllow"
+                      required
+                      [ngClass]="{
+                        'is-invalid': submitted && locationFormControl.memberAllow.errors?.required
+                      }"
+                    >
+                      <option value="" disabled>Allow Member</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Both">Both</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      This field is mandatory.
+                    </div>
+                  </div>
+                </div>
+                </div> -->
+                <div class="row">
+                  <div class="col custom-margin" style="width: 20%;">
+                      <div class="form-group">
+                          <div class="row">
+                            <!-- <div class="d-flex flex-row">
+                              <div class="col-md-6">
+                                <label class="" for="mixedGenderAllow">MixedGenderAllow</label>
+                             </div>
+                       
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="mixedGenderAllow" formControlName="mixedGenderAllow" name="mixedGenderAllow">
+                                
+                                  
+                                </div>
+                           
+                            </div> -->
+                            <div class="form-check">
+                              <label class="form-check-label" for="mixedGenderAllow">
+                                MixedGenderAllow
+                              <input class="form-check-input custom-checkbox" formControlName="mixedGenderAllow" type="checkbox"  [(ngModel)]="location.mixedGenderAllow" id="mixedGenderAllow" value="true" name="mixedGenderAllow">
+                          
+                              </label>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
-
+            </div>
+             
+  
               <!-- Pincode -->
               <div class="row">
               <div class="col" style="width: 20%;">
@@ -602,7 +658,7 @@
          <div class="row">
           <div class="col-md-2">
         <div class="form-group">
-         <label for="contact2Initial">{{ 'Initial' | translate }}<span class="text-danger">*</span></label><br>
+         <label for="contact2Initial">{{ 'Initial' | translate }}</label><br>
          <div class="input-group input-group-alternative mb-3">
            <div class="input-group-prepend"></div>
            <select
@@ -613,26 +669,24 @@
              name="contact2Initial"
              [(ngModel)]="location.contact2Initial" 
              required
-             [ngClass]="{
-               'is-invalid': (submitted && locationFormControl.contact2Initial.errors?.required)
-             }"
+             
            >
              <option value="" disabled>Select initial</option>
              <option value="Mr.">Mr.</option>
              <option value="Mrs.">Mrs.</option>
              <option value="Miss.">Miss.</option>  
            </select>
-           <div class="invalid-feedback">
+           <!-- <div class="invalid-feedback">
              {{ 'This field is mandatory.' | translate }}
-           </div>
+           </div> -->
          </div>
        </div>
         </div>
 
              <!-- contact2 Name-->
-             <div class="col-md-10">
+             <div class="col-md-5">
              <div class="form-group">
-              <label for="contact2Name">{{ 'Name' | translate }}<span class="text-danger">*</span></label>
+              <label for="contact2Name">{{ 'Name' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -642,24 +696,43 @@
                    id="contact2Name"
                   name="contact2Name"
                   [(ngModel)]="location.contact2Name"
-                  [ngClass]="{
-                   'is-invalid': (submitted && locationFormControl.contact2Name.errors?.required)
-                  }"
+                  
                   maxlength="25" 
                     />
-                    <div class="invalid-feedback">
+                    <!-- <div class="invalid-feedback">
                       {{ 'This field is mandatory.' | translate }}
-                    </div>
+                    </div> -->
                     </div>
                     </div>
               </div>
-             </div>
+             
+              <!-- contact2Occupation -->
+              <div class="col-md-5">
+                <div class="form-group">
+                 <label for="contact2Occupation">{{ 'Occupation' | translate }}</label>
+                 <div class="input-group input-group-alternative mb-3">
+                   <div class="input-group-prepend"></div>
+                   <input
+                       formControlName="contact2Occupation"
+                       type="text"
+                       class="form-control"
+                      id="contact2Occupation"
+                     name="contact2Occupation"
+                     [(ngModel)]="location.contact2Occupation"
+                     
+                     maxlength="25" 
+                       />
+                       
+                       </div>
+                       </div>
+                 </div>    
+                </div>            
 
               <!-- contact2 Phone1 -->
          <div class="row">
           <div class="col-md-4">
          <div class="form-group">
-          <label for="contact2Phone1">{{ 'Mobile Number' | translate }}<span class="text-danger">*</span></label>
+          <label for="contact2Phone1">{{ 'Mobile Number' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <input
@@ -669,17 +742,14 @@
                id="contact2Phone1"
               name="contact2Phone1"
               [(ngModel)]="location.contact2Phone1"
-              [ngClass]="{
-                'is-invalid': (submitted && (locationFormControl.contact2Phone1.errors?.required || locationFormControl.contact2Phone1.errors?.minlength))
-
-              }"
+              
               (input)="validatePhoneNumber($event)"
               minlength="10"
                 />
-                <div class="invalid-feedback">
+                <!-- <div class="invalid-feedback">
                   <div *ngIf="locationFormControl.contact2Phone1.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
                   <div *ngIf="locationFormControl.contact2Phone1.errors?.minlength">{{ 'Mobile number should be 10 digits' | translate }}</div>
-                </div>
+                </div> -->
                 </div>
           </div>
          </div>
@@ -704,7 +774,7 @@
             <!-- contact2 Email-->
             <div class="col-md-4">
             <div class="form-group">
-              <label for="contact2Email">{{ 'Email' | translate }}<span class="text-danger">*</span></label>
+              <label for="contact2Email">{{ 'Email' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend"></div>
                 <input
@@ -714,13 +784,11 @@
                    id="contact2Email"
                   name="contact2Email"
                   [(ngModel)]="location.contact2Email"
-                  [ngClass]="{
-                   'is-invalid': (submitted && locationFormControl.contact2Email.errors?.required)
-                  }"
+                  
                     />
-                    <div class="invalid-feedback">
+                    <!-- <div class="invalid-feedback">
                       {{ 'This field is mandatory.' | translate }}
-                    </div>
+                    </div> -->
                     </div>
                     </div>
               </div>
@@ -728,7 +796,7 @@
    
                <!-- Header -->
                <div>
-                <h2 class="form-section-header text-center">Additional information</h2>
+                <h2 class="form-section-header text-center">Additional Information</h2>
               </div>
                  <!-- additional info -->
 

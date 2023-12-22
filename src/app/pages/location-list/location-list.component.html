@@ -15,7 +15,7 @@
           <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
             <li class="nav-item ml-auto">
               <span class="d-none d-md-block form-group">
-                <h2>{{ 'Available Location!' | translate }}</h2>
+                <h2>{{ 'Available Location' | translate }}</h2>
               </span>
             </li>
             <li class="nav-item ml-auto">
@@ -32,7 +32,7 @@
             <!-- Hide this for medium and larger scren -->
             <li class="nav-item d-md-none"> 
               <span class="form-group">
-                <h3>{{ 'location' | translate }}</h3>
+                <h3>{{ 'Location' | translate }}</h3>
               </span>
             </li>
             <li class="nav-item d-md-none"> <!-- Hide this item on medium and larger screen -->
@@ -53,12 +53,9 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>    
               </div>
-              <input class="form-control col-md-4" placeholder="{{ 'Search city' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
-              (blur)="focus = false">
-              <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
-              (blur)="focus = false">
-              <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
-              (blur)="focus = false">
+              <input class="form-control col-md-4" placeholder="{{ 'Search City' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true" (blur)="focus = false">
+              <input class="form-control col-md-4" placeholder="{{ 'Search Area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true" (blur)="focus = false">
+              <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true" (blur)="focus = false">
               </div>
             
             <div class="form-group"><br>
@@ -87,6 +84,12 @@
                     </div>
                   </span>
               </li>
+              <li class="nav-item mr-2 mr-md-0">
+                <span class="d-none d-md-block" class="form-group">              
+                    <!-- <div style="text-align: end;">Record Count:</div> -->
+                    <div style="text-align: end;">Record Count: {{ (pagedLocations | filter: searchText:searchText1:searchText2).length }}</div>
+                </span>
+            </li>
             </ul>
           </div>
         </div>

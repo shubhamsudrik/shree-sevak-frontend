@@ -106,6 +106,7 @@ export class UpdateMemberComponent implements OnInit {
         englishSpeak:[this.Member?.englishSpeak],
 
         eligibleForChild:[''],
+        eligibleForNone:[''],
         eligibleForGents:[''],
         eligibleForLadies:[''],
         

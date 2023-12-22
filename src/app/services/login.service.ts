@@ -15,7 +15,34 @@ export class LoginService implements OnInit {
   
   }
 
+  private userName: string;
+  private userNameKey = 'user_name';
+  private UserRole : string;
+  private roleKey='role'
   
+  setUserName(name: string): void {
+    this.userName = name;
+    localStorage.setItem(this.userNameKey, name);
+  }
+  setUserRoles(role: string): void {
+    this.UserRole = role;
+    localStorage.setItem(this.roleKey, role);
+  }
+
+  getUserName(): string {
+    // Check localStorage first
+    const storedUserName = localStorage.getItem(this.userNameKey);
+    // If not in localStorage, use the in-memory value
+    return storedUserName || this.userName;
+  }
+
+  getUserRole(): string {
+    // Check localStorage first
+    const storedUserRole = localStorage.getItem(this.roleKey);
+    // If not in localStorage, use the in-memory value
+    return storedUserRole || this.userName;
+  }
+
 
 //calling server to generate token
 generateToken(credentials:any){

@@ -16,7 +16,7 @@
             <ul class="nav nav-pills flex-column flex-md-row justify-content-md-end">
               <li class="nav-item ml-auto">
                 <span class="d-none d-md-block form-group">
-                  <h2>{{ 'Available Member!' | translate }}</h2>
+                  <h2>{{ 'Available Member' | translate }}</h2>
                 </span>
               </li>
               <li class="nav-item ml-auto">
@@ -84,6 +84,12 @@
                       </div>
                     </span>
                 </li>
+                <li class="nav-item mr-2 mr-md-0">
+                  <span class="d-none d-md-block" class="form-group">              
+                      <!-- <div style="text-align: end;">Record Count:</div> -->
+                      <div style="text-align: end;">Record Count: {{ (pagedLocations | filter: searchText:searchText1:searchText2).length }}</div>
+                  </span>
+              </li>
               </ul>
             </div>
           </div>

@@ -96,6 +96,7 @@ export class AddNewMemberComponent implements OnInit {
       eligibleForChild:[''],
 	    eligibleForGents:[''],
 	    eligibleForLadies:[''],
+      eligibleForNone:[''],
       
       ownBaithakDay: ['', Validators.required],
       // type: ['', Validators.required],          

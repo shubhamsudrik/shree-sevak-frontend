@@ -41,7 +41,7 @@ export class LocService {
 
 
   // For update the record into database
-  updateLocation(locationId: number, location: Location): Observable<Object>{
+  updateLocation(location: Location,locationId: number): Observable<Object>{
     return this.httpclient.put(`${this.baseUrl}/api/location/${locationId}`, location);
   }
 

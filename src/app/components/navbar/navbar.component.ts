@@ -15,15 +15,21 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
+
   constructor(
     private toast: ToastrService,
     location: Location, 
     private router: Router,   
-    private authService: LoginService
-    
+    private authService: LoginService,
+    private loginservice:LoginService,
     ) {
     this.location = location;
   }
+
+  getUserName(): string {
+    // Get the user name from the service
+    return this.loginservice.getUserName(); 
+  }  
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);

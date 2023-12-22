@@ -28,6 +28,7 @@ export class Member {
 	vehicleType:string;
 	phoneNumber:string;
 	// ownBaithakId:string;
+	eligibleForNone:boolean;
 	eligibleForChild:boolean;
 	eligibleForGents:boolean;
 	eligibleForLadies:boolean;

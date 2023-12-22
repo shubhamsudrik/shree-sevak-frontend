@@ -7,12 +7,14 @@ import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
 import { LocationDataService } from 'src/app/services/location-data.service';
 import { ForgotPasswordComponent } from 'src/app/pages/forgot-password/forgot-password.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
+    Ng2SearchPipeModule,
     ToastrModule.forRoot(),
     // NgbModule
   ],

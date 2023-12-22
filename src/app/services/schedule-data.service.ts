@@ -6,6 +6,8 @@ import { ScheduleDto } from "../Classes/schedule-dto";
 import { DateLocation } from "../Classes/DateLocation";
 import { Member } from "../Classes/member";
 import { MemberListService } from "./member-list.service";
+import { LocationDataService } from "./location-data.service";
+import { LocService } from "./loc.service";
 
 @Injectable({
   providedIn: "root",
@@ -19,7 +21,8 @@ export class ScheduleDataService {
 
   constructor(
     private httpclient: HttpClient,
-    private memberService: MemberListService
+    private memberService: MemberListService,
+  private locationService:LocService
   ) {}
 
   private baseUrl = "http://localhost:8080/api/schedular";
@@ -210,12 +213,14 @@ export class ScheduleDataService {
       );
     });
     console.log("for hajeri", index1);
+    console.log("for vachan", index1);
     if (index1 === -1 && index2 === -1) {
       return true;
     } else {
       return false;
     }
   }
+
 
   // validateVachanMember(member: any) {
   //   const index1 = this.schduleVachanmember.findIndex((value) => {
@@ -240,22 +245,50 @@ export class ScheduleDataService {
     return this.totalMembers;
   }
   setMembers(members: any[]) {
-    this.serviceDefaultMember = [...this.serviceDefaultMember, ...members];
+    this.serviceDefaultMember = [...members];
     console.log("list of members", this.serviceDefaultMember);
   }
   setSingleVachanMembers(member: any) {
-
-  this.schduleVachanmember.push(member);
-  console.log(this.schduleVachanmember)
+    const foundIndex=this.schduleVachanmember.findIndex((value)=>{
+      return (
+        value.date === member.date &&
+        value.baithakId === +member.baithakId &&
+        value.locationId === +member.locationId
+      );
+    })
+    console.log("found", foundIndex)
+    if(foundIndex !== -1) {
+      this.schduleVachanmember[foundIndex]=member
+      console.log("list of members", this.schduleVachanmember);
+    }else{
+      this.schduleVachanmember.push(member);
+      console.log("list of members", this.schduleVachanmember);
+    }
+      
+  
   }
   setSingleHajeriMembers(member: any) {
+    const foundIndex=this.schduleHajeriMember.findIndex((value)=>{
+      return (
+        value.date === member.date &&
+        value.baithakId === +member.baithakId &&
+        value.locationId === +member.locationId
+        );
+      })
+      console.log("found", foundIndex)
 
-
+if(foundIndex !== -1) {
+  this.schduleHajeriMember[foundIndex]=member
+  console.log("list of members scheduleHajeri", this.schduleHajeriMember);
+}else{
   this.schduleHajeriMember.push(member)
-  console.log("list of members", this.schduleHajeriMember);
+  console.log("list of members scheduleHajeri", this.schduleHajeriMember);
+}
+  
 }
 
   getMembers(date: string, baithakId: any, locationId: any): any[] {
+   console.log( this.serviceDefaultMember)
     const newServiceDefaultMember = this.serviceDefaultMember.filter(
       (member) => {
         // Check if member's date and baithakId match the provided parameters
@@ -267,27 +300,37 @@ export class ScheduleDataService {
       "fillter members base on date memebers",
       newServiceDefaultMember
     );
-    const updatedServiceDefaultMember = newServiceDefaultMember.slice(
-      0,
-      this.getMembersLength()
-    );
+    // const updatedServiceDefaultMember = newServiceDefaultMember.slice(
+    //   0,
+    //   this.getMembersLength()
+    // );
     const hajeriMember = this.schduleHajeriMember.filter(
       (member) => member.date === date && member.baithakId === +baithakId
     );
+
+    console.log("hajerimember",hajeriMember)
+    console.log("selected hajerimember",this.schduleHajeriMember)
     const vachanMember = this.schduleVachanmember.filter(
       (member) => member.date === date && member.baithakId === +baithakId
     );
- 
+    console.log("vachan member",vachanMember)
+    console.log("selected vachan",this.schduleVachanmember)
     const listOfhajeriAndVachanMember = [...vachanMember, ...hajeriMember];
-    const memberIdsToRemove = listOfhajeriAndVachanMember.map(
+    const newlistOfhajeriAndVachanMember=listOfhajeriAndVachanMember.filter(
+      (member) => {
+        // Check if member's date and baithakId match the provided parameters
+        return member.date === date && member.baithakId === +baithakId;
+      })
+    const memberIdsToRemove = newlistOfhajeriAndVachanMember.map(
       (member) => member.memberId
     );
 
-    const sortedMemeberList = updatedServiceDefaultMember.filter(
+    const sortedMemeberList = newServiceDefaultMember.filter(
       (member) => !memberIdsToRemove.includes(member.memberId)
     );
     // const nonSelectHajeriMembers=updatedServiceDefaultMember.filter()
     console.log(sortedMemeberList);
+    this.serviceDefaultMember=[]
     return sortedMemeberList;
   }
 

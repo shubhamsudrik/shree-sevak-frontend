@@ -11,7 +11,7 @@
         <div class="card-body px-lg-10 py-lg-5">
           
           <form role="form" [formGroup]="memberform" (ngSubmit)="onSubmit()" class="needs-validation">
-            <h2 class="text-center">{{'Update member records!' | translate }}</h2><br>
+            <h2 class="text-center">{{'Update member records' | translate }}</h2><br>
 
             <!-- Head -->
             <div>
@@ -412,7 +412,7 @@
               </div>
               <div class="col-md-1 custom-margin">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" formControlName="marathiRead" id="marathiRead" name="marathiRead[]" class="custom-control-input"  [(ngModel)]="Member.marathiRead" >
+               <input type="checkbox" formControlName="marathiRead" id="marathiRead" name="marathiRead[]" class="custom-control-input"  [(ngModel)]="Member.marathiRead" >
                   <label class="custom-control-label" for="marathiRead">Read</label>
                 </div>
               </div>
@@ -487,13 +487,14 @@
         </div>
     
           <div class="col-6">
-            <h2 class="form-section-header text-center">Eligible</h2>
+            <h2 class="form-section-header text-center">Schedule Role</h2>
             <span>  Atleast one baithak should be mandatory<span class="text-danger">*</span></span><br><br>
   
-            <!-- Eligible for child-->
-          <div class="form-group">
-            <div class="row">            
-              <label style="margin-left: 30px;">Eligible for child </label>           
+            <!-- Eligible for child-->          
+            <div class="row"> 
+              <div style="margin-left: 14px;"  class="col-md-3">    
+              <div class="form-group">       
+              <!-- <label style="margin-left: 30px;">Child </label>            -->
               <div class="col-md-1 custom-margin">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" id="eligibleForChild" formControlName="eligibleForChild" name="eligibleForChild[]" class="custom-control-input"  [(ngModel)]="Member.eligibleForChild" value="eligibleForChild">
@@ -501,12 +502,25 @@
                 </div>
               </div>
             </div>
+            </div>
+            <!-- Eligible for none--> 
+            <div class="col-md-3"> 
+                <div class="form-group">         
+                <!-- <label style="margin-left: 30px;">None </label>            -->
+                <div class="col-md-1 custom-margin">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" id="eligibleForNone" formControlName="eligibleForNone" name="eligibleForNone[]" class="custom-control-input"  [(ngModel)]="Member.eligibleForNone" value="eligibleForNone">
+                    <label class="custom-control-label" for="eligibleForNone">None</label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
   
           <!-- Eligible for Gents -->
-          <div class="form-group">
+          <div style="margin-left: 30px;"  class="form-group">
             <div class="row">           
-              <label style="margin-left: 30px;">Eligible for gents </label>                      
+              <!-- <label style="margin-left: 30px;">Gents </label>                       -->
               <div class="col-md-1 custom-margin">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" id="eligibleForGents" formControlName="eligibleForGents" name="eligibleForGents[]" class="custom-control-input"  [(ngModel)]="Member.eligibleForGents" value="eligibleForGents">
@@ -517,9 +531,9 @@
           </div>
                     
           <!--Eligible for ladied -->
-          <div class="form-group">
+          <div style="margin-left: 30px;"  class="form-group">
             <div class="row">           
-              <label style="margin-left: 30px;">Eligible for ladies</label>          
+              <!-- <label style="margin-left: 30px;">Ladies</label>           -->
               <div class="col-md-1 custom-margin">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" id="eligibleForLadies" formControlName="eligibleForLadies" name="eligibleForLadies[]" class="custom-control-input"  [(ngModel)]="Member.eligibleForLadies" value="eligibleForLadies">

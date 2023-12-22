@@ -28,6 +28,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     Ng2SearchPipeModule,
     ClipboardModule,
     ReactiveFormsModule,
+    Ng2SearchPipeModule,
     ToastrModule.forRoot()
   ],
   providers: [LocationDataService],

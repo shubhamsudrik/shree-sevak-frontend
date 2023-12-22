@@ -56,12 +56,12 @@
 
           <br />
 
-          <form [formGroup]="schedularForm">
+          <form [formGroup]="schedularForm" (ngSubmit)="onSubmit()">
             <div class="table-responsive scrollit ">
               <table class="calendar-table" *ngIf="calendar" border="1px solid" >
                 <thead>
                   <tr >
-                    <th>Sr.no</th>
+                    <th class="sticky-column">Sr.no</th>
 
                     <th class="sticky-column">Locations</th>
 
@@ -75,11 +75,15 @@
                 </thead>
 
                 <tbody>
-                  <tr *ngFor="let location of defaultLocations; let i = index" style="text-align: center">
-                    <td>{{ i + 1 }}</td>
+                  <tr  *ngFor="let location of defaultLocations; let i = index" style="text-align: center">
+                    <td class="sticky-column">{{ i + 1 }}</td>
 
                     <td class="text-uppercase sticky-column" style="text-align: center">
+  
                       {{ location.locationName }}
+                      <div *ngIf="location.mixedGenderAllow" class="text-uppercase" style="color: red; font-size: 10px;">
+                       ( Mixed Gender Allow )
+                     </div>
                     </td>
 
                     <td
@@ -109,7 +113,7 @@
             <div
             class="d-flex flex flex flex-row ml-auto mt-5 "
           >
-            <button *ngIf="hasSave"  type="submit" class="btn btn-primary"  (click)="onSubmit()">
+            <button *ngIf="hasSave"  type="submit" class="btn btn-primary">
              Save and continue
             </button>
 

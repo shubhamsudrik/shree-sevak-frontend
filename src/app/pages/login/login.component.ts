@@ -26,19 +26,32 @@ constructor(
 
   ngOnInit(): void {
  
+   
   }
+
+
 
   onSubmit(){
     if(this.credentials.email !='' && this.credentials.password !=''  ){
      
       this.loginservice.generateToken(this.credentials).subscribe(
        (response:any)=>{
-        console.log(response)        
+        console.log(response) 
 
   console.log(response.jwtToken)
   console.log(response.user.roles)
 
   this.toast.success('Sign in successfully')
+  
+  // for profile name
+  console.log(response.user.name)
+  console.log(response.user.roles[0].roleName)
+        const role = response.user.roles[0].roleName;
+        this.loginservice.setUserRoles(role)
+        const userName = response.user.name;
+        this.loginservice.setUserName(userName)
+        console.log(userName)
+  
   this.loginservice.loginUser(response)
   this.router.navigate(['/dashboard']);
         console.log('hello')
