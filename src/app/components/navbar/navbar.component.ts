@@ -47,5 +47,9 @@ export class NavbarComponent implements OnInit {
     this.toast.warning('Sign out succesfully');
     this.router.navigate(['/login']);
   }
+
+  logoutUser2() {
+    this.router.navigate(['/forgot-password']);
+  }
   
 }

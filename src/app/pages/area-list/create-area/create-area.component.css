@@ -1,0 +1,73 @@
+
+    /* Add this to your CSS file */
+/* Add this to your CSS file */
+.invalid-input {
+    border-color: red !important; /* Use !important to ensure it takes precedence */
+  }
+  .invalid-input {
+    border: 1px solid red;
+  }
+   /* for greater then 600 px */
+ .custom-width {
+  width: 200%; /* Adjust the width as needed, e.g., 150% */
+  margin-left: -60%; /* Adjust the negative margin to center the card */
+  margin-right: -60%;
+}
+
+/* for less then 600 px */
+@media (max-width: 600px) {
+  .custom-width {
+  width: 100%; /* Adjust as needed for smaller screens */
+  margin-left: -3%;
+  margin-right: -25%;
+  }
+  /* Additional custom styles for smaller screens */
+}
+
+.text-color{
+  color: whitesmoke;
+}
+
+.form-section-header {
+background-color: #a3aeae; /* Set the background color to blue (you can change it) */
+/* color: #353232; Set the text color to white */
+padding: 10px; /* Add some padding for spacing */
+font-size: 18px; /* Adjust the font size */
+margin-top: 20px; /* Add margin to separate sections */
+}
+
+  /* Style the label text to be dark */
+.form-group label {
+  color: #333; /* Dark text color */
+}
+
+/* Style the input text color to be dark */
+.form-control {
+  color: #333; /* Dark text color */
+}
+
+/* Style the input box background color to be lighter for contrast */
+.form-control {
+  background-color: #f5f5f5; /* Light gray background color */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 9px;
+}
+
+/* Add padding to the form group for better spacing */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Style the invalid feedback text */
+.invalid-feedback {
+  color: #f44336; /* Red error text color */
+}
+.custom-checkbox {
+  margin-left: 11px;
+  margin-top: 10px; /* Add more margin as needed */
+}
+.custom-margin {
+  margin-right: 65px; /* Add more margin as needed */
+  margin-left: 17px;
+}

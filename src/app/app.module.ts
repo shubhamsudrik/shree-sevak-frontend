@@ -49,6 +49,8 @@ import { ScheduleDataService } from './services/schedule-data.service';
 
 import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp-component.component';
 import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
+import { AreaListComponent } from './pages/area-list/area-list.component';
+import { CreateAreaComponent } from './pages/area-list/create-area/create-area.component';
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -118,6 +120,8 @@ import { ChangePasswordComponent } from './pages/forgot-password/change-password
     UpdateDynamicFormComponent,
     OtpComponentComponent,
     ChangePasswordComponent,
+    AreaListComponent,
+    CreateAreaComponent,
   
     // ComponentComponent
   ],
