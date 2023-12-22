@@ -119,8 +119,9 @@
                 <table class="table table-bordered"> -->
                     <tbody>
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
-                <tr style="width: 10%;" *ngFor="let location of pagedLocations |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
-
+                <!-- <tr style="width: 10%;" *ngFor="let location of pagedLocations |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
+                   -->
+                   <tr style="width: 10%;" *ngFor="let location of pagedLocations | filter:searchText:'':'' | filter:'' :searchText1:'' | filter:'' :'' :searchText2; let i = index ">
                 <td>
                   <input type="radio" name="operation" (click)="toggleButtons('edit', location)" value="edit"  (change)="selectedRow = i">
                   <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->

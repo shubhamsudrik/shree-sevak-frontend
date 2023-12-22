@@ -49,7 +49,9 @@ import { ScheduleDataService } from './services/schedule-data.service';
 
 import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp-component.component';
 import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
-import { FilterPipe } from './filter.pipe';
+import { FilterPipe } from './Pipe filter/filter.pipe';
+import { BaithakSearchPipe } from './Pipe filter/baithak-search.pipe';
+
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -121,6 +123,8 @@ import { FilterPipe } from './filter.pipe';
     OtpComponentComponent,
     ChangePasswordComponent,
     FilterPipe,
+    BaithakSearchPipe,
+
     // ComponentComponent
   ],
  

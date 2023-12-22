@@ -35,11 +35,8 @@ export class LoginService implements OnInit {
     // If not in localStorage, use the in-memory value
     return storedUserName || this.userName;
   }
-
   getUserRole(): string {
-    // Check localStorage first
     const storedUserRole = localStorage.getItem(this.roleKey);
-    // If not in localStorage, use the in-memory value
     return storedUserRole || this.userName;
   }
 
