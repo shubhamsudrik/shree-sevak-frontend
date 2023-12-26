@@ -3,12 +3,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-
-
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { LocationListComponent } from './pages/location-list/location-list.component';
@@ -45,12 +42,12 @@ import { DynamicformComponent } from './pages/schedular/add-schedular/dynamicfor
 import { UpdateDynamicFormComponent } from './pages/schedular/update-schedule/update-dynamic-form/update-dynamic-form.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ScheduleDataService } from './services/schedule-data.service';
-
 import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp-component.component';
 import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
 import { FilterPipe } from './Pipe filter/filter.pipe';
 import { BaithakSearchPipe } from './Pipe filter/baithak-search.pipe';
+import { MemberFilterPipe } from './Pipe filter/member-filter.pipe';
+import { ScheduledFilterPipe } from './Pipe filter/scheduled-filter.pipe';
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -124,6 +121,8 @@ import { BaithakSearchPipe } from './Pipe filter/baithak-search.pipe';
     ChangePasswordComponent,
     FilterPipe,
     BaithakSearchPipe,
+    MemberFilterPipe,
+    ScheduledFilterPipe,
 
     // ComponentComponent
   ],

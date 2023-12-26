@@ -79,7 +79,7 @@ export class FilterPipe implements PipeTransform {
       const matchAllFields =
         (searchCity && this.itemMatchesField(item, searchCity, ['city'])) ||
         (searchArea && this.itemMatchesField(item, searchArea, ['area'])) ||
-        (searchAll && this.itemMatchesField(item, searchAll, ['area','city','locationName','state','locationId','country','add1','add2','pincode'])) ||
+        (searchAll && this.itemMatchesField(item, searchAll, ['area','city','locationName','state','locationId','country','add1','add2','pincode','division'])) ||
 
         (searchBaithakType && this.itemMatchesField(item, searchBaithakType, ['baithakType'])) ||
         (searchBaithakDay && this.itemMatchesField(item, searchBaithakDay, ['dayOfWeek'])) ||
