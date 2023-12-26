@@ -151,19 +151,18 @@ export class CreateAreaComponent implements OnInit {
       const isDuplicate = this.isDuplicateData(this.area);
 
       this.checkDublickateAndSave(isDuplicate);
-     if(!isDuplicate){
-      this.areaDataService.updateArea(this.area, this.id).subscribe((data) => {
-        console.log("updated data", data);
-     
+      if (!isDuplicate) {
+        this.areaDataService
+          .updateArea(this.area, this.id)
+          .subscribe((data) => {
+            console.log("updated data", data);
 
-        this.toast.success("update Succesfully");
-        this.router.navigate(["/area-list"]);
-      });
+            this.toast.success("update Succesfully");
+            this.router.navigate(["/area-list"]);
+          });
+      }
     } else {
       this.toast.warning("please Feild * feilds");
     }
-
-     }
   }
-
 }

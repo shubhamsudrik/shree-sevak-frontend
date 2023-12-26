@@ -74,16 +74,18 @@ export class BaithakListComponent implements OnInit {
   statusBaithak(status: string) {
     if (status === "all") {
       this.getBaithakList();
+    }else{
+      this.baithakService.getBaithakByStatus(status).subscribe(
+        (data: Baithak[]) => {
+          this.baithakList = data;
+          console.log(data);
+        },
+        (error) => {
+          console.error("fetching baithak detail:", error);
+        }
+      );
     }
-    this.baithakService.getBaithakByStatus(status).subscribe(
-      (data: Baithak[]) => {
-        this.baithakList = data;
-        console.log(data);
-      },
-      (error) => {
-        console.error("fetching baithak detail:", error);
-      }
-    );
+    
   }
 
   switchLang(lang: string) {

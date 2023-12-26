@@ -63,11 +63,11 @@ export class FilterPipe implements PipeTransform {
     if (!items) {
       return [];
     }
-
+  
     if (!searchCity && !searchArea && !searchAll && !searchBaithakType && !searchBaithakDay && !searchAllBaithak ) {
       return items;
     }
-
+    
     searchCity = searchCity ? searchCity.toLowerCase() : '';
     searchArea = searchArea ? searchArea.toLowerCase() : '';
     searchAll = searchAll ? searchAll.toLowerCase() : '';
