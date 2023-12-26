@@ -30,6 +30,10 @@ export class NavbarComponent implements OnInit {
     // Get the user name from the service
     return this.loginservice.getUserName(); 
   }  
+  getUserRole(): string {
+    // Get the user name from the service
+    return this.loginservice.getUserRole(); 
+  }  
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);

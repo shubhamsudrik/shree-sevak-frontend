@@ -136,7 +136,7 @@ export class EditLocationComponent implements OnInit {
     if (isDuplicate) {
       // Data already exists error message
       alert(
-        'Data already exists with the same address, city, state, and division.'
+        'Data already exists with the same Location, Division, City and State'
       );
     } else if (this.locationform.valid) {
       // Data doesn't exist and the form is valid, save the location

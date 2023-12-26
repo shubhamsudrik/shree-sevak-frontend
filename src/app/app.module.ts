@@ -51,7 +51,10 @@ import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp
 import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
 import { AreaListComponent } from './pages/area-list/area-list.component';
 import { CreateAreaComponent } from './pages/area-list/create-area/create-area.component';
-import { FilterPipe } from './filter.pipe';
+// import { FilterPipe } from './filter.pipe';
+import { FilterPipe } from './Pipe filter/filter.pipe';
+import { BaithakSearchPipe } from './Pipe filter/baithak-search.pipe';
+
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -126,6 +129,8 @@ import { FilterPipe } from './filter.pipe';
     CreateAreaComponent,
   
     FilterPipe,
+    BaithakSearchPipe,
+
     // ComponentComponent
   ],
  

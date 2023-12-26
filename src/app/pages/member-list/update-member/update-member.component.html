@@ -412,7 +412,7 @@
           <div class="row">
             <div class="col-6">
             <h2 class="form-section-header text-center">Languages known</h2> 
-            <span>  Atleast one language should be mandatory<span class="text-danger">*</span></span><br><br>          
+            <span style="margin-left: 20px;">Atleast one language should be mandatory<span class="text-danger">*</span></span><br><br>          
   
             <!-- Marathi lanng-->
           <div class="form-group">
@@ -498,11 +498,11 @@
     
           <div class="col-6">
             <h2 class="form-section-header text-center">Schedule Role</h2>
-            <span>  Atleast one baithak should be mandatory<span class="text-danger">*</span></span><br><br>
+            <span style="margin-left: 20px;"> Atleast one baithak should be mandatory<span class="text-danger">*</span></span><br><br>
   
             <!-- Eligible for child-->          
             <div class="row"> 
-              <div style="margin-left: 14px;"  class="col-md-3">    
+              <div style="margin-left: 10px;"  class="col-md-3">    
               <div class="form-group">       
               <!-- <label style="margin-left: 30px;">Child </label>            -->
               <div class="col-md-1 custom-margin">
@@ -513,36 +513,10 @@
               </div>
             </div>
             </div>
-            <!-- Eligible for none--> 
-            <div class="col-md-3"> 
-                <div class="form-group">         
-                <!-- <label style="margin-left: 30px;">None </label>            -->
-                <div class="col-md-1 custom-margin">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" id="eligibleForNone" formControlName="eligibleForNone" name="eligibleForNone[]" class="custom-control-input"  [(ngModel)]="Member.eligibleForNone" value="eligibleForNone">
-                    <label class="custom-control-label" for="eligibleForNone">None</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Eligible for Gents -->
-          <div style="margin-left: 30px;"  class="form-group">
-            <div class="row">           
-              <!-- <label style="margin-left: 30px;">Gents </label>                       -->
-              <div class="col-md-1 custom-margin">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" id="eligibleForGents" formControlName="eligibleForGents" name="eligibleForGents[]" class="custom-control-input"  [(ngModel)]="Member.eligibleForGents" value="eligibleForGents">
-                  <label class="custom-control-label" for="eligibleForGents">Gents</label>
-                </div>
-              </div>
-            </div>
-          </div>
-                    
-          <!--Eligible for ladied -->
-          <div style="margin-left: 30px;"  class="form-group">
-            <div class="row">           
+
+             <!--Eligible for ladied -->          
+            <div class="row"> 
+              <div class="form-group">          
               <!-- <label style="margin-left: 30px;">Ladies</label>           -->
               <div class="col-md-1 custom-margin">
                 <div class="custom-control custom-checkbox">
@@ -551,9 +525,37 @@
                 </div>
               </div>           
             </div>
+            </div>
+          </div><br>
+
+          <!-- Eligible for Gents -->          
+            <div class="row">   
+              <div class="col-md-3"> 
+              <div style="margin-left: 10px;"  class="form-group">        
+              <!-- <label style="margin-left: 30px;">Gents </label>                       -->
+              <div class="col-md-1 custom-margin">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" id="eligibleForGents" formControlName="eligibleForGents" name="eligibleForGents[]" class="custom-control-input"  [(ngModel)]="Member.eligibleForGents" value="eligibleForGents">
+                  <label class="custom-control-label" for="eligibleForGents">Gent</label>
+                </div>
+              </div>
+              </div>
+            </div>
+                    <!-- Eligible for none--> 
+            <div class="col-md-3"> 
+              <div class="form-group">         
+              <!-- <label style="margin-left: 30px;">None </label>            -->
+              <div class="col-md-1 custom-margin">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" id="eligibleForNone" formControlName="eligibleForNone" name="eligibleForNone[]" class="custom-control-input"  [(ngModel)]="Member.eligibleForNone" value="eligibleForNone">
+                  <label class="custom-control-label" for="eligibleForNone">None</label>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>          
         </div>
-          </div>
+      </div>
 
              <!-- Header -->
              <div>

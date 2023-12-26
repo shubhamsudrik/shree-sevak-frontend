@@ -50,11 +50,11 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-search"></i></span>    
             </div>
-            <input class="form-control col-md-4" placeholder="{{ 'Search baithak type' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search Baithak Type' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
             (blur)="focus = false">
-            <input class="form-control col-md-4" placeholder="{{ 'Search day' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search Baithak Day' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
             (blur)="focus = false">
-            <input class="form-control col-md-4" placeholder="{{ 'Search time' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
             (blur)="focus = false">
             </div>
             <div class="form-group"><br>
@@ -91,7 +91,7 @@
               <li class="nav-item mr-2 mr-md-0">
                 <span class="d-none d-md-block" class="form-group">              
                     <!-- <div style="text-align: end;">Record Count:</div> -->
-                    <div style="text-align: end;">Record Count: {{ (pagedLocations | filter: searchText:searchText1:searchText2).length }}</div>
+                    <div style="text-align: end;">Record Count: {{ (pagedLocations | baithakSearch: searchText:searchText1:searchText2).length }}</div>
                 </span>
             </li>
             </ul>
@@ -112,7 +112,7 @@
             </thead>
             <tbody>
               <!-- <tr *ngFor="let baithak of baithakList; trackBy: trackLocatByIndex"> -->
-                <tr *ngFor="let baithaData of pagedBaithaks |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
+                <tr *ngFor="let baithaData of pagedBaithaks | baithakSearch:searchText:'':'' |baithakSearch:'':searchText1:'' |baithakSearch:'':'':searchText2; let i = index ">
 
                 <td>
                   <input type="radio" name="operation" (click)="toggleButtons('edit', baithaData)" value="edit"  (change)="selectedRow = i">
