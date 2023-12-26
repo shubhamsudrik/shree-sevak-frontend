@@ -16,7 +16,7 @@
           >
             <li class="nav-item ml-auto">
               <span class="d-none d-md-block form-group">
-                <h2>{{ "Available Scheduled!" | translate }}</h2>
+                <h2>{{ "Available Scheduled" | translate }}</h2>
               </span>
             </li>
             <li class="nav-item ml-auto">
@@ -43,7 +43,7 @@
             <li class="nav-item d-md-none">
               <!-- Hide this for medium and larger scren -->
               <span class="form-group">
-                <h3>{{ "Scheduled Record!" | translate }}</h3>
+                <h3>{{ "Scheduled Record" | translate }}</h3>
               </span>
             </li>
           </ul>
@@ -75,7 +75,7 @@
                       class="btn btn-success"
                       (change)="onOpen($event.target.value)"
                     >
-                      <option disabled selected>Schedule New Baithak!</option>
+                      <option disabled selected>Schedule New Baithak</option>
                       <option
                         style="background-color: gray"
                         *ngFor="let baithak of baithakList; let i = index"

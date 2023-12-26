@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class AreaDataService {
 
 
+
   private baseUrl="http://localhost:8080/api/area"
   constructor(private httpClient:HttpClient) { }
 
@@ -32,5 +33,12 @@ getAreaById(id: number):Observable<Area>{ {
 
 updateArea(area:Area,id: number):Observable<Area>{
   return this.httpClient.put<Area>(`${this.baseUrl}/update-area/${id}`,area);
+}
+
+
+findAreaByName(areaName: any):Observable<Area>{ {
+  console.log(areaName ,"inside find by name api");
+ return this.httpClient.get<Area>(`${this.baseUrl}/areaName?areaName=${areaName}`);
+}
 }
 }

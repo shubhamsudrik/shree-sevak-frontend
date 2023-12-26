@@ -31,6 +31,13 @@ export class MemberListComponent implements OnInit {
     this.currentPage = event.pageIndex ;
   }
 
+    // record count
+  get pagedLocations(): any[] {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.defaultMembers.slice(startIndex, endIndex);
+  }
+
     constructor(
       private memberListService: MemberListService,
       private router: Router,

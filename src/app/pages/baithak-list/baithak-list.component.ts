@@ -50,7 +50,13 @@ export class BaithakListComponent implements OnInit {
     translate.setDefaultLang("English");
   }
 
-  
+  // record count
+  get pagedLocations(): any[] {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.baithakList.slice(startIndex, endIndex);
+  }
+
   //get baithak data
   getBaithakList() {
     this.baithakService.getBaithakList().subscribe(

@@ -11,7 +11,7 @@ export class Area {
   division: string;
   state: string;
   country: string;
-status: any;
-
-
+  status: any;
+  maleCount?: number;
+  femaleCount?: number;
 }

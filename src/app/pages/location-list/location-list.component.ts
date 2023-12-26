@@ -23,6 +23,7 @@ export class LocationListComponent implements OnInit {
   currentPage: number = 0;
   itemsPerPage: number = 10;
 
+  //record count
   get pagedLocations(): any[] {
     const startIndex = this.currentPage * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
@@ -40,9 +41,8 @@ export class LocationListComponent implements OnInit {
   ) {
     translate.addLangs(['English']);
     translate.setDefaultLang('English');
-
-    
   }
+  
   //for location convert to descending order
   // sortDefaultLocationsDescending() {
   //   this.sortedDefaultLocations = this.defaultLocations.slice().sort((a, b) => b.locationId - a.locationId);

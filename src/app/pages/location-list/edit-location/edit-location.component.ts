@@ -4,6 +4,8 @@ import { Location } from "src/app/Classes/location"
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocService } from 'src/app/services/loc.service';
 import { ToastrService } from 'ngx-toastr';
+import { Area } from 'src/app/Classes/Area';
+import { AreaDataService } from 'src/app/services/area-data.service';
 
 @Component({
   selector: 'app-edit-location',
@@ -16,6 +18,10 @@ export class EditLocationComponent implements OnInit {
   defaultLocations: Location[] = [];
   location: any = new Location();
   id: number;
+  arealist:Area[];
+  
+  selectedArea: Area =new Area();
+  isSelect : boolean = false;
 
   constructor(
     private locationDataService: LocService,
@@ -23,10 +29,9 @@ export class EditLocationComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
+    private areaDataService:AreaDataService
   ) {
-    this.location.division='A';
-    this.location.country='IN';
-    this.location.state='Maharashtra';
+
     this.location.status=1;
     // this.location.contact1Email='@gmail.com';
     // this.location.contact2Email='@gmail.com';
@@ -37,7 +42,9 @@ export class EditLocationComponent implements OnInit {
 
   ngOnInit(): void {
    
-
+ 
+    this.getAreas()
+    this.getLocations();
     this.locationform = this.formBuilder.group({
       locationName: ['', Validators.required],
       area: ['', Validators.required],
@@ -61,19 +68,54 @@ export class EditLocationComponent implements OnInit {
       contact1Occupation: [''],
       contact1Phone1: ['', Validators.required],
       contact1Phone2: [''],
-      contact2Email: ['', Validators.required],
-      contact2Initial: ['', Validators.required],
-      contact2Name: ['', Validators.required],
-      contact2Phone1: ['', Validators.required],
+      contact2Email: [''],
+      contact2Initial: [''],
+      contact2Name: [''],
+      contact2Occupation: [''],
+      contact2Phone1: [''],
       contact2Phone2: [''],
-      mixedGenderAllow:[false]
+      mixedGenderAllow:[false],
+
    
-     
     });
 
-    this.getLocations();
+  
+    // this.loadselectedAreaObject()
   }
 
+  setFields(){
+    this.locationform.patchValue({
+      city:this.selectedArea.city,
+      division:this.selectedArea.division,
+      state: this.selectedArea.state,
+      country:this.selectedArea.country,
+  
+    })
+  }
+
+  getAreas(){
+    this.areaDataService.getAllAreaList().subscribe((data)=>{
+      this.arealist=data
+      console.log(this.arealist)
+    })
+  
+  }
+
+
+
+  //
+  areaChange(value:any){
+    console.log("area selected ",value)
+    this.areaDataService.findAreaByName(value).subscribe((data)=>{
+  this.isSelect  = true;
+
+      this.selectedArea=data;
+   this. setFields()
+      console.log(this.selectedArea)
+
+    })
+
+  }
   get locationFormControl() {
     return this.locationform.controls;
   }

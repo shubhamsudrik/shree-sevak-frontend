@@ -100,6 +100,9 @@
                   <th scope="col">{{'Action'|translate}} </th>
                   <th scope="col">{{'AreaId'|translate}}</th>
                   <th scope="col">{{'AreaName'|translate}}</th>
+                  <th scope="col">{{'Male Memebr'|translate}}</th>
+                  <th scope="col">{{'Female Memebr'|translate}}</th>
+                  <th scope="col">{{'Total Memebr'|translate}}</th>
                   <th scope="col">{{'contactInitial'|translate}} </th>
                   <th scope="col">{{'contactName'|translate}} </th>
                   <th scope="col">{{'contactPhone1'|translate}} </th>
@@ -124,6 +127,9 @@
                   </td>
                   <td>{{area.areaId }}</td>
                   <td>{{area.areaName }}</td>
+                  <td>{{area.maleCount }}</td>
+                  <td>{{area.femaleCount}}</td>
+                  <td>{{area.maleCount+area.femaleCount}}</td>
                   <td>{{area.contactInitial }}</td>
                   <td>{{area.contactName }}</td>
                   <td>{{area.contactPhone1 }}</td>

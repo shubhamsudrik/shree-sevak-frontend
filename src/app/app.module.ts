@@ -51,6 +51,7 @@ import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp
 import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
 import { AreaListComponent } from './pages/area-list/area-list.component';
 import { CreateAreaComponent } from './pages/area-list/create-area/create-area.component';
+import { FilterPipe } from './filter.pipe';
 // import { ComponentComponent } from './pages/component/component.component';
 
 
@@ -84,6 +85,7 @@ import { CreateAreaComponent } from './pages/area-list/create-area/create-area.c
       }
     ),
     MatInputModule,
+    Ng2SearchPipeModule,
     MatButtonModule,
     BrowserModule,
         HttpClientModule,
@@ -123,6 +125,7 @@ import { CreateAreaComponent } from './pages/area-list/create-area/create-area.c
     AreaListComponent,
     CreateAreaComponent,
   
+    FilterPipe,
     // ComponentComponent
   ],
  

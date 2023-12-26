@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/Classes/member';
+import { AreaDataService } from 'src/app/services/area-data.service';
 import { MemberListService } from 'src/app/services/member-list.service';
 
 
@@ -18,16 +19,19 @@ export class UpdateMemberComponent implements OnInit {
     defaultMembers: Member[] = [];
     Member: Member = new Member();
     id: number;
+  arealist: import("d:/shree-sevak-fe/shree-sevak-frontend1/shree-sevak-frontend/src/app/Classes/Area").Area[];
    
     constructor(
       private MemberListService: MemberListService,
       private router: Router,
       private route: ActivatedRoute,
       private formBuilder: FormBuilder,
-      private toast:ToastrService
+      private toast:ToastrService,
+      private areaDataService:AreaDataService
     ) {  }
   
     ngOnInit(): void {
+      this.getAreas()
       this.id = this.route.snapshot.params['id'];
       this.initializeForm();
       this.MemberListService.getMemberById(this.id).subscribe({
@@ -89,7 +93,7 @@ export class UpdateMemberComponent implements OnInit {
         status: [this.Member?.state, Validators.required],
 
         mobile: [this.Member?.mobile, [Validators.required, Validators.minLength(10)]],
-        phoneNumber: [this.Member?.phoneNumber],
+        phone: [this.Member?.phoneNumber],
         email: [this.Member?.email, Validators.required],
        
         vehicleType: [this.Member?.vehicleType], 
@@ -106,6 +110,7 @@ export class UpdateMemberComponent implements OnInit {
         englishSpeak:[this.Member?.englishSpeak],
 
         eligibleForChild:[''],
+        eligibleForNone:[''],
         eligibleForGents:[''],
         eligibleForLadies:[''],
         
@@ -121,7 +126,13 @@ export class UpdateMemberComponent implements OnInit {
       this.getMembers();
  
     }
-  
+    getAreas(){
+      this.areaDataService.getAllAreaList().subscribe((data)=>{
+        this.arealist=data
+        console.log(this.arealist)
+      })
+    
+    }
   
     get MemberFormControl() {
       return this.memberform.controls;
