@@ -44,34 +44,159 @@
                 </div>
 
                  <!-- Area -->
-                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="area">{{ 'Area' | translate }}<span class="text-danger">*</span></label>
-                    <div class="input-group input-group-alternative mb-3">
-                      <div class="input-group-prepend"></div>
-                      <select
-                        formControlName="area"
-                        type="text"
-                        class="form-control"
-                        id="area"
-                        name="area"
-                        [(ngModel)]="location.area"
-                        [ngClass]="{
-                          'is-invalid': submitted && locationFormControl.area.errors?.required
-                        }"                      
+                  <!-- Area -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="area"
+                        >{{ "Area" | translate
+                        }}<span class="text-danger">*</span></label
                       >
-                      <option value="" disabled>Select Area</option>
-                      <option value="Chhatrpati Shivaji Nagar">Chhatrpati Shivaji Nagar</option>
-                      <option value="Peth Area">Peth Area</option>
-                      <option value="Pimpri">Pimpri</option>                      
-                    </select>
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <select
+                          formControlName="area"
+                          type="text"
+                          class="form-control"
+                          id="area"
+                          name="area"
+                          (click)="areaChange($event.target.value)"
+                          [(ngModel)]="location.area"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              locationFormControl.area.errors?.required
+                          }"
+                        >
+                          <option value="" disabled>Select Area</option>
+                          <option
+                            *ngFor="let area of arealist"
+                            [value]="area.areaName"
+                          >
+                            {{ area.areaName}}
+                          </option>
+                        </select>
 
-                      <div class="invalid-feedback">
-                        This field is mandatory.
+                        <div class="invalid-feedback">
+                          This field is mandatory.
+                        </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              <div *ngIf="isSelect">
+                <!--contact initial -->
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="contactInitial">{{ "Initial" | translate }}</label>
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="contactInitial"
+                          name="contactInitial"
+                          [value]="selectedArea.contactInitial"
+                          readonly
+                        />
+                      </div>
                     </div>
+                  </div>
+                
+                <!--contactName -->
+               
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="contactName">{{ "Name" | translate }}</label>
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="contactName"
+                          name="contactName"
+                          [value]="selectedArea.contactName"
+                          readonly
+                        />
+                      </div>
                     </div>
+                  </div>
+                  
+
+                  <!--contactOccupation -->
+                
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="contactOccupation">{{ "Occupation" | translate }}</label>
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="contactOccupation"
+                          name="contactOccupation"
+                          [value]="selectedArea.contactOccupation"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+                   <!--contactPhone1 -->
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="contactOccupation">{{ "Mobile Number" | translate }}</label>
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="contactPhone1"
+                          name="contactPhone1"
+                          [value]="selectedArea.contactPhone1"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                  </div>
+                    <!--contactPhone2 -->
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="contactOccupation">{{ "Phone Number" | translate }}</label>
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="contactPhone2"
+                          name="contactPhone2"
+                          [value]="selectedArea.contactPhone2"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--contactEmail -->
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="contactOccupation">{{ "Email" | translate }}</label>
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="contactEmail"
+                          name="contactEmail"
+                          [value]="selectedArea.contactEmail"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <!-- add 1 -->

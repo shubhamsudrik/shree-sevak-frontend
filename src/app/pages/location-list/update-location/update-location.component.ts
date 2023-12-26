@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from 'src/app/Classes/location';
+import { AreaDataService } from 'src/app/services/area-data.service';
 import { LocService } from 'src/app/services/loc.service';
 
 @Component({
@@ -16,18 +17,25 @@ export class UpdateLocationComponent implements OnInit {
   location: any = new Location();
   id: number;
   defaultLocations: Location[] = [];
+isSelect: any=false;
+  selectedArea: any;
+  arealist: import("c:/Users/shubhams.SSKTECH/Documents/GitHub/shree-sevak-frontend/src/app/Classes/Area").Area[];
+
 
   constructor(
     private formBuilder: FormBuilder,
     private locationDataService: LocService,
     private router: Router,
     private route: ActivatedRoute,
-    private toaster:ToastrService
+    private toaster:ToastrService,
+    private areaDataService: AreaDataService
   ) {
     
   }
 
   ngOnInit(): void {
+    this.getAreas()
+    this.getLocations();
     this.id = this.route.snapshot.params['id'];
     this.initializeForm();
     this.getLocations();
@@ -125,7 +133,7 @@ export class UpdateLocationComponent implements OnInit {
       console.log(this.location.locationName);
       console.log(this.location);
       this.saveLocation();
-      this.toaster.success("Location Updated Successfully !")
+      
     } else {
       this.toaster.warning('Fill all mandatory field.');
     }
@@ -137,6 +145,7 @@ export class UpdateLocationComponent implements OnInit {
       data => {
         console.log(data);
         this.router.navigate(['/location-list']);
+        this.toaster.success("Location Updated Successfully !")
       },
       error => {
         console.log(error);
@@ -165,6 +174,37 @@ export class UpdateLocationComponent implements OnInit {
 
   CancelChanges() {
     this.router.navigate(['/location-list']);
+  }
+  getAreas(){
+    this.areaDataService.getAllAreaList().subscribe((data)=>{
+      this.arealist=data
+      console.log(this.arealist)
+    })
+  
+  }
+
+
+  setFields(){
+    this.locationform.patchValue({
+      city:this.selectedArea.city,
+      division:this.selectedArea.division,
+      state: this.selectedArea.state,
+      country:this.selectedArea.country,
+  
+    })
+  }
+  //
+  areaChange(value:any){
+    console.log("area selected ",value)
+    this.areaDataService.findAreaByName(value).subscribe((data)=>{
+  this.isSelect  = true;
+
+      this.selectedArea=data;
+   this. setFields()
+      console.log(this.selectedArea)
+
+    })
+
   }
 
   isDuplicateData(newLocation: Location): boolean {

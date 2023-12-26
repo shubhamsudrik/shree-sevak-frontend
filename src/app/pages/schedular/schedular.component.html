@@ -52,11 +52,11 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-search"></i></span>    
             </div>
-            <input class="form-control col-md-4" placeholder="{{ 'Search baithak type' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search Baithak Date' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
             (blur)="focus = false">
-            <input class="form-control col-md-4" placeholder="{{ 'Search date' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search Location Name' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
             (blur)="focus = false">
-            <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+            <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
             (blur)="focus = false">
             </div>
 
@@ -104,6 +104,12 @@
                   </div>
                 </span>
               </li>
+              <li class="nav-item mr-2 mr-md-0">
+                <span class="d-none d-md-block" class="form-group">              
+                    <!-- <div style="text-align: end;">Record Count:</div> -->
+                    <div style="text-align: end;">Record Count: {{ (pagedLocations | scheduledFilter: searchText:searchText1:searchText2).length }}</div>
+                </span>
+            </li>
             </ul>
           </div>
         </div>
@@ -127,7 +133,7 @@
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
               <tr 
                 *ngFor="
-                  let schedule of pagedSchedules | filter : searchText | filter : searchText1 | filter : searchText2; 
+                  let schedule of pagedSchedules | scheduledFilter : searchText:'':'' | scheduledFilter:'':searchText1:'' |scheduledFilter:'':'': searchText2; 
                   let i = index
                 ">
                 <td >

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/Classes/member';
+import { AreaDataService } from 'src/app/services/area-data.service';
 import { MemberListService } from 'src/app/services/member-list.service';
 
 @Component({
@@ -16,12 +17,15 @@ export class AddNewMemberComponent implements OnInit {
   defaultMembers: Member[] = [];
   Member: Member = new Member();
   id: number;
+  arealist: import("c:/Users/shubhams.SSKTECH/Documents/GitHub/shree-sevak-frontend/src/app/Classes/Area").Area[];
+
 
   constructor(
     private MemberListService: MemberListService,
     private router: Router,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
+    private areaDataService:AreaDataService
   ) {
 
     this.Member.marathiRead = true;
@@ -46,7 +50,7 @@ export class AddNewMemberComponent implements OnInit {
 
   ngOnInit(): void {
   
-
+    this.getAreas()
     // Validatons
     this.memberform = this.formBuilder.group({
       initial: [this.Member?.initial, Validators.required],
@@ -108,7 +112,13 @@ export class AddNewMemberComponent implements OnInit {
 
     this.getMembers();
   }
-
+  getAreas(){
+    this.areaDataService.getAllAreaList().subscribe((data)=>{
+      this.arealist=data
+      console.log(this.arealist)
+    })
+  
+  }
 
   get MemberFormControl() {
     return this.memberform.controls;

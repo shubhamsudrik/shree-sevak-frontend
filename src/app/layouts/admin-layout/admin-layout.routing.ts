@@ -17,6 +17,8 @@ import { ScheduleLadiesBaithakComponent } from 'src/app/pages/schedular/schedule
 import { UserProfileComponent } from 'src/app/pages/user-profile/user-profile.component';
 import { ReportComponent } from 'src/app/pages/report/report.component';
 import { RegisterComponent } from 'src/app/pages/register/register.component';
+import { CreateAreaComponent } from 'src/app/pages/area-list/create-area/create-area.component';
+import { AreaListComponent } from 'src/app/pages/area-list/area-list.component';
 
 
 
@@ -40,6 +42,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'report', component: ReportComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'schedule-ladies-baithak', component: ScheduleLadiesBaithakComponent },
+    { path: 'area-list', component: AreaListComponent},
+    { path: 'create-area/:id', component: CreateAreaComponent},
+    { path: 'create-area', component: CreateAreaComponent},
+    
     
 
 ];

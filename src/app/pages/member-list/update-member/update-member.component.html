@@ -342,7 +342,10 @@
               <!-- Area -->
               <div class="col">
                 <div class="form-group">
-                  <label for="area">{{ 'Area' | translate }}<span class="text-danger">*</span></label>
+                  <label for="area"
+                    >{{ "Area" | translate
+                    }}<span class="text-danger">*</span></label
+                  >
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend"></div>
                     <select
@@ -353,21 +356,28 @@
                       name="area"
                       [(ngModel)]="Member.area"
                       [ngClass]="{
-                        'is-invalid': submitted && MemberFormControl.area.errors?.required
-                      }"                      
+                        'is-invalid':
+                          submitted &&
+                          MemberFormControl.area.errors?.required
+                      }"
                     >
-                    <option value="" disabled>Select Area</option>
-                    <option value="Chhatrpati shivaji nagar">Chhatrpati shivaji nagar</option>
-                    <option value="Peth area">Peth area</option>
-                    <option value="Pimpri">Pimpri</option>                      
-                  </select>
+                      <option value="" disabled>Select Area</option>
+                      <option
+                        *ngFor="let area of arealist"
+                        [value]="area.areaName"
+                      >
+                        {{ area.areaName }}
+                      </option>
+                    </select>
 
                     <div class="invalid-feedback">
                       This field is mandatory.
                     </div>
                   </div>
-                  </div>
-                  </div>
+                </div>
+              </div>
+            </div>
+
              <!-- status-->       
              <div class="col" >
             <div class="form-group">
@@ -396,7 +406,7 @@
               </div>
             </div>
              </div>
-            </div>
+           
 
                <!-- Header -->
           <div class="row">

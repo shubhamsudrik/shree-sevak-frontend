@@ -44,6 +44,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { OtpComponentComponent } from './pages/forgot-password/otp-component/otp-component.component';
 import { ChangePasswordComponent } from './pages/forgot-password/change-password/change-password.component';
+import { AreaListComponent } from './pages/area-list/area-list.component';
+import { CreateAreaComponent } from './pages/area-list/create-area/create-area.component';
 import { FilterPipe } from './Pipe filter/filter.pipe';
 import { BaithakSearchPipe } from './Pipe filter/baithak-search.pipe';
 import { MemberFilterPipe } from './Pipe filter/member-filter.pipe';
@@ -119,6 +121,9 @@ import { ScheduledFilterPipe } from './Pipe filter/scheduled-filter.pipe';
     UpdateDynamicFormComponent,
     OtpComponentComponent,
     ChangePasswordComponent,
+    AreaListComponent,
+    CreateAreaComponent,
+  
     FilterPipe,
     BaithakSearchPipe,
     MemberFilterPipe,
