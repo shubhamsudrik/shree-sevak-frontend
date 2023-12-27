@@ -2,6 +2,7 @@
     <div class="container">
       <div class="header-body text-center mb-7">
         <div class="row justify-content-center">
+          
         </div>
       </div>
     </div>
@@ -104,19 +105,19 @@
               <thead class="thead-light">
                 <tr style="width: 10%;">
                   <th scope="col">{{'Action'|translate}} </th>
-                  <th scope="col">{{'AreaId'|translate}}</th>
-                  <th scope="col">{{'AreaName'|translate}}</th>
+                  <th scope="col">{{'Area Id'|translate}}</th>
+                  <th scope="col">{{'Area Name'|translate}}</th>
                   <th scope="col">{{'Male Memebr'|translate}}</th>
                   <th scope="col">{{'Female Memebr'|translate}}</th>
                   <th scope="col">{{'Total Memebr'|translate}}</th>
-                  <th scope="col">{{'contactInitial'|translate}} </th>
-                  <th scope="col">{{'contactName'|translate}} </th>
-                  <th scope="col">{{'contactPhone1'|translate}} </th>
-                  <th scope="col">{{'contactEmail'|translate}}</th>
-                  <th scope="col">{{'state'|translate}} </th>
-                  <th scope="col">{{'city'|translate}} </th>
-                  <th scope="col">{{'division'|translate}} </th>
-                  <th scope="col">{{'country'|translate}} </th>
+                  <!-- <th scope="col">{{'contact Initial'|translate}} </th> -->
+                  <th scope="col">{{'Name'|translate}} </th>
+                  <th scope="col">{{'Mobile Number'|translate}} </th>
+                  <th scope="col">{{'Contact Email'|translate}}</th>
+                  <th scope="col">{{'State'|translate}} </th>
+                  <th scope="col">{{'City'|translate}} </th>
+                  <th scope="col">{{'Division'|translate}} </th>
+                  <th scope="col">{{'Country'|translate}} </th>
                  
                   <!-- <th scope="col">{{'status'|translate}}</th> -->
                 </tr>
@@ -136,8 +137,8 @@
                   <td>{{area.maleCount }}</td>
                   <td>{{area.femaleCount}}</td>
                   <td>{{area.maleCount+area.femaleCount}}</td>
-                  <td>{{area.contactInitial }}</td>
-                  <td>{{area.contactName }}</td>
+                  <!-- <td></td> -->
+                  <td>{{area.contactInitial }} {{area.contactName }}</td>
                   <td>{{area.contactPhone1 }}</td>
                   <td>{{area.contactEmail }}</td>
                   <td>{{area.state }}</td>
