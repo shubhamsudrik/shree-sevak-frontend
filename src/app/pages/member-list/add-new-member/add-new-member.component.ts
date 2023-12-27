@@ -17,7 +17,8 @@ export class AddNewMemberComponent implements OnInit {
   defaultMembers: Member[] = [];
   Member: Member = new Member();
   id: number;
-  arealist: import("c:/Users/shubhams.SSKTECH/Documents/GitHub/shree-sevak-frontend/src/app/Classes/Area").Area[];
+  arealist: any;
+
 
 
   constructor(

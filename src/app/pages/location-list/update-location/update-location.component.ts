@@ -19,7 +19,7 @@ export class UpdateLocationComponent implements OnInit {
   defaultLocations: Location[] = [];
 isSelect: any=false;
   selectedArea: any;
-  arealist: import("c:/Users/shubhams.SSKTECH/Documents/GitHub/shree-sevak-frontend/src/app/Classes/Area").Area[];
+  arealist:any;
 
 
   constructor(
