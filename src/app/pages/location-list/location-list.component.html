@@ -87,7 +87,7 @@
               <li class="nav-item mr-2 mr-md-0">
                 <span class="d-none d-md-block" class="form-group">              
                     <!-- <div style="text-align: end;">Record Count:</div> -->
-                    <div style="text-align: end;">Record Count: {{ (pagedLocations | filter: searchText:searchText1:searchText2).length }}</div>
+                    <button  class="btn btn-success" > Record Count: {{ (defaultLocations | filter: searchText:searchText1:searchText2).length }}</button>
                 </span>
             </li>
             </ul>

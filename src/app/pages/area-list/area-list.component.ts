@@ -36,6 +36,14 @@ export class AreaListComponent implements OnInit {
     this.getAreaList();
   }
 
+  // record count
+  get pagedLocations(): any[] {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.defaultAreas.slice(startIndex, endIndex);
+  }
+
+
   get pagedAreas():any[] {
     const startIndex = this.currentPage*this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;

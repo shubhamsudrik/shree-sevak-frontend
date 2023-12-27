@@ -53,11 +53,11 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>    
                 </div>
-                <input class="form-control col-md-4" placeholder="{{ 'Search city' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+                <input class="form-control col-md-4" placeholder="{{ 'Search Area' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
                 (blur)="focus = false">
-                <input class="form-control col-md-4" placeholder="{{ 'Search area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+                <input class="form-control col-md-4" placeholder="{{ 'Search City' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
                 (blur)="focus = false">
-                <input class="form-control col-md-4" placeholder="{{ 'Search location name' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+                <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
                 (blur)="focus = false">
                 </div>
               
@@ -87,6 +87,12 @@
                       </div>
                     </span>
                 </li>
+                <li class="nav-item mr-2 mr-md-0">
+                  <span class="d-none d-md-block" class="form-group">              
+                      <!-- <div style="text-align: end;">Record Count:</div> -->
+                      <button  class="btn btn-success" >Record Count: {{ (defaultAreas | areaFilter: searchText:searchText1:searchText2).length }}</button>
+                  </span>
+              </li>
               </ul>
             </div>
           </div>
@@ -119,7 +125,7 @@
                   <table class="table table-bordered"> -->
                       <tbody>
                 <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
-                  <tr style="width: 10%;" *ngFor="let area of pagedAreas |filter:searchText |filter:searchText1 |filter:searchText2; let i = index ">
+                  <tr style="width: 10%;" *ngFor="let area of pagedAreas |areaFilter:searchText:'':'' |areaFilter:'':searchText1:'' |areaFilter:'':'':searchText2; let i = index ">
   
                   <td>
                     <input type="radio" name="operation" (click)="toggleButtons('edit', area)" value="edit"  (change)="selectedRow = i">

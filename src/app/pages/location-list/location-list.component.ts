@@ -28,6 +28,7 @@ export class LocationListComponent implements OnInit {
     const startIndex = this.currentPage * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     return this.defaultLocations.slice(startIndex, endIndex);
+    console.log(this.pagedLocations)
   }
 
   onPageChange(event: PageEvent): void {
