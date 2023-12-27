@@ -40,6 +40,13 @@ export class SchedularComponent implements OnInit {
     onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex ;
   }
+
+     // record count
+     get pagedLocations(): any[] {
+      const startIndex = this.currentPage * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.defaultSchedules.slice(startIndex, endIndex);
+    }
     
     constructor(
       private scheduleDataService: ScheduleDataService,

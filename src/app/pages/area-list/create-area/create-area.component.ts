@@ -83,7 +83,7 @@ export class CreateAreaComponent implements OnInit {
     if (isDuplicate) {
       // Data already exists error message
       alert(
-        "Data already exists with the same address, city, state, and division."
+        "Area already exists with the same city, state, and division."
       );
     } else if (this.areaForm.valid) {
       // Data doesn't exist and the form is valid, save the location
@@ -94,6 +94,7 @@ export class CreateAreaComponent implements OnInit {
       this.toast.warning("Fill all mandatory field.");
     }
   }
+
   onSubmit() {
     this.submitted = true;
 
@@ -133,13 +134,15 @@ export class CreateAreaComponent implements OnInit {
 
   isDuplicateData(newArea: Area): boolean {
     for (let item of this.defaultAreas) {
-      if (
-        item.city === newArea.city &&
-        item.state === newArea.state &&
-        item.division === newArea.division &&
-        item.areaName === newArea.areaName
-      ) {
-        return true; // Data already exists
+      if (item.areaId !== newArea.areaId) {
+        if (
+          item.city === newArea.city &&
+          item.state === newArea.state &&
+          item.division === newArea.division &&
+          item.areaName === newArea.areaName
+        ) {
+          return true; // Data already exists
+        }
       }
     }
     return false; // Data does not exist
@@ -150,19 +153,27 @@ export class CreateAreaComponent implements OnInit {
     if (this.areaForm.valid) {
       const isDuplicate = this.isDuplicateData(this.area);
 
-      this.checkDublickateAndSave(isDuplicate);
-      if (!isDuplicate) {
-        this.areaDataService
-          .updateArea(this.area, this.id)
-          .subscribe((data) => {
-            console.log("updated data", data);
+      this.checkDublickateAndUpdate(isDuplicate);
+    }
+  }
+  checkDublickateAndUpdate(isDuplicate: boolean) {
+    if (isDuplicate) {
+      // Data already exists error message
+      alert(
+        "Area already exists with the same, city, division,state, and country."
+      );
+    } else if (this.areaForm.valid) {
+      // Data doesn't exist and the form is valid, save the location
+      console.log(this.area.areaName);
+      console.log(this.area);
+      this.areaDataService.updateArea(this.area, this.id).subscribe((data) => {
+        console.log("updated data", data);
 
-            this.toast.success("update Succesfully");
-            this.router.navigate(["/area-list"]);
-          });
-      }
+        this.toast.success("update Succesfully");
+        this.router.navigate(["/area-list"]);
+      });
     } else {
-      this.toast.warning("please Feild * feilds");
+      this.toast.warning("Fill all mandatory field.");
     }
   }
 }

@@ -17,7 +17,7 @@
 
                 <!-- Area Name -->
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-8">
                     <div class="form-group">
                       <label for="locationName"
                         >Area Name<span class="text-danger">*</span></label
@@ -37,6 +37,41 @@
                           }"
                           maxlength="30"
                         />
+                        <div class="invalid-feedback">
+                          This field is mandatory.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label
+                        >{{ "Status" | translate
+                        }}<span class="text-danger">*</span></label
+                      ><br />
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <select
+                          formControlName="status"
+                          class="form-control"
+                          id="status"
+                          name="status"
+                          [(ngModel)]="area.status"
+                          required
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              areaFormCotrols.status.errors?.required
+                          }"
+                        >
+                          <option value="" disabled>Select Status</option>
+                          <option value="1">
+                            {{ "Active" | translate }}
+                          </option>
+                          <option value="0">
+                            {{ "Inactive" | translate }}
+                          </option>
+                        </select>
                         <div class="invalid-feedback">
                           This field is mandatory.
                         </div>
@@ -234,39 +269,7 @@
                   </div>
                   <!-- Status -->
                   <div class="col-md-3" style="width: 20%">
-                    <div class="form-group">
-                      <label
-                        >{{ "Status" | translate
-                        }}<span class="text-danger">*</span></label
-                      ><br />
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="status"
-                          class="form-control"
-                          id="status"
-                          name="status"
-                          [(ngModel)]="area.status"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              areaFormCotrols.status.errors?.required
-                          }"
-                        >
-                          <option value="" disabled>Select Status</option>
-                          <option value="1">
-                            {{ "Active" | translate }}
-                          </option>
-                          <option value="0">
-                            {{ "Inactive" | translate }}
-                          </option>
-                        </select>
-                        <div class="invalid-feedback">
-                          This field is mandatory.
-                        </div>
-                      </div>
-                    </div>
+                   
                   </div>
                 </div>
                 <div class="row">

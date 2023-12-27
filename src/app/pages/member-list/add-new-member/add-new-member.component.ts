@@ -17,7 +17,9 @@ export class AddNewMemberComponent implements OnInit {
   defaultMembers: Member[] = [];
   Member: Member = new Member();
   id: number;
-  arealist: import("d:/shree-sevak-fe/shree-sevak-frontend1/shree-sevak-frontend/src/app/Classes/Area").Area[];
+  arealist: any;
+
+
 
   constructor(
     private MemberListService: MemberListService,
@@ -112,7 +114,7 @@ export class AddNewMemberComponent implements OnInit {
     this.getMembers();
   }
   getAreas(){
-    this.areaDataService.getAllAreaList().subscribe((data)=>{
+    this.areaDataService.getAreaByStatus("1").subscribe((data)=>{
       this.arealist=data
       console.log(this.arealist)
     })

@@ -32,8 +32,7 @@ export class AreaListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    this.getAreaList();
+this.getAreaList() 
   }
 
   get pagedAreas():any[] {
@@ -60,13 +59,17 @@ console.log(this.defaultAreas);
       this.getAreaList();
 
     }else{
-      this.areaDataService.getAreaByStatus(status).subscribe((areaList:Area[])=>{
-        this.defaultAreas = areaList
-        console.log(areaList)
-      },(error)=>{
-        console.error("fetching area details ", error)
-      })
+    this.getAreaByStatus(status)
     }
+  }
+
+  getAreaByStatus(status:string){
+    this.areaDataService.getAreaByStatus(status).subscribe((areaList:Area[])=>{
+      this.defaultAreas = areaList
+      console.log(areaList)
+    },(error)=>{
+      console.error("fetching area details ", error)
+    })
   }
 
   toggleButtons(operation:string, area:any){
