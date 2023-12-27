@@ -19,7 +19,8 @@ export class UpdateLocationComponent implements OnInit {
   defaultLocations: Location[] = [];
 isSelect: any=false;
   selectedArea: any;
-  arealist: import("c:/Users/shubhams.SSKTECH/Documents/GitHub/shree-sevak-frontend/src/app/Classes/Area").Area[];
+  arealist: any;
+  
 
 
   constructor(
@@ -100,7 +101,7 @@ isSelect: any=false;
       contact2Name: [this.location?.contact2Name],    
       contact2Occupation: [this.location?.contact1Occupation], 
       contact2Phone1: [this.location?.contact2Phone1],
-      contact2Phone2: [''],
+      contact2Phone2: ['',],
       contact2Email: [this.location?.contact2Email],
      
       additionalInfo: [''],
@@ -176,7 +177,7 @@ isSelect: any=false;
     this.router.navigate(['/location-list']);
   }
   getAreas(){
-    this.areaDataService.getAllAreaList().subscribe((data)=>{
+    this.areaDataService.getAreaByStatus("1").subscribe((data)=>{
       this.arealist=data
       console.log(this.arealist)
     })

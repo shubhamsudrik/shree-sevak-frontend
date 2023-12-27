@@ -32,7 +32,7 @@ export class BaithakSearchPipe implements PipeTransform {
         (searchBaithakType && this.itemMatchesField(item, searchBaithakType, ['baithakType'])) ||
         (searchBaithakDay && this.itemMatchesField(item, searchBaithakDay, ['dayOfWeek'])) ||
         (searchAllBaithak && this.itemMatchesField(item, searchAllBaithak, ['baithakType','dayOfWeek','toTime','fromTime','date','baithakType'])) ;
-
+        
       return matchAllFields;
     });
   }
