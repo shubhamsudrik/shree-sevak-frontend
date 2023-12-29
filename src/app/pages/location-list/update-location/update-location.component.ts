@@ -19,8 +19,7 @@ export class UpdateLocationComponent implements OnInit {
   defaultLocations: Location[] = [];
 isSelect: any=false;
   selectedArea: any;
-  arealist: any;
-  
+  arealist:any;
 
 
   constructor(

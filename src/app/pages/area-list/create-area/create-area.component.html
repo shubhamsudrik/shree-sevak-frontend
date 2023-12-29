@@ -9,6 +9,18 @@
           <div class="card shadow border-0 w-500">
             <div class="card-body px-lg-5 py-lg-5 text-color">
               <form [formGroup]="areaForm" (ngSubmit)="onSubmit()">
+
+
+                <div *ngIf="!id">
+                  <h2 class="header text-center">
+                    Create Area Record
+                  </h2>
+                </div>
+                <div *ngIf="id">
+                  <h2 class="header text-center">
+                    Update Area Record
+                  </h2>
+                </div>
                 <div>
                   <h2 class="form-section-header text-center">
                     Area information
@@ -84,7 +96,7 @@
                 <!--contact1 initial -->
                 <div class="row">
                   <div class="col-md-12">
-                    <h2 class="form-section-header text-center">Contact-1</h2>
+                    <h2 class="form-section-header text-center">Contact</h2>
                   </div>
                 </div>
                 <div class="row">
@@ -267,10 +279,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- Status -->
-                  <div class="col-md-3" style="width: 20%">
-                   
-                  </div>
+                
                 </div>
                 <div class="row">
                     <div class="col-md-12">
