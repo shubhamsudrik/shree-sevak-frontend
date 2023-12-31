@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthLayoutRoutes } from './auth-layout.routing';import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from '../../pages/login/login.component';
-import { RegisterComponent } from '../../pages/register/register.component';
+import { RegisterComponent } from '../../pages/user-list/register/register.component';
 import { LocationDataService } from 'src/app/services/location-data.service';
 import { ForgotPasswordComponent } from 'src/app/pages/forgot-password/forgot-password.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';

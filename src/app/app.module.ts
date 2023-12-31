@@ -51,6 +51,10 @@ import { BaithakSearchPipe } from './Pipe filter/baithak-search.pipe';
 import { MemberFilterPipe } from './Pipe filter/member-filter.pipe';
 import { ScheduledFilterPipe } from './Pipe filter/scheduled-filter.pipe';
 import { AreaFilterPipe } from './Pipe filter/area-filter.pipe';
+import { UserListComponent } from './pages/user-list/user-list.component';
+import { UserFilterPipe } from './Pipe filter/user-filter.pipe';
+
+
 
 // import { ComponentComponent } from './pages/component/component.component';
 
@@ -58,6 +62,7 @@ import { AreaFilterPipe } from './Pipe filter/area-filter.pipe';
 @NgModule
 ({
   imports: [
+  
     MatPaginatorModule,
     NgxMaterialTimepickerModule,
     TranslateModule,
@@ -95,7 +100,8 @@ import { AreaFilterPipe } from './Pipe filter/area-filter.pipe';
                 useFactory: HttpLoaderFactory,
                 deps: [HttpClient]
             }
-        })
+        }),
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -130,6 +136,9 @@ import { AreaFilterPipe } from './Pipe filter/area-filter.pipe';
     MemberFilterPipe,
     ScheduledFilterPipe,
     AreaFilterPipe,
+    UserListComponent,
+    UserFilterPipe,
+   
 
     // ComponentComponent
   ],
