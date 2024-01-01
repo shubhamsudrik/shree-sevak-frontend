@@ -362,7 +362,7 @@
                     <div class="form-group">
                       <label for="panNo"
                         >{{ "Pan Number" | translate
-                        }}<span class="text-danger">*</span></label
+                        }}</label
                       >
                       <div class="input-group input-group-alternative mb-3">
                         <div class="input-group-prepend"></div>
@@ -373,12 +373,7 @@
                           id="panNo"
                           name="panNo"
                           [(ngModel)]="Member.panNo"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              (MemberFormControl.panNo.errors?.required ||
-                                MemberFormControl.panNo.errors?.minlength)
-                          }"
+                          
                           (input)="validatePanNumber($event)"
                           minlength="10"
                         />
@@ -397,7 +392,7 @@
                   </div>
 
                   <!-- photoBase64  -->
-                  <div class="col">
+                  <!-- <div class="col">
                     <div class="form-group">
                       <label for="photoBase64">{{
                         "Photo Base64" | translate
@@ -418,7 +413,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- Area -->
                   <!-- Area -->
@@ -1278,6 +1273,8 @@
                           id="phone"
                           name="phone"
                           [(ngModel)]="Member.phone"
+                          (input)="validatePhoneNumber($event)"
+                          minlength="12"
                         />
                         <div class="invalid-feedback">
                           {{ "This field is mandatory." | translate }}
