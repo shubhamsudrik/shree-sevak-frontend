@@ -32,6 +32,8 @@ export class Member {
 	eligibleForChild:boolean;
 	eligibleForGents:boolean;
 	eligibleForLadies:boolean;
+	
+
  marathiRead:boolean;
  marathiSpeak:boolean;
  marathiWrite:boolean;

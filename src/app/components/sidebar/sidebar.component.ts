@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { UserDataService } from 'src/app/services/user-data.service';
 
 declare interface RouteInfo {
@@ -11,6 +12,7 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [ 
     { path: '/dashboard', title: 'Dashboard',  icon: 'fas fa-tachometer-alt ni-dashboard text-primary', class:'' },  
+    { path: '/user-list', title: 'User',  icon:'fas fa-map-marker-alt ni-user text-primary', class: '' },
     { path: '/location-list', title: 'Location',  icon:'fas fa-map-marker-alt ni-location text-primary', class: '' },
     { path: '/member-list', title: 'Member',  icon: 'fas fa-user ni-user text-primary', class: '' },
     { path: '/baithak-list', title: 'Baithak',  icon:'fas fa-clock ni-schedule-meeting text-primary', class: '' },

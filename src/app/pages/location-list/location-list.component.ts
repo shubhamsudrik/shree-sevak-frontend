@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { Location } from 'src/app/Classes/location';
 import { TranslateService } from '@ngx-translate/core';
 import { LocService } from 'src/app/services/loc.service';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-list',

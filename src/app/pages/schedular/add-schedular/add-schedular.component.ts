@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from "@angular/core";
 
-import { ActivatedRoute, Route, Router } from "@angular/router";
+
 
 import { Location } from "src/app/Classes/location";
 
@@ -26,6 +26,7 @@ import { ToastrService } from "ngx-toastr";
 import { firstValueFrom } from "rxjs";
 import { Schedule } from "src/app/Classes/schedule";
 import { error } from "console";
+import { Router, ActivatedRoute } from "@angular/router";
 
 export class CalendarDay {
   public date: Date;

@@ -1,9 +1,10 @@
 export class User {
+  userId?:number ;
   password: string;
+  name?:string
   emailId: string;
-  stringphoneNumber: string;
-  providerId: string;
-  photoUrl: string;
-  status: string;
-  user:User;
+  phoneNumber: string;
+  role?: string; 
+  status?: string;
+ 
 }

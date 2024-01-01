@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { ToastrService } from 'ngx-toastr';
 import { Location } from 'src/app/Classes/location';
 import { AreaDataService } from 'src/app/services/area-data.service';
@@ -19,8 +20,7 @@ export class UpdateLocationComponent implements OnInit {
   defaultLocations: Location[] = [];
 isSelect: any=false;
   selectedArea: any;
-  arealist: any;
-  
+  arealist:any;
 
 
   constructor(

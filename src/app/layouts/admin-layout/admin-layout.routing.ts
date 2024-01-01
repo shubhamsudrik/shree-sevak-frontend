@@ -16,9 +16,10 @@ import { UpdateScheduleComponent } from 'src/app/pages/schedular/update-schedule
 import { ScheduleLadiesBaithakComponent } from 'src/app/pages/schedular/schedule-ladies-baithak/schedule-ladies-baithak.component';
 import { UserProfileComponent } from 'src/app/pages/user-profile/user-profile.component';
 import { ReportComponent } from 'src/app/pages/report/report.component';
-import { RegisterComponent } from 'src/app/pages/register/register.component';
+import { RegisterComponent } from 'src/app/pages/user-list/register/register.component';
 import { CreateAreaComponent } from 'src/app/pages/area-list/create-area/create-area.component';
 import { AreaListComponent } from 'src/app/pages/area-list/area-list.component';
+import { UserListComponent } from 'src/app/pages/user-list/user-list.component';
 
 
 
@@ -41,10 +42,12 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile', component: UserProfileComponent },
     { path: 'report', component: ReportComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'register/:id', component: RegisterComponent },
     { path: 'schedule-ladies-baithak', component: ScheduleLadiesBaithakComponent },
     { path: 'area-list', component: AreaListComponent},
     { path: 'create-area/:id', component: CreateAreaComponent},
     { path: 'create-area', component: CreateAreaComponent},
+    { path: 'user-list', component: UserListComponent},
     
     
 

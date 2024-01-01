@@ -54,8 +54,42 @@
                       maxlength="30"
                     >
                       <option value="Select role" disabled>Select role</option>
-                      <option value="user">User</option>
-                      <option value="Admin">Admin</option>                  
+                      <option value="USER">User</option>
+                      <option value="ADMIN">Admin</option>                  
+                  </select>
+                    <div class="invalid-feedback">
+                      This field is mandatory.
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+               <!-- role -->   
+            
+               <div class="col-md-12">
+                <div class="form-group">
+                 
+                </div>
+               </div>
+              
+               <div class="col-md-12">
+                <div class="form-group">
+                  <label for="role">Status<span class="text-danger">*</span></label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <select
+                      formControlName="status"
+                      type="text"
+                      class="form-control"
+                      id="status"
+                      name="status"
+                      [ngClass]="{
+                        'is-invalid': submitted && registerFormControl.status.errors?.required
+                      }"
+                      maxlength="30"
+                    >
+                      <option value="Select role" disabled>Select status</option>
+                      <option value="1">Active</option>
+                      <option value="0">Inactive</option>                  
                   </select>
                     <div class="invalid-feedback">
                       This field is mandatory.
@@ -90,26 +124,7 @@
                   </div>
                   </div>
 
-                  <!-- photoUrl -->            
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="photoUrl">Photo Url</label>
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend"></div>
-                    <input
-                      formControlName="photoUrl"
-                      type="text"
-                      class="form-control"
-                      id="photoUrl"
-                      name="photoUrl"                      
-                      maxlength="50"
-                    />
-                    <div class="invalid-feedback">
-                   
-                    </div>
-                  </div>
-                  </div>
-                  </div>
+               
 
                    <!-- emailId -->            
               <div class="col-md-12">
@@ -183,13 +198,17 @@
                   </div>
 
              <div class="text-center">
-              <button type="submit" class="btn btn-success mt-4">Create account</button><br><br>
+              <button *ngIf="!id" type="submit" class="btn btn-success mt-4">Create account</button>
+              <button *ngIf="id" type="submit" class="btn btn-danger mt-4" >Update account</button>
+              <button  type="button" class="btn btn-primary mt-4" (click)="goBack()">Back</button>
               
-              <span>
+            <div>
+            
                 <small>Already have an account? Sign out this session and </small>
                 <a href="/login">sign in </a>
                 <!-- <a class="nav-link nav-link-icon" routerLinkActive="active" class="text-blue" [routerLink]="['/dashboard']">dashboard</a> -->
-              </span>              
+            
+            </div>             
             </div>
           </form>
         </div>

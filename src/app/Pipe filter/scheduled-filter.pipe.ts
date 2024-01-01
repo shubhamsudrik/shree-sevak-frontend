@@ -22,13 +22,13 @@ export class ScheduledFilterPipe implements PipeTransform {
       searchName = searchName ? searchName.toLowerCase() : '';
       searchArea = searchArea ? searchArea.toLowerCase() : '';
       searchAll = searchAll ? searchAll.toLowerCase() : '';
-  
+      
       return items.filter(item => {
         const matchAllFields =
           (searchName && this.itemMatchesField(item, searchName, ['date'])) ||
           (searchArea && this.itemMatchesField(item, searchArea, ['location.locationName'])) ||
           (searchAll && this.itemMatchesField(item, searchAll, ['date','members','scheduleId','baithak','location.locationName','baithak.baithakType'])) ;
-  
+           
         return matchAllFields;
       });
     }
@@ -52,7 +52,7 @@ export class ScheduledFilterPipe implements PipeTransform {
                 } else if (typeof fieldValue === 'string') {
                   return fieldValue.toLowerCase().includes(searchTerm);
                 }
-        
+                 
                 return false;
               });
             } else {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { ActivatedRoute, Router } from "@angular/router";
+
 import { TranslateService } from "@ngx-translate/core";
 import { Baithak } from "src/app/Classes/baithak";
 import { BaithakDataService } from "src/app/services/baithak-data.service";

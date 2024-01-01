@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { User } from "../Classes/user";
+import { User } from "../Classes/User";
 import { LoginService } from "./login.service";
 
 @Injectable({
@@ -18,6 +18,22 @@ export class UserDataService {
   getUserByUsername(username: string): Observable<Object> {
     return this.httpclient.get(`${this.url}/username/${username}`);
   }
+
+  getUserById(id:number): Observable<Object> {
+    return this.httpclient.get(`${this.url}/${id}`);
+  }
+ updateUserById(user:User,id:number) :Observable<Object>
+ {
+  return this.httpclient.put(`${this.url}/${id}`,user)
+ }
+
+ getAllUserList() :Observable<User[]>{
+  return this.httpclient.get<User[]>(`${this.url}/user_list`)
+ }
+
+ getUserListByStatus(status:string) :Observable<User[]>{
+  return this.httpclient.get<User[]>(`${this.url}/status/${status}`)
+ }
 
   roleMatch(allowedRoles): boolean {
     let isMatch = false;

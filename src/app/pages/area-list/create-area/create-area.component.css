@@ -35,6 +35,12 @@ padding: 10px; /* Add some padding for spacing */
 font-size: 18px; /* Adjust the font size */
 margin-top: 20px; /* Add margin to separate sections */
 }
+.header{
+  background-color: white;
+  padding: 10px; /* Add some padding for spacing */
+font-size: 30px; /* Adjust the font size */
+margin-top: 10px; /* Add margin to separate sections */
+}
 
   /* Style the label text to be dark */
 .form-group label {

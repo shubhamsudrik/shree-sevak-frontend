@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+
 import { ToastrService } from "ngx-toastr";
 import { Area } from "src/app/Classes/Area";
 import { AreaDataService } from "src/app/services/area-data.service";
@@ -154,6 +155,8 @@ export class CreateAreaComponent implements OnInit {
       const isDuplicate = this.isDuplicateData(this.area);
 
       this.checkDublickateAndUpdate(isDuplicate);
+    }else {
+      this.toast.warning("Fill all mandatory field.");
     }
   }
   checkDublickateAndUpdate(isDuplicate: boolean) {
@@ -171,9 +174,7 @@ export class CreateAreaComponent implements OnInit {
 
         this.toast.success("update Succesfully");
         this.router.navigate(["/area-list"]);
-      });
-    } else {
-      this.toast.warning("Fill all mandatory field.");
-    }
+      },error => this.toast.warning("Fill all mandatory field."));
+    } 
   }
 }
