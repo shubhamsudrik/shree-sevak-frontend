@@ -65,8 +65,8 @@ export class AddNewMemberComponent implements OnInit {
       // role: [this.Member?.role, Validators.required],
       area: [this.Member?.area, Validators.required],
       addharNumber: ['', [Validators.required, Validators.minLength(12)]],
-      panNo: ['', Validators.required],
-      photoBase64: [''],
+      panNo: [''],
+      // photoBase64: [''],
       status :[''],
       add1: ['', Validators.required],
       add2: ['', Validators.required],
@@ -98,10 +98,10 @@ export class AddNewMemberComponent implements OnInit {
       englishWrite:[''],
       englishSpeak:[''],
 
-      eligibleForChild:[''],
-	    eligibleForGents:[''],
-	    eligibleForLadies:[''],
-      eligibleForNone:[''],
+      eligibleForChild:[false],
+	    eligibleForGents:[false],
+	    eligibleForLadies:[false],
+      eligibleForNone:[false],
       
       ownBaithakDay: ['', Validators.required],
       // type: ['', Validators.required],          
@@ -112,7 +112,38 @@ export class AddNewMemberComponent implements OnInit {
     });
 
     this.getMembers();
+
+    this.memberform.valueChanges.subscribe(() => {
+      this.handleCheckboxChanges();
+    });
   }
+
+  //handel check boxes
+  handleCheckboxChanges() {
+    const eligibleForChild = this.memberform.get('eligibleForChild');
+    const eligibleForGents = this.memberform.get('eligibleForGents');
+    const eligibleForLadies = this.memberform.get('eligibleForLadies');
+    const eligibleForNone = this.memberform.get('eligibleForNone');
+  
+    // Check if the value has changed before making changes
+    if (eligibleForChild.value !== this.Member.eligibleForChild ||eligibleForGents.value !== this.Member.eligibleForGents || 
+      eligibleForLadies.value !== this.Member.eligibleForLadies ) {
+        
+      eligibleForNone.setValue(false, { emitEvent: false });
+   
+    } else if (eligibleForNone.value !== this.Member.eligibleForNone) {
+      eligibleForChild.setValue(false, { emitEvent: false });
+      eligibleForGents.setValue(false, { emitEvent: false });
+      eligibleForLadies.setValue(false, { emitEvent: false });
+    }
+  
+    // Update the Member object
+    this.Member.eligibleForChild = eligibleForChild.value;
+    this.Member.eligibleForGents = eligibleForGents.value;
+    this.Member.eligibleForLadies = eligibleForLadies.value;
+  }
+  
+
   getAreas(){
     this.areaDataService.getAreaByStatus("1").subscribe((data)=>{
       this.arealist=data
@@ -200,6 +231,24 @@ export class AddNewMemberComponent implements OnInit {
         const truncatedValue = numericValue.slice(0, 10); // Truncate input to 10 characters
         input.value = truncatedValue;
     }
+    // phone number validation
+    // validatePhoneNumber1(event){
+    //   const input = event.target;
+    //     // const numericValue = input.value.replace(/[^0-9]/g, '');
+    //     const numericValue = input.value.replace(/[^0-9\s-]/g, ''); // Remove non-numeric characters
+    //     const truncatedValue = numericValue.slice(0, 12); // Truncate input to 10 characters
+    //     input.value = truncatedValue;
+    // }
+   
+    validatePhoneNumber1(event) {
+      const input = event.target;
+      const allowedCharacters = input.value.replace(/[^0-9\s-]/g, ''); // Allow only digits, spaces, and dashes
+      const truncatedValue = allowedCharacters.slice(0, 12); // Truncate input to 12 characters
+      input.value = truncatedValue;
+  }
+  
+
+  
     // addhar number validation
     validateAddharNumber(event){
     const input = event.target;

@@ -295,289 +295,420 @@
                     </div>
                    
 
-              <!-- City -->   
-              <div class="row">           
-              <div class="col-md-3">
-              <div class="form-group">
-                <label for="city">{{ 'City' | translate }}<span class="text-danger">*</span></label><br>
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend"></div>
-                  <select
-                    formControlName="city"
-                    class="form-control"
-                    id="city"
-                    name="city"
-                    [(ngModel)]="location.city"
-                    required
-                    [ngClass]="{
-                      'is-invalid': submitted && locationFormControl.city.errors?.required
-                    }"
-                  >
-                    <option value="" disabled>Select City</option>
-                    <option value="Pune">Pune</option>
-                    <option value="Mumbai">Mumbai</option>
-                    <option value="Kolhapur">Kolhapur</option>
-                    <option value="Nagpur">Nagpur</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    This field is mandatory.
-                  </div>
-                </div>
-                </div>
-              </div>
-
-              <!-- Division -->
-              <div class="col-md-3">
-              <div class="form-group">
-                <label>{{ 'Division' | translate }}<span class="text-danger">*</span></label><br>
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend"></div>
-                  <select
-                    formControlName="division"
-                    class="form-control"
-                    id="division"
-                    name="division"
-                    [(ngModel)]="location.division"
-                    required
-                    [ngClass]="{
-                      'is-invalid': submitted && locationFormControl.division.errors?.required
-                    }"
-                  >
-                    <option value="" disabled>Select Division</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    This field is mandatory.
-                  </div>
-                 </div>
-                </div>
-              </div>
-
-              <!-- State -->              
-              <div class="col-md-3">
-              <div class="form-group">
-                <label>{{ 'State' | translate }}<span class="text-danger">*</span></label>
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend"></div>
-                  <select
-                    formControlName="state"
-                    class="form-control"
-                    id="state"
-                    name="state"
-                    [(ngModel)]="location.state"
-                    required
-                    [ngClass]="{
-                      'is-invalid': submitted && locationFormControl.state.errors?.required
-                    }"
-                  >
-                    <option value="" disabled>{{ 'Select state' | translate }}</option>
-                    <option value="Andhra Pradesh">{{ 'Andhra Pradesh' | translate }}</option>
-                    <option value="Arunachal Pradesh">{{ 'Arunachal Pradesh' | translate }}</option>
-                    <option value="Assam">{{ 'Assam' | translate }}</option>
-                    <option value="Bihar">{{ 'Bihar' | translate }}</option>
-                    <option value="Chhattisgarh">{{ 'Chhattisgarh' | translate }}</option>
-                    <option value="Goa">{{ 'Goa' | translate }}</option>
-                    <option value="Gujarat">{{ 'Gujarat' | translate }}</option>
-                    <option value="Haryana">{{ 'Haryana' | translate }}</option>
-                    <option value="Himachal Pradesh">{{ 'Himachal Pradesh' | translate }}</option>
-                    <option value="Jharkhand">{{ 'Jharkhand' | translate }}</option>
-                    <option value="Karnataka">{{ 'Karnataka' | translate }}</option>
-                    <option value="Kerala">{{ 'Kerala' | translate }}</option>
-                    <option value="Madhya Pradesh">{{ 'Madhya Pradesh' | translate }}</option>
-                    <option value="Maharashtra">{{ 'Maharashtra' | translate }}</option>
-                    <option value="Manipur">{{ 'Manipur' | translate }}</option>
-                    <option value="Meghalaya">{{ 'Meghalaya' | translate }}</option>
-                    <option value="Mizoram">{{ 'Mizoram' | translate }}</option>
-                    <option value="Nagaland">{{ 'Nagaland' | translate }}</option>
-                    <option value="Odisha">{{ 'Odisha' | translate }}</option>
-                    <option value="Punjab">{{ 'Punjab' | translate }}</option>
-                    <option value="Rajasthan">{{ 'Rajasthan' | translate }}</option>
-                    <option value="Sikkim">{{ 'Sikkim' | translate }}</option>
-                    <option value="Tamil Nadu">{{ 'Tamil Nadu' | translate }}</option>
-                    <option value="Telangana">{{ 'Telangana' | translate }}</option>
-                    <option value="Tripura">{{ 'Tripura' | translate }}</option>
-                    <option value="Uttar Pradesh">{{ 'Uttar Pradesh' | translate }}</option>
-                    <option value="Uttarakhand">{{ 'Uttarakhand' | translate }}</option>
-                    <option value="West Bengal">{{ 'West Bengal' | translate }}</option>
-                                
-                  </select>
-                  <div class="invalid-feedback">
-                    This field is mandatory.
-                  </div>
-                </div>
-                </div>
-              </div>
-
-              <!-- Country -->
-              <div class="col-md-3">
-              <div class="form-group">
-                <label>{{ 'Country' | translate }}<span class="text-danger">*</span></label><br>
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend"></div>
-                  <select
-                    formControlName="country"
-                    class="form-control"
-                    id="country"
-                    name="country"
-                    [(ngModel)]="location.country"
-                    required
-                    [ngClass]="{
-                      'is-invalid': submitted && locationFormControl.country.errors?.required
-                    }"
-                  >
-                    <option value="" disabled>Select Country</option>
-                    <option value="IN">IN</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    This field is mandatory.
-                  </div>
-                </div>
-              </div>
-              </div>
-               <!-- Allow Memebr -->
-               <div class="row">
-                <div class="col custom-margin" style="width: 20%;">
-                    <div class="form-group">
-                        <div class="row">
-                          <div class="form-check">
-                            <label class="form-check-label" for="mixedGenderAllow">
-                              MixedGenderAllow
-                            <input class="form-check-input custom-checkbox" (change)="onChange($event)" formControlName="mixedGenderAllow" type="checkbox"  [(ngModel)]="location.mixedGenderAllow" id="mixedGenderAllow" value="true" name="mixedGenderAllow">
-                        
-                            </label>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-           
-             
-           
-              <!-- Pincode -->
+              <!-- City -->
               <div class="row">
-              <div class="col" style="width: 20%;">
-              <div class="form-group">
-                <label for="pincode">{{ 'Pincode' | translate }}<span class="text-danger">*</span></label>
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend"></div>
-                  <input
-                    formControlName="pincode"
-                    type="text"
-                    class="form-control"
-                    id="pincode"
-                    name="pincode"
-                    [(ngModel)]="location.pincode"
-                    [ngClass]="{
-                      'is-invalid': (submitted && (locationFormControl.pincode.errors?.required || locationFormControl.pincode.errors?.minlength))
-                    }"
-                    (input)="validatePincode($event)"
-                  />
-                  <div class="invalid-feedback">
-                    <div *ngIf="locationFormControl.pincode.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
-                    <div *ngIf="locationFormControl.pincode.errors?.minlength">{{ 'Pincode should be 6 digits' | translate }}</div>
+                <div class="col-md">
+                  <div class="form-group">
+                    <label for="city"
+                      >{{ "City" | translate
+                      }}<span class="text-danger">*</span></label
+                    ><br />
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <select
+                        formControlName="city"
+                        class="form-control"
+                        id="city"
+                        name="city"
+                        [(ngModel)]="location.city"
+                        required
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            locationFormControl.city.errors?.required
+                        }"
+                      >
+                        <option value="" disabled>Select City</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Kolhapur">Kolhapur</option>
+                        <option value="Nagpur">Nagpur</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                <!-- Division -->
+                <div class="col-md">
+                  <div class="form-group">
+                    <label
+                      >{{ "Division" | translate
+                      }}<span class="text-danger">*</span></label
+                    ><br />
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <select
+                        formControlName="division"
+                        class="form-control"
+                        id="division"
+                        name="division"
+                        [(ngModel)]="location.division"
+                        required
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            locationFormControl.division.errors?.required
+                        }"
+                      >
+                        <option value="" disabled>Select Division</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- State -->
+                <div class="col-md">
+                  <div class="form-group">
+                    <label
+                      >{{ "State" | translate
+                      }}<span class="text-danger">*</span></label
+                    >
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <select
+                        formControlName="state"
+                        class="form-control"
+                        id="state"
+                        name="state"
+                        [(ngModel)]="location.state"
+                        required
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            locationFormControl.state.errors?.required
+                        }"
+                      >
+                        <option value="" disabled>
+                          {{ "Select state" | translate }}
+                        </option>
+                        <option value="Andhra Pradesh">
+                          {{ "Andhra Pradesh" | translate }}
+                        </option>
+                        <option value="Arunachal Pradesh">
+                          {{ "Arunachal Pradesh" | translate }}
+                        </option>
+                        <option value="Assam">
+                          {{ "Assam" | translate }}
+                        </option>
+                        <option value="Bihar">
+                          {{ "Bihar" | translate }}
+                        </option>
+                        <option value="Chhattisgarh">
+                          {{ "Chhattisgarh" | translate }}
+                        </option>
+                        <option value="Goa">{{ "Goa" | translate }}</option>
+                        <option value="Gujarat">
+                          {{ "Gujarat" | translate }}
+                        </option>
+                        <option value="Haryana">
+                          {{ "Haryana" | translate }}
+                        </option>
+                        <option value="Himachal Pradesh">
+                          {{ "Himachal Pradesh" | translate }}
+                        </option>
+                        <option value="Jharkhand">
+                          {{ "Jharkhand" | translate }}
+                        </option>
+                        <option value="Karnataka">
+                          {{ "Karnataka" | translate }}
+                        </option>
+                        <option value="Kerala">
+                          {{ "Kerala" | translate }}
+                        </option>
+                        <option value="Madhya Pradesh">
+                          {{ "Madhya Pradesh" | translate }}
+                        </option>
+                        <option value="Maharashtra">
+                          {{ "Maharashtra" | translate }}
+                        </option>
+                        <option value="Manipur">
+                          {{ "Manipur" | translate }}
+                        </option>
+                        <option value="Meghalaya">
+                          {{ "Meghalaya" | translate }}
+                        </option>
+                        <option value="Mizoram">
+                          {{ "Mizoram" | translate }}
+                        </option>
+                        <option value="Nagaland">
+                          {{ "Nagaland" | translate }}
+                        </option>
+                        <option value="Odisha">
+                          {{ "Odisha" | translate }}
+                        </option>
+                        <option value="Punjab">
+                          {{ "Punjab" | translate }}
+                        </option>
+                        <option value="Rajasthan">
+                          {{ "Rajasthan" | translate }}
+                        </option>
+                        <option value="Sikkim">
+                          {{ "Sikkim" | translate }}
+                        </option>
+                        <option value="Tamil Nadu">
+                          {{ "Tamil Nadu" | translate }}
+                        </option>
+                        <option value="Telangana">
+                          {{ "Telangana" | translate }}
+                        </option>
+                        <option value="Tripura">
+                          {{ "Tripura" | translate }}
+                        </option>
+                        <option value="Uttar Pradesh">
+                          {{ "Uttar Pradesh" | translate }}
+                        </option>
+                        <option value="Uttarakhand">
+                          {{ "Uttarakhand" | translate }}
+                        </option>
+                        <option value="West Bengal">
+                          {{ "West Bengal" | translate }}
+                        </option>
+                      </select>
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Country -->
+                <div class="col-md">
+                  <div class="form-group">
+                    <label
+                      >{{ "Country" | translate
+                      }}<span class="text-danger">*</span></label
+                    ><br />
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <select
+                        formControlName="country"
+                        class="form-control"
+                        id="country"
+                        name="country"
+                        [(ngModel)]="location.country"
+                        required
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            locationFormControl.country.errors?.required
+                        }"
+                      >
+                        <option value="" disabled>Select Country</option>
+                        <option value="IN">IN</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
+                    </div>
+                  </div>
+                
+                <!-- Allow Memebr
+         <div class="col-md-3">
+              <div class="form-group">
+                <label>{{ 'MemberAllow' | translate }}<span class="text-danger">*</span></label><br>
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend"></div>
+                  <select
+                    formControlName="memberAllow"
+                    class="form-control"
+                    id="memberAllow"
+                    name="memberAllow"
+                    [(ngModel)]="location.memberAllow"
+                    required
+                    [ngClass]="{
+                      'is-invalid': submitted && locationFormControl.memberAllow.errors?.required
+                    }"
+                  >
+                    <option value="" disabled>Allow Member</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Both">Both</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    This field is mandatory.
+                  </div>
                 </div>
               </div>
+              </div> -->
+               
+                 
+                </div>
+
+              <!-- Pincode -->
+                <div class="col-md">
+                  <div class="form-group">
+                    <label for="pincode"
+                      >{{ "Pincode" | translate
+                      }}<span class="text-danger">*</span></label
+                    >
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="pincode"
+                        type="text"
+                        class="form-control"
+                        id="pincode"
+                        name="pincode"
+                        [(ngModel)]="location.pincode"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            (locationFormControl.pincode.errors?.required ||
+                              locationFormControl.pincode.errors?.minlength)
+                        }"
+                        (input)="validatePincode($event)"
+                      />
+                      <div class="invalid-feedback">
+                        <div
+                          *ngIf="locationFormControl.pincode.errors?.required"
+                        >
+                          {{ "Pincode is required." | translate }}
+                        </div>
+                        <div
+                          *ngIf="
+                            locationFormControl.pincode.errors?.minlength
+                          "
+                        >
+                          {{
+                            "Pincode must be at least 6 characters long."
+                              | translate
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
               <!-- latitude -->
-          <div class="col" style="width: 20%;">
-          <div class="form-group">
-            <label for="latitude">{{ 'Latitude' | translate }}</label>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <input
-                  formControlName="latitude"
-                  type="text"
-                  class="form-control"
-                 id="latitude"
-                name="latitude"
-                [(ngModel)]="location.latitude"
-                
-               
-                  />
-                  
-            </div>
-            </div>
-           </div>
+              <div class="row">
+                <div class="col-md" style="margin-left: 12px;">
+                  <div class="form-group">
+                    <label for="latitude">{{ "Latitude" | translate }}</label>
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="latitude"
+                        type="text"
+                        class="form-control"
+                        id="latitude"
+                        name="latitude"
+                        [(ngModel)]="location.latitude"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-           <!-- longitude -->
-          <div class="col" style="width: 20%;">
-          <div class="form-group">
-            <label for="longitude">{{ 'Longitude' | translate }}</label>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <input
-                  formControlName="longitude"
-                  type="text"
-                  class="form-control"
-                 id="longitude"
-                name="longitude"
-                [(ngModel)]="location.longitude"
-               
-               
-                  />
-                 
-            </div>
-            </div>
-           </div>
+                <!-- longitude -->
+                <div class="col-md">
+                  <div class="form-group">
+                    <label for="longitude">{{
+                      "Longitude" | translate
+                    }}</label>
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="longitude"
+                        type="text"
+                        class="form-control"
+                        id="longitude"
+                        name="longitude"
+                        [(ngModel)]="location.longitude"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-            <!-- Google map link -->
-            <div class="col" style="width: 20%;">
-            <div class="form-group">
-              <label for="googleMapLink">{{ 'Google Map Link' | translate }}</label>
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend"></div>
-                <input
-                    formControlName="googleMapLink"
-                    type="text"
-                    class="form-control"
-                   id="googleMapLink"
-                  name="googleMapLink"
-                  [(ngModel)]="location.googleMapLink"
-                  
-                  maxlength="50" 
-                    />
-                    
-              </div>
-             </div>
-             </div>
-             
-               <!-- Status -->
-               <div class="col" style="width: 20%;">
+                <!-- Google map link -->
+                <div class="col-md">
+                  <div class="form-group">
+                    <label for="googleMapLink">{{
+                      "Google Map Link" | translate
+                    }}</label>
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="googleMapLink"
+                        type="text"
+                        class="form-control"
+                        id="googleMapLink"
+                        name="googleMapLink"
+                        [(ngModel)]="location.googleMapLink"
+                        maxlength="50"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Status -->
+                <div class="col-md" >
+                  <div class="form-group">
+                    <label
+                      >{{ "Status" | translate
+                      }}<span class="text-danger">*</span></label
+                    ><br />
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <select
+                        formControlName="status"
+                        class="form-control"
+                        id="status"
+                        name="status"
+                        [(ngModel)]="location.status"
+                        required
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            locationFormControl.status.errors?.required
+                        }"
+                      >
+                        <option value="" disabled>Select Status</option>
+                        <option value="1">{{ "Active" | translate }}</option>
+                        <option value="0">
+                          {{ "Inactive" | translate }}
+                        </option>
+                      </select>
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+              <div class="col-md" style="margin-top: 40px;">
                 <div class="form-group">
-                 <label>{{ 'Status' | translate }}<span class="text-danger">*</span></label><br>
-                 <div class="input-group input-group-alternative mb-3">
-                   <div class="input-group-prepend"></div>
-                   <select
-                     formControlName="status"
-                     class="form-control"
-                     id="status"
-                     name="status"
-                     [(ngModel)]="location.status"
-                     required
-                     [ngClass]="{
-                       'is-invalid': submitted && locationFormControl.status.errors?.required
-                     }"
-                   >
-                     <option value="" disabled>Select Status</option>
-                     <option value="1">{{ 'Active' | translate }}</option>
-                     <option value="0">{{ 'Inactive' | translate }}</option>
-                   </select>
-                   <div class="invalid-feedback">
-                    This field is mandatory.
-                   </div>
-                 </div>
-               </div>
-               </div> 
-            </div>
-
-
+                    <div class="form-check">
+                      <label
+                        class="form-check-label"
+                        for="mixedGenderAllow"
+                      >
+                       Allow Mixed Gender
+                        <input
+                          class="form-check-input custom-checkbox"
+                          formControlName="mixedGenderAllow"
+                          type="checkbox"
+                          [(ngModel)]="location.mixedGenderAllow"
+                          id="mixedGenderAllow"
+                          value="true"
+                          name="mixedGenderAllow"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+             
                <!-- Header -->
              <div>
               <h2 class="form-section-header text-center">Contact-1</h2>

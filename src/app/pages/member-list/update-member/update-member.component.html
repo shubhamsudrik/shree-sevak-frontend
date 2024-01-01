@@ -233,7 +233,7 @@
              </div>              
             </div>  
               <!-- role-->
-              <div class="row d-flex flex-row">
+              <!-- <div class="row d-flex flex-row"> -->
                 <!-- <div class="col" style="width: 20%;">
               <div class="form-group">
                 <label for="role">{{ 'Role' | translate }}</label>
@@ -265,7 +265,8 @@
                </div> -->
 
               <!-- aadhar number-->
-              <div class="col">
+              <div class="row">
+              <div class="col-md">
                 <div class="form-group">
                  <label for="addharNumber">{{ 'Addhar Number' | translate }}<span class="text-danger">*</span></label>
                  <div class="input-group input-group-alternative mb-3">
@@ -292,9 +293,9 @@
                 </div>
                 </div>
              <!-- panNo -->
-             <div class="col">
+             <div class="col-md">
                 <div class="form-group">
-                 <label for="panNo">{{ 'Pan Number' | translate }}<span class="text-danger">*</span></label>
+                 <label for="panNo">{{ 'Pan Number' | translate }}</label>
                  <div class="input-group input-group-alternative mb-3">
                    <div class="input-group-prepend"></div>
                    <input
@@ -304,15 +305,12 @@
                       id="panNo"
                      name="panNo"
                      [(ngModel)]="Member.panNo"
-                     [ngClass]="{
-                       'is-invalid': (submitted && (MemberFormControl.panNo.errors?.required || MemberFormControl.panNo.errors?.minlength))
-     
-                     }"
+                     
                      (input)="validatePanNumber($event)"
                      minlength="10"
                        />
                        <div class="invalid-feedback">
-                         <div *ngIf="MemberFormControl.panNo.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                         <!-- <div *ngIf="MemberFormControl.panNo.errors?.required">{{ 'This field is mandatory.' | translate }}</div> -->
                          <div *ngIf="MemberFormControl.panNo.errors?.minlength">{{ 'Pan number should be 10 digits' | translate }}</div>
                        </div>
                  </div>  
@@ -320,7 +318,7 @@
                </div>
 
              <!-- photoBase64  -->
-             <div class="col" >
+             <!-- <div class="col" >
              <div class="form-group">
               <label for="photoBase64">{{ 'Photo Base64' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
@@ -338,9 +336,9 @@
                    
               </div>
              </div>
-             </div>
+             </div> -->
               <!-- Area -->
-              <div class="col">
+              <div class="col-md">
                 <div class="form-group">
                   <label for="area"
                     >{{ "Area" | translate
@@ -376,10 +374,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            
 
              <!-- status-->       
-             <div class="col" >
+             <div class="col-md" >
             <div class="form-group">
               <label for="status">{{ 'Status' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
@@ -388,6 +386,7 @@
                     formControlName="status"
                     type="text"
                     class="form-control"
+                    
                    id="status"
                   name="status"
                   [(ngModel)]="Member.status"
@@ -406,6 +405,8 @@
               </div>
             </div>
              </div>
+             </div>
+             <!-- </div> -->
            
 
                <!-- Header -->
