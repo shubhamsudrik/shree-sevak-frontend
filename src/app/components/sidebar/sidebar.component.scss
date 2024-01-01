@@ -1,3 +1,19 @@
 .my-image {
     height: 300px !important;
   }
+/* sidebar.component.css */
+.sidebar {
+  width: 200px;
+  background-color: #f0f0f0;
+  transition: width 0.3s ease; /* Add a smooth transition effect */
+}
+
+.toggle-icon {
+  cursor: pointer;
+}
+
+.sidebar-hidden {
+  width: 0;
+}
+
+/* Add any other styling you need */
