@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from 'src/app/Classes/member';
 import { MemberListService } from 'src/app/services/member-list.service';

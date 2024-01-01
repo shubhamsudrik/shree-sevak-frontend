@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+
 import { Area } from 'src/app/Classes/Area';
 import { AreaDataService } from 'src/app/services/area-data.service';
 

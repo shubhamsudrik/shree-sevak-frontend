@@ -3,11 +3,13 @@ export interface ApiResponse {
   message: string;
 }
 
+
+
+
+
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-
-
 import { ToastrService } from "ngx-toastr";
 import { User } from "src/app/Classes/User";
 import { AreaDataService } from "src/app/services/area-data.service";
@@ -62,6 +64,7 @@ export class RegisterComponent implements OnInit {
     if(this.id){
       this.populateForm()
     }
+  
   }
 
  
@@ -164,6 +167,6 @@ export class RegisterComponent implements OnInit {
   goBack(){
     this.router.navigate(['user-list'])
   }
-
+ 
   
 }

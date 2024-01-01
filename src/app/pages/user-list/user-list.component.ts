@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
-import { Route, Router } from "@angular/router";
+import { Router } from "@angular/router";
+
+
 import { User } from "src/app/Classes/User";
 import { UserDataService } from "src/app/services/user-data.service";
 
@@ -39,7 +41,7 @@ export class UserListComponent implements OnInit {
   constructor(private router: Router, private userService: UserDataService) {}
 
   ngOnInit(): void {
-    this.getAllUserList();
+    this.getActiveUserList()  ;
   }
   statusUsers(status: any) {
 
@@ -61,6 +63,12 @@ export class UserListComponent implements OnInit {
 
   getAllUserList() {
     this.userService.getAllUserList().subscribe((users: User[]) => {
+      this.defaultUsers = users;
+      console.log(this.defaultUsers);
+    });
+  }
+  getActiveUserList() {
+    this.userService.getUserListByStatus("1").subscribe((users: User[]) => {
       this.defaultUsers = users;
       console.log(this.defaultUsers);
     });

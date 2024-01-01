@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+
 import { Location } from "src/app/Classes/location"
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocService } from 'src/app/services/loc.service';
 import { ToastrService } from 'ngx-toastr';
 import { Area } from 'src/app/Classes/Area';
 import { AreaDataService } from 'src/app/services/area-data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-location',

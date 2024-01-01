@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/Classes/member';
 import { AreaDataService } from 'src/app/services/area-data.service';
