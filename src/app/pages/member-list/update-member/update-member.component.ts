@@ -76,8 +76,8 @@ export class UpdateMemberComponent implements OnInit {
         // eligible: ['', Validators.required],
         // role: [this.Member?.role, Validators.required],
         addharNumber: [this.Member?.addharNumber, [Validators.required, Validators.minLength(12)]],
-        panNo: [this.Member?.panNo, Validators.required],
-        photoBase64: [this.Member?.photoBase64],
+        panNo: [this.Member?.panNo],
+        // photoBase64: [this.Member?.photoBase64],
         area: [this.Member?.area, Validators.required],
 
         add1: [this.Member?.add1, Validators.required],
@@ -127,7 +127,38 @@ export class UpdateMemberComponent implements OnInit {
 
       this.getMembers();
  
+      this.memberform.valueChanges.subscribe(() => {
+        this.handleCheckboxChanges();
+      });
+
     }
+
+    //handel check boxes
+  handleCheckboxChanges() {
+    const eligibleForChild = this.memberform.get('eligibleForChild');
+    const eligibleForGents = this.memberform.get('eligibleForGents');
+    const eligibleForLadies = this.memberform.get('eligibleForLadies');
+    const eligibleForNone = this.memberform.get('eligibleForNone');
+  
+    // Check if the value has changed before making changes
+    if (eligibleForChild.value !== this.Member.eligibleForChild ||eligibleForGents.value !== this.Member.eligibleForGents || 
+      eligibleForLadies.value !== this.Member.eligibleForLadies ) {
+        
+      eligibleForNone.setValue(false, { emitEvent: false });
+   
+    } else if (eligibleForNone.value !== this.Member.eligibleForNone) {
+      eligibleForChild.setValue(false, { emitEvent: false });
+      eligibleForGents.setValue(false, { emitEvent: false });
+      eligibleForLadies.setValue(false, { emitEvent: false });
+    }
+  
+    // Update the Member object
+    this.Member.eligibleForChild = eligibleForChild.value;
+    this.Member.eligibleForGents = eligibleForGents.value;
+    this.Member.eligibleForLadies = eligibleForLadies.value;
+  }
+
+
     getAreas(){
       this.areaDataService.getAreaByStatus("1").subscribe((data)=>{
         this.arealist=data
