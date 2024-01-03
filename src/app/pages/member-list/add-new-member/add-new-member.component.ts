@@ -112,7 +112,7 @@ export class AddNewMemberComponent implements OnInit {
       ownBaithakDay: ['', Validators.required],
       // type: ['', Validators.required],          
       hajeriNo: ['', Validators.required],
-      hajeriNoDetails: [''],
+      hajeriNoDetails: ['', Validators.required], // hajeri no details contain Baithak location from now
       weeklyOffs: ['', Validators.required],
       additionalInfo: [''],
     });

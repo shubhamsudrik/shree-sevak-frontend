@@ -49,9 +49,9 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-search"></i></span>    
                   </div>
-                  <input class="form-control col-md-4" placeholder="{{ 'Search Name' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+                  <input class="form-control col-md-4" placeholder="{{ 'Search User Name' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
                   (blur)="focus = false">
-                  <input class="form-control col-md-4" placeholder="{{ 'Search Area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+                  <input class="form-control col-md-4" placeholder="{{ 'Search Email ID' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
                   (blur)="focus = false">
                   <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
                   (blur)="focus = false">
@@ -118,12 +118,12 @@
                       <input type="radio" name="operation" (click)="toggleButtons('edit', user)" value="edit"  (change)="selectedRow = i">
                       <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->
                     </td>
-                    <td>{{ user.userId}}</td>                  
-                    <td>{{ user.name}}</td>
-                    <td>{{ user.emailId }}</td>
-                    <td>{{ user.roles[0].roleName}}</td>
-                    <td>{{ user.phoneNumber }}</td>
-                    <td>{{ user.status }}</td>                 
+                    <td>{{ user?.userId}}</td>                  
+                    <td>{{ user?.name}}</td>
+                    <td>{{ user?.emailId }}</td>
+                    <td>{{ user?.roles[0]?.roleName}}</td>
+                    <td>{{ user?.phoneNumber }}</td>
+                    <td>{{ user?.status === "1"? 'Active' :'InActive'}}</td>                 
                     <!-- <td>{{ user.area }}</td>                  -->
                    
                                        

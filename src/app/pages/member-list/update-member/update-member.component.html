@@ -1173,7 +1173,7 @@
          <!-- hajeriNoDetails -->
          <div class="col-md-4">
          <div class="form-group">
-          <label for="hajeriNoDetails">{{ 'Baithak Location' | translate }}</label>
+          <label for="hajeriNoDetails">{{ 'Baithak Location' | translate }}<span class="text-danger">*</span></label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <input
@@ -1183,10 +1183,14 @@
                id="hajeriNoDetails"
               name="hajeriNoDetails"
               [(ngModel)]="Member.hajeriNoDetails"
-             
+              [ngClass]="{
+                'is-invalid': (submitted && (MemberFormControl.hajeriNoDetails.errors?.required))
+            }"
               maxlength="25" 
                 />
-               
+                <div class="invalid-feedback">
+                  {{ 'This field is mandatory.' | translate }}
+                </div>
           </div>
           </div>
          </div>

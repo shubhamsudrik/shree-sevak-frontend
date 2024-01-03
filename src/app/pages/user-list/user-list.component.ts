@@ -4,11 +4,7 @@ import { PageEvent } from "@angular/material/paginator";
 import { Router } from "@angular/router";
 import { User } from "src/app/Classes/User";
 import { UserDataService } from "src/app/services/user-data.service";
- 
- 
- 
- 
- 
+  
 @Component({
   selector: "app-user-list",
   templateUrl: "./user-list.component.html",
@@ -16,12 +12,12 @@ import { UserDataService } from "src/app/services/user-data.service";
 })
 export class UserListComponent implements OnInit {
   user = new User();
-  defaultUsers: User[];
+  defaultUsers: User[]= [];
  
   public focus;
-  searchText: any;
-  searchText1: any;
-  searchText2: any;
+  searchText ='';
+  searchText1 ='';
+  searchText2 ='';
   currentPage: number = 0;
   itemsPerPage: number = 10;
  
@@ -36,7 +32,7 @@ export class UserListComponent implements OnInit {
   }
  
   // record count
-  get pagedLocations(): any[] {
+  get pagedUsers(): any[] {
     const startIndex = this.currentPage * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     return this.defaultUsers.slice(startIndex, endIndex);
@@ -71,10 +67,14 @@ export class UserListComponent implements OnInit {
     });
   }
   getActiveUserList() {
-    this.userService.getUserListByStatus("1").subscribe((users: User[]) => {
+    this.userService.getUserListByStatus('1').subscribe((users: User[]) => {
       this.defaultUsers = users;
       console.log(this.defaultUsers);
-    });
+    },
+    (error) => {
+      console.error('Error fetching users:', error);
+    }
+    );
   }
   toggleButtons(operation: string, user: any) {
     if (operation === "edit") {

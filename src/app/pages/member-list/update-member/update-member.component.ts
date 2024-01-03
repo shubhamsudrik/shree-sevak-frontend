@@ -126,7 +126,7 @@ export class UpdateMemberComponent implements OnInit {
         // ownBaithakId: [this.Member?.ownBaithakId, Validators.required], 
         // type: [this.Member?.type, Validators.required],         
         hajeriNo: [this.Member?.hajeriNo, Validators.required],
-        hajeriNoDetails: [this.Member?.hajeriNoDetails],
+        hajeriNoDetails: [this.Member?.hajeriNoDetails, Validators.required], // hajerinodetails change into Baithak Location it contain baithak location toward
         weeklyOffs: [this.Member?.weeklyOffs, Validators.required],
         additionalInfo: [this.Member?.additionalInfo],
       });
