@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { UserDataService } from 'src/app/services/user-data.service';
+
 
 declare interface RouteInfo {
     path: string;

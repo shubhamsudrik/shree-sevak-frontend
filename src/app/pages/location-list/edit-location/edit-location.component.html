@@ -882,6 +882,8 @@
                           id="contact1Phone2"
                           name="contact1Phone2"
                           [(ngModel)]="location.contact1Phone2"
+                          (input)="validatePhoneNumber1($event)"
+
                           
                         />
                       </div>
@@ -907,11 +909,11 @@
                           [ngClass]="{
                             'is-invalid':
                               submitted &&
-                              locationFormControl.contact1Email.errors?.required
+                              locationFormControl.contact1Email.errors?.required || locationFormControl.contact1Email.errors?.email
                           }"
                         />
                         <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
+                          {{ "This field is mandatory and should be Email." | translate }}
                         </div>
                       </div>
                     </div>
@@ -1040,6 +1042,8 @@
                           id="contact2Phone2"
                           name="contact2Phone2"
                           [(ngModel)]="location.contact2Phone2"
+                          (input)="validatePhoneNumber1($event)"
+
                         />
                       </div>
                     </div>
@@ -1059,10 +1063,13 @@
                           id="contact2Email"
                           name="contact2Email"
                           [(ngModel)]="location.contact2Email"
+                          [ngClass]="{
+                            'is-invalid': (submitted && locationFormControl.contact2Email.errors?.email)
+                           }"
                         />
-                        <!-- <div class="invalid-feedback">
-                      {{ 'This field is mandatory.' | translate }}
-                    </div> -->
+                        <div class="invalid-feedback">
+                          {{ "Value should be Email." | translate }}
+                        </div>
                       </div>
                     </div>
                   </div>

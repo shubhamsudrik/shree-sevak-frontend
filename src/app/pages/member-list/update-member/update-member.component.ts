@@ -19,10 +19,9 @@ export class UpdateMemberComponent implements OnInit {
     submitted = false;
     defaultMembers: Member[] = [];
     Member: Member = new Member();
-    id: number;
-  arealist: any;
-
- 
+   id: number;
+   arealist: any;
+   isInputDisabled=false; 
    
     constructor(
       private MemberListService: MemberListService,
@@ -31,7 +30,9 @@ export class UpdateMemberComponent implements OnInit {
       private formBuilder: FormBuilder,
       private toast:ToastrService,
       private areaDataService:AreaDataService
-    ) {  }
+    ) { 
+      console.log(this.isInputDisabled)
+     }
   
     ngOnInit(): void {
       this.getAreas()
@@ -76,7 +77,7 @@ export class UpdateMemberComponent implements OnInit {
         gender: [this.Member?.gender, Validators.required],
         // eligible: ['', Validators.required],
         // role: [this.Member?.role, Validators.required],
-        addharNumber: [this.Member?.addharNumber, [Validators.required, Validators.minLength(12)]],
+        addharNumber: [this.Member?.addharNumber, [Validators.minLength(12)]],
         panNo: [this.Member?.panNo],
         // photoBase64: [this.Member?.photoBase64],
         area: [this.Member?.area, Validators.required],
@@ -97,10 +98,14 @@ export class UpdateMemberComponent implements OnInit {
 
         mobile: [this.Member?.mobile, [Validators.required, Validators.minLength(10)]],
         phone: [this.Member?.phoneNumber],
-        email: [this.Member?.email, Validators.required],
+        email: [this.Member?.email, [Validators.required, Validators.email]],
        
-        vehicleType: [this.Member?.vehicleType], 
-        vehicleDetails: [this.Member?.vehicleDetails],                 
+        twoWheeler: [this.Member?.twoWheeler], 
+        fourWheeler: [this.Member?.fourWheeler], 
+        // both: [this.Member?.both], 
+        noVehical: [''], 
+        twoWheelerDetail: [''],    
+        fourWheelerDetail: [''],           
        
         hindiRead:[this.Member?.hindiRead],
         hindiWrite:[this.Member?.hindiWrite],
@@ -130,18 +135,37 @@ export class UpdateMemberComponent implements OnInit {
  
       this.memberform.valueChanges.subscribe(() => {
         this.handleCheckboxChanges();
+        this.handleCheckboxForVehical();
       });
 
     }
 
-    //handel check boxes
+    // // vehicacheckbox
+    handleCheckboxForVehical(){
+      const twoWheeler = this.memberform.get('twoWheeler');
+      const fourWheeler =this.memberform.get("fourWheeler");
+      const noVehical = this.memberform.get('noVehical');
+      const twoWheelerDetail = this.memberform.get('twoWheelerDetail');
+      const fourWheelerDetail = this.memberform.get('fourWheelerDetail');
+
+      if(twoWheeler.value !== this.Member.twoWheeler || fourWheeler.value !== this.Member.fourWheeler){
+        noVehical.setValue(false, {emitEvent: false});
+      }
+      else if(noVehical.value !== this.Member.noVehical){
+        twoWheeler.setValue(false, {emitEvent: false});
+        fourWheeler.setValue(false, {emitEvent: false});
+        twoWheelerDetail.setValue('', {emitEvent: false})
+        fourWheelerDetail.setValue('', {emitEvent: false})
+      }     
+    }
+
+    //eligicheckboxes
   handleCheckboxChanges() {
     const eligibleForChild = this.memberform.get('eligibleForChild');
     const eligibleForGents = this.memberform.get('eligibleForGents');
     const eligibleForLadies = this.memberform.get('eligibleForLadies');
     const eligibleForNone = this.memberform.get('eligibleForNone');
   
-    // Check if the value has changed before making changes
     if (eligibleForChild.value !== this.Member.eligibleForChild ||eligibleForGents.value !== this.Member.eligibleForGents || 
       eligibleForLadies.value !== this.Member.eligibleForLadies ) {
         
@@ -154,9 +178,9 @@ export class UpdateMemberComponent implements OnInit {
     }
   
     // Update the Member object
-    this.Member.eligibleForChild = eligibleForChild.value;
-    this.Member.eligibleForGents = eligibleForGents.value;
-    this.Member.eligibleForLadies = eligibleForLadies.value;
+    // this.Member.eligibleForChild = eligibleForChild.value;
+    // this.Member.eligibleForGents = eligibleForGents.value;
+    // this.Member.eligibleForLadies = eligibleForLadies.value;
   }
 
 
@@ -187,9 +211,11 @@ export class UpdateMemberComponent implements OnInit {
 
     if (isDuplicate) {
       // Data already exists error message
-      alert(
-        'Data already exists with the same Aaddhar card Number .'
-      );
+      if(confirm(
+        'Data already exists with the same Aaddhar card Number .\n"Cancel" it for change the addhar card Number'
+      )){
+      this.saveMember();
+      this.toast.success("  Member Info Update Succesfully ")}
     } else if (this.memberform.valid) {
         // Data doesn't exist and the form is valid, save the Member
         console.log(this.Member);
@@ -246,6 +272,13 @@ export class UpdateMemberComponent implements OnInit {
           const truncatedValue = numericValue.slice(0, 10); // Truncate input to 10 characters
           input.value = truncatedValue;
       }
+
+      validatePhoneNumber1(event) {
+        const input = event.target;
+        const allowedCharacters = input.value.replace(/[^\d\s-]/g, ''); // Allow only digits, spaces, and dashes
+        const truncatedValue = allowedCharacters.slice(0, 13); // Truncate input to 12 characters
+        input.value = truncatedValue;
+    }
       // addhar number validation
       validateAddharNumber(event){
       const input = event.target;

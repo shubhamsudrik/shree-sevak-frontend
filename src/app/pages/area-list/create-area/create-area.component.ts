@@ -39,7 +39,7 @@ export class CreateAreaComponent implements OnInit {
       contactOccupation: [""],
       contactPhone1: ["", Validators.required],
       contactPhone2: [""],
-      contactEmail: ["", Validators.required],
+      contactEmail: ["", [Validators.required, Validators.email]],
       city: ["", Validators.required],
       division: ["", Validators.required],
       state: ["", Validators.required],
@@ -132,6 +132,12 @@ export class CreateAreaComponent implements OnInit {
     const truncatedValue = numericValue.slice(0, 10); // Truncate input to 10 characters
     input.value = truncatedValue;
   }
+  validatePhoneNumber1(event) {
+    const input = event.target;
+    const allowedCharacters = input.value.replace(/[^\d\s-]/g, ''); // Allow only digits, spaces, and dashes
+    const truncatedValue = allowedCharacters.slice(0, 13); // Truncate input to 12 characters
+    input.value = truncatedValue;
+}
 
   isDuplicateData(newArea: Area): boolean {
     for (let item of this.defaultAreas) {

@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { User } from "src/app/Classes/User";
+
 import { AreaDataService } from "src/app/services/area-data.service";
 import { LocationDataService } from "src/app/services/location-data.service";
 import { UserDataService } from "src/app/services/user-data.service";
@@ -48,7 +49,7 @@ export class RegisterComponent implements OnInit {
       name: ["", Validators.required],
       phoneNumber: ["", [Validators.required, Validators.minLength(10)]],
       photoUrl: [""],
-      emailId: ["", [Validators.required]],
+      emailId: ["", [Validators.required, Validators.email]],
       password: [
         "",
         [

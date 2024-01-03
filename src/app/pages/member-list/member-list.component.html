@@ -119,7 +119,7 @@
                   </td>
                   <td>{{ member.memberId }}</td>                  
                   <td>{{ member.initial+' ' }} {{ member.firstName+' ' }} {{ member.middleName+' ' }} {{ member.lastName }}</td>
-                  <td>{{ member.eligibleForChild ? 'Child ' : '' }} {{ member.eligibleForGents ? 'Gents ' : '' }} {{ member.eligibleForLadies ? 'Ladies ' : ''}}</td>
+                  <td>{{ member.eligibleForChild ? 'Child ' : '' }} {{ member.eligibleForGents ? 'Gents ' : '' }} {{ member.eligibleForLadies ? 'Ladies ' : ''}} {{ member.eligibleForNone ? 'Only For Attendance ' : ''}}</td>
                   <td>{{ member.gender }}</td>
                   <td>{{ member.mobile }}</td>                 
                   <td>{{ member.area }}</td> 

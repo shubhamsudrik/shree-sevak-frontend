@@ -279,7 +279,7 @@
                      name="addharNumber"
                      [(ngModel)]="Member.addharNumber"
                      [ngClass]="{
-                       'is-invalid': (submitted && (MemberFormControl.addharNumber.errors?.required || MemberFormControl.addharNumber.errors?.minlength))
+                       'is-invalid': (submitted && (MemberFormControl.addharNumber.errors?.minlength))
      
                      }"
                      (input)="validateAddharNumber($event)"
@@ -935,7 +935,7 @@
                  id="phone"
                 name="phone"
                 [(ngModel)]="Member.phone"
-               
+                (input)="validatePhoneNumber1($event)"
                   />
                   
             </div>  
@@ -956,11 +956,11 @@
                   name="email"
                   [(ngModel)]="Member.email"
                   [ngClass]="{
-                   'is-invalid': (submitted && MemberFormControl.email.errors?.required)
+                   'is-invalid': submitted && MemberFormControl.email.errors?.required || MemberFormControl.email.errors?.email
                   }"
                     />
                     <div class="invalid-feedback">
-                      {{ 'This field is mandatory.' | translate }}
+                      {{ "This field is mandatory and should be Email." | translate }}
                     </div>
               </div>
              </div>
@@ -974,44 +974,100 @@
         </div>
 
         <!-- vehicleType-->
+        <label for="vehicleType" style="margin-left: 20px;">{{ 'Vehicle Type' | translate }}</label>
+        <label for="vehicleType" style="margin-left: 380px;">{{ 'Vehicle Details' | translate }}</label>
         <div class="row">
-          <div class="col-md-6">
-        <div class="form-group">
-          <label for="vehicleType">{{ 'Vehicle Type' | translate }}</label>
-          <div class="input-group input-group-alternative mb-3">
-            <div class="input-group-prepend"></div>
-            <select
-                formControlName="vehicleType"
+          
+          <div class="col-md-3" style="margin-top: 20px;">    
+           
+            <div class="form-group">
+                <div class="form-check">
+                  <label
+                    class="form-check-label"
+                    for="twoWheeler"
+                  >
+                  2-Wheeler
+                    <input
+                      class="form-check-input custom-checkbox"
+                      formControlName="twoWheeler"
+                      type="checkbox"
+                      [(ngModel)]="Member.twoWheeler"
+                      id="twoWheeler"
+                      value="twoWheeler"
+                      name="twoWheeler"                      
+                    />
+                  </label>
+                </div><br>
+
+                <div class="form-check">
+                  <label
+                    class="form-check-label"
+                    for="fourWheeler"
+                  >
+                  4-Wheeler
+                    <input
+                      class="form-check-input custom-checkbox"
+                      formControlName="fourWheeler"
+                      type="checkbox"
+                      [(ngModel)]="Member.fourWheeler"
+                      id="fourWheeler"
+                      value="fourWheeler"
+                      name="fourWheeler"
+                      disabled="true"
+                    />
+                  </label>
+                </div><br>
+
+                <div class="form-check">
+                  <label
+                    class="form-check-label"
+                    for="noVehical"
+                  >
+                  No Vehical
+                    <input
+                      class="form-check-input custom-checkbox"
+                      formControlName="noVehical"
+                      type="checkbox"
+                      [(ngModel)]="Member.noVehical"
+                      id="noVehical"
+                      value="noVehical"
+                      name="noVehical"
+                    />
+                  </label>
+                </div><br>
+              </div>
+            </div>
+           <!-- vehicleDetails -->
+            <div class="col-md-8">
+           <div class="form-group">           
+            <div class="input-group input-group-alternative mb-3" style="margin-top: 20px;">
+              <div class="input-group-prepend"></div>
+              <input [disabled]="isInputDisabled ? 'disabled' : true"
+                formControlName="twoWheelerDetail"
                 type="text"
                 class="form-control"
-               id="vehicleType"
-              name="vehicleType"
-              [(ngModel)]="Member.vehicleType"              
-                >
-              <option value="" disabled>Select Vehicle</option>
-                  <option value="2-Wheeler">2-Wheeler</option>
-                  <option value="4-Wheeler">4-Wheeler</option>
-                </select>
-          </div>
-        </div>
-         </div>
-           <!-- vehicleDetails -->
-         
-            <div class="col-md-6">
-           <div class="form-group">
-            <label for="vehicleDetails">{{ 'Vehicle Details' | translate }}</label>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <input
-                  formControlName="vehicleDetails"
-                  type="text"
-                  class="form-control"
-                 id="vehicleDetails"
-                name="vehicleDetails"
-                [(ngModel)]="Member.vehicleDetails"
-                maxlength="14" 
+                id="twoWheelerDetail"
+                name="twoWheelerDetail"
+                [(ngModel)]="Member.twoWheelerDetail"
+                placeholder="Two Wheeler Details"
+                maxlength="25" 
                   />
             </div>
+            <span></span>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <input 
+              formControlName="fourWheelerDetail"
+              type="text"
+              class="form-control"
+              id="fourWheelerDetail"
+              name="fourWheelerDetail"
+              [(ngModel)]="Member.fourWheelerDetail"              
+              placeholder="Four Wheeler Details"
+              maxlength="25" 
+                  />
+            </div>
+           
            </div>
             </div>
           </div>
@@ -1019,12 +1075,12 @@
               
                <!-- Header -->
         <div>
-          <h2 class="form-section-header text-center">Baithak details</h2>
+          <h2 class="form-section-header text-center">Baithak Details</h2>
         </div>
 
          <!-- ownBaithakDay -->
          <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
          <div class="form-group">
           <label>{{ 'Baithak Day' | translate }}<span class="text-danger">*</span></label><br>
           <div class="input-group input-group-alternative mb-3">
@@ -1117,7 +1173,7 @@
          <!-- hajeriNoDetails -->
          <div class="col-md-4">
          <div class="form-group">
-          <label for="hajeriNoDetails">{{ 'Hajeri Number Details' | translate }}</label>
+          <label for="hajeriNoDetails">{{ 'Baithak Location' | translate }}</label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <input
@@ -1147,6 +1203,7 @@
                 name="weeklyOffs"
                 [(ngModel)]="Member.weeklyOffs"
                 required
+                multiple
                 [ngClass]="{
                   'is-invalid': (submitted && MemberFormControl.weeklyOffs.errors?.required)
                 }"
@@ -1154,7 +1211,7 @@
                 <option value="" disabled>Select Status</option>
                 <option value="Sunday">{{'Sunday'|translate}}</option>
                 <option value="Monday">{{'Monday'|translate}}</option>
-                <option value="Tuesdat">{{'Tuesdat'|translate}}</option>
+                <option value="Tuesday">{{'Tuesday'|translate}}</option>
                 <option value="Wednesday">{{'Wednesday'|translate}}</option>
                 <option value="Thursday">{{'Thursday'|translate}}</option>
                 <option value="Friday">{{'Friday'|translate}}</option>

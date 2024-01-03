@@ -25,7 +25,10 @@ export class Member {
 	googleMapLink:string;
 	initial:string;
 	role:string;
-	vehicleType:string;
+	twoWheeler:boolean;
+	fourWheeler:boolean;
+	// both:string;
+	noVehical:boolean;
 	phoneNumber:string;
 	// ownBaithakId:string;
 	eligibleForNone:boolean;
@@ -54,7 +57,8 @@ export class Member {
  pincode:string;
  state :string;
  status:string;
- vehicleDetails:string;
+ twoWheelerDetail:string;
+ fourWheelerDetail:string;
  weeklyOffs:string;
  members:string;
  locations:string;

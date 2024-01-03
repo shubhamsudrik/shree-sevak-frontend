@@ -139,12 +139,12 @@
                       id="emailId"
                       name="emailId"
                       [ngClass]="{
-                        'is-invalid': submitted && registerFormControl.emailId.errors?.required
+                        'is-invalid': submitted && registerFormControl.emailId.errors?.required || registerFormControl.emailId.errors?.email
                       }"
                       maxlength="30"
                     />
                     <div class="invalid-feedback">
-                      This field is mandatory.
+                      {{ "This field is mandatory and should be Email." }}
                     </div>
                   </div>
                   </div>

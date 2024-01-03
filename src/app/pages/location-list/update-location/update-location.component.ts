@@ -95,14 +95,14 @@ isSelect: any=false;
       contact1Occupation: [this.location?.contact1Occupation],
       contact1Phone1: [this.location?.contact1Phone1, Validators.required],
       contact1Phone2: [''],
-      contact1Email: [this.location?.contact1Email, Validators.required],
+      contact1Email: [this.location?.contact1Email, [Validators.required, Validators.email]],
   
       contact2Initial: [this.location?.contact2Initial],
       contact2Name: [this.location?.contact2Name],    
       contact2Occupation: [this.location?.contact1Occupation], 
       contact2Phone1: [this.location?.contact2Phone1],
       contact2Phone2: ['',],
-      contact2Email: [this.location?.contact2Email],
+      contact2Email: [this.location?.contact2Email, [Validators.email]],
      
       additionalInfo: [''],
       mixedGenderAllow:[this.location?.mixedGenderAllow||false]
@@ -172,6 +172,12 @@ isSelect: any=false;
       const truncatedValue = numericValue.slice(0, 10); // Truncate input to 6 characters
       input.value = truncatedValue;
   }
+  validatePhoneNumber1(event) {
+    const input = event.target;
+    const allowedCharacters = input.value.replace(/[^\d\s-]/g, ''); // Allow only digits, spaces, and dashes
+    const truncatedValue = allowedCharacters.slice(0, 13); // Truncate input to 12 characters
+    input.value = truncatedValue;
+}
 
   CancelChanges() {
     this.router.navigate(['/location-list']);

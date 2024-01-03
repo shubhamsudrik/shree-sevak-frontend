@@ -1,0 +1,33 @@
+/* styles.scss */
+
+/* Highlight the parent container when any child element has focus */
+// .form-group input:focus {
+//     border: 2px solid #3498db; /* Change the color to your preference */
+//   }
+//   .form-group input:not(:focus) {
+//   border: 1px solid #ccc; /* Change the color to your default border color */
+// }
+/* styles.scss */
+
+/* Highlight the border of the input and select fields when they have focus */
+.form-group input:focus,
+.form-group select:focus {
+  border: 2px solid #3498db; /* Change the color to your preference */
+}
+
+/* Reset the border when focus is not on the input and select fields */
+.form-group input:not(:focus),
+.form-group select:not(:focus) {
+  border: 1px solid #ccc; /* Change the color to your default border color */
+}
+
+  /* Reset the border when focus is not within the parent container */
+//   .form-group:not(:focus-within) {
+//     border: 1px solid #ccc; /* Change the color to your default border color */
+//   }
+  
+  /* Style individual input fields within the parent container */
+//   .form-group input {
+//     /* Your input field styles here */
+//   }
+  
