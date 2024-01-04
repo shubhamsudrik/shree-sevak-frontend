@@ -21,7 +21,7 @@ export class UpdateMemberComponent implements OnInit {
     Member: Member = new Member();
    id: number;
    arealist: any;
-   isInputDisabled=false; 
+   isInputDisabled=true; 
    
     constructor(
       private MemberListService: MemberListService,

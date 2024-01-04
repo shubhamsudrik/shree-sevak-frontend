@@ -11,11 +11,11 @@
         <div class="card-body px-lg-10 py-lg-5">
           
           <form role="form" [formGroup]="memberform" (ngSubmit)="onSubmit()" class="needs-validation">
-            <h2 class="text-center">{{'Update member records' | translate }}</h2><br>
+            <h2 class="text-center">{{'Update Member Records' | translate }}</h2><br>
 
             <!-- Head -->
             <div>
-              <h2 class="form-section-header text-center">Personal details</h2>
+              <h2 class="form-section-header text-center">Personal Details</h2>
             </div>
 
              <!-- initial -->
@@ -268,7 +268,7 @@
               <div class="row">
               <div class="col-md">
                 <div class="form-group">
-                 <label for="addharNumber">{{ 'Addhar Number' | translate }}<span class="text-danger">*</span></label>
+                 <label for="addharNumber">{{ 'Addhar Number' | translate }}</label>
                  <div class="input-group input-group-alternative mb-3">
                    <div class="input-group-prepend"></div>
                    <input
@@ -412,7 +412,7 @@
                <!-- Header -->
           <div class="row">
             <div class="col-6">
-            <h2 class="form-section-header text-center">Languages known</h2> 
+            <h2 class="form-section-header text-center">Languages Known</h2> 
             <span style="margin-left: 20px;">Atleast one language should be mandatory<span class="text-danger">*</span></span><br><br>          
   
             <!-- Marathi lanng-->
@@ -560,7 +560,7 @@
 
              <!-- Header -->
              <div>
-              <h2 class="form-section-header text-center">Address details</h2>
+              <h2 class="form-section-header text-center">Address Details</h2>
             </div>
             
               <!-- add1 -->
@@ -890,7 +890,7 @@
 
         <!-- Header -->
         <div>
-          <h2 class="form-section-header text-center">Contact information</h2>
+          <h2 class="form-section-header text-center">Contact Information</h2>
         </div>
         
             <!-- mobile -->
@@ -970,7 +970,7 @@
 
               <!-- Header -->
         <div>
-          <h2 class="form-section-header text-center">Vehical information</h2>
+          <h2 class="form-section-header text-center">Vehical Information</h2>
         </div>
 
         <!-- vehicleType-->
@@ -1012,8 +1012,7 @@
                       [(ngModel)]="Member.fourWheeler"
                       id="fourWheeler"
                       value="fourWheeler"
-                      name="fourWheeler"
-                      disabled="true"
+                      name="fourWheeler"                      
                     />
                   </label>
                 </div><br>
@@ -1042,7 +1041,7 @@
            <div class="form-group">           
             <div class="input-group input-group-alternative mb-3" style="margin-top: 20px;">
               <div class="input-group-prepend"></div>
-              <input [disabled]="isInputDisabled ? 'disabled' : true"
+              <input 
                 formControlName="twoWheelerDetail"
                 type="text"
                 class="form-control"
@@ -1065,6 +1064,7 @@
               [(ngModel)]="Member.fourWheelerDetail"              
               placeholder="Four Wheeler Details"
               maxlength="25" 
+              [disabled]="isInputDisabled"
                   />
             </div>
            
@@ -1170,7 +1170,7 @@
           </div>
           </div>
       </div>
-         <!-- hajeriNoDetails -->
+         <!-- Baithak Location -->
          <div class="col-md-4">
          <div class="form-group">
           <label for="hajeriNoDetails">{{ 'Baithak Location' | translate }}<span class="text-danger">*</span></label>
@@ -1207,7 +1207,6 @@
                 name="weeklyOffs"
                 [(ngModel)]="Member.weeklyOffs"
                 required
-                multiple
                 [ngClass]="{
                   'is-invalid': (submitted && MemberFormControl.weeklyOffs.errors?.required)
                 }"
@@ -1229,10 +1228,9 @@
            </div>
            </div>
 
-
-           <!-- Heade -->
+           <!-- Header -->
            <div>
-            <h2 class="form-section-header text-center">Additional information</h2>
+            <h2 class="form-section-header text-center">Additional Information</h2>
           </div>
 
            
