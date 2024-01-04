@@ -11,23 +11,30 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { Area } from "src/app/Classes/Area";
 import { User } from "src/app/Classes/User";
 import { AreaDataService } from "src/app/services/area-data.service";
 import { LocationDataService } from "src/app/services/location-data.service";
 import { UserDataService } from "src/app/services/user-data.service";
-
+interface City {
+  name: string,
+  code: string
+}
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-  
+  cities!: City[];
+
+  selectedCities!: City[];
 
   user: User = new User();
   registerform: FormGroup;
   submitted = false;
   id: number;
+  defaultAreas: Area[];
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +47,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getAreaByStatus("1");
     this.route.params.subscribe((params) => {
       this.id = +params["id"]; // the '+' sign is used to convert the parameter to a number
       console.log(this.id); // This will log the value "1" from your example URL
@@ -168,5 +176,13 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['user-list'])
   }
  
-  
+  getAreaByStatus(status:string){
+    this.areaDataService.getAreaByStatus(status).subscribe((areaList:Area[])=>{
+      this.defaultAreas = areaList
+      console.log(areaList)
+    },(error)=>{
+      console.error("fetching area details ", error)
+    })
+  }
+
 }
