@@ -62,6 +62,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ComponentsModule } from "./components/components.module";
+// import { ButtonModule } from "primeng/button";
 @NgModule
 ({
   imports: [
@@ -70,7 +71,7 @@ import { ComponentsModule } from "./components/components.module";
     MatPaginatorModule,
     NgxMaterialTimepickerModule,
     TranslateModule,
-    ButtonModule,
+    // ButtonModule,
     HttpClientModule,
     ComponentsModule,
     NgbModule,
