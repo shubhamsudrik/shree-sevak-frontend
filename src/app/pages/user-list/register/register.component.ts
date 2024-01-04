@@ -22,7 +22,7 @@ import { UserDataService } from "src/app/services/user-data.service";
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-
+  
 
   user: User = new User();
   registerform: FormGroup;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
-import { AgendaService, DayService, MonthAgendaService, MonthService, TimelineMonthService, TimelineViewsService, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
+// import { AgendaService, DayService, MonthAgendaService, MonthService, TimelineMonthService, TimelineViewsService, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
 import { Baithak } from 'src/app/Classes/baithak';
 import { Schedule } from 'src/app/Classes/schedule';
 import { ScheduleDataService } from 'src/app/services/schedule-data.service';
@@ -11,7 +11,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 
 @Component({
-  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService, TimelineViewsService, TimelineMonthService],
+  // providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService, TimelineViewsService, TimelineMonthService],
   selector: 'app-schedular',
   templateUrl: './schedular.component.html',
   styleUrls: ['./schedular.component.css']
