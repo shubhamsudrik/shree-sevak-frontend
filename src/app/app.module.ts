@@ -1,5 +1,9 @@
 import { NgFor } from "@angular/common";
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from "@angular/common/http";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -39,7 +43,10 @@ import { UpdateLocationComponent } from "./pages/location-list/update-location/u
 import { AddNewMemberComponent } from "./pages/member-list/add-new-member/add-new-member.component";
 import { MemberListComponent } from "./pages/member-list/member-list.component";
 import { UpdateMemberComponent } from "./pages/member-list/update-member/update-member.component";
-import { AddSchedularComponent, ChunkPipe } from "./pages/schedular/add-schedular/add-schedular.component";
+import {
+  AddSchedularComponent,
+  ChunkPipe,
+} from "./pages/schedular/add-schedular/add-schedular.component";
 import { DynamicformComponent } from "./pages/schedular/add-schedular/dynamicform/dynamicform.component";
 import { HelloComponent } from "./pages/schedular/add-schedular/hello.component";
 import { SchedularComponent } from "./pages/schedular/schedular.component";
@@ -49,23 +56,22 @@ import { UpdateScheduleComponent } from "./pages/schedular/update-schedule/updat
 import { UserListComponent } from "./pages/user-list/user-list.component";
 import { LocationDataService } from "./services/location-data.service";
 import { LoginService } from "./services/login.service";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatInputModule } from "@angular/material/input";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ComponentsModule } from "./components/components.module";
-
 @NgModule
 ({
   imports: [
+  
     Ng2SearchPipeModule,
     MatPaginatorModule,
     NgxMaterialTimepickerModule,
     TranslateModule,
-    
+    ButtonModule,
     HttpClientModule,
-
     ComponentsModule,
     NgbModule,
     RouterModule,
@@ -74,35 +80,31 @@ import { ComponentsModule } from "./components/components.module";
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule, 
-    MatSelectModule, 
-  
-   
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    MatFormFieldModule,
+    MatSelectModule,
+
+    NgxSpinnerModule.forRoot({ type: "ball-scale-multiple" }),
     NgFor,
-    ToastrModule.forRoot(
-      {
-        timeOut: 3500,
-        positionClass: 'toast-top-center',
-        preventDuplicates: true,
-      }
-    ),
+    ToastrModule.forRoot({
+      timeOut: 3500,
+      positionClass: "toast-top-center",
+      preventDuplicates: true,
+    }),
     MatInputModule,
 
     MatButtonModule,
     BrowserModule,
-        HttpClientModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        }),
-
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  
+
   declarations: [
     AppComponent,
     AdminLayoutComponent,
@@ -129,7 +131,7 @@ import { ComponentsModule } from "./components/components.module";
     ChangePasswordComponent,
     AreaListComponent,
     CreateAreaComponent,
-  
+
     FilterPipe,
     BaithakSearchPipe,
     MemberFilterPipe,
@@ -137,17 +139,20 @@ import { ComponentsModule } from "./components/components.module";
     AreaFilterPipe,
     UserListComponent,
     UserFilterPipe,
-   
 
     // ComponentComponent
   ],
- 
-  providers: [LocationDataService,LoginService,AuthGuard,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
-  bootstrap: [AppComponent]
+
+  providers: [
+    LocationDataService,
+    LoginService,
+    AuthGuard,
+    [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  ],
+  bootstrap: [AppComponent],
 })
+export class AppModule {}
 
-export class AppModule { }
-
-  export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http);
-  }
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

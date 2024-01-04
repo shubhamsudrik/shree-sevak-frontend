@@ -8,8 +8,10 @@ import { RegisterComponent } from '../../pages/user-list/register/register.compo
 import { LocationDataService } from 'src/app/services/location-data.service';
 import { ForgotPasswordComponent } from 'src/app/pages/forgot-password/forgot-password.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   imports: [
+    ButtonModule,
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
