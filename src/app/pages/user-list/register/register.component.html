@@ -1,220 +1,291 @@
 <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
   <div class="py-7 py-lg-8"></div>
   <!-- Page content -->
-  <div class="container mt--8 pb-5 ">
+  <div class="container mt--8 pb-5">
     <!-- Table -->
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
         <div class="custom-width">
-        <div class="card shadow border-0 w-500" style="margin-top: -78px;">
-          <div class="card-body px-lg-5 py-lg-5 text-color">
-                      
-          <form [formGroup]="registerform" (ngSubmit)="proceedregistration()">
-            <h2 class="text-center">Register New User</h2><br>
+          <div class="card shadow border-0 w-500" style="margin-top: -78px">
+            <div class="card-body px-lg-5 py-lg-5 text-color">
+              <form
+                [formGroup]="registerform"
+                (ngSubmit)="proceedregistration()"
+              >
+                <h2 class="text-center">Register New User</h2>
+                <br />
 
-            <!-- Name -->            
-              <div class="col-md-12">
-            <div class="form-group">
-              <label for="name">Full name<span class="text-danger">*</span></label>
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend"></div>
-                <input
-                  formControlName="name"
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  name="name"
-                  [ngClass]="{
-                    'is-invalid': submitted && registerFormControl.name.errors?.required
-                  }"
-                  maxlength="30"
-                />
-                <div class="invalid-feedback">
-                  This field is mandatory.
-                </div>
-              </div>
-              </div>
-              </div>
-
-               <!-- role -->            
-               <div class="col-md-12">
-                <div class="form-group">
-                  <label for="role">Role<span class="text-danger">*</span></label>
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend"></div>
-                    <select
-                      formControlName="role"
-                      type="text"
-                      class="form-control"
-                      id="role"
-                      name="role"
-                      [ngClass]="{
-                        'is-invalid': submitted && registerFormControl.role.errors?.required
-                      }"
-                      maxlength="30"
+                <!-- Name -->
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="name"
+                      >Full name<span class="text-danger">*</span></label
                     >
-                      <option value="Select role" disabled>Select role</option>
-                      <option value="USER">User</option>
-                      <option value="ADMIN">Admin</option>                  
-                  </select>
-                    <div class="invalid-feedback">
-                      This field is mandatory.
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="name"
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            registerFormControl.name.errors?.required
+                        }"
+                        maxlength="30"
+                      />
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
                     </div>
                   </div>
-                  </div>
-                  </div>
-               <!-- role -->   
-              <!-- Area -->
-               <div class="col-md-12">
-                <div class="form-group">
-                  <p-multiSelect [options]="defaultAreas" [(ngModel)]="selectedCities" placeholder="Select Area" optionLabel="areaName">Select Area</p-multiSelect>
                 </div>
-               </div>
-              
-               <div class="col-md-12">
-                <div class="form-group">
-                  <label for="role">Status<span class="text-danger">*</span></label>
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend"></div>
-                    <select
-                      formControlName="status"
-                      type="text"
-                      class="form-control"
-                      id="status"
-                      name="status"
-                      [ngClass]="{
-                        'is-invalid': submitted && registerFormControl.status.errors?.required
-                      }"
-                      maxlength="30"
+
+                <!-- role -->
+                <div class="row">
+                  <div class="col-md-6 ml-3">
+                    <div class="form-group">
+                      <label for="role"
+                        >Role<span class="text-danger">*</span></label
+                      >
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <select
+                          formControlName="role"
+                          type="text"
+                          class="form-control"
+                          id="role"
+                          name="role"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              registerFormControl.role.errors?.required
+                          }"
+                          maxlength="30"
+                        >
+                          <option value="Select role" disabled>
+                            Select role
+                          </option>
+                          <option value="USER">User</option>
+                          <option value="ADMIN">Admin</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          This field is mandatory.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- role -->
+                  <!-- Area -->
+                  <div class="col-md-5">
+                    <p-multiSelect
+                    class="card flex justify-content-center mt-4"
+                      id="selectArea"
+                      [options]="defaultAreas"
+                      formControlName="selectedAreas"
+                      placeholder="Select Area"
+                      optionLabel="areaName"
+                      (onChange)="onMultiSelectChange($event)"
                     >
-                      <option value="Select role" disabled>Select status</option>
-                      <option value="1">Active</option>
-                      <option value="0">Inactive</option>                  
-                  </select>
-                    <div class="invalid-feedback">
-                      This field is mandatory.
+                      Select Area
+                    </p-multiSelect>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="role"
+                      >Status<span class="text-danger">*</span></label
+                    >
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <select
+                        formControlName="status"
+                        type="text"
+                        class="form-control"
+                        id="status"
+                        name="status"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            registerFormControl.status.errors?.required
+                        }"
+                        maxlength="30"
+                      >
+                        <option value="Select role" disabled>
+                          Select status
+                        </option>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
                     </div>
                   </div>
-                  </div>
-                  </div>
+                </div>
 
-               <!-- Mobile Number -->            
-               <div class="col-md-12">
-                <div class="form-group">
-                  <label for="phoneNumber">Mobile Number<span class="text-danger">*</span></label>
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend"></div>
-                    <input
-                      formControlName="phoneNumber"
-                      type="text"
-                      class="form-control"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      [ngClass]="{
-                        'is-invalid': (submitted && (registerFormControl.phoneNumber.errors?.required || registerFormControl.phoneNumber.errors?.minlength))
-                      }"
-                      (input)="validatePhoneNumber($event)"
-                      maxlength="10"
-                    />
-                    <div class="invalid-feedback">
-                      <div *ngIf="registerFormControl.phoneNumber.errors?.required">This field is mandatory.</div>
-                      <div *ngIf="registerFormControl.phoneNumber.errors?.minlength">Mobile number should be 10 digits.</div>
+                <!-- Mobile Number -->
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="phoneNumber"
+                      >Mobile Number<span class="text-danger">*</span></label
+                    >
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="phoneNumber"
+                        type="text"
+                        class="form-control"
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            (registerFormControl.phoneNumber.errors?.required ||
+                              registerFormControl.phoneNumber.errors?.minlength)
+                        }"
+                        (input)="validatePhoneNumber($event)"
+                        maxlength="10"
+                      />
+                      <div class="invalid-feedback">
+                        <div
+                          *ngIf="
+                            registerFormControl.phoneNumber.errors?.required
+                          "
+                        >
+                          This field is mandatory.
+                        </div>
+                        <div
+                          *ngIf="
+                            registerFormControl.phoneNumber.errors?.minlength
+                          "
+                        >
+                          Mobile number should be 10 digits.
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  </div>
-                  </div>
+                </div>
 
-               
-
-                   <!-- emailId -->            
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="emailId">Email<span class="text-danger">*</span></label>
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend"></div>
-                    <input
-                      formControlName="emailId"
-                      type="text"
-                      class="form-control"
-                      id="emailId"
-                      name="emailId"
-                      [ngClass]="{
-                        'is-invalid': submitted && registerFormControl.emailId.errors?.required || registerFormControl.emailId.errors?.email
-                      }"
-                      maxlength="30"
-                    />
-                    <div class="invalid-feedback">
-                      {{ "This field is mandatory and should be Email." }}
+                <!-- emailId -->
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="emailId"
+                      >Email<span class="text-danger">*</span></label
+                    >
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="emailId"
+                        type="text"
+                        class="form-control"
+                        id="emailId"
+                        name="emailId"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            registerFormControl.emailId.errors?.required
+                        }"
+                        maxlength="30"
+                      />
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
                     </div>
                   </div>
-                  </div>
-                  </div>
+                </div>
 
-                   <!-- password -->            
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="password">Password<span class="text-danger">*</span></label>
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend"></div>
-                    <input
-                      formControlName="password"
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      name="password"
-                      [ngClass]="{
-                        'is-invalid': (submitted && (registerFormControl.password.errors?.required || registerFormControl.password.errors?.pattern))
-                      }"
-                    />
-                    <div class="invalid-feedback">
-                      This field is mandatory and Password should be capital,small letter & number.
+                <!-- password -->
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="password"
+                      >Password<span class="text-danger">*</span></label
+                    >
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="password"
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            (registerFormControl.password.errors?.required ||
+                              registerFormControl.password.errors?.pattern)
+                        }"
+                      />
+                      <div class="invalid-feedback">
+                        This field is mandatory and Password should be
+                        capital,small letter & number.
+                      </div>
                     </div>
                   </div>
-                  </div>
-                  </div>
+                </div>
 
-                   <!-- confirmPassword -->            
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="confirmPassword">Confirm Password<span class="text-danger">*</span></label>
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend"></div>
-                    <input
-                      formControlName="confirmPassword"
-                      type="text"
-                      class="form-control"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      [ngClass]="{
-                        'is-invalid': submitted && registerFormControl.confirmPassword.errors?.required
-                      }"
-                      maxlength="30"
-                    />
-                    <div class="invalid-feedback">
-                      This field is mandatory.
+                <!-- confirmPassword -->
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="confirmPassword"
+                      >Confirm Password<span class="text-danger">*</span></label
+                    >
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend"></div>
+                      <input
+                        formControlName="confirmPassword"
+                        type="text"
+                        class="form-control"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            registerFormControl.confirmPassword.errors?.required
+                        }"
+                        maxlength="30"
+                      />
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
                     </div>
                   </div>
-                  </div>
-                  </div>
+                </div>
 
-             <div class="text-center">
-              <button *ngIf="!id" type="submit" class="btn btn-success mt-4">Create account</button>
-              <button *ngIf="id" type="submit" class="btn btn-danger mt-4" >Update account</button>
-              <button  type="button" class="btn btn-primary mt-4" (click)="goBack()">Back</button>
-              
-            <div>
-            
-                <small>Already have an account? Sign out this session and </small>
-                <a href="/login">sign in </a>
-                <!-- <a class="nav-link nav-link-icon" routerLinkActive="active" class="text-blue" [routerLink]="['/dashboard']">dashboard</a> -->
-            
-            </div>             
+                <div class="text-center">
+                  <button
+                    *ngIf="!id"
+                    type="submit"
+                    class="btn btn-success mt-4"
+                  >
+                    Create account
+                  </button>
+                  <button *ngIf="id" type="submit" class="btn btn-danger mt-4">
+                    Update account
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary mt-4"
+                    (click)="goBack()"
+                  >
+                    Back
+                  </button>
+
+                  <div>
+                    <small
+                      >Already have an account? Sign out this session and
+                    </small>
+                    <a href="/login">sign in </a>
+                    <!-- <a class="nav-link nav-link-icon" routerLinkActive="active" class="text-blue" [routerLink]="['/dashboard']">dashboard</a> -->
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
-    </div>
   </div>
-</div>
 </div>

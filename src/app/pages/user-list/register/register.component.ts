@@ -7,8 +7,8 @@ export interface ApiResponse {
 
 
 
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit, SimpleChanges } from "@angular/core";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Area } from "src/app/Classes/Area";
@@ -17,19 +17,16 @@ import { User } from "src/app/Classes/User";
 import { AreaDataService } from "src/app/services/area-data.service";
 import { LocationDataService } from "src/app/services/location-data.service";
 import { UserDataService } from "src/app/services/user-data.service";
-interface City {
-  name: string,
-  code: string
-}
+
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-  cities!: City[];
 
-  selectedCities!: City[];
+
+  selectedAreas!: Area[];
 
   user: User = new User();
   registerform: FormGroup;
@@ -50,7 +47,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAreaByStatus("1");
+    
     this.route.params.subscribe((params) => {
       this.id = +params["id"]; // the '+' sign is used to convert the parameter to a number
       console.log(this.id); // This will log the value "1" from your example URL
@@ -68,12 +65,15 @@ export class RegisterComponent implements OnInit {
         ],
       ],
       role: ["", Validators.required],
+     selectedAreas:[null],
       confirmPassword: ["", Validators.required],
-      status: ["",],
+      status: [""],
     });
 
     if(this.id){
-      this.populateForm()
+      this.selectedAreas=[];
+      this.getAreaByStatus("1");
+    
     }
   
   }
@@ -138,9 +138,10 @@ export class RegisterComponent implements OnInit {
 
    }else{
     if (this.registerform.valid) {
+      console.log(this.registerform.value)
       this.userdataService.updateUserById(this.registerform.value,this.id).subscribe((data)=>{
         console.log("updated user data",data);
-
+        this.selectedAreas=[];
         this.router.navigate(['/user-list']);
       })
 
@@ -163,8 +164,12 @@ export class RegisterComponent implements OnInit {
       // const temp=data
       // const role=temp.roles[0].roleName
       this.user=data;
-     
+      console.log(data)
+      const selectedAreas =this.user?.selectedAreas || [];
+      this.selectedAreas=selectedAreas
+      console.log(selectedAreas)
       this.registerform.patchValue({
+        selectedAreas: selectedAreas,
         userId: this.user?.userId,
         name: this.user.name,
         emailId: this.user?.emailId,
@@ -173,7 +178,7 @@ export class RegisterComponent implements OnInit {
         status: this.user?.status,
       });
     })
-  
+    
   }
   goBack(){
     this.router.navigate(['user-list'])
@@ -182,10 +187,19 @@ export class RegisterComponent implements OnInit {
   getAreaByStatus(status:string){
     this.areaDataService.getAreaByStatus(status).subscribe((areaList:Area[])=>{
       this.defaultAreas = areaList
+      setTimeout(() => {
+        this.populateForm();
+      }, 1000);
+    
       console.log(areaList)
     },(error)=>{
       console.error("fetching area details ", error)
     })
+  }
+    onMultiSelectChange(event: any) {
+    // 'event' parameter contains the selected values
+    this.selectedAreas = event.value;
+    console.log('Selected Cities:', this.selectedAreas);
   }
 
 }
