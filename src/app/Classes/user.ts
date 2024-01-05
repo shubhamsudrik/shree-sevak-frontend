@@ -1,3 +1,5 @@
+import { Area } from "./Area";
+
 export class User {
   userId?:number ;
   password: string;
@@ -5,6 +7,7 @@ export class User {
   emailId: string;
   phoneNumber: string;
   role?: string; 
+  selectedAreas?:Area[]
   status?: string;
  
 }
