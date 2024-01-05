@@ -59,7 +59,7 @@ export class Member {
  status:string;
  twoWheelerDetail:string;
  fourWheelerDetail:string;
- weeklyOffs:string;
+ weeklyOffs:string[]=[];
  members:string;
  locations:string;
 }

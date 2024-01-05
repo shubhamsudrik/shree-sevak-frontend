@@ -63,10 +63,11 @@ import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ComponentsModule } from "./components/components.module";
 // import { ButtonModule } from "primeng/button";
+import { MultiSelectModule } from 'primeng/multiselect';
 @NgModule
 ({
   imports: [
-  
+    MultiSelectModule,
     Ng2SearchPipeModule,
     MatPaginatorModule,
     NgxMaterialTimepickerModule,
@@ -132,7 +133,7 @@ import { ComponentsModule } from "./components/components.module";
     ChangePasswordComponent,
     AreaListComponent,
     CreateAreaComponent,
-
+    
     FilterPipe,
     BaithakSearchPipe,
     MemberFilterPipe,

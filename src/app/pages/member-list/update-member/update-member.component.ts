@@ -22,6 +22,10 @@ export class UpdateMemberComponent implements OnInit {
    id: number;
    arealist: any;
    isInputDisabled=true; 
+   weeklyOffs!: any[];
+    //multi checkboxes
+
+    WeekOff:any[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
    
     constructor(
       private MemberListService: MemberListService,
@@ -31,7 +35,7 @@ export class UpdateMemberComponent implements OnInit {
       private toast:ToastrService,
       private areaDataService:AreaDataService
     ) { 
-      console.log(this.isInputDisabled)
+      console.log(this.weeklyOffs)
      }
   
     ngOnInit(): void {
@@ -127,7 +131,7 @@ export class UpdateMemberComponent implements OnInit {
         // type: [this.Member?.type, Validators.required],         
         hajeriNo: [this.Member?.hajeriNo, Validators.required],
         hajeriNoDetails: [this.Member?.hajeriNoDetails, Validators.required], // hajerinodetails change into Baithak Location it contain baithak location toward
-        weeklyOffs: [this.Member?.weeklyOffs, Validators.required],
+        weeklyOffs: [this.Member?.weeklyOffs ||[], Validators.required],
         additionalInfo: [this.Member?.additionalInfo],
       });
 
@@ -139,6 +143,7 @@ export class UpdateMemberComponent implements OnInit {
       });
 
     }
+
 
     // // vehicacheckbox
     handleCheckboxForVehical(){

@@ -1198,35 +1198,27 @@
           <div class="col-md-4">
           <div class="form-group">
             <label>{{ 'Weekly Offs' | translate }}<span class="text-danger">*</span></label><br>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <select
-                formControlName="weeklyOffs"
-                class="form-control"
+            <!-- <div class="input-group input-group-alternative mb-3"> -->
+              <!-- <div class="input-group-prepend"></div> -->
+              <p-multiSelect [options]="WeekOff" placeholder="Weekly Off" 
+              formControlName="weeklyOffs"                
                 id="weeklyOffs"
+                style="width: 280px;"
                 name="weeklyOffs"
                 [(ngModel)]="Member.weeklyOffs"
                 required
                 [ngClass]="{
                   'is-invalid': (submitted && MemberFormControl.weeklyOffs.errors?.required)
                 }"
-              >
-                <option value="" disabled>Select Status</option>
-                <option value="Sunday">{{'Sunday'|translate}}</option>
-                <option value="Monday">{{'Monday'|translate}}</option>
-                <option value="Tuesday">{{'Tuesday'|translate}}</option>
-                <option value="Wednesday">{{'Wednesday'|translate}}</option>
-                <option value="Thursday">{{'Thursday'|translate}}</option>
-                <option value="Friday">{{'Friday'|translate}}</option>
-                <option value="Saturday">{{'Saturday'|translate}}</option>
-              </select>
+               
+              ></p-multiSelect>              
               <div class="invalid-feedback">
                 {{ 'This field is mandatory.' | translate }}
               </div>
             </div>
-           </div>
-           </div>
-           </div>
+           </div>         
+        </div>
+          
 
            <!-- Header -->
            <div>
