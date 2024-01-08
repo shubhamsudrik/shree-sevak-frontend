@@ -82,11 +82,11 @@
                   <div class="col-md-5">
                     <p-multiSelect
                     class="card flex justify-content-center mt-4"
-                      id="selectArea"
                       [options]="defaultAreas"
-                      formControlName="selectedAreas"
+
+                      formControlName="selectedAreas" 
                       placeholder="Select Area"
-                      optionLabel="areaName"
+                      optionLabel="value"
                       (onChange)="onMultiSelectChange($event)"
                     >
                       Select Area
