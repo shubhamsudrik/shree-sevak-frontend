@@ -4,7 +4,10 @@ export interface ApiResponse {
 }
 
 
-
+export interface Area1{
+  id: number;
+  value: string;
+}
 
 
 import { Component, OnInit, SimpleChanges } from "@angular/core";
@@ -26,13 +29,13 @@ import { UserDataService } from "src/app/services/user-data.service";
 export class RegisterComponent implements OnInit {
 
 
-  selectedAreas!: Area[];
+  selectedArea!: Area[];
 
   user: User = new User();
   registerform: FormGroup;
   submitted = false;
   id: number;
-  defaultAreas: Area[];
+  defaultAreas: { id: number; value: string }[];
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +50,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.getAreaByStatus("1");
     this.route.params.subscribe((params) => {
       this.id = +params["id"]; // the '+' sign is used to convert the parameter to a number
       console.log(this.id); // This will log the value "1" from your example URL
@@ -65,14 +68,14 @@ export class RegisterComponent implements OnInit {
         ],
       ],
       role: ["", Validators.required],
-     selectedAreas:[null],
+     selectedAreas:[""],
       confirmPassword: ["", Validators.required],
       status: [""],
     });
 
     if(this.id){
-      this.selectedAreas=[];
-      this.getAreaByStatus("1");
+      this.selectedArea=[];
+     this.populateForm()
     
     }
   
@@ -141,7 +144,7 @@ export class RegisterComponent implements OnInit {
       console.log(this.registerform.value)
       this.userdataService.updateUserById(this.registerform.value,this.id).subscribe((data)=>{
         console.log("updated user data",data);
-        this.selectedAreas=[];
+
         this.router.navigate(['/user-list']);
       })
 
@@ -158,27 +161,35 @@ export class RegisterComponent implements OnInit {
     const truncatedValue = numericValue.slice(0, 10); // Truncate input to 10 characters
     input.value = truncatedValue;
   }
-
-  populateForm() {
-    this.userdataService.getUserById(this.id).subscribe((data:any) => {
-      // const temp=data
-      // const role=temp.roles[0].roleName
-      this.user=data;
-      console.log(data)
-      const selectedAreas =this.user?.selectedAreas || [];
-      this.selectedAreas=selectedAreas
-      console.log(selectedAreas)
+ populateForm() {
+   this.userdataService.getUserById(this.id).subscribe((data:any) => {
+     
+     // const temp=data
+     // const role=temp.roles[0].roleName
+     this.user=data;
+     // console.log(data)
+     const modifiedData:any[]=[];
+     this.selectedArea=this.user?.selectedAreas || [];
+     this.selectedArea.map((selected)=>{
+       modifiedData.push({ 
+         id:selected.areaId,
+         value:selected.areaName
+        })
+      })
+      console.log(modifiedData)
       this.registerform.patchValue({
-        selectedAreas: selectedAreas,
+        // selectedAreas: new FormControl<any[]>(modifiedData),
+        selectedAreas:modifiedData,
         userId: this.user?.userId,
-        name: this.user.name,
+        name: this.user?.name,
         emailId: this.user?.emailId,
         phoneNumber: this.user?.phoneNumber,
         role: data.roles[0]?.roleName,
         status: this.user?.status,
       });
+      // this.getAreaByStatus("1");
     })
-    
+  
   }
   goBack(){
     this.router.navigate(['user-list'])
@@ -186,20 +197,26 @@ export class RegisterComponent implements OnInit {
  
   getAreaByStatus(status:string){
     this.areaDataService.getAreaByStatus(status).subscribe((areaList:Area[])=>{
-      this.defaultAreas = areaList
-      setTimeout(() => {
-        this.populateForm();
-      }, 1000);
-    
+      const modifydefaultAreas:Area1[] = [];
+      areaList.map((area:Area)=>{
+        
+        
+        modifydefaultAreas.push({
+          id: area.areaId,
+          value:area.areaName
+        })
+      })
       console.log(areaList)
+   this.defaultAreas=modifydefaultAreas
+   console.log(this.defaultAreas)
     },(error)=>{
       console.error("fetching area details ", error)
     })
   }
     onMultiSelectChange(event: any) {
     // 'event' parameter contains the selected values
-    this.selectedAreas = event.value;
-    console.log('Selected Cities:', this.selectedAreas);
+    this.selectedArea = event.value;
+    console.log('Selected Cities:', this.selectedArea);
   }
 
 }
