@@ -47,11 +47,17 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getAreaByStatus("1");
+    // this.getAreaByStatus("1");
     this.route.params.subscribe((params) => {
       this.id = +params["id"]; // the '+' sign is used to convert the parameter to a number
       console.log(this.id); // This will log the value "1" from your example URL
     });
+
+    if(!this.id){
+      this.getAllUnselectedAres();
+    }else{
+      this.getAllUnselectedAresExceptCurrentUserAreas(this.id);
+    }
     this.registerform = this.fb.group({
       name: ["", Validators.required],
       phoneNumber: ["", [Validators.required, Validators.minLength(10)]],
@@ -76,6 +82,36 @@ export class RegisterComponent implements OnInit {
     
     }
   
+  }
+  getAllUnselectedAresExceptCurrentUserAreas(id:number) {
+    this.areaDataService.getAllUnselectedAreasExceptSingleUser(id).subscribe(data => {
+      const modifydefaultAreas:Area1[] = [];
+      data.map((area:Area)=>{
+          
+          
+          modifydefaultAreas.push({
+            id: area.areaId,
+            value:area.areaName
+          })
+        })
+        console.log(data)
+     this.defaultAreas=modifydefaultAreas
+     })
+  }
+  getAllUnselectedAres() {
+   this.areaDataService.getAllUnselectedAreas().subscribe(data => {
+    const modifydefaultAreas:Area1[] = [];
+    data.map((area:Area)=>{
+        
+        
+        modifydefaultAreas.push({
+          id: area.areaId,
+          value:area.areaName
+        })
+      })
+      console.log(data)
+   this.defaultAreas=modifydefaultAreas
+   })
   }
 
  
@@ -143,6 +179,11 @@ export class RegisterComponent implements OnInit {
         console.log("updated user data",data);
 
         this.router.navigate(['/user-list']);
+      },(error) => {
+        console.log("Error:", error);
+        if(error.status === 409){
+          this.toast.error("Area all ready selected choose another");
+        }
       })
 
     }else{
