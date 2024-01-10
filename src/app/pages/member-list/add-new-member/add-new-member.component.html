@@ -1,1663 +1,1705 @@
 <div class="container-fluid mt--7 pb-8 pt-5 pt-md-8">
-  <div class="py-7 py-lg-8"></div>
-  <!-- Page content -->
-  <div class="container mt--8 pb-5">
-    <!-- Table -->
-    <div class="row justify-content-center">
-      <div class="col-lg-6 col-md-8">
-        <div class="custom-width">
-          <div class="card shadow border-0 w-500">
-            <div class="card-body px-lg-10 py-lg-5">
-              <form
-                role="form"
-                [formGroup]="memberform"
-                (ngSubmit)="onSubmit()"
-                class="needs-validation"
-              >
-                <h2 class="text-center">
-                  {{ "Add member records" | translate }}
-                </h2>
-                <br />
-
-                <!-- Head -->
-                <div>
-                  <h2 class="form-section-header text-center">
-                    Personal details
+    <div class="py-7 py-lg-8"></div>
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <!-- Table -->
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <div class="custom-width">
+            <div class="card shadow border-0 w-500">
+              <div class="card-body px-lg-10 py-lg-5">
+                <form
+                  role="form"
+                  [formGroup]="memberform"
+                  (ngSubmit)="onSubmit()"
+                  class="needs-validation"
+                >
+                  <h2 class="text-center">
+                    {{ "Add Member Records" | translate }}
                   </h2>
-                </div>
-
-                <!-- initial -->
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="initial"
-                        >{{ "Initial" | translate
-                        }}<span class="text-danger">*</span></label
-                      ><br />
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="initial"
-                          class="form-control"
-                          type="text"
-                          id="initial"
-                          name="initial"
-                          [(ngModel)]="Member.initial"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.initial.errors?.required
-                          }"
+                  <br />
+  
+                  <!-- Head -->
+                  <div>
+                    <h2 class="form-section-header text-center">
+                      Personal Details
+                    </h2>
+                  </div>
+  
+                  <!-- initial -->
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="initial"
+                          >{{ "Initial" | translate
+                          }}<span class="text-danger">*</span></label
+                        ><br />
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="initial"
+                            class="form-control"
+                            type="text"
+                            id="initial"
+                            name="initial"
+                            [(ngModel)]="Member.initial"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.initial.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>Select Initial</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Miss.">Miss.</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- firstName -->
+  
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="firstName"
+                          >{{ "First Name" | translate
+                          }}<span class="text-danger">*</span></label
                         >
-                          <option value="" disabled>Select initial</option>
-                          <option value="Mr.">Mr.</option>
-                          <option value="Mrs.">Mrs.</option>
-                          <option value="Miss.">Miss.</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="firstName"
+                            type="text"
+                            class="form-control"
+                            id="firstName"
+                            name="firstName"
+                            [(ngModel)]="Member.firstName"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.firstName.errors?.required
+                            }"
+                            maxlength="14"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  <!-- firstName -->
-
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="firstName"
-                        >{{ "First Name" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="firstName"
-                          type="text"
-                          class="form-control"
-                          id="firstName"
-                          name="firstName"
-                          [(ngModel)]="Member.firstName"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.firstName.errors?.required
-                          }"
-                          maxlength="14"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- middle name -->
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="middleName"
-                        >{{ "Middle Name" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="middleName"
-                          type="text"
-                          class="form-control"
-                          id="middleName"
-                          name="middleName"
-                          [(ngModel)]="Member.middleName"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.middleName.errors?.required
-                          }"
-                          maxlength="14"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Last Name -->
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="lastName"
-                        >{{ "Last Name" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="lastName"
-                          type="text"
-                          class="form-control"
-                          id="lastName"
-                          name="lastName"
-                          [(ngModel)]="Member.lastName"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.lastName.errors?.required
-                          }"
-                          maxlength="14"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- education -->
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="education"
-                        >{{ "Education" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="education"
-                          type="text"
-                          class="form-control"
-                          id="education"
-                          name="education"
-                          [(ngModel)]="Member.education"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.education.errors?.required
-                          }"
-                          maxlength="20"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- occupation -->
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="occupation"
-                        >{{ "Occupation" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="occupation"
-                          type="text"
-                          class="form-control"
-                          id="occupation"
-                          name="occupation"
-                          [(ngModel)]="Member.occupation"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.occupation.errors?.required
-                          }"
-                          maxlength="14"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- dob -->
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="dob"
-                        >{{ "Birth Date" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="dob"
-                          type="date"
-                          class="form-control"
-                          id="dob"
-                          name="dob"
-                          [(ngModel)]="Member.dob"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.dob.errors?.required
-                          }"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- gender -->
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="gender"
-                        >{{ "Gender" | translate
-                        }}<span class="text-danger">*</span></label
-                      ><br />
-                      <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="gender"
-                          class="form-control"
-                          id="gender"
-                          name="gender"
-                          [(ngModel)]="Member.gender"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.gender.errors?.required
-                          }"
+                    <!-- middle name -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="middleName"
+                          >{{ "Middle Name" | translate
+                          }}<span class="text-danger">*</span></label
                         >
-                          <option value="" disabled>Select gender</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Other">Other</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="middleName"
+                            type="text"
+                            class="form-control"
+                            id="middleName"
+                            name="middleName"
+                            [(ngModel)]="Member.middleName"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.middleName.errors?.required
+                            }"
+                            maxlength="14"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- Last Name -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="lastName"
+                          >{{ "Last Name" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="lastName"
+                            type="text"
+                            class="form-control"
+                            id="lastName"
+                            name="lastName"
+                            [(ngModel)]="Member.lastName"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.lastName.errors?.required
+                            }"
+                            maxlength="14"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <!-- role-->
-                <div class="row d-flex flex-row">
-                  <!-- <div class="col" style="width: 20%;">
+  
+                  <!-- education -->
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="education"
+                          >{{ "Education" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="education"
+                            type="text"
+                            class="form-control"
+                            id="education"
+                            name="education"
+                            [(ngModel)]="Member.education"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.education.errors?.required
+                            }"
+                            maxlength="20"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- occupation -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="occupation"
+                          >{{ "Occupation" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="occupation"
+                            type="text"
+                            class="form-control"
+                            id="occupation"
+                            name="occupation"
+                            [(ngModel)]="Member.occupation"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.occupation.errors?.required
+                            }"
+                            maxlength="14"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- dob -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="dob"
+                          >{{ "Birth Date" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="dob"
+                            type="date"
+                            class="form-control"
+                            id="dob"
+                            name="dob"
+                            [(ngModel)]="Member.dob"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.dob.errors?.required
+                            }"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- gender -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="gender"
+                          >{{ "Gender" | translate
+                          }}<span class="text-danger">*</span></label
+                        ><br />
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="gender"
+                            class="form-control"
+                            id="gender"
+                            name="gender"
+                            [(ngModel)]="Member.gender"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.gender.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- role-->
+                  <div class="row d-flex flex-row">
+                    <!-- <div class="col" style="width: 20%;">
+                <div class="form-group">
+                  <label for="role">{{ 'Role' | translate }}</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend"></div>
+                    <select
+                        formControlName="role"
+                        type="text"
+                        class="form-control"
+                       id="role"
+                      name="role"
+                      [(ngModel)]="Member.role"
+                      [ngClass]="{
+                       'is-invalid': (submitted && MemberFormControl.role.errors?.required)
+                      }"
+                      maxlength="14" 
+                        >
+                    <option value="" disabled>Select Role</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Super Admin">Super Admin</option>
+                    
+                  </select>
+                        <div class="invalid-feedback">
+                          {{ 'role is required.' | translate }}
+                        </div>
+                  </div>
+                 </div>
+                 </div> -->
+  
+                    <!-- aadhar number-->
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="addharNumber"
+                          >{{ "Addhar Number" | translate
+                          }}</label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="addharNumber"
+                            type="text"
+                            class="form-control"
+                            id="addharNumber"
+                            name="addharNumber"
+                            [(ngModel)]="Member.addharNumber"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                (MemberFormControl.addharNumber.errors
+                                  ?.required ||
+                                  MemberFormControl.addharNumber.errors
+                                    ?.minlength)
+                            }"
+                            (input)="validateAddharNumber($event)"
+                            minlength="12"
+                          />
+                          <div class="invalid-feedback">
+                            <div
+                              *ngIf="
+                                MemberFormControl.addharNumber.errors?.required
+                              "
+                            >
+                              {{ "This field is mandatory." | translate }}
+                            </div>
+                            <div
+                              *ngIf="
+                                MemberFormControl.addharNumber.errors?.minlength
+                              "
+                            >
+                              {{
+                                "Aaddhar number should be 12 digits." | translate
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- panNo -->
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="panNo"
+                          >{{ "Pan Number" | translate
+                          }}</label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="panNo"
+                            type="text"
+                            class="form-control"
+                            id="panNo"
+                            name="panNo"
+                            [(ngModel)]="Member.panNo"
+                            
+                            (input)="validatePanNumber($event)"
+                            minlength="10"
+                          />
+                          <div class="invalid-feedback">
+                            <div *ngIf="MemberFormControl.panNo.errors?.required">
+                              {{ "This field is mandatory." | translate }}
+                            </div>
+                            <div
+                              *ngIf="MemberFormControl.panNo.errors?.minlength"
+                            >
+                              {{ "Pan number should be 10 digits" | translate }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- photoBase64  -->
+                    <!-- <div class="col">
+                      <div class="form-group">
+                        <label for="photoBase64">{{
+                          "Photo Base64" | translate
+                        }}</label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="photoBase64"
+                            type="text"
+                            class="form-control"
+                            id="photoBase64"
+                            name="photoBase64"
+                            [(ngModel)]="Member.photoBase64"
+                            maxlength="20"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+  
+                    <!-- Area -->
+                    <!-- Area -->
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="area"
+                          >{{ "Area" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="area"
+                            type="text"
+                            class="form-control"
+                            id="area"
+                            name="area"
+                            [(ngModel)]="Member.area"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.area.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>Select Area</option>
+                            <option
+                              *ngFor="let area of arealist"
+                              [value]="area.areaName"
+                            >
+                              {{ area.areaName }}
+                            </option>
+                          </select>
+  
+                          <div class="invalid-feedback">
+                            This field is mandatory.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- Header -->
+                  <div class="row">
+                    <div class="col-6">
+                      <h2 class="form-section-header text-center">
+                        Languages known
+                      </h2>
+                      <span>
+                        Atleast one language should be mandatory<span
+                          class="text-danger"
+                          >*</span
+                        ></span
+                      ><br /><br />
+  
+                      <!-- Marathi lanng-->
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label style="margin-left: 20px">Marathi</label>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                formControlName="marathiRead"
+                                id="marathiRead"
+                                name="marathiRead[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.marathiRead"
+                                value="marathiRead"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="marathiRead"
+                                >Read</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="marathiWrite"
+                                formControlName="marathiWrite"
+                                name="marathiWrite[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.marathiWrite"
+                                value="marathiWrite"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="marathiWrite"
+                                >Write</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="marathiSpeak"
+                                formControlName="marathiSpeak"
+                                name="marathiSpeak[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.marathiSpeak"
+                                value="marathiSpeak"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="marathiSpeak"
+                                >Speak</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <!-- Hindi lang -->
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label style="margin-left: 20px">Hindi</label>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="hindiRead"
+                                formControlName="hindiRead"
+                                name="hindiRead[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.hindiRead"
+                                value="hindiRead"
+                              />
+                              <label class="custom-control-label" for="hindiRead"
+                                >Read</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="hindihWrite"
+                                formControlName="hindiWrite"
+                                name="hindihWrite[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.hindiWrite"
+                                value="hindihWrite"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="hindihWrite"
+                                >Write</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="hindiSpeak"
+                                formControlName="hindiSpeak"
+                                name="hindiSpeak[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.hindiSpeak"
+                                value="hindiSpeak"
+                              />
+                              <label class="custom-control-label" for="hindiSpeak"
+                                >Speak</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <!-- English lang -->
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <label style="margin-left: 20px">English</label>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="englishRead"
+                                formControlName="englishRead"
+                                name="englishRead[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.englishRead"
+                                value="englishRead"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="englishRead"
+                                >Read</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="englishWrite"
+                                formControlName="englishWrite"
+                                name="englishWrite[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.englishWrite"
+                                value="englishWrite"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="englishWrite"
+                                >Write</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="englishSpeak"
+                                formControlName="englishSpeak"
+                                name="englishSpeak[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.englishSpeak"
+                                value="englishSpeak"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="englishSpeak"
+                                >Speak</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col-6">
+                      <h2 class="form-section-header text-center">
+                        Schedule Role
+                      </h2>
+                      <span>
+                        Atleast one baithak should be mandatory<span
+                          class="text-danger"
+                          >*</span
+                        ></span
+                      ><br /><br />
+  
+                      <!-- Eligible for child-->
+                      <div class="row">
+                        <div style="margin-left: 14px" class="col-md-3">
+                          <div class="form-group">
+                            <!-- <label style="margin-left: 30px;">Child </label>            -->
+                            <div class="col-md-1 custom-margin">
+                              <div class="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  id="eligibleForChild"
+                                  formControlName="eligibleForChild"
+                                  name="eligibleForChild[]"
+                                  class="custom-control-input"
+                                  [(ngModel)]="Member.eligibleForChild"
+                                  value="eligibleForChild"
+                                />
+                                <label
+                                  class="custom-control-label"
+                                  for="eligibleForChild"
+                                  >Child</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+  
+                        <!-- Eligible for none-->
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <!-- <label style="margin-left: 30px;">Child </label>            -->
+                            <div class="col-md-1 custom-margin">
+                              <div class="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  id="eligibleForNone"
+                                  formControlName="eligibleForNone"
+                                  name="eligibleForNone[]"
+                                  class="custom-control-input"
+                                  [(ngModel)]="Member.eligibleForNone"
+                                  value="eligibleForNone"
+                                />
+                                <label
+                                  class="custom-control-label"
+                                  for="eligibleForNone"
+                                  >None</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <!-- Eligible for Gents -->
+                      <div style="margin-left: 30px" class="form-group">
+                        <div class="row">
+                          <!-- <label style="margin-left: 30px;">Gents </label>                       -->
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="eligibleForGents"
+                                formControlName="eligibleForGents"
+                                name="eligibleForGents[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.eligibleForGents"
+                                value="eligibleForGents"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="eligibleForGents"
+                                >Gents</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <!--Eligible for ladied -->
+                      <div style="margin-left: 30px" class="form-group">
+                        <div class="row">
+                          <!-- <label style="margin-left: 30px;">Ladies</label>           -->
+                          <div class="col-md-1 custom-margin">
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                id="eligibleForLadies"
+                                formControlName="eligibleForLadies"
+                                name="eligibleForLadies[]"
+                                class="custom-control-input"
+                                [(ngModel)]="Member.eligibleForLadies"
+                                value="eligibleForLadies"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="eligibleForLadies"
+                                >Ladies</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- Header -->
+                  <div>
+                    <h2 class="form-section-header text-center">
+                      Address Details
+                    </h2>
+                  </div>
+  
+                  <!-- add1 -->
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="add1"
+                          >{{ "Address-1" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="add1"
+                            type="text"
+                            class="form-control"
+                            id="add1"
+                            name="add1"
+                            [(ngModel)]="Member.add1"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.add1.errors?.required
+                            }"
+                            maxlength="20"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- add2 -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="add2"
+                          >{{ "Address-2" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="add2"
+                            type="text"
+                            class="form-control"
+                            id="add2"
+                            name="add2"
+                            [(ngModel)]="Member.add2"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.add2.errors?.required
+                            }"
+                            maxlength="20"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- add3 -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="add3">{{ "Address-3" | translate }}</label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="add3"
+                            type="text"
+                            class="form-control"
+                            id="add3"
+                            name="add3"
+                            [(ngModel)]="Member.add3"
+                            maxlength="20"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- add4 -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="add1">{{ "Address-4" | translate }}</label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="add4"
+                            type="text"
+                            class="form-control"
+                            id="add4"
+                            name="add4"
+                            [(ngModel)]="Member.add4"
+                            maxlength="20"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- city -->
+                  <div class="row">
+                    <div class="col" style="width: 20%">
+                      <div class="form-group">
+                        <label
+                          >{{ "City" | translate
+                          }}<span class="text-danger">*</span></label
+                        ><br />
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="city"
+                            class="form-control"
+                            id="city"
+                            name="city"
+                            [(ngModel)]="Member.city"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.city.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>Select City</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="kolhapur">Kolhapur</option>
+                            <option value="Nagpur">Nagpur</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- division -->
+                    <div class="col" style="width: 20%">
+                      <div class="form-group">
+                        <label
+                          >{{ "Division" | translate
+                          }}<span class="text-danger">*</span></label
+                        ><br />
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="division"
+                            class="form-control"
+                            id="division"
+                            name="division"
+                            [(ngModel)]="Member.division"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.division.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>Select Division</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- state -->
+                    <div class="col" style="width: 20%">
+                      <div class="form-group">
+                        <label
+                          >{{ "State" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="state"
+                            class="form-control"
+                            id="state"
+                            name="state"
+                            [(ngModel)]="Member.state"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.state.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>
+                              {{ "Select state" | translate }}
+                            </option>
+                            <option value="Andhra Pradesh">
+                              {{ "Andhra Pradesh" | translate }}
+                            </option>
+                            <option value="Arunachal Pradesh">
+                              {{ "Arunachal Pradesh" | translate }}
+                            </option>
+                            <option value="Assam">
+                              {{ "Assam" | translate }}
+                            </option>
+                            <option value="Bihar">
+                              {{ "Bihar" | translate }}
+                            </option>
+                            <option value="Chhattisgarh">
+                              {{ "Chhattisgarh" | translate }}
+                            </option>
+                            <option value="Goa">{{ "Goa" | translate }}</option>
+                            <option value="Gujarat">
+                              {{ "Gujarat" | translate }}
+                            </option>
+                            <option value="Haryana">
+                              {{ "Haryana" | translate }}
+                            </option>
+                            <option value="Himachal Pradesh">
+                              {{ "Himachal Pradesh" | translate }}
+                            </option>
+                            <option value="Jharkhand">
+                              {{ "Jharkhand" | translate }}
+                            </option>
+                            <option value="Karnataka">
+                              {{ "Karnataka" | translate }}
+                            </option>
+                            <option value="Kerala">
+                              {{ "Kerala" | translate }}
+                            </option>
+                            <option value="Madhya Pradesh">
+                              {{ "Madhya Pradesh" | translate }}
+                            </option>
+                            <option value="Maharashtra">
+                              {{ "Maharashtra" | translate }}
+                            </option>
+                            <option value="Manipur">
+                              {{ "Manipur" | translate }}
+                            </option>
+                            <option value="Meghalaya">
+                              {{ "Meghalaya" | translate }}
+                            </option>
+                            <option value="Mizoram">
+                              {{ "Mizoram" | translate }}
+                            </option>
+                            <option value="Nagaland">
+                              {{ "Nagaland" | translate }}
+                            </option>
+                            <option value="Odisha">
+                              {{ "Odisha" | translate }}
+                            </option>
+                            <option value="Punjab">
+                              {{ "Punjab" | translate }}
+                            </option>
+                            <option value="Rajasthan">
+                              {{ "Rajasthan" | translate }}
+                            </option>
+                            <option value="Sikkim">
+                              {{ "Sikkim" | translate }}
+                            </option>
+                            <option value="Tamil Nadu">
+                              {{ "Tamil Nadu" | translate }}
+                            </option>
+                            <option value="Telangana">
+                              {{ "Telangana" | translate }}
+                            </option>
+                            <option value="Tripura">
+                              {{ "Tripura" | translate }}
+                            </option>
+                            <option value="Uttar Pradesh">
+                              {{ "Uttar Pradesh" | translate }}
+                            </option>
+                            <option value="Uttarakhand">
+                              {{ "Uttarakhand" | translate }}
+                            </option>
+                            <option value="West Bengal">
+                              {{ "West Bengal" | translate }}
+                            </option>
+                          </select>
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- country -->
+                    <div class="col" style="width: 20%">
+                      <div class="form-group">
+                        <label
+                          >{{ "Country" | translate
+                          }}<span class="text-danger">*</span></label
+                        ><br />
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="country"
+                            class="form-control"
+                            id="country"
+                            name="country"
+                            [(ngModel)]="Member.country"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.country.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>Select Country</option>
+                            <option value="IN">IN</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- pincode -->
+                    <div class="col" style="width: 20%">
+                      <div class="form-group">
+                        <label for="Pincode"
+                          >{{ "Pincode" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="pincode"
+                            type="text"
+                            class="form-control"
+                            id="pincode"
+                            name="pincode"
+                            [(ngModel)]="Member.pincode"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                (MemberFormControl.pincode.errors?.required ||
+                                  MemberFormControl.pincode.errors?.minlength)
+                            }"
+                            (input)="validatePincode($event)"
+                            minlength="6"
+                          />
+                          <div class="invalid-feedback">
+                            <div
+                              *ngIf="MemberFormControl.pincode.errors?.required"
+                            >
+                              {{ "This field is mandatory." | translate }}
+                            </div>
+                            <div
+                              *ngIf="MemberFormControl.pincode.errors?.minlength"
+                            >
+                              {{ "Pincode should be 6 digits." | translate }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- latitude -->
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="latitude">{{ "Latitude" | translate }}</label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="latitude"
+                            type="text"
+                            class="form-control"
+                            id="latitude"
+                            name="latitude"
+                            [(ngModel)]="Member.latitude"
+                            maxlength="20"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- longitude -->
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="longitude">{{
+                          "Longitude" | translate
+                        }}</label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="longitude"
+                            type="text"
+                            class="form-control"
+                            id="longitude"
+                            name="longitude"
+                            [(ngModel)]="Member.longitude"
+                            maxlength="20"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- googleMapLink -->
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="googleMapLink">{{
+                          "Google Map Link" | translate
+                        }}</label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="googleMapLink"
+                            type="text"
+                            class="form-control"
+                            id="googleMapLink"
+                            name="googleMapLink"
+                            [(ngModel)]="Member.googleMapLink"
+                            maxlength="25"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- Header -->
+                  <div>
+                    <h2 class="form-section-header text-center">
+                      Contact Information
+                    </h2>
+                  </div>
+  
+                  <!-- mobile -->
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="mobile"
+                          >{{ "Mobile Number" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="mobile"
+                            type="text"
+                            class="form-control"
+                            id="mobile"
+                            name="mobile"
+                            [(ngModel)]="Member.mobile"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                (MemberFormControl.mobile.errors?.required ||
+                                  MemberFormControl.mobile.errors?.minlength)
+                            }"
+                            (input)="validatePhoneNumber($event)"
+                            minlength="10"
+                          />
+                          <div class="invalid-feedback">
+                            <div
+                              *ngIf="MemberFormControl.mobile.errors?.required"
+                            >
+                              {{ "This field is mandatory." | translate }}
+                            </div>
+                            <div
+                              *ngIf="MemberFormControl.mobile.errors?.minlength"
+                            >
+                              {{
+                                "Mobile number should be 10 digits." | translate
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- phoneNumber -->
+  
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="phone">{{
+                          "Phone Number" | translate
+                        }}</label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="phone"
+                            type="text"
+                            class="form-control"
+                            id="phone"
+                            name="phone"
+                            [(ngModel)]="Member.phone"
+                            (input)="validatePhoneNumber1($event)"
+                            minlength="12"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- Email -->
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="email"
+                          >{{ "Email" | translate
+                          }}<span class="text-danger">*</span></label
+                        >
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="email"
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            [(ngModel)]="Member.email"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.email.errors?.required || MemberFormControl.email.errors?.email
+                            }"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory and should be Email." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                    <!-- Header -->
+        <div>
+            <h2 class="form-section-header text-center">Vehical Information</h2>
+          </div>
+  
+          <!-- vehicleType-->
+          <label for="vehicleType" style="margin-left: 20px;">{{ 'Vehicle Type' | translate }}</label>
+          <label for="vehicleType" style="margin-left: 380px;">{{ 'Vehicle Details' | translate }}</label>
+          <div class="row">
+            
+            <div class="col-md-3" style="margin-top: 20px;">    
+             
               <div class="form-group">
-                <label for="role">{{ 'Role' | translate }}</label>
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend"></div>
-                  <select
-                      formControlName="role"
-                      type="text"
-                      class="form-control"
-                     id="role"
-                    name="role"
-                    [(ngModel)]="Member.role"
-                    [ngClass]="{
-                     'is-invalid': (submitted && MemberFormControl.role.errors?.required)
-                    }"
-                    maxlength="14" 
-                      >
-                  <option value="" disabled>Select Role</option>
-                  <option value="User">User</option>
-                  <option value="Admin">Admin</option>
-                  <option value="Super Admin">Super Admin</option>
-                  
-                </select>
-                      <div class="invalid-feedback">
-                        {{ 'role is required.' | translate }}
-                      </div>
+                  <div class="form-check">
+                    <label
+                      class="form-check-label"
+                      for="twoWheeler"
+                    >
+                    2-Wheeler
+                      <input
+                        class="form-check-input custom-checkbox"
+                        formControlName="twoWheeler"
+                        type="checkbox"
+                        [(ngModel)]="Member.twoWheeler"
+                        id="twoWheeler"
+                        value="twoWheeler"
+                        name="twoWheeler"
+                      />
+                    </label>
+                  </div><br>
+  
+                  <div class="form-check">
+                    <label
+                      class="form-check-label"
+                      for="fourWheeler"
+                    >
+                    4-Wheeler
+                      <input
+                        class="form-check-input custom-checkbox"
+                        formControlName="fourWheeler"
+                        type="checkbox"
+                        [(ngModel)]="Member.fourWheeler"
+                        id="fourWheeler"
+                        value="fourWheeler"
+                        name="fourWheeler"
+                      />
+                    </label>
+                  </div><br>
+  
+                  <div class="form-check">
+                    <label
+                      class="form-check-label"
+                      for="noVehical"
+                    >
+                    No Vehical
+                      <input
+                        class="form-check-input custom-checkbox"
+                        formControlName="noVehical"
+                        type="checkbox"
+                        [(ngModel)]="Member.noVehical"
+                        id="noVehical"
+                        value="noVehical"
+                        name="noVehical"
+                      />
+                    </label>
+                  </div><br>
                 </div>
-               </div>
-               </div> -->
-
-                  <!-- aadhar number-->
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="addharNumber"
-                        >{{ "Addhar Number" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="addharNumber"
-                          type="text"
-                          class="form-control"
-                          id="addharNumber"
-                          name="addharNumber"
-                          [(ngModel)]="Member.addharNumber"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              (MemberFormControl.addharNumber.errors
-                                ?.required ||
-                                MemberFormControl.addharNumber.errors
-                                  ?.minlength)
-                          }"
-                          (input)="validateAddharNumber($event)"
-                          minlength="12"
-                        />
-                        <div class="invalid-feedback">
-                          <div
-                            *ngIf="
-                              MemberFormControl.addharNumber.errors?.required
-                            "
-                          >
-                            {{ "This field is mandatory." | translate }}
-                          </div>
-                          <div
-                            *ngIf="
-                              MemberFormControl.addharNumber.errors?.minlength
-                            "
-                          >
-                            {{
-                              "Aaddhar number should be 12 digits." | translate
-                            }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- panNo -->
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="panNo"
-                        >{{ "Pan Number" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="panNo"
-                          type="text"
-                          class="form-control"
-                          id="panNo"
-                          name="panNo"
-                          [(ngModel)]="Member.panNo"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              (MemberFormControl.panNo.errors?.required ||
-                                MemberFormControl.panNo.errors?.minlength)
-                          }"
-                          (input)="validatePanNumber($event)"
-                          minlength="10"
-                        />
-                        <div class="invalid-feedback">
-                          <div *ngIf="MemberFormControl.panNo.errors?.required">
-                            {{ "This field is mandatory." | translate }}
-                          </div>
-                          <div
-                            *ngIf="MemberFormControl.panNo.errors?.minlength"
-                          >
-                            {{ "Pan number should be 10 digits" | translate }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- photoBase64  -->
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="photoBase64">{{
-                        "Photo Base64" | translate
-                      }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="photoBase64"
-                          type="text"
-                          class="form-control"
-                          id="photoBase64"
-                          name="photoBase64"
-                          [(ngModel)]="Member.photoBase64"
-                          maxlength="20"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Area -->
-                  <!-- Area -->
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="area"
-                        >{{ "Area" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="area"
-                          type="text"
-                          class="form-control"
-                          id="area"
-                          name="area"
-                          [(ngModel)]="Member.area"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.area.errors?.required
-                          }"
-                        >
-                          <option value="" disabled>Select Area</option>
-                          <option
-                            *ngFor="let area of arealist"
-                            [value]="area.areaName"
-                          >
-                            {{ area.areaName }}
-                          </option>
-                        </select>
-
-                        <div class="invalid-feedback">
-                          This field is mandatory.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Header -->
-                <div class="row">
-                  <div class="col-6">
-                    <h2 class="form-section-header text-center">
-                      Languages known
-                    </h2>
-                    <span>
-                      Atleast one language should be mandatory<span
-                        class="text-danger"
-                        >*</span
-                      ></span
-                    ><br /><br />
-
-                    <!-- Marathi lanng-->
-                    <div class="form-group">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <label style="margin-left: 20px">Marathi</label>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              formControlName="marathiRead"
-                              id="marathiRead"
-                              name="marathiRead[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.marathiRead"
-                              value="marathiRead"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="marathiRead"
-                              >Read</label
-                            >
-                          </div>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="marathiWrite"
-                              formControlName="marathiWrite"
-                              name="marathiWrite[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.marathiWrite"
-                              value="marathiWrite"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="marathiWrite"
-                              >Write</label
-                            >
-                          </div>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="marathiSpeak"
-                              formControlName="marathiSpeak"
-                              name="marathiSpeak[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.marathiSpeak"
-                              value="marathiSpeak"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="marathiSpeak"
-                              >Speak</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Hindi lang -->
-                    <div class="form-group">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <label style="margin-left: 20px">Hindi</label>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="hindiRead"
-                              formControlName="hindiRead"
-                              name="hindiRead[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.hindiRead"
-                              value="hindiRead"
-                            />
-                            <label class="custom-control-label" for="hindiRead"
-                              >Read</label
-                            >
-                          </div>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="hindihWrite"
-                              formControlName="hindiWrite"
-                              name="hindihWrite[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.hindiWrite"
-                              value="hindihWrite"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="hindihWrite"
-                              >Write</label
-                            >
-                          </div>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="hindiSpeak"
-                              formControlName="hindiSpeak"
-                              name="hindiSpeak[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.hindiSpeak"
-                              value="hindiSpeak"
-                            />
-                            <label class="custom-control-label" for="hindiSpeak"
-                              >Speak</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- English lang -->
-                    <div class="form-group">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <label style="margin-left: 20px">English</label>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="englishRead"
-                              formControlName="englishRead"
-                              name="englishRead[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.englishRead"
-                              value="englishRead"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="englishRead"
-                              >Read</label
-                            >
-                          </div>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="englishWrite"
-                              formControlName="englishWrite"
-                              name="englishWrite[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.englishWrite"
-                              value="englishWrite"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="englishWrite"
-                              >Write</label
-                            >
-                          </div>
-                        </div>
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="englishSpeak"
-                              formControlName="englishSpeak"
-                              name="englishSpeak[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.englishSpeak"
-                              value="englishSpeak"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="englishSpeak"
-                              >Speak</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-6">
-                    <h2 class="form-section-header text-center">
-                      Schedule Role
-                    </h2>
-                    <span>
-                      Atleast one baithak should be mandatory<span
-                        class="text-danger"
-                        >*</span
-                      ></span
-                    ><br /><br />
-
-                    <!-- Eligible for child-->
-                    <div class="row">
-                      <div style="margin-left: 14px" class="col-md-3">
-                        <div class="form-group">
-                          <!-- <label style="margin-left: 30px;">Child </label>            -->
-                          <div class="col-md-1 custom-margin">
-                            <div class="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                id="eligibleForChild"
-                                formControlName="eligibleForChild"
-                                name="eligibleForChild[]"
-                                class="custom-control-input"
-                                [(ngModel)]="Member.eligibleForChild"
-                                value="eligibleForChild"
-                              />
-                              <label
-                                class="custom-control-label"
-                                for="eligibleForChild"
-                                >Child</label
-                              >
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Eligible for none-->
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <!-- <label style="margin-left: 30px;">Child </label>            -->
-                          <div class="col-md-1 custom-margin">
-                            <div class="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                id="eligibleForNone"
-                                formControlName="eligibleForNone"
-                                name="eligibleForNone[]"
-                                class="custom-control-input"
-                                [(ngModel)]="Member.eligibleForNone"
-                                value="eligibleForNone"
-                              />
-                              <label
-                                class="custom-control-label"
-                                for="eligibleForNone"
-                                >None</label
-                              >
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Eligible for Gents -->
-                    <div style="margin-left: 30px" class="form-group">
-                      <div class="row">
-                        <!-- <label style="margin-left: 30px;">Gents </label>                       -->
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="eligibleForGents"
-                              formControlName="eligibleForGents"
-                              name="eligibleForGents[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.eligibleForGents"
-                              value="eligibleForGents"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="eligibleForGents"
-                              >Gents</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!--Eligible for ladied -->
-                    <div style="margin-left: 30px" class="form-group">
-                      <div class="row">
-                        <!-- <label style="margin-left: 30px;">Ladies</label>           -->
-                        <div class="col-md-1 custom-margin">
-                          <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              id="eligibleForLadies"
-                              formControlName="eligibleForLadies"
-                              name="eligibleForLadies[]"
-                              class="custom-control-input"
-                              [(ngModel)]="Member.eligibleForLadies"
-                              value="eligibleForLadies"
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="eligibleForLadies"
-                              >Ladies</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Header -->
-                <div>
-                  <h2 class="form-section-header text-center">
-                    Address details
-                  </h2>
-                </div>
-
-                <!-- add1 -->
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="add1"
-                        >{{ "Address-1" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="add1"
-                          type="text"
-                          class="form-control"
-                          id="add1"
-                          name="add1"
-                          [(ngModel)]="Member.add1"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.add1.errors?.required
-                          }"
-                          maxlength="20"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- add2 -->
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="add2"
-                        >{{ "Address-2" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="add2"
-                          type="text"
-                          class="form-control"
-                          id="add2"
-                          name="add2"
-                          [(ngModel)]="Member.add2"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.add2.errors?.required
-                          }"
-                          maxlength="20"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- add3 -->
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="add3">{{ "Address-3" | translate }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="add3"
-                          type="text"
-                          class="form-control"
-                          id="add3"
-                          name="add3"
-                          [(ngModel)]="Member.add3"
-                          maxlength="20"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- add4 -->
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="add1">{{ "Address-4" | translate }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="add4"
-                          type="text"
-                          class="form-control"
-                          id="add4"
-                          name="add4"
-                          [(ngModel)]="Member.add4"
-                          maxlength="20"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- city -->
-                <div class="row">
-                  <div class="col" style="width: 20%">
-                    <div class="form-group">
-                      <label
-                        >{{ "City" | translate
-                        }}<span class="text-danger">*</span></label
-                      ><br />
-                      <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="city"
-                          class="form-control"
-                          id="city"
-                          name="city"
-                          [(ngModel)]="Member.city"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.city.errors?.required
-                          }"
-                        >
-                          <option value="" disabled>Select City</option>
-                          <option value="Pune">Pune</option>
-                          <option value="Mumbai">Mumbai</option>
-                          <option value="kolhapur">Kolhapur</option>
-                          <option value="Nagpur">Nagpur</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- division -->
-                  <div class="col" style="width: 20%">
-                    <div class="form-group">
-                      <label
-                        >{{ "Division" | translate
-                        }}<span class="text-danger">*</span></label
-                      ><br />
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="division"
-                          class="form-control"
-                          id="division"
-                          name="division"
-                          [(ngModel)]="Member.division"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.division.errors?.required
-                          }"
-                        >
-                          <option value="" disabled>Select Division</option>
-                          <option value="A">A</option>
-                          <option value="B">B</option>
-                          <option value="C">C</option>
-                          <option value="D">D</option>
-                          <option value="E">E</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- state -->
-                  <div class="col" style="width: 20%">
-                    <div class="form-group">
-                      <label
-                        >{{ "State" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="state"
-                          class="form-control"
-                          id="state"
-                          name="state"
-                          [(ngModel)]="Member.state"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.state.errors?.required
-                          }"
-                        >
-                          <option value="" disabled>
-                            {{ "Select state" | translate }}
-                          </option>
-                          <option value="Andhra Pradesh">
-                            {{ "Andhra Pradesh" | translate }}
-                          </option>
-                          <option value="Arunachal Pradesh">
-                            {{ "Arunachal Pradesh" | translate }}
-                          </option>
-                          <option value="Assam">
-                            {{ "Assam" | translate }}
-                          </option>
-                          <option value="Bihar">
-                            {{ "Bihar" | translate }}
-                          </option>
-                          <option value="Chhattisgarh">
-                            {{ "Chhattisgarh" | translate }}
-                          </option>
-                          <option value="Goa">{{ "Goa" | translate }}</option>
-                          <option value="Gujarat">
-                            {{ "Gujarat" | translate }}
-                          </option>
-                          <option value="Haryana">
-                            {{ "Haryana" | translate }}
-                          </option>
-                          <option value="Himachal Pradesh">
-                            {{ "Himachal Pradesh" | translate }}
-                          </option>
-                          <option value="Jharkhand">
-                            {{ "Jharkhand" | translate }}
-                          </option>
-                          <option value="Karnataka">
-                            {{ "Karnataka" | translate }}
-                          </option>
-                          <option value="Kerala">
-                            {{ "Kerala" | translate }}
-                          </option>
-                          <option value="Madhya Pradesh">
-                            {{ "Madhya Pradesh" | translate }}
-                          </option>
-                          <option value="Maharashtra">
-                            {{ "Maharashtra" | translate }}
-                          </option>
-                          <option value="Manipur">
-                            {{ "Manipur" | translate }}
-                          </option>
-                          <option value="Meghalaya">
-                            {{ "Meghalaya" | translate }}
-                          </option>
-                          <option value="Mizoram">
-                            {{ "Mizoram" | translate }}
-                          </option>
-                          <option value="Nagaland">
-                            {{ "Nagaland" | translate }}
-                          </option>
-                          <option value="Odisha">
-                            {{ "Odisha" | translate }}
-                          </option>
-                          <option value="Punjab">
-                            {{ "Punjab" | translate }}
-                          </option>
-                          <option value="Rajasthan">
-                            {{ "Rajasthan" | translate }}
-                          </option>
-                          <option value="Sikkim">
-                            {{ "Sikkim" | translate }}
-                          </option>
-                          <option value="Tamil Nadu">
-                            {{ "Tamil Nadu" | translate }}
-                          </option>
-                          <option value="Telangana">
-                            {{ "Telangana" | translate }}
-                          </option>
-                          <option value="Tripura">
-                            {{ "Tripura" | translate }}
-                          </option>
-                          <option value="Uttar Pradesh">
-                            {{ "Uttar Pradesh" | translate }}
-                          </option>
-                          <option value="Uttarakhand">
-                            {{ "Uttarakhand" | translate }}
-                          </option>
-                          <option value="West Bengal">
-                            {{ "West Bengal" | translate }}
-                          </option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- country -->
-                  <div class="col" style="width: 20%">
-                    <div class="form-group">
-                      <label
-                        >{{ "Country" | translate
-                        }}<span class="text-danger">*</span></label
-                      ><br />
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="country"
-                          class="form-control"
-                          id="country"
-                          name="country"
-                          [(ngModel)]="Member.country"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.country.errors?.required
-                          }"
-                        >
-                          <option value="" disabled>Select Country</option>
-                          <option value="IN">IN</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- pincode -->
-                  <div class="col" style="width: 20%">
-                    <div class="form-group">
-                      <label for="Pincode"
-                        >{{ "Pincode" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="pincode"
-                          type="text"
-                          class="form-control"
-                          id="pincode"
-                          name="pincode"
-                          [(ngModel)]="Member.pincode"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              (MemberFormControl.pincode.errors?.required ||
-                                MemberFormControl.pincode.errors?.minlength)
-                          }"
-                          (input)="validatePincode($event)"
-                          minlength="6"
-                        />
-                        <div class="invalid-feedback">
-                          <div
-                            *ngIf="MemberFormControl.pincode.errors?.required"
-                          >
-                            {{ "This field is mandatory." | translate }}
-                          </div>
-                          <div
-                            *ngIf="MemberFormControl.pincode.errors?.minlength"
-                          >
-                            {{ "Pincode should be 6 digits." | translate }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- latitude -->
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="latitude">{{ "Latitude" | translate }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="latitude"
-                          type="text"
-                          class="form-control"
-                          id="latitude"
-                          name="latitude"
-                          [(ngModel)]="Member.latitude"
-                          maxlength="20"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- longitude -->
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="longitude">{{
-                        "Longitude" | translate
-                      }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="longitude"
-                          type="text"
-                          class="form-control"
-                          id="longitude"
-                          name="longitude"
-                          [(ngModel)]="Member.longitude"
-                          maxlength="20"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- googleMapLink -->
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="googleMapLink">{{
-                        "Google Map Link" | translate
-                      }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="googleMapLink"
-                          type="text"
-                          class="form-control"
-                          id="googleMapLink"
-                          name="googleMapLink"
-                          [(ngModel)]="Member.googleMapLink"
-                          maxlength="25"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Header -->
-                <div>
-                  <h2 class="form-section-header text-center">
-                    Contact information
-                  </h2>
-                </div>
-
-                <!-- mobile -->
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="mobile"
-                        >{{ "Mobile Number" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="mobile"
-                          type="text"
-                          class="form-control"
-                          id="mobile"
-                          name="mobile"
-                          [(ngModel)]="Member.mobile"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              (MemberFormControl.mobile.errors?.required ||
-                                MemberFormControl.mobile.errors?.minlength)
-                          }"
-                          (input)="validatePhoneNumber($event)"
-                          minlength="10"
-                        />
-                        <div class="invalid-feedback">
-                          <div
-                            *ngIf="MemberFormControl.mobile.errors?.required"
-                          >
-                            {{ "This field is mandatory." | translate }}
-                          </div>
-                          <div
-                            *ngIf="MemberFormControl.mobile.errors?.minlength"
-                          >
-                            {{
-                              "Mobile number should be 10 digits." | translate
-                            }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- phoneNumber -->
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="phone">{{
-                        "Phone Number" | translate
-                      }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="phone"
-                          type="text"
-                          class="form-control"
-                          id="phone"
-                          name="phone"
-                          [(ngModel)]="Member.phone"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Email -->
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="email"
-                        >{{ "Email" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="email"
-                          type="email"
-                          class="form-control"
-                          id="email"
-                          name="email"
-                          [(ngModel)]="Member.email"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.email.errors?.required
-                          }"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Header -->
-                <div>
-                  <h2 class="form-section-header text-center">
-                    Vehical information
-                  </h2>
-                </div>
-
-                <!-- vehiclesType-->
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="vehicleType">{{
-                        "Vehicle Type" | translate
-                      }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="vehicleType"
-                          type="text"
-                          class="form-control"
-                          id="vehicleType"
-                          name="vehicleType"
-                          [(ngModel)]="Member.vehicleType"
-                        >
-                          <option value="" disabled>Select Vehicle</option>
-                          <option value="2-Wheeler">2-Wheeler</option>
-                          <option value="4-Wheeler">4-Wheeler</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- vehicleDetails -->
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="vehicleDetails">{{
-                        "Vehicle Details" | translate
-                      }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="vehicleDetails"
-                          type="text"
-                          class="form-control"
-                          id="vehicleDetails"
-                          name="vehicleDetails"
-                          [(ngModel)]="Member.vehicleDetails"
-                          maxlength="14"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Header -->
-                <div>
-                  <h2 class="form-section-header text-center">
-                    Baithak details
-                  </h2>
-                </div>
-
-                <!-- ownBaithakDay -->
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label
-                        >{{ "Baithak Day" | translate
-                        }}<span class="text-danger">*</span></label
-                      ><br />
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="ownBaithakDay"
-                          class="form-control"
-                          id="ownBaithakDay"
-                          name="ownBaithakDay"
-                          [(ngModel)]="Member.ownBaithakDay"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.ownBaithakDay.errors?.required
-                          }"
-                        >
-                          <option value="" disabled>Select Day</option>
-                          <option value="Sunday">
-                            {{ "Sunday" | translate }}
-                          </option>
-                          <option value="Monday">
-                            {{ "Monday" | translate }}
-                          </option>
-                          <option value="Tuesdat">
-                            {{ "Tuesday" | translate }}
-                          </option>
-                          <option value="Wednesday">
-                            {{ "Wednesday" | translate }}
-                          </option>
-                          <option value="Thursday">
-                            {{ "Thursday" | translate }}
-                          </option>
-                          <option value="Friday">
-                            {{ "Friday" | translate }}
-                          </option>
-                          <option value="Saturday">
-                            {{ "Saturday" | translate }}
-                          </option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- ownBaithakId -->
-                <!-- <div class="col-md-6">
-         <div class="form-group">
-          <label for="ownBaithakId">{{ 'Baithak Id' | translate }}</label>
-          <div class="input-group input-group-alternative mb-3">
-            <div class="input-group-prepend"></div>
-            <input
-                formControlName="ownBaithakId"
+              </div>
+             <!-- vehicleDetails -->
+              <div class="col-md-8">
+             <div class="form-group">           
+              <div class="input-group input-group-alternative mb-3" style="margin-top: 20px;">
+                <div class="input-group-prepend"></div>
+                <input 
+                  formControlName="twoWheelerDetail"
+                  type="text"
+                  class="form-control"
+                  id="twoWheelerDetail"
+                  name="twoWheelerDetail"
+                  [(ngModel)]="Member.twoWheelerDetail"
+                  placeholder="Two Wheeler Details"
+                  maxlength="25" 
+                    />
+              </div>
+              <span></span>
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend"></div>
+                <input 
+                formControlName="fourWheelerDetail"
                 type="text"
                 class="form-control"
-               id="ownBaithakId"
-              name="ownBaithakId"
-              [(ngModel)]="Member.ownBaithakId"
-              [ngClass]="{
-               'is-invalid': (submitted && MemberFormControl.ownBaithakId.errors?.required)
-              }"
-              (input)="validateHajeriNumber($event)"
-              maxlength="10" 
-                />
-                <div class="invalid-feedback">
-                  {{ 'ownBaithakId is required.' | translate }}
-                </div>
-          </div>
-          </div>
-         </div> -->
-
-                <!-- type -->
-                <!-- <div class="row">
-       <div class="col-md-3">
-        <div class="form-group">
-         <label for="type">{{ 'Type' | translate }}</label>
-         <div class="input-group input-group-alternative mb-3">
-             <div class="input-group-prepend"></div>
-             <select
-                 formControlName="type"
-                 type="text"
-                 class="form-control"
-                 id="type"
-                 name="type"
-                 [(ngModel)]="Member.type"
-                 [ngClass]="{
-                     'is-invalid': (submitted && (MemberFormControl.type.errors?.required))
-                 }"
-             >
-             <option value="" disabled>Select Type</option>
-             <option value="1">{{'Reader'|translate}}</option>
-             <option value="2">{{'Attendence'|translate}}</option>
-             <option value="3">{{'Both'|translate}}</option>
-           </select>
-             <div class="invalid-feedback">
-               {{ 'Type is required.' | translate }}
+                id="fourWheelerDetail"
+                name="fourWheelerDetail"
+                [(ngModel)]="Member.fourWheelerDetail"              
+                placeholder="Four Wheeler Details"
+                maxlength="25" 
+                    />
+              </div>
+             
              </div>
-         </div>
-         </div>
-     </div> -->
-                <!-- hajeriNo -->
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="hajeriNo"
-                        >{{ "Hajeri Number" | translate
-                        }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="hajeriNo"
-                          type="text"
-                          class="form-control"
-                          id="hajeriNo"
-                          name="hajeriNo"
-                          [(ngModel)]="Member.hajeriNo"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.hajeriNo.errors?.required
-                          }"
-                          (input)="validateHajeriNumber($event)"
-                          maxlength="6"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
+              </div>
+            </div>
+                  <!-- Header -->
+                  <div>
+                    <h2 class="form-section-header text-center">
+                      Baithak Details
+                    </h2>
+                  </div>
+  
+                  <!-- ownBaithakDay -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label
+                          >{{ "Baithak Day" | translate
+                          }}<span class="text-danger">*</span></label
+                        ><br />
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="ownBaithakDay"
+                            class="form-control"
+                            id="ownBaithakDay"
+                            name="ownBaithakDay"
+                            [(ngModel)]="Member.ownBaithakDay"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.ownBaithakDay.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>Select Day</option>
+                            <option value="Sunday">
+                              {{ "Sunday" | translate }}
+                            </option>
+                            <option value="Monday">
+                              {{ "Monday" | translate }}
+                            </option>
+                            <option value="Tuesdat">
+                              {{ "Tuesday" | translate }}
+                            </option>
+                            <option value="Wednesday">
+                              {{ "Wednesday" | translate }}
+                            </option>
+                            <option value="Thursday">
+                              {{ "Thursday" | translate }}
+                            </option>
+                            <option value="Friday">
+                              {{ "Friday" | translate }}
+                            </option>
+                            <option value="Saturday">
+                              {{ "Saturday" | translate }}
+                            </option>
+                          </select>
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  <!-- hajeriNoDetails -->
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="hajeriNoDetails">{{
-                        "Hajeri Number Details" | translate
-                      }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="hajeriNoDetails"
-                          type="text"
-                          class="form-control"
-                          id="hajeriNoDetails"
-                          name="hajeriNoDetails"
-                          [(ngModel)]="Member.hajeriNoDetails"
-                          maxlength="25"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
-                      </div>
-                    </div>
+  
+                  <!-- ownBaithakId -->
+                  <!-- <div class="col-md-6">
+           <div class="form-group">
+            <label for="ownBaithakId">{{ 'Baithak Id' | translate }}</label>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <input
+                  formControlName="ownBaithakId"
+                  type="text"
+                  class="form-control"
+                 id="ownBaithakId"
+                name="ownBaithakId"
+                [(ngModel)]="Member.ownBaithakId"
+                [ngClass]="{
+                 'is-invalid': (submitted && MemberFormControl.ownBaithakId.errors?.required)
+                }"
+                (input)="validateHajeriNumber($event)"
+                maxlength="10" 
+                  />
+                  <div class="invalid-feedback">
+                    {{ 'ownBaithakId is required.' | translate }}
                   </div>
-                  <!-- weeklyOffs -->
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label
-                        >{{ "Weekly Offs" | translate
-                        }}<span class="text-danger">*</span></label
-                      ><br />
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <select
-                          formControlName="weeklyOffs"
-                          class="form-control"
-                          id="weeklyOffs"
-                          name="weeklyOffs"
-                          [(ngModel)]="Member.weeklyOffs"
-                          required
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.weeklyOffs.errors?.required
-                          }"
+            </div>
+            </div>
+           </div> -->
+  
+                  <!-- type -->
+                  <!-- <div class="row">
+         <div class="col-md-3">
+          <div class="form-group">
+           <label for="type">{{ 'Type' | translate }}</label>
+           <div class="input-group input-group-alternative mb-3">
+               <div class="input-group-prepend"></div>
+               <select
+                   formControlName="type"
+                   type="text"
+                   class="form-control"
+                   id="type"
+                   name="type"
+                   [(ngModel)]="Member.type"
+                   [ngClass]="{
+                       'is-invalid': (submitted && (MemberFormControl.type.errors?.required))
+                   }"
+               >
+               <option value="" disabled>Select Type</option>
+               <option value="1">{{'Reader'|translate}}</option>
+               <option value="2">{{'Attendence'|translate}}</option>
+               <option value="3">{{'Both'|translate}}</option>
+             </select>
+               <div class="invalid-feedback">
+                 {{ 'Type is required.' | translate }}
+               </div>
+           </div>
+           </div>
+       </div> -->
+                  <!-- hajeriNo -->
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="hajeriNo"
+                          >{{ "Hajeri Number" | translate
+                          }}<span class="text-danger">*</span></label
                         >
-                          <option value="" disabled>Select Status</option>
-                          <option value="Sunday">
-                            {{ "Sunday" | translate }}
-                          </option>
-                          <option value="Monday">
-                            {{ "Monday" | translate }}
-                          </option>
-                          <option value="Tuesdat">
-                            {{ "Tuesdat" | translate }}
-                          </option>
-                          <option value="Wednesday">
-                            {{ "Wednesday" | translate }}
-                          </option>
-                          <option value="Thursday">
-                            {{ "Thursday" | translate }}
-                          </option>
-                          <option value="Friday">
-                            {{ "Friday" | translate }}
-                          </option>
-                          <option value="Saturday">
-                            {{ "Saturday" | translate }}
-                          </option>
-                        </select>
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="hajeriNo"
+                            type="text"
+                            class="form-control"
+                            id="hajeriNo"
+                            name="hajeriNo"
+                            [(ngModel)]="Member.hajeriNo"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.hajeriNo.errors?.required
+                            }"
+                            (input)="validateHajeriNumber($event)"
+                            maxlength="6"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- hajeriNoDetails -->
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="hajeriNoDetails">{{
+                          "Baithak Location" | translate
+                        }}<span class="text-danger">*</span></label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="hajeriNoDetails"
+                            type="text"
+                            class="form-control"
+                            id="hajeriNoDetails"
+                            name="hajeriNoDetails"
+                            [(ngModel)]="Member.hajeriNoDetails"
+                            [ngClass]="{
+                                'is-invalid': (submitted && (MemberFormControl.hajeriNoDetails.errors?.required))
+                            }"
+                            maxlength="25"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- weeklyOffs -->
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label
+                          >{{ "Weekly Offs" | translate
+                          }}<span class="text-danger">*</span></label
+                        ><br />
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <select
+                            formControlName="weeklyOffs"
+                            class="form-control"
+                            id="weeklyOffs"
+                            name="weeklyOffs"
+                            [(ngModel)]="Member.weeklyOffs"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                MemberFormControl.weeklyOffs.errors?.required
+                            }"
+                          >
+                            <option value="" disabled>Select Status</option>
+                            <option value="Sunday">
+                              {{ "Sunday" | translate }}
+                            </option>
+                            <option value="Monday">
+                              {{ "Monday" | translate }}
+                            </option>
+                            <option value="Tuesday">
+                              {{ "Tuesday" | translate }}
+                            </option>
+                            <option value="Wednesday">
+                              {{ "Wednesday" | translate }}
+                            </option>
+                            <option value="Thursday">
+                              {{ "Thursday" | translate }}
+                            </option>
+                            <option value="Friday">
+                              {{ "Friday" | translate }}
+                            </option>
+                            <option value="Saturday">
+                              {{ "Saturday" | translate }}
+                            </option>
+                          </select>
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <!-- Heade -->
-                <div>
-                  <h2 class="form-section-header text-center">
-                    Additional information
-                  </h2>
-                </div>
-
-                <!-- additional info -->
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="additionalInfo">{{
-                        "Additional Info" | translate
-                      }}</label>
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="additionalInfo"
-                          type="text"
-                          class="form-control"
-                          id="additionalInfo"
-                          name="additionalInfo"
-                          [(ngModel)]="Member.additionalInfo"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
+  
+                  <!-- Heade -->
+                  <div>
+                    <h2 class="form-section-header text-center">
+                      Additional Information
+                    </h2>
+                  </div>
+  
+                  <!-- additional info -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="additionalInfo">{{
+                          "Additional Info" | translate
+                        }}</label>
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend"></div>
+                          <input
+                            formControlName="additionalInfo"
+                            type="text"
+                            class="form-control"
+                            id="additionalInfo"
+                            name="additionalInfo"
+                            [(ngModel)]="Member.additionalInfo"
+                          />
+                          <div class="invalid-feedback">
+                            {{ "This field is mandatory." | translate }}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <!-- Button -->
-                <div class="text-center">
-                  <br />
-                  <button type="submit" class="btn btn-success btn-lg mx-3">
-                    {{ "Save" | translate }}
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-lg mx-3"
-                    (click)="Clear()"
-                  >
-                    {{ "Clear" | translate }}
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-lg mx-3"
-                    (click)="CancelChanges()"
-                  >
-                    {{ "Back" | translate }}
-                  </button>
-                </div>
-              </form>
+  
+                  <!-- Button -->
+                  <div class="text-center">
+                    <br />
+                    <button type="submit" class="btn btn-success btn-lg mx-3">
+                      {{ "Save" | translate }}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-lg mx-3"
+                      (click)="Clear()"
+                    >
+                      {{ "Clear" | translate }}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-lg mx-3"
+                      (click)="CancelChanges()"
+                    >
+                      {{ "Back" | translate }}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

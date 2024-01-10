@@ -45,6 +45,6 @@ export class MemberListService {
   }
 
   updateMember(memberId: number, member: Member): Observable<Object>{
-    return this.httpclient.put(`${this.baseUrl}/api/member/${memberId}`, member);
+    return this.httpclient.put(`${this.baseUrl}/api/member/update-member/${memberId}`, member);
   }
 }

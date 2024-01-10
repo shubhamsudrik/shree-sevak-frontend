@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AreaDataService {
+ 
 
 
 
@@ -32,7 +33,7 @@ getAllUnselectedAreasExceptSingleUser(userId:number):Observable<Area[]>{
   return this.httpClient.get<Area[]>(`${this.baseUrl}/unselected-AreasforUser/${userId}`);
 }
 
-getAreaById(id: number):Observable<Area>{ 
+getAreaById(id: any):Observable<Area>{ 
   return this.httpClient.get<Area>(`${this.baseUrl}/${id}`);
 
 

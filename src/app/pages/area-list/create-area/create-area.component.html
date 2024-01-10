@@ -180,13 +180,16 @@
                           maxlength="25"
                         />
                       </div>
+                      <div class="invalid-feedback">
+                        This field is mandatory.
+                      </div>
                     </div>
                   </div>
                 </div>
               
                 <!-- contactPhone1 -->
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <label for="contactPhone1"
                         >{{ "Mobile Number" | translate
@@ -227,12 +230,15 @@
                               "Mobile number should be 10 digits." | translate
                             }}
                           </div>
+                          <div class="invalid-feedback">
+                            This field is mandatory.
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <!-- contactPhone2 -->
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <label for="contactPhone2">{{
                         "Phone Number" | translate
@@ -246,13 +252,15 @@
                           id="contactPhone2"
                           name="contactPhone2"
                           [(ngModel)]="area.contactPhone2"
+                          (input)="validatePhoneNumber1($event)"
+
                         />
                       </div>
                     </div>
                   </div>
 
                   <!-- contact1 Email -->
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <label for="contactEmail"
                         >{{ "Email" | translate
@@ -270,11 +278,11 @@
                           [ngClass]="{
                             'is-invalid':
                               submitted &&
-                              areaFormCotrols.contactEmail.errors?.required
+                              areaFormCotrols.contactEmail.errors?.required || areaFormCotrols.contactEmail.errors?.email
                           }"
                         />
                         <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
+                          {{ "This field is mandatory and should be Email." | translate }}
                         </div>
                       </div>
                     </div>

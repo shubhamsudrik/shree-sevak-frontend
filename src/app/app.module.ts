@@ -62,16 +62,17 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ComponentsModule } from "./components/components.module";
-import {ButtonModule} from 'primeng/button';
+// import { ButtonModule } from "primeng/button";
 import { MultiSelectModule } from 'primeng/multiselect';
-@NgModule({
+@NgModule
+({
   imports: [
     MultiSelectModule,
     Ng2SearchPipeModule,
     MatPaginatorModule,
     NgxMaterialTimepickerModule,
     TranslateModule,
-    ButtonModule,
+    // ButtonModule,
     HttpClientModule,
     ComponentsModule,
     NgbModule,

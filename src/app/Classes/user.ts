@@ -7,7 +7,7 @@ export class User {
   emailId: string;
   phoneNumber: string;
   role?: string; 
-  selectedAreas?:Area[]
+  selectedAreas?:any[]
   status?: string;
  
 }

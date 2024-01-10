@@ -1,3 +1,5 @@
+import { Week } from "./Week";
+
 export class Member {
 
     memberId :number;
@@ -25,7 +27,10 @@ export class Member {
 	googleMapLink:string;
 	initial:string;
 	role:string;
-	vehicleType:string;
+	twoWheeler:boolean;
+	fourWheeler:boolean;
+	// both:string;
+	noVehical:boolean;
 	phoneNumber:string;
 	// ownBaithakId:string;
 	eligibleForNone:boolean;
@@ -54,8 +59,9 @@ export class Member {
  pincode:string;
  state :string;
  status:string;
- vehicleDetails:string;
- weeklyOffs:string;
+ twoWheelerDetail:string;
+ fourWheelerDetail:string;
+ weeklyOffs:any[];
  members:string;
  locations:string;
 }

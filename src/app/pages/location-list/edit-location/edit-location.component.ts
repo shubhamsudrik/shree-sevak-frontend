@@ -63,13 +63,13 @@ export class EditLocationComponent implements OnInit {
       add3: [''],
       add4: [''],
       additionalInfo: [''],
-      contact1Email: ['', Validators.required],
+      contact1Email: ['', [Validators.required, Validators.email]],
       contact1Initial: ['', Validators.required],
       contact1Name: ['', Validators.required],
       contact1Occupation: [''],
       contact1Phone1: ['', Validators.required],
       contact1Phone2: ['',],
-      contact2Email: [''],
+      contact2Email: ['',Validators.email],
       contact2Initial: [''],
       contact2Name: [''],
       contact2Occupation: [''],
@@ -107,7 +107,7 @@ export class EditLocationComponent implements OnInit {
   //
   areaChange(value:any){
     console.log("area selected ",value)
-    this.areaDataService.findAreaByName(value).subscribe((data)=>{
+    this.areaDataService.getAreaById(value).subscribe((data)=>{
   this.isSelect  = true;
 
       this.selectedArea=data;
@@ -192,6 +192,13 @@ validatePhoneNumber(event){
     const numericValue = input.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
     const truncatedValue = numericValue.slice(0, 10); // Truncate input to 10 characters
     input.value = truncatedValue;
+}
+
+validatePhoneNumber1(event) {
+  const input = event.target;
+  const allowedCharacters = input.value.replace(/[^\d\s-]/g, ''); // Allow only digits, spaces, and dashes
+  const truncatedValue = allowedCharacters.slice(0, 13); // Truncate input to 12 characters
+  input.value = truncatedValue;
 }
 
   isDuplicateData(newLocation: Location): boolean {

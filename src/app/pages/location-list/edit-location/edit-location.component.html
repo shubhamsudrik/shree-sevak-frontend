@@ -78,7 +78,7 @@
                           <option value="" disabled>Select Area</option>
                           <option
                             *ngFor="let area of arealist"
-                            [value]="area.areaName"
+                            [value]="area.areaId"
                           >
                             {{ area.areaName}}
                           </option>
@@ -311,7 +311,7 @@
 
                 <!-- City -->
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md">
                     <div class="form-group">
                       <label for="city"
                         >{{ "City" | translate
@@ -346,7 +346,7 @@
                   </div>
 
                   <!-- Division -->
-                  <div class="col-md-3">
+                  <div class="col-md">
                     <div class="form-group">
                       <label
                         >{{ "Division" | translate
@@ -382,7 +382,7 @@
                   </div>
 
                   <!-- State -->
-                  <div class="col-md-3">
+                  <div class="col-md">
                     <div class="form-group">
                       <label
                         >{{ "State" | translate
@@ -497,7 +497,7 @@
                   </div>
 
                   <!-- Country -->
-                  <div class="col-md-3">
+                  <div class="col-md">
                     <div class="form-group">
                       <label
                         >{{ "Country" | translate
@@ -526,7 +526,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  
                   <!-- Allow Memebr
            <div class="col-md-3">
                 <div class="form-group">
@@ -555,48 +555,12 @@
                   </div>
                 </div>
                 </div> -->
-                  <div class="row">
-                    <div class="col custom-margin" style="width: 20%">
-                      <div class="form-group">
-                        <div class="row">
-                          <!-- <div class="d-flex flex-row">
-                              <div class="col-md-6">
-                                <label class="" for="mixedGenderAllow">MixedGenderAllow</label>
-                             </div>
-                       
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="mixedGenderAllow" formControlName="mixedGenderAllow" name="mixedGenderAllow">
-                                
-                                  
-                                </div>
-                           
-                            </div> -->
-                          <div class="form-check">
-                            <label
-                              class="form-check-label"
-                              for="mixedGenderAllow"
-                            >
-                              MixedGenderAllow
-                              <input
-                                class="form-check-input custom-checkbox"
-                                formControlName="mixedGenderAllow"
-                                type="checkbox"
-                                [(ngModel)]="location.mixedGenderAllow"
-                                id="mixedGenderAllow"
-                                value="true"
-                                name="mixedGenderAllow"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                 
+                   
                   </div>
-                </div>
 
                 <!-- Pincode -->
-                <div class="row">
-                  <div class="col" style="width: 20%">
+                  <div class="col-md">
                     <div class="form-group">
                       <label for="pincode"
                         >{{ "Pincode" | translate
@@ -641,7 +605,8 @@
                   </div>
 
                   <!-- latitude -->
-                  <div class="col" style="width: 20%">
+                  <div class="row">
+                  <div class="col-md" style="margin-left: 12px;">
                     <div class="form-group">
                       <label for="latitude">{{ "Latitude" | translate }}</label>
                       <div class="input-group input-group-alternative mb-3">
@@ -659,7 +624,7 @@
                   </div>
 
                   <!-- longitude -->
-                  <div class="col" style="width: 20%">
+                  <div class="col-md">
                     <div class="form-group">
                       <label for="longitude">{{
                         "Longitude" | translate
@@ -679,7 +644,7 @@
                   </div>
 
                   <!-- Google map link -->
-                  <div class="col" style="width: 20%">
+                  <div class="col-md">
                     <div class="form-group">
                       <label for="googleMapLink">{{
                         "Google Map Link" | translate
@@ -700,7 +665,7 @@
                   </div>
 
                   <!-- Status -->
-                  <div class="col" style="width: 20%">
+                  <div class="col-md" >
                     <div class="form-group">
                       <label
                         >{{ "Status" | translate
@@ -733,7 +698,31 @@
                       </div>
                     </div>
                   </div>
+                
+                <div class="col-md" style="margin-top: 40px;">
+                  <div class="form-group">
+                      <div class="form-check">
+                        <label
+                          class="form-check-label"
+                          for="mixedGenderAllow"
+                        >
+                         Allow Mixed Gender
+                          <input
+                            class="form-check-input custom-checkbox"
+                            formControlName="mixedGenderAllow"
+                            type="checkbox"
+                            [(ngModel)]="location.mixedGenderAllow"
+                            id="mixedGenderAllow"
+                            value="true"
+                            name="mixedGenderAllow"
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                </div>
+               
 
                 <!-- Header -->
                 <div>
@@ -893,6 +882,8 @@
                           id="contact1Phone2"
                           name="contact1Phone2"
                           [(ngModel)]="location.contact1Phone2"
+                          (input)="validatePhoneNumber1($event)"
+
                           
                         />
                       </div>
@@ -918,11 +909,11 @@
                           [ngClass]="{
                             'is-invalid':
                               submitted &&
-                              locationFormControl.contact1Email.errors?.required
+                              locationFormControl.contact1Email.errors?.required || locationFormControl.contact1Email.errors?.email
                           }"
                         />
                         <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
+                          {{ "This field is mandatory and should be Email." | translate }}
                         </div>
                       </div>
                     </div>
@@ -1051,6 +1042,8 @@
                           id="contact2Phone2"
                           name="contact2Phone2"
                           [(ngModel)]="location.contact2Phone2"
+                          (input)="validatePhoneNumber1($event)"
+
                         />
                       </div>
                     </div>
@@ -1070,10 +1063,13 @@
                           id="contact2Email"
                           name="contact2Email"
                           [(ngModel)]="location.contact2Email"
+                          [ngClass]="{
+                            'is-invalid': (submitted && locationFormControl.contact2Email.errors?.email)
+                           }"
                         />
-                        <!-- <div class="invalid-feedback">
-                      {{ 'This field is mandatory.' | translate }}
-                    </div> -->
+                        <div class="invalid-feedback">
+                          {{ "Value should be Email." | translate }}
+                        </div>
                       </div>
                     </div>
                   </div>

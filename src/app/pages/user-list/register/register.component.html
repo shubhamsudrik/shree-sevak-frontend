@@ -81,13 +81,15 @@
                   <!-- Area -->
                   <div class="col-md-5">
                     <p-multiSelect
-                    class="card flex justify-content-center mt-4"
-                      [options]="defaultAreas"
-
-                      formControlName="selectedAreas" 
+                      class="card flex justify-content-center mt-4"
+                      [options]="filterAreaslist"
+                      formControlName="selectedAreas"
                       placeholder="Select Area"
+                      optionValue="id"
                       optionLabel="value"
                       (onChange)="onMultiSelectChange($event)"
+
+                    
                     >
                       Select Area
                     </p-multiSelect>
@@ -185,107 +187,115 @@
                         name="emailId"
                         [ngClass]="{
                           'is-invalid':
-                            submitted &&
-                            registerFormControl.emailId.errors?.required
+                            (submitted &&
+                              registerFormControl.emailId.errors?.required) ||
+                            registerFormControl.emailId.errors?.email
                         }"
                         maxlength="30"
                       />
                       <div class="invalid-feedback">
-                        This field is mandatory.
+                        {{ "This field is mandatory and should be Email." }}
                       </div>
                     </div>
                   </div>
                 </div>
+                  <!-- password -->
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="password"
+                        >Password<span class="text-danger">*</span></label
+                      >
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <input
+                          formControlName="password"
+                          type="password"
+                          class="form-control"
+                          id="password"
+                          name="password"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              (registerFormControl.password.errors?.required ||
+                                registerFormControl.password.errors?.pattern)
+                          }"
+                        />
+                        <div class="invalid-feedback">
+                          This field is mandatory and Password should be
+                          capital,small letter & number.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                <!-- password -->
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="password"
-                      >Password<span class="text-danger">*</span></label
+                  <!-- confirmPassword -->
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="confirmPassword"
+                        >Confirm Password<span class="text-danger"
+                          >*</span
+                        ></label
+                      >
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <input
+                          formControlName="confirmPassword"
+                          type="text"
+                          class="form-control"
+                          id="confirmPassword"
+                          name="confirmPassword"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              registerFormControl.confirmPassword.errors
+                                ?.required
+                          }"
+                          maxlength="30"
+                        />
+                        <div class="invalid-feedback">
+                          This field is mandatory.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <button
+                      *ngIf="!userId"
+                      type="submit"
+                      class="btn btn-success mt-4"
                     >
-                    <div class="input-group input-group-alternative mb-3">
-                      <div class="input-group-prepend"></div>
-                      <input
-                        formControlName="password"
-                        type="password"
-                        class="form-control"
-                        id="password"
-                        name="password"
-                        [ngClass]="{
-                          'is-invalid':
-                            submitted &&
-                            (registerFormControl.password.errors?.required ||
-                              registerFormControl.password.errors?.pattern)
-                        }"
-                      />
-                      <div class="invalid-feedback">
-                        This field is mandatory and Password should be
-                        capital,small letter & number.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- confirmPassword -->
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="confirmPassword"
-                      >Confirm Password<span class="text-danger">*</span></label
+                      Create account
+                    </button>
+                    <button
+                      *ngIf="userId"
+                      type="submit"
+                      class="btn btn-danger mt-4"
                     >
-                    <div class="input-group input-group-alternative mb-3">
-                      <div class="input-group-prepend"></div>
-                      <input
-                        formControlName="confirmPassword"
-                        type="text"
-                        class="form-control"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        [ngClass]="{
-                          'is-invalid':
-                            submitted &&
-                            registerFormControl.confirmPassword.errors?.required
-                        }"
-                        maxlength="30"
-                      />
-                      <div class="invalid-feedback">
-                        This field is mandatory.
-                      </div>
+                      Update account
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary mt-4"
+                      (click)="goBack()"
+                    >
+                      Back
+                    </button>
+
+                    <div>
+                      <small
+                        >Already have an account? Sign out this session and
+                      </small>
+                      <a href="/login">sign in </a>
+                      <!-- <a class="nav-link nav-link-icon" routerLinkActive="active" class="text-blue" [routerLink]="['/dashboard']">dashboard</a> -->
                     </div>
                   </div>
+                </form>
                 </div>
-
-                <div class="text-center">
-                  <button
-                    *ngIf="!id"
-                    type="submit"
-                    class="btn btn-success mt-4"
-                  >
-                    Create account
-                  </button>
-                  <button *ngIf="id" type="submit" class="btn btn-danger mt-4">
-                    Update account
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary mt-4"
-                    (click)="goBack()"
-                  >
-                    Back
-                  </button>
-
-                  <div>
-                    <small
-                      >Already have an account? Sign out this session and
-                    </small>
-                    <a href="/login">sign in </a>
-                    <!-- <a class="nav-link nav-link-icon" routerLinkActive="active" class="text-blue" [routerLink]="['/dashboard']">dashboard</a> -->
-                  </div>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
-</div>
+

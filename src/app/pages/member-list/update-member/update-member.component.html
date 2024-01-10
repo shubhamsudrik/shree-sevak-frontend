@@ -11,11 +11,11 @@
         <div class="card-body px-lg-10 py-lg-5">
           
           <form role="form" [formGroup]="memberform" (ngSubmit)="onSubmit()" class="needs-validation">
-            <h2 class="text-center">{{'Update member records' | translate }}</h2><br>
+            <h2 class="text-center">{{'Update Member Records' | translate }}</h2><br>
 
             <!-- Head -->
             <div>
-              <h2 class="form-section-header text-center">Personal details</h2>
+              <h2 class="form-section-header text-center">Personal Details</h2>
             </div>
 
              <!-- initial -->
@@ -233,7 +233,7 @@
              </div>              
             </div>  
               <!-- role-->
-              <div class="row d-flex flex-row">
+              <!-- <div class="row d-flex flex-row"> -->
                 <!-- <div class="col" style="width: 20%;">
               <div class="form-group">
                 <label for="role">{{ 'Role' | translate }}</label>
@@ -265,9 +265,10 @@
                </div> -->
 
               <!-- aadhar number-->
-              <div class="col">
+              <div class="row">
+              <div class="col-md">
                 <div class="form-group">
-                 <label for="addharNumber">{{ 'Addhar Number' | translate }}<span class="text-danger">*</span></label>
+                 <label for="addharNumber">{{ 'Addhar Number' | translate }}</label>
                  <div class="input-group input-group-alternative mb-3">
                    <div class="input-group-prepend"></div>
                    <input
@@ -278,7 +279,7 @@
                      name="addharNumber"
                      [(ngModel)]="Member.addharNumber"
                      [ngClass]="{
-                       'is-invalid': (submitted && (MemberFormControl.addharNumber.errors?.required || MemberFormControl.addharNumber.errors?.minlength))
+                       'is-invalid': (submitted && (MemberFormControl.addharNumber.errors?.minlength))
      
                      }"
                      (input)="validateAddharNumber($event)"
@@ -292,9 +293,9 @@
                 </div>
                 </div>
              <!-- panNo -->
-             <div class="col">
+             <div class="col-md">
                 <div class="form-group">
-                 <label for="panNo">{{ 'Pan Number' | translate }}<span class="text-danger">*</span></label>
+                 <label for="panNo">{{ 'Pan Number' | translate }}</label>
                  <div class="input-group input-group-alternative mb-3">
                    <div class="input-group-prepend"></div>
                    <input
@@ -304,15 +305,12 @@
                       id="panNo"
                      name="panNo"
                      [(ngModel)]="Member.panNo"
-                     [ngClass]="{
-                       'is-invalid': (submitted && (MemberFormControl.panNo.errors?.required || MemberFormControl.panNo.errors?.minlength))
-     
-                     }"
+                     
                      (input)="validatePanNumber($event)"
                      minlength="10"
                        />
                        <div class="invalid-feedback">
-                         <div *ngIf="MemberFormControl.panNo.errors?.required">{{ 'This field is mandatory.' | translate }}</div>
+                         <!-- <div *ngIf="MemberFormControl.panNo.errors?.required">{{ 'This field is mandatory.' | translate }}</div> -->
                          <div *ngIf="MemberFormControl.panNo.errors?.minlength">{{ 'Pan number should be 10 digits' | translate }}</div>
                        </div>
                  </div>  
@@ -320,7 +318,7 @@
                </div>
 
              <!-- photoBase64  -->
-             <div class="col" >
+             <!-- <div class="col" >
              <div class="form-group">
               <label for="photoBase64">{{ 'Photo Base64' | translate }}</label>
               <div class="input-group input-group-alternative mb-3">
@@ -338,9 +336,9 @@
                    
               </div>
              </div>
-             </div>
+             </div> -->
               <!-- Area -->
-              <div class="col">
+              <div class="col-md">
                 <div class="form-group">
                   <label for="area"
                     >{{ "Area" | translate
@@ -376,10 +374,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            
 
              <!-- status-->       
-             <div class="col" >
+             <div class="col-md" >
             <div class="form-group">
               <label for="status">{{ 'Status' | translate }}<span class="text-danger">*</span></label>
               <div class="input-group input-group-alternative mb-3">
@@ -388,6 +386,7 @@
                     formControlName="status"
                     type="text"
                     class="form-control"
+                    
                    id="status"
                   name="status"
                   [(ngModel)]="Member.status"
@@ -406,12 +405,14 @@
               </div>
             </div>
              </div>
+             </div>
+             <!-- </div> -->
            
 
                <!-- Header -->
           <div class="row">
             <div class="col-6">
-            <h2 class="form-section-header text-center">Languages known</h2> 
+            <h2 class="form-section-header text-center">Languages Known</h2> 
             <span style="margin-left: 20px;">Atleast one language should be mandatory<span class="text-danger">*</span></span><br><br>          
   
             <!-- Marathi lanng-->
@@ -559,7 +560,7 @@
 
              <!-- Header -->
              <div>
-              <h2 class="form-section-header text-center">Address details</h2>
+              <h2 class="form-section-header text-center">Address Details</h2>
             </div>
             
               <!-- add1 -->
@@ -889,7 +890,7 @@
 
         <!-- Header -->
         <div>
-          <h2 class="form-section-header text-center">Contact information</h2>
+          <h2 class="form-section-header text-center">Contact Information</h2>
         </div>
         
             <!-- mobile -->
@@ -934,7 +935,7 @@
                  id="phone"
                 name="phone"
                 [(ngModel)]="Member.phone"
-               
+                (input)="validatePhoneNumber1($event)"
                   />
                   
             </div>  
@@ -955,11 +956,11 @@
                   name="email"
                   [(ngModel)]="Member.email"
                   [ngClass]="{
-                   'is-invalid': (submitted && MemberFormControl.email.errors?.required)
+                   'is-invalid': submitted && MemberFormControl.email.errors?.required || MemberFormControl.email.errors?.email
                   }"
                     />
                     <div class="invalid-feedback">
-                      {{ 'This field is mandatory.' | translate }}
+                      {{ "This field is mandatory and should be Email." | translate }}
                     </div>
               </div>
              </div>
@@ -969,48 +970,104 @@
 
               <!-- Header -->
         <div>
-          <h2 class="form-section-header text-center">Vehical information</h2>
+          <h2 class="form-section-header text-center">Vehical Information</h2>
         </div>
 
         <!-- vehicleType-->
+        <label for="vehicleType" style="margin-left: 20px;">{{ 'Vehicle Type' | translate }}</label>
+        <label for="vehicleType" style="margin-left: 380px;">{{ 'Vehicle Details' | translate }}</label>
         <div class="row">
-          <div class="col-md-6">
-        <div class="form-group">
-          <label for="vehicleType">{{ 'Vehicle Type' | translate }}</label>
-          <div class="input-group input-group-alternative mb-3">
-            <div class="input-group-prepend"></div>
-            <select
-                formControlName="vehicleType"
+          
+          <div class="col-md-3" style="margin-top: 20px;">    
+           
+            <div class="form-group">
+                <div class="form-check">
+                  <label
+                    class="form-check-label"
+                    for="twoWheeler"
+                  >
+                  2-Wheeler
+                    <input
+                      class="form-check-input custom-checkbox"
+                      formControlName="twoWheeler"
+                      type="checkbox"
+                      [(ngModel)]="Member.twoWheeler"
+                      id="twoWheeler"
+                      value="twoWheeler"
+                      name="twoWheeler"                      
+                    />
+                  </label>
+                </div><br>
+
+                <div class="form-check">
+                  <label
+                    class="form-check-label"
+                    for="fourWheeler"
+                  >
+                  4-Wheeler
+                    <input
+                      class="form-check-input custom-checkbox"
+                      formControlName="fourWheeler"
+                      type="checkbox"
+                      [(ngModel)]="Member.fourWheeler"
+                      id="fourWheeler"
+                      value="fourWheeler"
+                      name="fourWheeler"                      
+                    />
+                  </label>
+                </div><br>
+
+                <div class="form-check">
+                  <label
+                    class="form-check-label"
+                    for="noVehical"
+                  >
+                  No Vehical
+                    <input
+                      class="form-check-input custom-checkbox"
+                      formControlName="noVehical"
+                      type="checkbox"
+                      [(ngModel)]="Member.noVehical"
+                      id="noVehical"
+                      value="noVehical"
+                      name="noVehical"
+                    />
+                  </label>
+                </div><br>
+              </div>
+            </div>
+           <!-- vehicleDetails -->
+            <div class="col-md-8">
+           <div class="form-group">           
+            <div class="input-group input-group-alternative mb-3" style="margin-top: 20px;">
+              <div class="input-group-prepend"></div>
+              <input 
+                formControlName="twoWheelerDetail"
                 type="text"
                 class="form-control"
-               id="vehicleType"
-              name="vehicleType"
-              [(ngModel)]="Member.vehicleType"              
-                >
-              <option value="" disabled>Select Vehicle</option>
-                  <option value="2-Wheeler">2-Wheeler</option>
-                  <option value="4-Wheeler">4-Wheeler</option>
-                </select>
-          </div>
-        </div>
-         </div>
-           <!-- vehicleDetails -->
-         
-            <div class="col-md-6">
-           <div class="form-group">
-            <label for="vehicleDetails">{{ 'Vehicle Details' | translate }}</label>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <input
-                  formControlName="vehicleDetails"
-                  type="text"
-                  class="form-control"
-                 id="vehicleDetails"
-                name="vehicleDetails"
-                [(ngModel)]="Member.vehicleDetails"
-                maxlength="14" 
+                id="twoWheelerDetail"
+                name="twoWheelerDetail"
+                [(ngModel)]="Member.twoWheelerDetail"
+                placeholder="Two Wheeler Details"
+                maxlength="25" 
                   />
             </div>
+            <span></span>
+            <div class="input-group input-group-alternative mb-3">
+              <div class="input-group-prepend"></div>
+              <input 
+              formControlName="fourWheelerDetail"
+              type="text"
+              class="form-control"
+              id="fourWheelerDetail"
+              name="fourWheelerDetail"
+              [(ngModel)]="Member.fourWheelerDetail"              
+              placeholder="Four Wheeler Details"
+              maxlength="25" 
+              [disabled]="isInputDisabled"
+                  />
+            </div>
+           
            </div>
             </div>
           </div>
@@ -1018,12 +1075,12 @@
               
                <!-- Header -->
         <div>
-          <h2 class="form-section-header text-center">Baithak details</h2>
+          <h2 class="form-section-header text-center">Baithak Details</h2>
         </div>
 
          <!-- ownBaithakDay -->
          <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
          <div class="form-group">
           <label>{{ 'Baithak Day' | translate }}<span class="text-danger">*</span></label><br>
           <div class="input-group input-group-alternative mb-3">
@@ -1113,10 +1170,10 @@
           </div>
           </div>
       </div>
-         <!-- hajeriNoDetails -->
+         <!-- Baithak Location -->
          <div class="col-md-4">
          <div class="form-group">
-          <label for="hajeriNoDetails">{{ 'Hajeri Number Details' | translate }}</label>
+          <label for="hajeriNoDetails">{{ 'Baithak Location' | translate }}<span class="text-danger">*</span></label>
           <div class="input-group input-group-alternative mb-3">
             <div class="input-group-prepend"></div>
             <input
@@ -1126,10 +1183,14 @@
                id="hajeriNoDetails"
               name="hajeriNoDetails"
               [(ngModel)]="Member.hajeriNoDetails"
-             
+              [ngClass]="{
+                'is-invalid': (submitted && (MemberFormControl.hajeriNoDetails.errors?.required))
+            }"
               maxlength="25" 
                 />
-               
+                <div class="invalid-feedback">
+                  {{ 'This field is mandatory.' | translate }}
+                </div>
           </div>
           </div>
          </div>
@@ -1137,40 +1198,35 @@
           <div class="col-md-4">
           <div class="form-group">
             <label>{{ 'Weekly Offs' | translate }}<span class="text-danger">*</span></label><br>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <select
-                formControlName="weeklyOffs"
-                class="form-control"
+            <!-- <div class="input-group input-group-alternative mb-3"> -->
+              <!-- <div class="input-group-prepend"></div> -->
+              <p-multiSelect placeholder="Weekly Off" 
+              formControlName="weeklyOffs"    
+               [options]="WeekOff" 
+               optionValue="id"       
+               optionLabel="value"  
                 id="weeklyOffs"
+                style="width: 280px;"
                 name="weeklyOffs"
                 [(ngModel)]="Member.weeklyOffs"
                 required
                 [ngClass]="{
                   'is-invalid': (submitted && MemberFormControl.weeklyOffs.errors?.required)
                 }"
-              >
-                <option value="" disabled>Select Status</option>
-                <option value="Sunday">{{'Sunday'|translate}}</option>
-                <option value="Monday">{{'Monday'|translate}}</option>
-                <option value="Tuesdat">{{'Tuesdat'|translate}}</option>
-                <option value="Wednesday">{{'Wednesday'|translate}}</option>
-                <option value="Thursday">{{'Thursday'|translate}}</option>
-                <option value="Friday">{{'Friday'|translate}}</option>
-                <option value="Saturday">{{'Saturday'|translate}}</option>
-              </select>
+                (onChange)="onMultiSelectChange($event)"
+               
+              ></p-multiSelect>              
               <div class="invalid-feedback">
                 {{ 'This field is mandatory.' | translate }}
               </div>
             </div>
-           </div>
-           </div>
-           </div>
+           </div>         
+        </div>
+          
 
-
-           <!-- Heade -->
+           <!-- Header -->
            <div>
-            <h2 class="form-section-header text-center">Additional information</h2>
+            <h2 class="form-section-header text-center">Additional Information</h2>
           </div>
 
            
