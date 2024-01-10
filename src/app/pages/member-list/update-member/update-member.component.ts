@@ -299,15 +299,15 @@ console.log(listofDaysIds);
     if (isDuplicate) {
       // Data already exists error message
 
-      confirm(
-        'Data already exists with the same Aaddhar card Number .\n"Cancel" it for change the addhar card Number'
-      );
+if(!confirm(
+  'Data already exists with the same Aaddhar card Number .\n"Cancel" it for change the addhar card Number'
+)){
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
       console.log(this.Member);
       this.updateMemebr();
       this.toast.success("  Member Info Update Succesfully ");
-    } else {
+    }} else {
       // alert('Please fill all fields: कृपया सर्व फील्ड भरा');
       this.toast.warning("Fill all mandatory field.");
     }
