@@ -141,6 +141,7 @@ console.log(listofDaysIds);
       englishRead: this.Member.englishRead,
       englishWrite: this.Member.englishWrite,
       englishSpeak: this.Member.englishSpeak,
+      area: this.Member.area.areaId,
       weeklyOffs: listofDaysIds,
     });
   }

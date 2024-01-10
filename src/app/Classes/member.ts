@@ -3,7 +3,7 @@ import { Week } from "./Week";
 export class Member {
 
     memberId :number;
-	area : string;
+	area : any;
 	eligible:string;
 	firstName:string;
     middleName:string;
