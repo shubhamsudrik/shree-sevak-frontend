@@ -18,9 +18,10 @@ export class UpdateLocationComponent implements OnInit {
   location: any = new Location();
   id: number;
   defaultLocations: Location[] = [];
-isSelect: any=false;
+  isSelect: any=true;
   selectedArea: any;
   arealist:any;
+  initialAreaId:number;
 
 
   constructor(
@@ -43,6 +44,10 @@ isSelect: any=false;
     this.locationDataService.getLocationById(this.id).subscribe({
       next: (data: any) => {
         console.log(data)
+        console.log("data.area.areaId", data.area.areaId);
+        this.initialAreaId=data.area?.areaId
+        console.log("initialAreaId",this.initialAreaId);
+        this.areaChange(this.initialAreaId);
         this.location = data;
         this.populateForm();
       },
@@ -50,6 +55,9 @@ isSelect: any=false;
         console.log(error);
       }
     });
+
+    // console.log("initialAreaId",this.initialAreaId);
+    // this.areaChange(this.initialAreaId);
   }
 
   // get All location
