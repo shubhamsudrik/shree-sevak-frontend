@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
 import { Member } from 'src/app/Classes/member';
 import { AreaDataService } from 'src/app/services/area-data.service';
 import { MemberListService } from 'src/app/services/member-list.service';
@@ -216,17 +215,17 @@ export class UpdateMemberComponent implements OnInit {
 
     if (isDuplicate) {
       // Data already exists error message
-      if(confirm(
+      if(!confirm(
         'Data already exists with the same Aaddhar card Number .\n"Cancel" it for change the addhar card Number'
       )){
-      this.saveMember();
-      this.toast.success("  Member Info Update Succesfully ")}
+        
+      
     } else if (this.memberform.valid) {
         // Data doesn't exist and the form is valid, save the Member
         console.log(this.Member);
         this.saveMember();
        this.toast.success("  Member Info Update Succesfully ")
-      } else {
+      }} else {
         // alert('Please fill all fields: कृपया सर्व फील्ड भरा');
         this.toast.warning('Fill all mandatory field.')
       }
