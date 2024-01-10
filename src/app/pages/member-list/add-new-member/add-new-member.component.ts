@@ -14,12 +14,15 @@ import { MemberListService } from 'src/app/services/member-list.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AddNewMemberComponent implements OnInit {
+  selectedDays: any[];
+ 
   memberform: FormGroup;
   submitted = false;
   defaultMembers: Member[] = [];
   Member: Member = new Member();
   id: number;
   arealist: any;
+WeekOff: any;
 
 
 
@@ -43,6 +46,7 @@ export class AddNewMemberComponent implements OnInit {
     this.Member.eligibleForChild= true;
 	  this.Member.eligibleForGents= true;
 	  this.Member.eligibleForLadies= false;
+    this.Member.eligibleForNone=false;
     this.Member.status='1';
     this.Member.initial='Mr.';
     this.Member.education='Graduate';
@@ -53,6 +57,37 @@ export class AddNewMemberComponent implements OnInit {
 
   ngOnInit(): void {
   
+    this.WeekOff = [
+      {
+        id: 1,
+        value: "Sunday",
+      },
+      {
+        id: 2,
+        value: "Monday",
+      },
+      {
+        id: 3,
+        value: "Tuesday",
+      },
+      {
+        id: 4,
+        value: "Wednesday",
+      },
+      {
+        id: 5,
+        value: "Thursday",
+      },
+      {
+        id: 6,
+        value: "Friday",
+      },
+      {
+        id: 7,
+        value: "Saturday",
+      },
+    ];
+
     this.getAreas()
     // Validatons
     this.memberform = this.formBuilder.group({
@@ -107,7 +142,7 @@ export class AddNewMemberComponent implements OnInit {
       eligibleForChild:[''],
 	    eligibleForGents:[''],
 	    eligibleForLadies:[''],
-      eligibleForNone:[''],
+      eligibleForNone:[false],
       
       ownBaithakDay: ['', Validators.required],
       // type: ['', Validators.required],          
@@ -124,7 +159,11 @@ export class AddNewMemberComponent implements OnInit {
       this.handleCheckboxForVehical();
     });
   }
-
+  onMultiSelectChange(event: any) {
+    this.selectedDays = event.value;
+   this.Member.weeklyOffs=this.selectedDays;
+    console.log(this.selectedDays);
+  }
     // // vehicacheckbox
     handleCheckboxForVehical(){
       const twoWheeler = this.memberform.get('twoWheeler');
@@ -308,6 +347,7 @@ export class AddNewMemberComponent implements OnInit {
 
   isDuplicateData(newMember: Member): boolean {
     for (let item of this.defaultMembers) {
+     if(newMember.memberId !== item.memberId){
       console.log('Existing Member Aadhar:', item.addharNumber);
       console.log('New Member Aadhar:', newMember.addharNumber);
       if (
@@ -317,6 +357,7 @@ export class AddNewMemberComponent implements OnInit {
       ) {
         return true; // Data already exists
       }
+     }
     }
     return false; // Data does not exist
   }
