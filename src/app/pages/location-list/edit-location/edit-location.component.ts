@@ -107,7 +107,7 @@ export class EditLocationComponent implements OnInit {
   //
   areaChange(value:any){
     console.log("area selected ",value)
-    this.areaDataService.findAreaByName(value).subscribe((data)=>{
+    this.areaDataService.getAreaById(value).subscribe((data)=>{
   this.isSelect  = true;
 
       this.selectedArea=data;

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AreaDataService {
+ 
 
 
 
@@ -25,9 +26,16 @@ getAllAreaList() {
   return this.httpClient.get<Area[]>(`${this.baseUrl}/all-areas`);
 }
 
-getAreaById(id: number):Observable<Area>{ {
-  return this.httpClient.get<Area>(`${this.baseUrl}/${id}`);
+getAllUnselectedAreas(){
+  return this.httpClient.get<Area[]>(`${this.baseUrl}/unselected-Areas`);
 }
+getAllUnselectedAreasExceptSingleUser(userId:number):Observable<Area[]>{
+  return this.httpClient.get<Area[]>(`${this.baseUrl}/unselected-AreasforUser/${userId}`);
+}
+
+getAreaById(id: any):Observable<Area>{ 
+  return this.httpClient.get<Area>(`${this.baseUrl}/${id}`);
+
 
 }
 
@@ -36,9 +44,11 @@ updateArea(area:Area,id: number):Observable<Area>{
 }
 
 
-findAreaByName(areaName: any):Observable<Area>{ {
+findAreaByName(areaName: any):Observable<Area>{ 
   console.log(areaName ,"inside find by name api");
  return this.httpClient.get<Area>(`${this.baseUrl}/areaName?areaName=${areaName}`);
+
 }
-}
+
+
 }

@@ -1200,8 +1200,11 @@
             <label>{{ 'Weekly Offs' | translate }}<span class="text-danger">*</span></label><br>
             <!-- <div class="input-group input-group-alternative mb-3"> -->
               <!-- <div class="input-group-prepend"></div> -->
-              <p-multiSelect [options]="WeekOff" placeholder="Weekly Off" 
-              formControlName="weeklyOffs"                
+              <p-multiSelect placeholder="Weekly Off" 
+              formControlName="weeklyOffs"    
+               [options]="WeekOff" 
+               optionValue="id"       
+               optionLabel="value"  
                 id="weeklyOffs"
                 name="weeklyOffs"
                 [(ngModel)]="Member.weeklyOffs"
@@ -1209,6 +1212,7 @@
                 [ngClass]="{
                   'is-invalid': (submitted && MemberFormControl.weeklyOffs.errors?.required)
                 }"
+                (onChange)="onMultiSelectChange($event)"
                
               ></p-multiSelect>              
               <div class="invalid-feedback">

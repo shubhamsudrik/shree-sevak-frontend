@@ -1,3 +1,5 @@
+import { Week } from "./Week";
+
 export class Member {
 
     memberId :number;
@@ -59,7 +61,7 @@ export class Member {
  status:string;
  twoWheelerDetail:string;
  fourWheelerDetail:string;
- weeklyOffs:string[]=[];
+ weeklyOffs:any[];
  members:string;
  locations:string;
 }

@@ -197,13 +197,14 @@ isSelect: any=false;
       division:this.selectedArea.division,
       state: this.selectedArea.state,
       country:this.selectedArea.country,
+      area:this.selectedArea.areaId
   
     })
   }
   //
   areaChange(value:any){
     console.log("area selected ",value)
-    this.areaDataService.findAreaByName(value).subscribe((data)=>{
+    this.areaDataService.getAreaById(value).subscribe((data)=>{
   this.isSelect  = true;
 
       this.selectedArea=data;
