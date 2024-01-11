@@ -298,8 +298,8 @@ export class UpdateMemberComponent implements OnInit {
 
     if (isDuplicate) {
       // Data already exists error message
-      !confirm(
-        'Data already exists with the same Aaddhar card Number .\n"Cancel" it for change the addhar card Number'
+      alert(
+        'Data already exists with the same Aaddhar card Number.'
       );
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
