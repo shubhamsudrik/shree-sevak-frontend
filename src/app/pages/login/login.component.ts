@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/Classes/User';
+import { User } from 'src/app/Classes/user';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
