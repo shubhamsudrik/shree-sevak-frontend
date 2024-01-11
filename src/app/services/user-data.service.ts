@@ -1,13 +1,18 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { User } from "../Classes/User";
+
 import { LoginService } from "./login.service";
+import { User } from "../Classes/user";
+
  
 @Injectable({
   providedIn: "root",
 })
 export class UserDataService {
+
+  userDtails:User;
+
   constructor(
     private httpclient: HttpClient,
     private loginservice: LoginService
@@ -51,5 +56,9 @@ export class UserDataService {
         }
       }
     }
+  }
+
+  set setUserDetails(user:User){
+   this.userDtails=user;
   }
 }

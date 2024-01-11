@@ -79,7 +79,7 @@ export class UpdateMemberComponent implements OnInit {
     this.getAreas();
     this.id = this.route.snapshot.params["id"];
     this.initializeForm();
-    if(this.id){
+    if (this.id) {
       this.WeekOff = [
         {
           id: 1,
@@ -125,11 +125,11 @@ export class UpdateMemberComponent implements OnInit {
   populateForm() {
     const memberDays: Week[] = this.Member.weeklyOffs;
     console.log(memberDays);
-    const listofDaysIds: number[] =[]
+    const listofDaysIds: number[] = [];
     memberDays.map((day: any) => {
       listofDaysIds.push(day.id);
     });
-console.log(listofDaysIds);
+    console.log(listofDaysIds);
     this.memberform.patchValue({
       firstName: this.Member?.firstName,
       hindiRead: this.Member.hindiRead,
@@ -141,6 +141,7 @@ console.log(listofDaysIds);
       englishRead: this.Member.englishRead,
       englishWrite: this.Member.englishWrite,
       englishSpeak: this.Member.englishSpeak,
+      area: this.Member.area.areaId,
       weeklyOffs: listofDaysIds,
     });
   }
@@ -297,16 +298,15 @@ console.log(listofDaysIds);
 
     if (isDuplicate) {
       // Data already exists error message
-
-if(!confirm(
-  'Data already exists with the same Aaddhar card Number .\n"Cancel" it for change the addhar card Number'
-)){
+      alert(
+        'Data already exists with the same Aaddhar card Number.'
+      );
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
       console.log(this.Member);
       this.updateMemebr();
       this.toast.success("  Member Info Update Succesfully ");
-    }} else {
+    } else {
       // alert('Please fill all fields: कृपया सर्व फील्ड भरा');
       this.toast.warning("Fill all mandatory field.");
     }
