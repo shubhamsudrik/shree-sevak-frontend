@@ -362,7 +362,7 @@
                       <option value="" disabled>Select Area</option>
                       <option
                         *ngFor="let area of arealist"
-                        [value]="area.areaId"
+                        [value]="area?.areaId"
                       >
                         {{ area.areaName }}
                       </option>
@@ -980,7 +980,7 @@
           
           <div class="col-md-3" style="margin-top: 20px;">    
            
-            <div class="form-group">
+            <div>
                 <div class="form-check">
                   <label
                     class="form-check-label"

@@ -43,6 +43,7 @@ export class UpdateMemberComponent implements OnInit {
     private areaDataService: AreaDataService
   ) {
     console.log(this.weeklyOffs);
+    console.log(this.arealist)
   }
 
   ngOnInit(): void {

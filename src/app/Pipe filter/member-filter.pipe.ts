@@ -35,16 +35,36 @@ export class MemberFilterPipe implements PipeTransform {
   }
 
   private itemMatchesField(item: Item, searchTerm: string, fields?: string[]): boolean {
+    console.log('itemMatchesField', item, searchTerm);
     if (fields && fields.length > 0) {
       return fields.some(field => {
-        if (typeof item[field] === 'string') {
-          return item[field].toLowerCase().includes(searchTerm);
+        const nestedProperties = field.split('.');
+
+        let fieldValue: any = item;
+        for (const prop of nestedProperties) {
+          if (fieldValue && fieldValue.hasOwnProperty(prop)) {
+            fieldValue = fieldValue[prop];
+
+            if (Array.isArray(fieldValue)) {
+       
+              const arrayMatch = fieldValue.some(subItem => this.itemMatchesField(subItem, searchTerm, ['area.areaName']));
+              if (arrayMatch) return true;
+            } else if (fieldValue && typeof fieldValue === 'object') {
+            
+              const objectMatch = this.itemMatchesField(fieldValue, searchTerm, ['areaName']);
+              if (objectMatch) return true;
+            } else {
+              if (typeof fieldValue === 'string') {
+                return fieldValue.toLowerCase().includes(searchTerm);
+              }
+            }
+          } else {
+            return false;
+          }
         }
+
         return false;
       });
-    } else {
-      const fieldsToSearch = Object.values(item).filter(value => typeof value === 'string');
-      return fieldsToSearch.some(value => value.toLowerCase().includes(searchTerm));
-    }
+    } 
   }
 }

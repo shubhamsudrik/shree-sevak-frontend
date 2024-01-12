@@ -1,5 +1,3 @@
-import { Week } from "./Week";
-
 export class Member {
 
     memberId :number;
