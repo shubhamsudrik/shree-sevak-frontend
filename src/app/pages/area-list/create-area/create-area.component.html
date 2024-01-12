@@ -503,7 +503,8 @@
                           }"
                         >
                           <option value="" disabled>Select Country</option>
-                          <option value="IN">IN</option>
+                          <option value="country.countryName" *ngFor="let country of countrylist " >{{country.countryName}}</option>
+                          <!-- <option value="IN" >IN</option> -->
                         </select>
                         <div class="invalid-feedback">
                           This field is mandatory.

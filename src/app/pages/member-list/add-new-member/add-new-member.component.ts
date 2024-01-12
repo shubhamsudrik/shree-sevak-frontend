@@ -4,8 +4,12 @@ import { Router } from "@angular/router";
 
 import { ToastrService } from "ngx-toastr";
 import { Member } from "src/app/Classes/member";
+import { User } from "src/app/Classes/user";
 import { AreaDataService } from "src/app/services/area-data.service";
+import { LocService } from "src/app/services/loc.service";
+import { LocationDataService } from "src/app/services/location-data.service";
 import { MemberListService } from "src/app/services/member-list.service";
+import { UserDataService } from "src/app/services/user-data.service";
 
 @Component({
   selector: "app-add-new-member",
@@ -15,7 +19,8 @@ import { MemberListService } from "src/app/services/member-list.service";
 })
 export class AddNewMemberComponent implements OnInit {
   selectedDays: any[];
-
+userDetail:User
+areaId:any;
   memberform: FormGroup;
   submitted = false;
   defaultMembers: Member[] = [];
@@ -23,13 +28,17 @@ export class AddNewMemberComponent implements OnInit {
   id: number;
   arealist: any;
   WeekOff: any;
+  loginUserDetail: User;
+  baithakLocationList: any;
 
   constructor(
     private MemberListService: MemberListService,
     private router: Router,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
-    private areaDataService: AreaDataService
+    private areaDataService: AreaDataService,
+    private userDataService: UserDataService,
+    private locationDataService:LocService
   ) {
     this.Member.marathiRead = true;
     this.Member.marathiWrite = true;
@@ -53,6 +62,9 @@ export class AddNewMemberComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+   this.getLoginUserDetail()
+   this.getBaithakLocationList(this.areaId);
     this.WeekOff = [
       {
         id: 1,
@@ -143,7 +155,7 @@ export class AddNewMemberComponent implements OnInit {
       ownBaithakDay: ["", Validators.required],
       // type: ['', Validators.required],
       hajeriNo: ["", Validators.required],
-      hajeriNoDetails: ["", Validators.required], // hajeri no details contain Baithak location from now
+      baithakLocation: ["", Validators.required], // hajeri no details contain Baithak location from now
       weeklyOffs: ["", Validators.required],
       additionalInfo: [""],
     });
@@ -154,6 +166,17 @@ export class AddNewMemberComponent implements OnInit {
       this.handleCheckboxChanges();
       this.handleCheckboxForVehical();
     });
+  }
+  getBaithakLocationList(id: number) {
+    console.log(id)
+this.locationDataService.getLocationByAreaId(id).subscribe(data => {
+  this.baithakLocationList=data
+  console.log(this.baithakLocationList);
+});
+  }
+  
+  getLoginUserDetail() {
+   this.loginUserDetail=this.userDataService.getUserDetails();
   }
   onMultiSelectChange(event: any) {
     this.selectedDays = event.value;
@@ -213,7 +236,12 @@ export class AddNewMemberComponent implements OnInit {
       console.log(this.arealist);
     });
   }
+  areaSelected(value:any){
+    console.log("area selected",value)
+    this.areaId = value
+    this.getBaithakLocationList(this.areaId)
 
+  }
   get MemberFormControl() {
     return this.memberform.controls;
   }
@@ -238,6 +266,9 @@ export class AddNewMemberComponent implements OnInit {
       );
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
+      if(!this.Member.addharNumber){
+        alert("Please provide Addhar card Number")
+      }
       console.log(this.Member);
       this.saveMember();
       this.toast.success("New Member Created successfully ");

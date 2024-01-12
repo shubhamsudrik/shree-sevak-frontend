@@ -432,13 +432,14 @@
                               submitted &&
                               MemberFormControl.area.errors?.required
                           }"
+                          (click)="areaSelected($event.target.value)"
                         >
                           <option value="" disabled>Select Area</option>
                           <option
                             *ngFor="let area of arealist"
                             [value]="area.areaId"
                           >
-                            {{ area.areaName }}
+                            {{ area.areaName }}-{{ area.city}}
                           </option>
                         </select>
 
@@ -1328,7 +1329,7 @@
                 }}</label>
                 <div class="row">
                   <div class="col-md-3" style="margin-top: 20px">
-                    <div class="form-group">
+                    <div>
                       <div class="form-check">
                         <label class="form-check-label" for="twoWheeler">
                           2-Wheeler
@@ -1561,8 +1562,39 @@
                       </div>
                     </div>
                   </div>
-
-                  <!-- hajeriNoDetails -->
+                <!-- Baithak Location -->
+ 
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label
+                        >{{ "Baithak Location" | translate
+                        }}<span class="text-danger">*</span></label
+                      ><br />
+                      <div class="input-group input-group-alternative mb-3">
+                        <div class="input-group-prepend"></div>
+                        <select
+                          formControlName="baithakLocation"
+                          class="form-control"
+                          id="baithakLocation"
+                          name="baithakLocation"
+                          [(ngModel)]="Member.baithakLocation"
+                          required
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              MemberFormControl.baithakLocation.errors?.required
+                          }"
+                          >
+                          <option value="" disabled selected >Select Baithak Location</option>
+                          <option [value]="location.locationId" *ngFor="let location of baithakLocationList">{{location.locationName}}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          {{ "This field is mandatory." | translate }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- hajeriNoDetails
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="hajeriNoDetails"
@@ -1590,7 +1622,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                    <!-- weeklyOffs -->
           <div class="col-md-4">
             <div class="form-group">

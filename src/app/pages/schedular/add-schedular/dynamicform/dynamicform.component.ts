@@ -191,6 +191,8 @@ hajeriErrorMessage: string | null = null;
     locationId: number,
     baithakId: number
   ): void {
+
+    console.log("individualScheduleRecord", date, locationId, baithakId)
     this.schedularService
       .getscheduleByDateAndLocationBaithak(date, locationId, baithakId)
       .subscribe(
@@ -209,6 +211,7 @@ hajeriErrorMessage: string | null = null;
           this.memberService
             .getMemberById(this.scheduleDto.vachanGhenara)
             .subscribe((member) => {
+              console.log(member)
               this.vachanMember = member;
               (this.vachanMember.locationId = +this.locationId),
                 (this.vachanMember.baithakId = +this.baithakId),
@@ -219,6 +222,7 @@ hajeriErrorMessage: string | null = null;
           this.memberService
             .getMemberById(this.scheduleDto.hajeriGhenara)
             .subscribe((member) => {
+              console.log(member)
               this.hajeriMember = member;
               (this.hajeriMember.locationId = +this.locationId),
                 (this.hajeriMember.baithakId = +this.baithakId),

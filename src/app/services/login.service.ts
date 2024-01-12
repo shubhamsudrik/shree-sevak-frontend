@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
+import { User } from "../Classes/user";
 
 @Injectable({
   providedIn: "root",
@@ -10,6 +11,7 @@ export class LoginService implements OnInit {
     private loginService:LoginService
     ) {}
 
+ userDetail:User
   ngOnInit(): void {
     // this.autoLogout();
   

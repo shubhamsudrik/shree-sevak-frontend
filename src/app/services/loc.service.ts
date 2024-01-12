@@ -49,7 +49,9 @@ export class LocService {
   deleteLocation(id: number): Observable<Object>{
     return this.httpclient.delete(`${this.baseUrl}/api/location/${id}`);
   }
-
+  getLocationByAreaId(areaId: any): Observable<Object>{
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/allLocations/areaId/${areaId}`)
+  }
      
 }
 

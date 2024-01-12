@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { ToastrService } from "ngx-toastr";
 import { Area } from "src/app/Classes/Area";
+import { Country } from "src/app/Classes/Country";
 import { AreaDataService } from "src/app/services/area-data.service";
+import { LocationDataService } from "src/app/services/location-data.service";
 
 @Component({
   selector: "app-create-area",
@@ -17,16 +19,19 @@ export class CreateAreaComponent implements OnInit {
   submitted: boolean = false;
   defaultAreas: any[];
   id: number;
+  countrylist: Country[];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private toast: ToastrService,
     private areaDataService: AreaDataService,
-    private router: Router
+    private router: Router,
+    private locationDataService: LocationDataService
   ) {}
 
   ngOnInit(): void {
+    this.getAllCountry()
     this.route.params.subscribe((params) => {
       this.id = +params["id"]; // the '+' sign is used to convert the parameter to a number
       console.log(this.id); // This will log the value "1" from your example URL
@@ -182,5 +187,22 @@ export class CreateAreaComponent implements OnInit {
         this.router.navigate(["/area-list"]);
       },error => this.toast.warning("Fill all mandatory field."));
     } 
+  }
+
+  getAllstate(){
+
+  }
+  getAllCity(){
+
+  }
+  getAllCountry(){
+    this.locationDataService.getAllCountryList().subscribe((country)=>{
+      this.countrylist=country;
+      console.log(this.countrylist)
+    });
+
+  }
+  getAllDivisions(){
+
   }
 }
