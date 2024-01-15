@@ -22,7 +22,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Area } from "src/app/Classes/Area";
-import { User } from "src/app/Classes/User";
+import { User } from "src/app/Classes/user";
 
 import { AreaDataService } from "src/app/services/area-data.service";
 import { LocationDataService } from "src/app/services/location-data.service";

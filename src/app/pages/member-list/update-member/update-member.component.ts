@@ -47,6 +47,7 @@ export class UpdateMemberComponent implements OnInit {
     private locationDataService:LocService
   ) {
     console.log(this.weeklyOffs);
+    console.log(this.arealist)
   }
 
   ngOnInit(): void {

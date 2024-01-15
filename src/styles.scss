@@ -16,13 +16,13 @@
   // text-transform: capitalize;
   height: 38px;
 }
-button {
+button { 
   text-transform: capitalize !important;
 }
-div{
-  text-transform: capitalize !important;
-}
- 
+// div{
+//   text-transform: capitalize !important;
+// }
+
 /* Reset the border when focus is not on the input and select fields */
 .form-group input:not(:focus),
 .form-group select:not(:focus) {
