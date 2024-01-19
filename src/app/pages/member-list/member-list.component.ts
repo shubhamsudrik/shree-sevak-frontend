@@ -91,7 +91,7 @@ export class MemberListComponent implements OnInit {
 
   
     updateMember(memberId: number) {
-      this.router.navigate(['/update-member', memberId]);
+      this.router.navigate(['/add-new-member', memberId]);
     }
 
     // show all data and handl using active in active button 

@@ -1,18 +1,23 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { ToastrService } from "ngx-toastr";
 import { Member } from "src/app/Classes/member";
 import { AreaDataService } from "src/app/services/area-data.service";
 import { MemberListService } from "src/app/services/member-list.service";
 
+export interface Week {
+  id: number;
+  value: string;
+}
 @Component({
   selector: "app-add-new-member",
   templateUrl: "./add-new-member.component.html",
   styleUrls: ["./add-new-member.component.css"],
   encapsulation: ViewEncapsulation.Emulated,
 })
+
 export class AddNewMemberComponent implements OnInit {
   selectedDays: any[];
 
@@ -23,14 +28,17 @@ export class AddNewMemberComponent implements OnInit {
   id: number;
   arealist: any;
   WeekOff: any;
+  memberId: number;
 
   constructor(
     private MemberListService: MemberListService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private toast: ToastrService,
     private areaDataService: AreaDataService
   ) {
+    if(!this.memberId){
     this.Member.marathiRead = true;
     this.Member.marathiWrite = true;
     this.Member.marathiSpeak = true;
@@ -40,10 +48,10 @@ export class AddNewMemberComponent implements OnInit {
     this.Member.englishRead = true;
     this.Member.englishWrite = true;
     this.Member.englishSpeak = true;
-    this.Member.eligibleForChild = true;
-    this.Member.eligibleForGents = true;
-    this.Member.eligibleForLadies = false;
-    this.Member.eligibleForNone = false;
+    this.Member.eligibleForNone = true;
+    this.Member.eligibleForChild = false;
+    this.Member.eligibleForGents = false;
+    this.Member.eligibleForLadies = false; 
     this.Member.status = "1";
     this.Member.initial = "Mr.";
     this.Member.education = "Graduate";
@@ -51,40 +59,97 @@ export class AddNewMemberComponent implements OnInit {
     this.Member.state = "Maharashtra";
     this.Member.division = "A";
   }
+}
 
   ngOnInit(): void {
-    this.WeekOff = [
-      {
-        id: 1,
-        value: "Sunday",
-      },
-      {
-        id: 2,
-        value: "Monday",
-      },
-      {
-        id: 3,
-        value: "Tuesday",
-      },
-      {
-        id: 4,
-        value: "Wednesday",
-      },
-      {
-        id: 5,
-        value: "Thursday",
-      },
-      {
-        id: 6,
-        value: "Friday",
-      },
-      {
-        id: 7,
-        value: "Saturday",
-      },
+    this.memberId = this.route.snapshot.params["memberId"];
+    console.log(this.memberId);
+    if(this.memberId){
+      console.log("Im in update member")
+      this.WeekOff = [
+        { id: 1, value: "Sunday", },
+        { id: 2, value: "Monday",},
+        { id: 3, value: "Tuesday",},
+        { id: 4, value: "Wednesday",},
+        { id: 5, value: "Thursday", },
+        { id: 6, value: "Friday", },
+        { id: 7, value: "Saturday", },
     ];
 
     this.getAreas();
+    this.memberRecord();
+      this.WeekOff = [
+          { id: 1, value: "Sunday", },
+          { id: 2, value: "Monday",},
+          { id: 3, value: "Tuesday",},
+          { id: 4, value: "Wednesday",},
+          { id: 5, value: "Thursday", },
+          { id: 6, value: "Friday", },
+          { id: 7, value: "Saturday", },
+      ];
+      
+      this.MemberListService.getMemberById(this.memberId).subscribe({
+        next: (data: Member) => {
+          console.log(data);
+          this.Member = data;
+          this.populateForm();
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+      this.memberform.valueChanges.subscribe(() => {
+        this.handleCheckboxChanges();
+        this.handleCheckboxForVehical();
+      });
+    }
+    else{
+      console.log("Im in create member")
+    this.WeekOff = [
+      { id: 1, value: "Sunday", },
+      { id: 2, value: "Monday",},
+      { id: 3, value: "Tuesday",},
+      { id: 4, value: "Wednesday",},
+      { id: 5, value: "Thursday", },
+      { id: 6, value: "Friday", },
+      { id: 7, value: "Saturday", },
+    ];
+
+    this.memberRecord();
+    this.getAreas();
+    this.getMembers();
+    this.memberform.valueChanges.subscribe(() => {
+      this.handleCheckboxChanges();
+      this.handleCheckboxForVehical();
+    });
+  }
+}
+
+populateForm() {
+  const memberDays: Week[] = this.Member.weeklyOffs;
+  console.log(memberDays);
+  const listofDaysIds: number[] = [];
+  memberDays.map((day: any) => {
+    listofDaysIds.push(day.id);
+  });
+  console.log(listofDaysIds);
+  this.memberform.patchValue({
+    firstName: this.Member?.firstName,
+    hindiRead: this.Member.hindiRead,
+    hindiWrite: this.Member.hindiWrite,
+    hindiSpeak: this.Member.hindiSpeak,
+    marathiRead: this.Member.marathiRead,
+    marathiWrite: this.Member.marathiWrite,
+    marathiSpeak: this.Member.marathiSpeak,
+    englishRead: this.Member.englishRead,
+    englishWrite: this.Member.englishWrite,
+    englishSpeak: this.Member.englishSpeak,
+    area: this.Member.area.areaId,
+    weeklyOffs: listofDaysIds,
+  });
+}
+
+    memberRecord(){
     // Validatons
     this.memberform = this.formBuilder.group({
       initial: [this.Member?.initial, Validators.required],
@@ -138,7 +203,7 @@ export class AddNewMemberComponent implements OnInit {
       eligibleForChild: [""],
       eligibleForGents: [""],
       eligibleForLadies: [""],
-      eligibleForNone: [false],
+      eligibleForNone: [""],
 
       ownBaithakDay: ["", Validators.required],
       // type: ['', Validators.required],
@@ -147,14 +212,8 @@ export class AddNewMemberComponent implements OnInit {
       weeklyOffs: ["", Validators.required],
       additionalInfo: [""],
     });
-
-    this.getMembers();
-
-    this.memberform.valueChanges.subscribe(() => {
-      this.handleCheckboxChanges();
-      this.handleCheckboxForVehical();
-    });
   }
+    
   onMultiSelectChange(event: any) {
     this.selectedDays = event.value;
     this.Member.weeklyOffs = this.selectedDays;
@@ -239,8 +298,12 @@ export class AddNewMemberComponent implements OnInit {
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
       console.log(this.Member);
+      if(!this.memberId){
       this.saveMember();
-      this.toast.success("New Member Created successfully ");
+      }
+      if(this.memberId){
+      this.updateMemebr();
+      }
     } else {
       this.toast.warning("Fill all mandatory field.");
     }
@@ -250,6 +313,17 @@ export class AddNewMemberComponent implements OnInit {
     this.MemberListService.createMember(this.Member).subscribe(
       (data) => {
         console.log(data);
+        this.toast.success("New Member Created successfully ");
+        this.router.navigate(["/member-list"]);
+      },
+      (error) => console.log(error)
+    );
+  }
+  updateMemebr() {
+    this.MemberListService.updateMember(this.Member.memberId,this.Member).subscribe(
+      (data) => {
+        console.log("update Memebr", data);
+        this.toast.success("  Member Info Update Succesfully ");
         this.router.navigate(["/member-list"]);
       },
       (error) => console.log(error)

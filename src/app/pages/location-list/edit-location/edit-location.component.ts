@@ -18,11 +18,12 @@ export class EditLocationComponent implements OnInit {
   submitted = false;
   defaultLocations: Location[] = [];
   location: any = new Location();
-  id: number;
+  initialAreaId:number;
   arealist:Area[];
   
   selectedArea: Area =new Area();
   isSelect : boolean = false;
+  id: number;
 
   constructor(
     private locationDataService: LocService,
@@ -36,16 +37,44 @@ export class EditLocationComponent implements OnInit {
     this.location.status=1;
     // this.location.contact1Email='@gmail.com';
     // this.location.contact2Email='@gmail.com';
-    this.location.contact1Initial='Mr.';
-    this.location.contact2Initial='Mr.';
-    this.location.contact1Occupation='Graduate';
+    // this.location.contact1Initial='Mr.';
+    // this.location.contact2Initial='Mr.';
+    // this.location.contact1Occupation='Graduate';
   }
 
   ngOnInit(): void {
-   
- 
-    this.getAreas()
-    this.getLocations();
+    this.id = this.route.snapshot.params['id'];
+    console.log("id "+this.id)
+      if(this.id){
+        this.getAreas()
+        this.getLocations();
+        this.addLocationRecord();
+        this.getLocations();
+        
+        this.locationDataService.getLocationById(this.id).subscribe({
+          next: (data: any) => {
+            console.log(data)
+            console.log("locationId "+this.id)
+            console.log("data.area.areaId ", data.area.areaId);
+            this.initialAreaId=data?.area?.areaId
+            console.log("initialAreaId",this.initialAreaId);
+            this.areaChange(this.initialAreaId);
+            this.location = data;
+            this.populateForm();
+          },
+          error: error => {
+            console.log(error);
+          }
+        });
+      }else{
+
+          this.getAreas()
+          this.getLocations();
+          this.addLocationRecord();
+        }
+      }
+
+  addLocationRecord(){
     this.locationform = this.formBuilder.group({
       locationName: ['', Validators.required],
       area: ['', Validators.required],
@@ -76,20 +105,21 @@ export class EditLocationComponent implements OnInit {
       contact2Phone1: [''],
       contact2Phone2: [''],
       mixedGenderAllow:[false],
-
-   
     });
-
-  
-    // this.loadselectedAreaObject()
   }
 
+  populateForm(){
+    this.locationform.patchValue({locationName:this.location?.locationName,
+      mixedGenderAllow:this.location?.mixedGenderAllow},)
+   
+  }
   setFields(){
     this.locationform.patchValue({
       city:this.selectedArea.city,
       division:this.selectedArea.division,
       state: this.selectedArea.state,
       country:this.selectedArea.country,
+      area:this.selectedArea.areaId
   
     })
   }
@@ -102,6 +132,10 @@ export class EditLocationComponent implements OnInit {
   
   }
 
+  onChange(event: any){
+    console.log("mixedGenderAllow :",event.target.value);
+
+  }
 
 
   //
@@ -143,8 +177,13 @@ export class EditLocationComponent implements OnInit {
       // Data doesn't exist and the form is valid, save the location
       console.log(this.location.locationName);
       console.log(this.location);
+      if(!this.id){
       this.saveLocation();
-      this.toast.success("Location Added successfully")
+      }
+     if(this.id) {
+      this.saveUpdateLocation();
+    }
+      
     } else {
       this.toast.warning('Fill all mandatory field.');
     }
@@ -159,6 +198,19 @@ export class EditLocationComponent implements OnInit {
 
       },
       (error) => console.log(error)
+    );
+  }
+
+  saveUpdateLocation() {  
+    this.locationDataService.updateLocation(this.location,this.id).subscribe(
+      data => {
+        console.log(data);
+        this.router.navigate(['/location-list']);
+        this.toast.success("Location Updated Successfully !")
+      },
+      error => {
+        console.log(error);
+      }
     );
   }
 
@@ -197,12 +249,16 @@ validatePhoneNumber(event){
 validatePhoneNumber1(event) {
   const input = event.target;
   const allowedCharacters = input.value.replace(/[^\d\s-]/g, ''); // Allow only digits, spaces, and dashes
-  const truncatedValue = allowedCharacters.slice(0, 13); // Truncate input to 12 characters
+  const truncatedValue = allowedCharacters.slice(0, 13); // Truncate input to 13 characters
   input.value = truncatedValue;
 }
 
   isDuplicateData(newLocation: Location): boolean {
     for (let item of this.defaultLocations) {
+      
+      if (item.locationId === newLocation.locationId){
+        continue;
+      }
       if (
         item.city === newLocation.city &&
         item.state === newLocation.state &&
@@ -215,6 +271,26 @@ validatePhoneNumber1(event) {
     }
     return false; // Data does not exist
     console.log(newLocation)
+  }
+  isDuplicateDataInUpdate(newLocation: Location): boolean {
+    for (let item of this.defaultLocations) {
+      console.log('existing location', item.city)
+      console.log('new location', newLocation.city)
+
+      if (item.locationId === newLocation.locationId){
+        continue;
+      }
+
+      if (
+        item.city === newLocation.city &&
+        item.state === newLocation.state &&
+        item.division === newLocation.division &&
+        item.locationName === newLocation.locationName
+      ) {
+        return true; // Data already exists
+      }
+    }
+    return false; // Data does not exist
   }
  
 

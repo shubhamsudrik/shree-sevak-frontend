@@ -48,69 +48,29 @@ export class UpdateMemberComponent implements OnInit {
 
   ngOnInit(): void {
     this.WeekOff = [
-      {
-        id: 1,
-        value: "Sunday",
-      },
-      {
-        id: 2,
-        value: "Monday",
-      },
-      {
-        id: 3,
-        value: "Tuesday",
-      },
-      {
-        id: 4,
-        value: "Wednesday",
-      },
-      {
-        id: 5,
-        value: "Thursday",
-      },
-      {
-        id: 6,
-        value: "Friday",
-      },
-      {
-        id: 7,
-        value: "Saturday",
-      },
+        { id: 1, value: "Sunday", },
+        { id: 2, value: "Monday",},
+        { id: 3, value: "Tuesday",},
+        { id: 4, value: "Wednesday",},
+        { id: 5, value: "Thursday", },
+        { id: 6, value: "Friday", },
+        { id: 7, value: "Saturday", },
     ];
+
     this.getAreas();
     this.id = this.route.snapshot.params["id"];
     this.initializeForm();
     if (this.id) {
       this.WeekOff = [
-        {
-          id: 1,
-          value: "Sunday",
-        },
-        {
-          id: 2,
-          value: "Monday",
-        },
-        {
-          id: 3,
-          value: "Tuesday",
-        },
-        {
-          id: 4,
-          value: "Wednesday",
-        },
-        {
-          id: 5,
-          value: "Thursday",
-        },
-        {
-          id: 6,
-          value: "Friday",
-        },
-        {
-          id: 7,
-          value: "Saturday",
-        },
+          { id: 1, value: "Sunday", },
+          { id: 2, value: "Monday",},
+          { id: 3, value: "Tuesday",},
+          { id: 4, value: "Wednesday",},
+          { id: 5, value: "Thursday", },
+          { id: 6, value: "Friday", },
+          { id: 7, value: "Saturday", },
       ];
+      
       this.MemberListService.getMemberById(this.id).subscribe({
         next: (data: Member) => {
           console.log(data);

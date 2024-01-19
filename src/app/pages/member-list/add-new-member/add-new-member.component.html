@@ -14,10 +14,16 @@
                 (ngSubmit)="onSubmit()"
                 class="needs-validation"
               >
+              <div *ngIf="!memberId">
                 <h2 class="text-center">
                   {{ "Add Member Records" | translate }}
                 </h2>
                 <br />
+                </div>
+                <div *ngIf="memberId">
+                  <h2 class="text-center">{{'Update Member Records' | translate }}</h2><br>
+                  <br />
+                  </div>
 
                 <!-- Head -->
                 <div>

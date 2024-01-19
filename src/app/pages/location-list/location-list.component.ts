@@ -101,7 +101,7 @@ export class LocationListComponent implements OnInit {
   }
 
   updateLocation(locationId: number) {
-    this.router.navigate(['/update-location', locationId]);
+    this.router.navigate(['/edit-location', locationId]);
   }
 
   //get all location data

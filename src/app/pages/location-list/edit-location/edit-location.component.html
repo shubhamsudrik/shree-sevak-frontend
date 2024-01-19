@@ -9,9 +9,12 @@
           <div class="card shadow border-0 w-500">
             <div class="card-body px-lg-5 py-lg-5 text-color">
               <form [formGroup]="locationform" (ngSubmit)="onSubmit()">
-                <h2 class="text-center">
-                  {{ "Add Location Information" | translate }}
-                </h2>
+                <div *ngIf="!id">
+                <h2 class="text-center">{{ "Add Location Information" | translate }} </h2>
+                </div>
+                <div *ngIf="id">
+                  <h2 class="text-center">{{ 'Update Location Information' | translate }}</h2><br>
+                  </div>
                 <br />
 
                 <!-- Header -->
