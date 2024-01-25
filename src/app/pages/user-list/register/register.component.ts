@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
       .subscribe((data) => {
         const modifydefaultAreas: Area1[] = [];
         data.map((area: Area) => {
-          const modifiedValue=`${area.areaName},${area.country},${area.state},${area.city},${area.division},`
+          const modifiedValue=`${area.areaName},${area.country.countryName},${area.state.stateName},${area.city.cityName},${area.division.divisionName},`
           modifydefaultAreas.push({
             id: area.areaId,
             value:modifiedValue
@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
     this.areaDataService.getAllUnselectedAreas().subscribe((data) => {
       const modifydefaultAreas: Area1[] = [];
       data.map((area: Area) => {
-        const modifiedValue=`${area.areaName},${area.country},${area.state},${area.city},${area.division},`
+        const modifiedValue=`${area.areaName},${area.country.countryName},${area.state.stateName},${area.city.cityName},${area.division.divisionName},`
         modifydefaultAreas.push({
           id: area.areaId,
           value: modifiedValue,

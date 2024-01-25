@@ -103,6 +103,6 @@ export class BaithakListComponent implements OnInit {
     }
   }
   updateBaithak(baithakId: number) {
-    this.router.navigate(["/update-baithak", baithakId]);
+    this.router.navigate(["/create-baithak", baithakId]);
   }
 }

@@ -14,10 +14,19 @@
                 (ngSubmit)="onSubmit()"
                 class="needs-validation"
               >
-                <h2 class="text-center">
-                  {{ "Add Member Records" | translate }}
-                </h2>
-                <br />
+                <div *ngIf="!memberId">
+                  <h2 class="text-center">
+                    {{ "Add Member Records" | translate }}
+                  </h2>
+                  <br />
+                </div>
+                <div *ngIf="memberId">
+                  <h2 class="text-center">
+                    {{ "Update Member Records" | translate }}
+                  </h2>
+                  <br />
+                  <br />
+                </div>
 
                 <!-- Head -->
                 <div>
@@ -439,7 +448,7 @@
                             *ngFor="let area of arealist"
                             [value]="area.areaId"
                           >
-                            {{ area.areaName }}-{{ area.city}}
+                            {{ area.areaName }}-{{ area.city.name }}
                           </option>
                         </select>
 
@@ -897,12 +906,18 @@
                               submitted &&
                               MemberFormControl.city.errors?.required
                           }"
+                          (click)="onCitySelect($event.target.value)"
                         >
                           <option value="" disabled>Select City</option>
-                          <option value="Pune">Pune</option>
-                          <option value="Mumbai">Mumbai</option>
+                          <option
+                            *ngFor="let city of cityList"
+                            [value]="city.id"
+                          >
+                            {{ city.cityName }}
+                          </option>
+                          <!-- <option value="Mumbai">Mumbai</option>
                           <option value="kolhapur">Kolhapur</option>
-                          <option value="Nagpur">Nagpur</option>
+                          <option value="Nagpur">Nagpur</option> -->
                         </select>
                         <div class="invalid-feedback">
                           {{ "This field is mandatory." | translate }}
@@ -932,12 +947,17 @@
                               MemberFormControl.division.errors?.required
                           }"
                         >
-                          <option value="" disabled>Select Division</option>
-                          <option value="A">A</option>
-                          <option value="B">B</option>
+                          <option [value]="" disabled>Select Division</option>
+                          <option
+                            *ngFor="let division of divisionList"
+                            [value]="division.id"
+                          >
+                            {{ division.divisionName }}
+                          </option>
+                          <!-- <option value="B">B</option>
                           <option value="C">C</option>
                           <option value="D">D</option>
-                          <option value="E">E</option>
+                          <option value="E">E</option> -->
                         </select>
                         <div class="invalid-feedback">
                           {{ "This field is mandatory." | translate }}
@@ -967,14 +987,18 @@
                               submitted &&
                               MemberFormControl.state.errors?.required
                           }"
+                          (click)="onStateSelect($event.target.value)"
                         >
                           <option value="" disabled>
                             {{ "Select state" | translate }}
                           </option>
-                          <option value="Andhra Pradesh">
-                            {{ "Andhra Pradesh" | translate }}
+                          <option
+                            *ngFor="let state of stateList"
+                            [value]="state.id"
+                          >
+                            {{ state.stateName | translate }}
                           </option>
-                          <option value="Arunachal Pradesh">
+                          <!-- <option value="Arunachal Pradesh">
                             {{ "Arunachal Pradesh" | translate }}
                           </option>
                           <option value="Assam">
@@ -1052,7 +1076,7 @@
                           </option>
                           <option value="West Bengal">
                             {{ "West Bengal" | translate }}
-                          </option>
+                          </option> -->
                         </select>
                         <div class="invalid-feedback">
                           {{ "This field is mandatory." | translate }}
@@ -1081,9 +1105,16 @@
                               submitted &&
                               MemberFormControl.country.errors?.required
                           }"
+                          (click)="onCountrySelect($event.target.value)"
                         >
-                          <option value="" disabled>Select Country</option>
-                          <option value="IN">IN</option>
+                          >
+                          <option [value]="" disabled>Select Country</option>
+                          <option
+                            *ngFor="let country of countrylist"
+                            [value]="country.id"
+                          >
+                            {{ country.countryName }}
+                          </option>
                         </select>
                         <div class="invalid-feedback">
                           {{ "This field is mandatory." | translate }}
@@ -1423,8 +1454,8 @@
                 </div>
 
                 <!-- ownBaithakDay -->
-                <div class="row">
-                  <div class="col-md-6">
+                <div class="row" >
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label
                         >{{ "Baithak Day" | translate
@@ -1474,66 +1505,10 @@
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <!-- ownBaithakId -->
-                <!-- <div class="col-md-6">
-           <div class="form-group">
-            <label for="ownBaithakId">{{ 'Baithak Id' | translate }}</label>
-            <div class="input-group input-group-alternative mb-3">
-              <div class="input-group-prepend"></div>
-              <input
-                  formControlName="ownBaithakId"
-                  type="text"
-                  class="form-control"
-                 id="ownBaithakId"
-                name="ownBaithakId"
-                [(ngModel)]="Member.ownBaithakId"
-                [ngClass]="{
-                 'is-invalid': (submitted && MemberFormControl.ownBaithakId.errors?.required)
-                }"
-                (input)="validateHajeriNumber($event)"
-                maxlength="10" 
-                  />
-                  <div class="invalid-feedback">
-                    {{ 'ownBaithakId is required.' | translate }}
-                  </div>
-            </div>
-            </div>
-           </div> -->
+                  <!-- hajeriNo -->
 
-                <!-- type -->
-                <!-- <div class="row">
-         <div class="col-md-3">
-          <div class="form-group">
-           <label for="type">{{ 'Type' | translate }}</label>
-           <div class="input-group input-group-alternative mb-3">
-               <div class="input-group-prepend"></div>
-               <select
-                   formControlName="type"
-                   type="text"
-                   class="form-control"
-                   id="type"
-                   name="type"
-                   [(ngModel)]="Member.type"
-                   [ngClass]="{
-                       'is-invalid': (submitted && (MemberFormControl.type.errors?.required))
-                   }"
-               >
-               <option value="" disabled>Select Type</option>
-               <option value="1">{{'Reader'|translate}}</option>
-               <option value="2">{{'Attendence'|translate}}</option>
-               <option value="3">{{'Both'|translate}}</option>
-             </select>
-               <div class="invalid-feedback">
-                 {{ 'Type is required.' | translate }}
-               </div>
-           </div>
-           </div>
-       </div> -->
-                <!-- hajeriNo -->
-                <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label for="hajeriNo"
                         >{{ "Hajeri Number" | translate
@@ -1561,10 +1536,12 @@
                         </div>
                       </div>
                     </div>
+
+                   
                   </div>
-                <!-- Baithak Location -->
- 
-                  <div class="col-md-4">
+                   <!-- Baithak Location -->
+
+                   <div class="col-md-4">
                     <div class="form-group">
                       <label
                         >{{ "Baithak Location" | translate
@@ -1582,11 +1559,19 @@
                           [ngClass]="{
                             'is-invalid':
                               submitted &&
-                              MemberFormControl.baithakLocation.errors?.required
+                              MemberFormControl.baithakLocation.errors
+                                ?.required
                           }"
+                        >
+                          <option value="" disabled selected>
+                            Select Baithak Location
+                          </option>
+                          <option
+                            [value]="location.locationId"
+                            *ngFor="let location of baithakLocationList"
                           >
-                          <option value="" disabled selected >Select Baithak Location</option>
-                          <option [value]="location.locationId" *ngFor="let location of baithakLocationList">{{location.locationName}}</option>
+                            {{ location.locationName }}
+                          </option>
                         </select>
                         <div class="invalid-feedback">
                           {{ "This field is mandatory." | translate }}
@@ -1594,62 +1579,39 @@
                       </div>
                     </div>
                   </div>
-                  <!-- hajeriNoDetails
+                 
+                  <!-- weeklyOffs -->
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="hajeriNoDetails"
-                        >{{ "Baithak Location" | translate
+                      <label
+                        >{{ "Weekly Offs" | translate
                         }}<span class="text-danger">*</span></label
-                      >
-                      <div class="input-group input-group-alternative mb-3">
-                        <div class="input-group-prepend"></div>
-                        <input
-                          formControlName="hajeriNoDetails"
-                          type="text"
-                          class="form-control"
-                          id="hajeriNoDetails"
-                          name="hajeriNoDetails"
-                          [(ngModel)]="Member.hajeriNoDetails"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              MemberFormControl.hajeriNoDetails.errors?.required
-                          }"
-                          maxlength="25"
-                        />
-                        <div class="invalid-feedback">
-                          {{ "This field is mandatory." | translate }}
-                        </div>
+                      ><br />
+                      <!-- <div class="input-group input-group-alternative mb-3"> -->
+                      <!-- <div class="input-group-prepend"></div> -->
+                      <p-multiSelect
+                        placeholder="Weekly Off"
+                        formControlName="weeklyOffs"
+                        [options]="WeekOff"
+                        optionValue="id"
+                        optionLabel="value"
+                        id="weeklyOffs"
+                        name="weeklyOffs"
+                        [(ngModel)]="Member.weeklyOffs"
+                        required
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted &&
+                            MemberFormControl.weeklyOffs.errors?.required
+                        }"
+                        (onChange)="onMultiSelectChange($event)"
+                      ></p-multiSelect>
+                      <div class="invalid-feedback">
+                        {{ "This field is mandatory." | translate }}
                       </div>
                     </div>
-                  </div> -->
-                   <!-- weeklyOffs -->
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>{{ 'Weekly Offs' | translate }}<span class="text-danger">*</span></label><br>
-              <!-- <div class="input-group input-group-alternative mb-3"> -->
-                <!-- <div class="input-group-prepend"></div> -->
-                <p-multiSelect placeholder="Weekly Off" 
-                formControlName="weeklyOffs"    
-                 [options]="WeekOff" 
-                 optionValue="id"       
-                 optionLabel="value"  
-                  id="weeklyOffs"
-                  name="weeklyOffs"
-                  [(ngModel)]="Member.weeklyOffs"
-                  required
-                  [ngClass]="{
-                    'is-invalid': (submitted && MemberFormControl.weeklyOffs.errors?.required)
-                  }"
-                  (onChange)="onMultiSelectChange($event)"
-                 
-                ></p-multiSelect>              
-                <div class="invalid-feedback">
-                  {{ 'This field is mandatory.' | translate }}
+                  </div>
                 </div>
-              </div>
-             </div>         
-          </div>
 
                 <!-- Heade -->
                 <div>
