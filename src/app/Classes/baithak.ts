@@ -1,7 +1,7 @@
 
 
 export class Baithak{
-    bithakId :Number
+    bithakId :number
     baithakType:string;
 	dayOfWeek:string ;
     // date:string;

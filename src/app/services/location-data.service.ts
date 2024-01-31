@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  Observable, catchError, throwError } from 'rxjs';
+import { Country } from '../Classes/Country';
 
 
 @Injectable({
@@ -9,6 +10,7 @@ import {  Observable, catchError, throwError } from 'rxjs';
 export class LocationDataService {
  
   private baseUrl = "http://localhost:8080";
+  private locationUrl="http://localhost:8080/api/country"
   
 
   constructor(private httpclient: HttpClient) {
@@ -53,5 +55,15 @@ export class LocationDataService {
   //   const data = { otp: otp };
   //   return this.httpclient.post(`${this.baseUrl}/api/user/verify-otp`, data);
   // }
+
+  getAllCountryList(): Observable<Country[]>{
+    return this.httpclient.get<Country[]>(`${this.locationUrl}/all`);
+
+  }
+  
+
+
+
+
 }
 

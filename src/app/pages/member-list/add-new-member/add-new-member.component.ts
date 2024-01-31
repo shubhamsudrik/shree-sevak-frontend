@@ -4,8 +4,12 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { ToastrService } from "ngx-toastr";
 import { Member } from "src/app/Classes/member";
+import { User } from "src/app/Classes/user";
 import { AreaDataService } from "src/app/services/area-data.service";
+import { LocService } from "src/app/services/loc.service";
+import { LocationDataService } from "src/app/services/location-data.service";
 import { MemberListService } from "src/app/services/member-list.service";
+import { UserDataService } from "src/app/services/user-data.service";
 
 export interface Week {
   id: number;
@@ -20,7 +24,8 @@ export interface Week {
 
 export class AddNewMemberComponent implements OnInit {
   selectedDays: any[];
-
+userDetail:User
+areaId:any;
   memberform: FormGroup;
   submitted = false;
   defaultMembers: Member[] = [];
@@ -29,6 +34,8 @@ export class AddNewMemberComponent implements OnInit {
   arealist: any;
   WeekOff: any;
   memberId: number;
+  loginUserDetail: User;
+  baithakLocationList: any;
 
   constructor(
     private MemberListService: MemberListService,
@@ -36,7 +43,9 @@ export class AddNewMemberComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private toast: ToastrService,
-    private areaDataService: AreaDataService
+    private areaDataService: AreaDataService,
+    private userDataService: UserDataService,
+    private locationDataService:LocService
   ) {
     if(!this.memberId){
     this.Member.marathiRead = true;
@@ -208,12 +217,29 @@ populateForm() {
       ownBaithakDay: ["", Validators.required],
       // type: ['', Validators.required],
       hajeriNo: ["", Validators.required],
-      hajeriNoDetails: ["", Validators.required], // hajeri no details contain Baithak location from now
+      baithakLocation: ["", Validators.required], // hajeri no details contain Baithak location from now
       weeklyOffs: ["", Validators.required],
       additionalInfo: [""],
     });
+
+    this.getMembers();
+
+    this.memberform.valueChanges.subscribe(() => {
+      this.handleCheckboxChanges();
+      this.handleCheckboxForVehical();
+    });
   }
-    
+  getBaithakLocationList(id: number) {
+    console.log(id)
+this.locationDataService.getLocationByAreaId(id).subscribe(data => {
+  this.baithakLocationList=data
+  console.log(this.baithakLocationList);
+});
+  }
+  
+  getLoginUserDetail() {
+   this.loginUserDetail=this.userDataService.getUserDetails();
+  }
   onMultiSelectChange(event: any) {
     this.selectedDays = event.value;
     this.Member.weeklyOffs = this.selectedDays;
@@ -272,7 +298,12 @@ populateForm() {
       console.log(this.arealist);
     });
   }
+  areaSelected(value:any){
+    console.log("area selected",value)
+    this.areaId = value
+    this.getBaithakLocationList(this.areaId)
 
+  }
   get MemberFormControl() {
     return this.memberform.controls;
   }
@@ -297,6 +328,9 @@ populateForm() {
       );
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
+      if(!this.Member.addharNumber){
+        alert("Please provide Addhar card Number")
+      }
       console.log(this.Member);
       if(!this.memberId){
       this.saveMember();

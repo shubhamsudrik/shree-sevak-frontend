@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/Classes/user';
 import { LoginService } from 'src/app/services/login.service';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 constructor(
   private loginservice:LoginService,
   private toast: ToastrService,
-  private  router: Router,){
+  private  router: Router,
+ private userDataService:UserDataService){
   
 }
 
@@ -37,7 +39,7 @@ constructor(
       this.loginservice.generateToken(this.credentials).subscribe(
        (response:any)=>{
         console.log(response) 
-
+        this.userDataService.setUserDetails(response.user);
   console.log(response.jwtToken)
   console.log(response.user.roles)
 

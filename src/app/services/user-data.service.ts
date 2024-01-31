@@ -58,7 +58,11 @@ export class UserDataService {
     }
   }
 
-  set setUserDetails(user:User){
+  setUserDetails(user:User){
    this.userDtails=user;
+   console.log("set user ",user);
+  }
+  getUserDetails(){
+    return this.userDtails;
   }
 }

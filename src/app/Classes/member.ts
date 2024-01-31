@@ -9,7 +9,7 @@ export class Member {
 	email:string;
 	type:string;
 	hajeriNo:string;
-	hajeriNoDetails:string;
+	baithakLocation:any;
 	addharNumber:string;
 	education:string;
 	add1:string;

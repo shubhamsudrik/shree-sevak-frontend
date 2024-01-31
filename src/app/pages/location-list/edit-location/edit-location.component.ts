@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Area } from 'src/app/Classes/Area';
 import { AreaDataService } from 'src/app/services/area-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserDataService } from 'src/app/services/user-data.service';
+import { User } from 'src/app/Classes/user';
 
 @Component({
   selector: 'app-edit-location',
@@ -24,6 +26,7 @@ export class EditLocationComponent implements OnInit {
   selectedArea: Area =new Area();
   isSelect : boolean = false;
   id: number;
+  loginUser: User;
 
   constructor(
     private locationDataService: LocService,
@@ -31,7 +34,8 @@ export class EditLocationComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
-    private areaDataService:AreaDataService
+    private areaDataService:AreaDataService,
+    private userDataService: UserDataService
   ) {
 
     this.location.status=1;
@@ -106,6 +110,9 @@ export class EditLocationComponent implements OnInit {
       contact2Phone2: [''],
       mixedGenderAllow:[false],
     });
+  }
+  getloginUserDetail() {
+   this.loginUser=this.userDataService.getUserDetails();
   }
 
   populateForm(){

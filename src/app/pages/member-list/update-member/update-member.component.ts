@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 
 import { Member } from "src/app/Classes/member";
 import { AreaDataService } from "src/app/services/area-data.service";
+import { LocService } from "src/app/services/loc.service";
 import { MemberListService } from "src/app/services/member-list.service";
 
 export interface Week {
@@ -18,10 +19,12 @@ export interface Week {
 })
 export class UpdateMemberComponent implements OnInit {
   selectedDays: any[];
+  areaId: number;
   onMultiSelectChange(event: any) {
     this.selectedDays = event.value;
     console.log(this.selectedDays);
   }
+  baithakLocationList:any;
   memberform: FormGroup;
   submitted = false;
   defaultMembers: Member[] = [];
@@ -40,7 +43,8 @@ export class UpdateMemberComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
-    private areaDataService: AreaDataService
+    private areaDataService: AreaDataService,
+    private locationDataService:LocService
   ) {
     console.log(this.weeklyOffs);
     console.log(this.arealist)
@@ -75,6 +79,8 @@ export class UpdateMemberComponent implements OnInit {
         next: (data: Member) => {
           console.log(data);
           this.Member = data;
+          this.areaId=this.Member.area.areaId;
+          this.getBaithakLocationList(this.areaId);
           this.populateForm();
         },
         error: (error) => {
@@ -83,6 +89,7 @@ export class UpdateMemberComponent implements OnInit {
       });
     }
   }
+ 
   populateForm() {
     const memberDays: Week[] = this.Member.weeklyOffs;
     console.log(memberDays);
@@ -105,6 +112,7 @@ export class UpdateMemberComponent implements OnInit {
       area: this.Member.area.areaId,
       weeklyOffs: listofDaysIds,
     });
+    
   }
   // Validatons
   initializeForm() {
@@ -123,7 +131,7 @@ export class UpdateMemberComponent implements OnInit {
       panNo: [this.Member?.panNo],
       // photoBase64: [this.Member?.photoBase64],
       area: [this.Member?.area, Validators.required],
-
+      
       add1: [this.Member?.add1, Validators.required],
       add2: [this.Member?.add2, Validators.required],
       add3: [this.Member?.add3],
@@ -140,14 +148,14 @@ export class UpdateMemberComponent implements OnInit {
       longitude: [this.Member?.longitude],
       googleMapLink: [this.Member?.googleMapLink],
       status: [this.Member?.state, Validators.required],
-
+      
       mobile: [
         this.Member?.mobile,
         [Validators.required, Validators.minLength(10)],
       ],
       phone: [this.Member?.phoneNumber],
       email: [this.Member?.email, [Validators.required, Validators.email]],
-
+      
       twoWheeler: [this.Member?.twoWheeler],
       fourWheeler: [this.Member?.fourWheeler],
       // both: [this.Member?.both],
@@ -164,29 +172,30 @@ export class UpdateMemberComponent implements OnInit {
       englishRead: [this.Member?.englishRead],
       englishWrite: [this.Member?.englishWrite],
       englishSpeak: [this.Member?.englishSpeak],
-
+      
       eligibleForChild: [""],
       eligibleForNone: [""],
       eligibleForGents: [""],
       eligibleForLadies: [""],
-
+      
       ownBaithakDay: [this.Member?.ownBaithakDay, Validators.required],
       // ownBaithakId: [this.Member?.ownBaithakId, Validators.required],
       // type: [this.Member?.type, Validators.required],
       hajeriNo: [this.Member?.hajeriNo, Validators.required],
-      hajeriNoDetails: [this.Member?.hajeriNoDetails, Validators.required], // hajerinodetails change into Baithak Location it contain baithak location toward
+      baithakLocation: [this.Member?.baithakLocation, Validators.required], // hajerinodetails change into Baithak Location it contain baithak location toward
       weeklyOffs: [this.Member?.weeklyOffs || [], Validators.required],
       additionalInfo: [this.Member?.additionalInfo],
     });
-
+    
+    
     this.getMembers();
-
+    
     this.memberform.valueChanges.subscribe(() => {
       this.handleCheckboxChanges();
       this.handleCheckboxForVehical();
     });
   }
-
+  
   // // vehicacheckbox
   handleCheckboxForVehical() {
     const twoWheeler = this.memberform.get("twoWheeler");
@@ -227,12 +236,26 @@ export class UpdateMemberComponent implements OnInit {
       eligibleForLadies.setValue(false, { emitEvent: false });
     }
 
+   
     // Update the Member object
     // this.Member.eligibleForChild = eligibleForChild.value;
     // this.Member.eligibleForGents = eligibleForGents.value;
     // this.Member.eligibleForLadies = eligibleForLadies.value;
   }
+  areaSelected(value:any){
+    console.log("area selected",value)
+    this.areaId = value
+    this.getBaithakLocationList(this.areaId)
 
+  }
+  getBaithakLocationList(id: number) {
+    console.log(id)
+this.locationDataService.getLocationByAreaId(id).subscribe(data => {
+  this.baithakLocationList=data
+  console.log(this.baithakLocationList);
+});
+  }
+  
   getAreas() {
     this.areaDataService.getAreaByStatus("1").subscribe((data) => {
       this.arealist = data;
@@ -264,6 +287,9 @@ export class UpdateMemberComponent implements OnInit {
       );
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
+      if(!this.Member.addharNumber){
+        alert("Please provide Addhar card Number")
+      }
       console.log(this.Member);
       this.updateMemebr();
       this.toast.success("  Member Info Update Succesfully ");
