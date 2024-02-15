@@ -38,30 +38,39 @@ export class UpdateBaithakComponent implements OnInit {
 
      // FormValidation
      this.baithakForm = this.formBuilder.group({
-      baithakType: ['',Validators.required ],
-      dayOfWeek: ['',Validators.required],
+      baithakType: [this.baithak?.baithakType,Validators.required ],
+      dayOfWeek: [this.baithak?.dayOfWeek,Validators.required],
       // date: ['',Validators.required],
-      fromTime: ['',Validators.required],
-      status: ['',Validators.required],
-      toTime: ['',Validators.required]
+      fromTime: [this.baithak?.fromTime,Validators.required],
+      status: [this.baithak?.status,Validators.required],
+      toTime: [this.baithak?.toTime,Validators.required]
   
     })
   }
   onSubmit() {
     if(this.baithakForm.valid){
     console.log(this.baithak);
-    this.saveBaithak();
+    this.updateBaithak();
     this.toast.success("Baithak update successfully");
     }else{
       this.toast.warning("All field is mandatory.");
     }
   }
+
+  updateBaithak(){
+    this.baithakService.updateBaithak(this.id,this.baithak).subscribe((data) => {
+      console.log(data);
+      this.router.navigate(["/baithak-list"]);
+    },error=>console.log(error))
+     
+
+  }
   saveBaithak() {
     this.baithakService.createBaithak(this.baithak).subscribe((data) => {
       console.log(data);
       this.router.navigate(["/baithak-list"]);
-    }),
-      (error) => console.log(error);
+    },error => console.log(error));
+      
   }
 
   CancelChanges() {

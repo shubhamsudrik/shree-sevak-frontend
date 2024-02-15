@@ -1,5 +1,3 @@
-import { Week } from "./Week";
-
 export class Member {
 
     memberId :number;
@@ -11,17 +9,17 @@ export class Member {
 	email:string;
 	type:string;
 	hajeriNo:string;
-	hajeriNoDetails:string;
+	baithakLocation:any;
 	addharNumber:string;
 	education:string;
 	add1:string;
 	add2:string;
 	add3:string;
 	add4:string;
-	city:string;
-	country:string;
+	city:any;
+	country:any;
 	additionalInfo:string;
-	division:string;
+	division:any;
 	dob:string;
 	gender:string;
 	googleMapLink:string;
@@ -57,7 +55,7 @@ export class Member {
  phone:string;
  photoBase64:string;
  pincode:string;
- state :string;
+ state :any;
  status:string;
  twoWheelerDetail:string;
  fourWheelerDetail:string;

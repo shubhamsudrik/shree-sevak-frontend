@@ -5,10 +5,10 @@ export class Location{
     area : any;
     add1 : string;
     add2 : string;
-    division : string;
-    city : string;
-    state : string;
-    country : string;
+    division : any;
+    city : any;
+    state : any;
+    country : any;
     pincode : number;
     locId: number;
     latitude : string;

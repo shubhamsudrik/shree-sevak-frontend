@@ -1,23 +1,36 @@
 /* styles.scss */
-
+ 
 // @import "primeng/resources/themes/lara-light-blue/theme.css";
 // @import "primeng/resources/primeng.css";
-
-
+ 
+ 
 /* Highlight the border of the input and select fields when they have focus */
 .form-group input:focus,
 .form-group select:focus {
-  border: 2px solid #3498db; 
+  border: 2px solid #3498db;
 }
+.form-group select,
+.form-group input {
+  padding: initial !important;
+  padding-left: 5px !important;
+  // text-transform: capitalize;
+  height: 38px;
+}
+button { 
+  text-transform: capitalize !important;
+}
+// div{
+//   text-transform: capitalize !important;
+// }
 
 /* Reset the border when focus is not on the input and select fields */
 .form-group input:not(:focus),
 .form-group select:not(:focus) {
   border: 1px solid #ccc; /* Change the color to your default border color */
 }
-
-
+ 
+ 
 //   }
-  
+ 
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";

@@ -11,7 +11,7 @@ import { User } from "../Classes/user";
 })
 export class UserDataService {
 
-  userDtails:User;
+  userDetails:User;
 
   constructor(
     private httpclient: HttpClient,
@@ -58,7 +58,11 @@ export class UserDataService {
     }
   }
 
-  set setUserDetails(user:User){
-   this.userDtails=user;
+  setUserDetails(user:User){
+   this.userDetails=user;
+   console.log("set user ",user);
+  }
+  getUserDetails(){
+    return this.userDetails;
   }
 }

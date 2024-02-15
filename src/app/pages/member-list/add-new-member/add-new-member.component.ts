@@ -1,12 +1,20 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { ToastrService } from "ngx-toastr";
 import { Member } from "src/app/Classes/member";
+import { User } from "src/app/Classes/user";
 import { AreaDataService } from "src/app/services/area-data.service";
+import { LocService } from "src/app/services/loc.service";
+import { LocationDataService } from "src/app/services/location-data.service";
 import { MemberListService } from "src/app/services/member-list.service";
+import { UserDataService } from "src/app/services/user-data.service";
 
+export interface Week {
+  id: number;
+  value: string;
+}
 @Component({
   selector: "app-add-new-member",
   templateUrl: "./add-new-member.component.html",
@@ -15,76 +23,156 @@ import { MemberListService } from "src/app/services/member-list.service";
 })
 export class AddNewMemberComponent implements OnInit {
   selectedDays: any[];
-
+  userDetail: User;
+  areaId: any;
   memberform: FormGroup;
   submitted = false;
   defaultMembers: Member[] = [];
   Member: Member = new Member();
-  id: number;
+
   arealist: any;
   WeekOff: any;
+  loginUserDetail: User;
+  baithakLocationList: any;
+  memberId: number;
+  countryId: number;
+  stateId: number;
+  cityId: number;
+  countrylist: any;
+  divisionList: any;
+  cityList: any;
+  stateList: any;
+  selectedArea: any;
+  isCountryRecordListLoaded: boolean = false;
 
   constructor(
     private MemberListService: MemberListService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private toast: ToastrService,
-    private areaDataService: AreaDataService
+    private areaDataService: AreaDataService,
+    private userDataService: UserDataService,
+    private locationDataService: LocService,
+    private locationService: LocationDataService
   ) {
-    this.Member.marathiRead = true;
-    this.Member.marathiWrite = true;
-    this.Member.marathiSpeak = true;
-    this.Member.hindiRead = true;
-    this.Member.hindiWrite = true;
-    this.Member.hindiSpeak = true;
-    this.Member.englishRead = true;
-    this.Member.englishWrite = true;
-    this.Member.englishSpeak = true;
-    this.Member.eligibleForChild = true;
-    this.Member.eligibleForGents = true;
-    this.Member.eligibleForLadies = false;
-    this.Member.eligibleForNone = false;
-    this.Member.status = "1";
-    this.Member.initial = "Mr.";
-    this.Member.education = "Graduate";
-    this.Member.country = "IN";
-    this.Member.state = "Maharashtra";
-    this.Member.division = "A";
+    if (!this.memberId) {
+      this.Member.marathiRead = true;
+      this.Member.marathiWrite = true;
+      this.Member.marathiSpeak = true;
+      this.Member.hindiRead = true;
+      this.Member.hindiWrite = true;
+      this.Member.hindiSpeak = true;
+      this.Member.englishRead = true;
+      this.Member.englishWrite = true;
+      this.Member.englishSpeak = true;
+      this.Member.eligibleForNone = true;
+      this.Member.eligibleForChild = false;
+      this.Member.eligibleForGents = false;
+      this.Member.eligibleForLadies = false;
+      this.Member.status = "1";
+      this.Member.initial = "Mr.";
+      this.Member.education = "Graduate";
+      // this.Member.country = "IN";
+      // this.Member.state = "Maharashtra";
+      // this.Member.division = "A";
+    }
   }
 
   ngOnInit(): void {
-    this.WeekOff = [
-      {
-        id: 1,
-        value: "Sunday",
-      },
-      {
-        id: 2,
-        value: "Monday",
-      },
-      {
-        id: 3,
-        value: "Tuesday",
-      },
-      {
-        id: 4,
-        value: "Wednesday",
-      },
-      {
-        id: 5,
-        value: "Thursday",
-      },
-      {
-        id: 6,
-        value: "Friday",
-      },
-      {
-        id: 7,
-        value: "Saturday",
-      },
-    ];
-
+    // this.getAllCountry();
+  this.getLoginUserDetail()
+    this.memberRecord();
     this.getAreas();
+    this.memberId = this.route.snapshot.params["memberId"];
+    console.log(this.memberId);
+    if (this.memberId) {
+      console.log("Im in update member");
+      this.WeekOff = [
+        { id: 1, value: "Sunday" },
+        { id: 2, value: "Monday" },
+        { id: 3, value: "Tuesday" },
+        { id: 4, value: "Wednesday" },
+        { id: 5, value: "Thursday" },
+        { id: 6, value: "Friday" },
+        { id: 7, value: "Saturday" },
+      ];
+
+      this.WeekOff = [
+        { id: 1, value: "Sunday" },
+        { id: 2, value: "Monday" },
+        { id: 3, value: "Tuesday" },
+        { id: 4, value: "Wednesday" },
+        { id: 5, value: "Thursday" },
+        { id: 6, value: "Friday" },
+        { id: 7, value: "Saturday" },
+      ];
+
+      this.MemberListService.getMemberById(this.memberId).subscribe({
+        next: (data: Member) => {
+          console.log(data);
+          this.Member = data;
+          this.selectedArea = data.area;
+          this.getBaithakLocationList(this.selectedArea.areaId);
+          this.getAllCountryRecord();
+          this.populateForm();
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+      this.memberform.valueChanges.subscribe(() => {
+        this.handleCheckboxChanges();
+        this.handleCheckboxForVehical();
+      });
+    } else {
+      console.log("Im in create member");
+      this.WeekOff = [
+        { id: 1, value: "Sunday" },
+        { id: 2, value: "Monday" },
+        { id: 3, value: "Tuesday" },
+        { id: 4, value: "Wednesday" },
+        { id: 5, value: "Thursday" },
+        { id: 6, value: "Friday" },
+        { id: 7, value: "Saturday" },
+      ];
+
+      this.memberform.valueChanges.subscribe(() => {
+        this.handleCheckboxChanges();
+        this.handleCheckboxForVehical();
+      });
+    }
+  }
+
+  populateForm() {
+    const memberDays: Week[] = this.Member.weeklyOffs;
+    console.log(memberDays);
+    const listofDaysIds: number[] = [];
+    memberDays.map((day: any) => {
+      listofDaysIds.push(day.id);
+    });
+    console.log(listofDaysIds);
+    this.memberform.patchValue({
+      firstName: this.Member?.firstName,
+      hindiRead: this.Member.hindiRead,
+      hindiWrite: this.Member.hindiWrite,
+      hindiSpeak: this.Member.hindiSpeak,
+      marathiRead: this.Member.marathiRead,
+      marathiWrite: this.Member.marathiWrite,
+      marathiSpeak: this.Member.marathiSpeak,
+      englishRead: this.Member.englishRead,
+      englishWrite: this.Member.englishWrite,
+      englishSpeak: this.Member.englishSpeak,
+      area: this.Member.area.areaId,
+      state: this.Member.state.id,
+      country: this.Member.country.id,
+      division: this.Member.division.id,
+      city: this.Member.city.id,
+      weeklyOffs: listofDaysIds,
+    });
+  }
+
+  memberRecord() {
     // Validatons
     this.memberform = this.formBuilder.group({
       initial: [this.Member?.initial, Validators.required],
@@ -105,10 +193,10 @@ export class AddNewMemberComponent implements OnInit {
       add2: ["", Validators.required],
       add3: [""],
       add4: [""],
-      city: ["", Validators.required],
-      division: ["", Validators.required],
-      state: ["", Validators.required],
-      country: ["", Validators.required],
+      city: [null, Validators.required],
+      division: [null, Validators.required],
+      state: [null, Validators.required],
+      country: [null, Validators.required],
       pincode: ["", [Validators.required, Validators.minLength(6)]],
       latitude: [""],
       longitude: [""],
@@ -138,23 +226,28 @@ export class AddNewMemberComponent implements OnInit {
       eligibleForChild: [""],
       eligibleForGents: [""],
       eligibleForLadies: [""],
-      eligibleForNone: [false],
+      eligibleForNone: [""],
 
       ownBaithakDay: ["", Validators.required],
       // type: ['', Validators.required],
       hajeriNo: ["", Validators.required],
-      hajeriNoDetails: ["", Validators.required], // hajeri no details contain Baithak location from now
+      baithakLocation: ["", Validators.required], // hajeri no details contain Baithak location from now
       weeklyOffs: ["", Validators.required],
       additionalInfo: [""],
     });
-
-    this.getMembers();
-
-    this.memberform.valueChanges.subscribe(() => {
-      this.handleCheckboxChanges();
-      this.handleCheckboxForVehical();
+  }
+  getBaithakLocationList(id: number) {
+    console.log(id);
+    this.locationDataService.getLocationByAreaId(id).subscribe((data) => {
+      this.baithakLocationList = data;
+      console.log(this.baithakLocationList);
     });
   }
+
+  getLoginUserDetail() {
+    this.loginUserDetail = this.userDataService.getUserDetails();
+  }
+
   onMultiSelectChange(event: any) {
     this.selectedDays = event.value;
     this.Member.weeklyOffs = this.selectedDays;
@@ -208,12 +301,42 @@ export class AddNewMemberComponent implements OnInit {
   }
 
   getAreas() {
-    this.areaDataService.getAreaByStatus("1").subscribe((data) => {
-      this.arealist = data;
+    const areaList = this.loginUserDetail.selectedAreas;
+    console.log(areaList);
+    this.arealist = areaList;
       console.log(this.arealist);
-    });
+    // this.areaDataService.getAreaByStatus("1").subscribe((data) => {
+    //   this.arealist = data;
+    //   console.log(this.arealist);
+    // });
   }
+  areaSelected(value: any) {
+    console.log("area selected", value);
+    this.areaId = value;
+    console.log(this.arealist);
+    this.getBaithakLocationList(this.areaId);
+    // this.selectedArea = this.arealist.find(
+    //   (area) => area.areaId == +this.areaId
+    // );
+    this.areaDataService.getAreaById(value).subscribe((data) => {
+      this.selectedArea = data
+      if (!this.memberId && this.isCountryRecordListLoaded === false) {
+        this.isCountryRecordListLoaded = true;
+        this.getAllCountryRecord();
+      }
+      console.log(this.selectedArea);
+      //  this. getAllCountryRecord()
+      this.memberform.patchValue({
+        state: this.selectedArea.state.id,
+        country: this.selectedArea.country.id,
+        division: this.selectedArea.division.id,
+        city: this.selectedArea.city.id,
+        area: this.selectedArea.areaId,
+      });
+    })
 
+    
+  }
   get MemberFormControl() {
     return this.memberform.controls;
   }
@@ -233,14 +356,19 @@ export class AddNewMemberComponent implements OnInit {
 
     if (isDuplicate) {
       // Data already exists error message
-      alert(
-        'Data already exists with the same Aaddhar card Number.'
-      );
+      alert("Data already exists with the same Aaddhar card Number.");
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
+      if (!this.Member.addharNumber) {
+        alert("Please provide Addhar card Number");
+      }
       console.log(this.Member);
-      this.saveMember();
-      this.toast.success("New Member Created successfully ");
+      if (!this.memberId) {
+        this.saveMember();
+      }
+      if (this.memberId) {
+        this.updateMemebr();
+      }
     } else {
       this.toast.warning("Fill all mandatory field.");
     }
@@ -250,6 +378,20 @@ export class AddNewMemberComponent implements OnInit {
     this.MemberListService.createMember(this.Member).subscribe(
       (data) => {
         console.log(data);
+        this.toast.success("New Member Created successfully ");
+        this.router.navigate(["/member-list"]);
+      },
+      (error) => console.log(error)
+    );
+  }
+  updateMemebr() {
+    this.MemberListService.updateMember(
+      this.Member.memberId,
+      this.Member
+    ).subscribe(
+      (data) => {
+        console.log("update Memebr", data);
+        this.toast.success("  Member Info Update Succesfully ");
         this.router.navigate(["/member-list"]);
       },
       (error) => console.log(error)
@@ -345,5 +487,92 @@ export class AddNewMemberComponent implements OnInit {
       }
     }
     return false; // Data does not exist
+  }
+
+  getAllstate() {
+    if (this.countryId) {
+      this.locationService
+        .getAllStateList(this.countryId)
+        .subscribe((state) => {
+          this.stateList = state;
+          console.log(this.stateList);
+        });
+    }
+  }
+  getAllCity() {
+    if (this.stateId) {
+      this.locationService
+        .getAllCityList(this.countryId, this.stateId)
+        .subscribe((city) => {
+          this.cityList = city;
+          console.log(this.stateList);
+        });
+    } 
+  }
+  getAllCountry() {
+    this.locationService.getAllCountryList().subscribe((country) => {
+      this.countrylist = country;
+      console.log(this.countrylist);
+      // this.getAllstate();
+    });
+  }
+  getAllDivisions() {
+    if (this.stateId) {
+      this.locationService
+        .getAllDivisionsList(this.countryId, this.stateId, this.cityId)
+        .subscribe((division) => {
+          this.divisionList = division;
+          console.log(this.divisionList);
+        });
+    }
+  }
+
+  onCountrySelect(selectedCountry: number) {
+    console.log(selectedCountry);
+    this.countryId = selectedCountry;
+    this.getAllstate();
+  }
+
+  onStateSelect(selectedState: number) {
+    console.log(selectedState);
+    this.stateId = selectedState;
+    this.getAllCity();
+  }
+  onCitySelect(selectedCity: number) {
+    console.log(selectedCity);
+    this.cityId = selectedCity;
+    this.getAllDivisions();
+  }
+  getAllCountryRecord() {
+    // this.loginUserDetail = this.userService.getUserDetails();
+    this.locationService.getAllCountryesData().subscribe((data) => {
+      console.log(data);
+      console.log(this.Member);
+      this.countrylist = data;
+      console.log("country list", this.countrylist);
+      // Assuming this.area.country is an object with an id property
+      const selectedCountryId = this.selectedArea.country.id;
+      const selectedCountry = this.countrylist.find(
+        (country) => country.id === selectedCountryId
+      );
+      this.stateList = selectedCountry ? selectedCountry.states : [];
+
+      console.log(this.stateList);
+      const selectedStateId = this.selectedArea.state.id;
+      console.log(selectedStateId);
+      const selectedState = this.stateList.find(
+        (state) => state.id === selectedStateId
+      );
+      this.cityList = selectedState.cities;
+      console.log(this.cityList);
+
+      const selectedCityId = this.selectedArea.city.id;
+      console.log(selectedCityId);
+      const selectedCity = this.cityList.find(
+        (city) => city.id === selectedCityId
+      );
+      this.divisionList = selectedCity.divisions;
+      console.log(this.divisionList);
+    });
   }
 }

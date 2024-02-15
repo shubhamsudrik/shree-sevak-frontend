@@ -7,10 +7,10 @@ export class Area {
   contactPhone1: string;
   contactPhone2: string;
   contactEmail: string;
-  city: string;
-  division: string;
-  state: string;
-  country: string;
+  city: any;
+  division: any;
+  state: any;
+  country: any;
   status: any;
   maleCount?: number;
   femaleCount?: number;

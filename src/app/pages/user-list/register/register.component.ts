@@ -22,7 +22,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Area } from "src/app/Classes/Area";
-import { User } from "src/app/Classes/User";
+import { User } from "src/app/Classes/user";
 
 import { AreaDataService } from "src/app/services/area-data.service";
 import { LocationDataService } from "src/app/services/location-data.service";
@@ -47,6 +47,7 @@ export class RegisterComponent implements OnInit {
   userId: number;
   filteredAreas: { id: number; value: string; city?: String; country?: string; division?: string; state?: string; }[];
   filterAreaslist: any;
+  Loading= false;
 
   constructor(
     private route: ActivatedRoute,
@@ -101,7 +102,7 @@ export class RegisterComponent implements OnInit {
       .subscribe((data) => {
         const modifydefaultAreas: Area1[] = [];
         data.map((area: Area) => {
-          const modifiedValue=`${area.areaName},${area.country},${area.state},${area.city},${area.division},`
+          const modifiedValue=`${area.areaName},${area.country.countryName},${area.state.stateName},${area.city.cityName},${area.division.divisionName},`
           modifydefaultAreas.push({
             id: area.areaId,
             value:modifiedValue
@@ -116,7 +117,7 @@ export class RegisterComponent implements OnInit {
     this.areaDataService.getAllUnselectedAreas().subscribe((data) => {
       const modifydefaultAreas: Area1[] = [];
       data.map((area: Area) => {
-        const modifiedValue=`${area.areaName},${area.country},${area.state},${area.city},${area.division},`
+        const modifiedValue=`${area.areaName},${area.country.countryName},${area.state.stateName},${area.city.cityName},${area.division.divisionName},`
         modifydefaultAreas.push({
           id: area.areaId,
           value: modifiedValue,
@@ -158,6 +159,7 @@ export class RegisterComponent implements OnInit {
   }
   proceedregistration() {
     this.submitted = true;
+    this.Loading=true
     if (!this.userId) {
       if (this.registerform.valid) {
         if (
@@ -173,6 +175,7 @@ export class RegisterComponent implements OnInit {
           this.locationDataService.signUP(this.registerform.value).subscribe(
             (res: ApiResponse) => {
               if (res.success === false) {
+                this.Loading=false
                 this.toast.warning(
                   "User Is Already Exit With Same Email,Mobile"
                 );

@@ -20,7 +20,7 @@ import { ScheduleDataService } from "src/app/services/schedule-data.service";
 
 import { LocService } from "src/app/services/loc.service";
 import { ScheduleDto } from "src/app/Classes/schedule-dto";
-import { DynamicformComponent } from "./dynamicform/dynamicform.component";
+import { DynamicformComponent, Memebr1 } from "./dynamicform/dynamicform.component";
 import { ToastrService } from "ngx-toastr";
 
 import { firstValueFrom } from "rxjs";
@@ -123,7 +123,7 @@ export class AddSchedularComponent implements OnInit {
 
   defaultLocations: Location[] = [];
 
-  defaultMembers: Member[] = [];
+  defaultMembers: any[] = [];
 
   searchText: string = "";
 
@@ -174,6 +174,7 @@ export class AddSchedularComponent implements OnInit {
   defaultHajeriMembers: Member[];
   hasSave: boolean ;
   collectionOfSchedule: Schedule[];
+  defaultMembers1: Memebr1[]=[];
 
   constructor(
     private router: Router,
@@ -349,6 +350,13 @@ export class AddSchedularComponent implements OnInit {
   private getMemberList() {
     this.memberListService.getMemberList().subscribe((data: Member[]) => {
       this.defaultMembers = data;
+      // let defaultmemebrsList:Memebr1[]=[];
+      this.defaultMembers.map((member) => {
+       const modifyValue=`${member.firstName}-${member.middleName}-${member.lastName},`
+       this.defaultMembers1.push({id: member.memberId,value:modifyValue}) 
+     });
+     
+     console.log("hajerimember list",this.defaultMembers1)
       // this.scheduleService.setMembers(this.defaultMembers);
       // this.hajeriMembers = data.filter((member: Member) => {
       //   if (member.hajeriNo === "1") {

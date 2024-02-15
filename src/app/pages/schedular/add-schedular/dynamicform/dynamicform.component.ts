@@ -19,12 +19,21 @@ import { LocService } from "src/app/services/loc.service";
 import {Location} from "src/app/Classes/location";
 import { MemberListService } from "src/app/services/member-list.service";
 import { ScheduleDataService } from "src/app/services/schedule-data.service";
+interface City {
+  name: string;
+  code: string;
+}
+export interface Memebr1{
+  id:number;
+  value:string
+}
 
 @Component({
   selector: "app-dynamicform",
   templateUrl: "./dynamicform.component.html",
   styleUrls: ["./dynamicform.component.css"],
 })
+
 export class DynamicformComponent implements OnInit {
 
   @Output() valueChanged: EventEmitter<ScheduleDto> = new EventEmitter();
@@ -34,13 +43,14 @@ export class DynamicformComponent implements OnInit {
   @ViewChild("vachanSelect") vachanSelect!: ElementRef;
   @ViewChild("hajeriSelect") hajeriSelect!: ElementRef;
   schedularFormchild: FormGroup;
-
+  selectedCity: City | undefined;
   scheduleDto: ScheduleDto = new ScheduleDto();
 
   @Input() members: Member[] = [];
   @Input() hajeriMembers: any[];
   @Input() vachanMembers: any[];
   @Input() allMembers: Member[];
+  @Input() defaultMembers1: Memebr1[];
 
   updateSchedule: Schedule;
 
@@ -53,7 +63,7 @@ export class DynamicformComponent implements OnInit {
   schedulePresent: boolean = false;
   vachanErrorMessage: string | null = null;
 hajeriErrorMessage: string | null = null;
-
+  hajeriMemebrList:Memebr1[];
   constructor(
     private formBuilder: FormBuilder,
     private schedularService: ScheduleDataService,
@@ -66,7 +76,7 @@ hajeriErrorMessage: string | null = null;
   // }
   ngOnInit(): void {
     // throw new Error("Method not implemented.");
-
+   
     this.initializingForm();
     this.individualScheduleRecord(this.date, this.locationId, this.baithakId);
 
@@ -77,9 +87,13 @@ hajeriErrorMessage: string | null = null;
         this.valueChanged.emit(this.scheduleDto);
       }
     });
+
+  //  this.hajeriMemebrList=this.defaultMembers1
+  //  console.log("hajerimember list in ngon in it",this.hajeriMemebrList)
   }
 
   assignMemeberList() {
+   
     this.hajeriMembers = this.schedularService.getMembers(
       this.date,
       this.baithakId,
@@ -191,6 +205,8 @@ hajeriErrorMessage: string | null = null;
     locationId: number,
     baithakId: number
   ): void {
+
+    console.log("individualScheduleRecord", date, locationId, baithakId)
     this.schedularService
       .getscheduleByDateAndLocationBaithak(date, locationId, baithakId)
       .subscribe(
@@ -209,6 +225,7 @@ hajeriErrorMessage: string | null = null;
           this.memberService
             .getMemberById(this.scheduleDto.vachanGhenara)
             .subscribe((member) => {
+              // console.log(member)
               this.vachanMember = member;
               (this.vachanMember.locationId = +this.locationId),
                 (this.vachanMember.baithakId = +this.baithakId),
@@ -219,6 +236,7 @@ hajeriErrorMessage: string | null = null;
           this.memberService
             .getMemberById(this.scheduleDto.hajeriGhenara)
             .subscribe((member) => {
+              console.log(member)
               this.hajeriMember = member;
               (this.hajeriMember.locationId = +this.locationId),
                 (this.hajeriMember.baithakId = +this.baithakId),
@@ -264,6 +282,19 @@ hajeriErrorMessage: string | null = null;
     }
 
     console.log(this.schedularService.schduleHajeriMember);
+    // let hajerimemebrList:Memebr1[]=[];
+     this.hajeriMembers = this.schedularService.getMembers(
+      this.date,
+      this.baithakId,
+      this.locationId
+    );
+    this.hajeriMemebrList= this.hajeriMembers.map((member) => {
+      const modifyValue=`${member.firstName},${member.middleName},${member.lastName},`
+      console.log( {id: member.memberId,value:modifyValue})
+    return {id: member.memberId,value:modifyValue}
+    });
+    // this.hajeriMemebrList=hajerimemebrList
+    console.log("hajerimember list",this.hajeriMemebrList)
     this.hajeriMembers = this.schedularService.getMembers(
       this.date,
       this.baithakId,
@@ -304,16 +335,6 @@ hajeriErrorMessage: string | null = null;
     console.log(this.vachanMembers);
     console.log("click event generated");
     console.log(memberId);
-  
-    // this.vachanMembers.find((value) => {
-    //   if (value.memberId === memberId) {
-    //     this.vachanMember = value;
-    //     this.vachanMember.locationId = +this.locationId;
-    //     this.vachanMember.baithakId = +this.baithakId;
-    //     this.vachanMember.date = this.date;
-    //     console.log(this.vachanMember);
-    //   }
-    // });
 
     this.memberService.getMemberById(memberId).subscribe((member) => {
       this.vachanMember = member;
@@ -323,42 +344,13 @@ hajeriErrorMessage: string | null = null;
         (this.vachanMember.date = this.date);
       console.log(this.vachanMember);
 
-      // const isVachanMember = this.schedularService.validateMember(
-      //   this.vachanMember
-      // );
-
       console.log(this.vachanMembers);
       this.validateGenderAssignment(this.vachanMember,this.locationId);
       this.removeMemeberFromSelectedVachanList(this.vachanMember);
    
-      // const isNotSimmilerGender: boolean =
-      // if (!isNotSimmilerGender) {
-      //   this.toast.warning("Male and Female can not assigned together");
-      // }
+    
 
       this.schedularService.addMembersToSchduleVachanGhenara(this.vachanMember);
-
-      // if (this.vachanMembers.length === 0) {
-      //   this.toast.warning("All members assigned");
-      // }
-      // if (!isVachanMember) {
-      //   // this.toast.error("Member all ready assign ");
-      //   this.removeMemeberFromSelectedVachanList(this.vachanMember);
-      // } else {
-      //   this.schedularService.addMembersToSchduleVachanGhenara(
-      //     this.vachanMember
-      //   );
-
-      //   // const selectedVachanMembers = this.schedularService.schduleVachanmember;
-      //   // const vachanMemberIdsToRemove = selectedVachanMembers.map((member) => member.memberId);
-
-      //   // this.allMembers = this.schedularService.serviceDefaultMember.filter((member) => !vachanMemberIdsToRemove.includes(member.memberId));
-      //   // this.schedularService.setMembers(this.allMembers)
-      // }
-
-     
-
-     
       console.log(this.vachanMember);
     },error => {
       this.vachanMembers = this.schedularService.getMembers(
@@ -368,24 +360,11 @@ hajeriErrorMessage: string | null = null;
       );
     });
 
-    // const member = this.allMembers.find((member) => {
-    //   if (member.memberId === +memberId) {
-    //     this.vachanMember = member;
-    //     console.log(member);
-    //     this.vachanMember.locationId = +this.locationId,
-    //       this.vachanMember.baithakId = +this.baithakId,
-    //       this.vachanMember.date = this.date;
-    //     console.log(this.vachanMember);
-    //     return this.vachanMember;
-    //   }
-    // });
-
-
-
-
   }
 
-  hajeriMemberChange(memberId: number) {
+  hajeriMemberChange(value: any) {
+    const memberId = value
+    console.log("change  hajeri member",memberId)
     this.isListSelected = false;
     if (!this.isListSelected) {
       this.isListSelected = true;
@@ -424,6 +403,28 @@ hajeriErrorMessage: string | null = null;
   
       console.log(this.hajeriMember);
     },error => {
+    //   let hajerimemebrList:Memebr1[]=[];
+    //   this.schedularService.getMembers(
+    //    this.date,
+    //    this.baithakId,
+    //    this.locationId
+    //  ).map((member) => {
+    //    const modifyValue=`${member.firstname},${member.middleName},${member.lastname},`
+    //    hajerimemebrList.push({id: member.id,value:modifyValue}) 
+    //  });
+    //  this.hajeriMemebrList=hajerimemebrList
+    //  console.log("hajerimember list",this.hajeriMemebrList)
+    this.hajeriMemebrList=  this.schedularService.getMembers(
+      this.date,
+      this.baithakId,
+      this.locationId
+    ).map((member) => {
+      const modifyValue=`${member.firstName},${member.middleName},${member.lastName},`
+      console.log({id: member.memberId,value:modifyValue})
+    return {id: member.memberId,value:modifyValue}
+    });
+    // this.hajeriMemebrList=hajerimemebrList
+    console.log("hajerimember list",this.hajeriMemebrList)
       this.hajeriMembers = this.schedularService.getMembers(
         this.date,
         this.baithakId,

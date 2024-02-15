@@ -49,7 +49,21 @@ export class LocService {
   deleteLocation(id: number): Observable<Object>{
     return this.httpclient.delete(`${this.baseUrl}/api/location/${id}`);
   }
+  getLocationByAreaId(areaId: any): Observable<Object>{
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/allLocations/areaId/${areaId}`)
+  }
 
+  getPaginateLocationList(pageNumber: number,pageSize: number){
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/pagination/all?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
+     
+  getPaginateLocationListBaseOnStatus(pageNumber: number,pageSize: number,statustype:string){
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/status/pagination/${statustype}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
+     
+  getPaginateLocationListBaseOnSearch(keyword:string,status:string,pageNumber: number,pageSize: number){
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/search?keyword=${keyword}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
      
 }
 
