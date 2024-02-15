@@ -111,7 +111,7 @@
               </thead>
               <tbody>
                 <!-- <tr *ngFor="let location of defaultMembers; trackBy: trackLocationByIndex"> -->
-                  <tr *ngFor="let member of pagedMembers |memberFilter:searchText:'':'' |memberFilter:'':searchText1 |memberFilter:'':'':searchText2; let i = index ">
+                  <tr *ngFor="let member of defaultMembers |memberFilter:searchText:'':'' |memberFilter:'':searchText1 |memberFilter:'':'':searchText2; let i = index ">
   
                   <td>
                     <input type="radio" name="operation" (click)="toggleButtons('edit', member)" value="edit"  (change)="selectedRow = i">
@@ -130,7 +130,7 @@
           </div>          
         </div>
         <small><mat-paginator class="justify-content-md-end"
-            [length]="defaultMembers.length"
+            [length]="totalElements"
             [pageIndex]="currentPage"
             [pageSizeOptions]="[10]"
             (page)="onPageChange($event)"

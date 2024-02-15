@@ -16,10 +16,12 @@ export class MemberListService {
 
 
   // For Get the all record from database
-  getAllMemberList(): Observable<Member[]> {
-    return this.httpclient.get<Member[]>(`${this.baseUrl}/api/member/all-members`);
+  getAllMemberList(pageNumber: number, pageSize: number): Observable<Member[]> {
+    return this.httpclient.get<Member[]>(`${this.baseUrl}/api/member/all-members?pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
-
+ 
+    // /api/member/all-members?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  
   
   //get member by status
   getMemberByStatus(member: string): Observable<Member[]>{

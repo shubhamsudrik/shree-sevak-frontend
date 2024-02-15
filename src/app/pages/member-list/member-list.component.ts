@@ -17,27 +17,31 @@ export class MemberListComponent implements OnInit {
     public focus;
     searchText: any;
     searchText1: any;
-    searchText2: any;
-    
+    searchText2: any;    
     currentPage: number = 0;
     itemsPerPage: number = 10;
+    totalElements: any;
+    totalPages: any;
 
-    get pagedMembers(): any[] {
-      const startIndex = this.currentPage * this.itemsPerPage;
-      const endIndex = startIndex + this.itemsPerPage;
-      return this.defaultMembers.slice(startIndex, endIndex);
-    }
+    // get pagedMembers(): any[] {
+    //   const startIndex = this.currentPage * this.itemsPerPage;
+    //   const endIndex = startIndex + this.itemsPerPage;
+    //   return this.defaultMembers.slice(startIndex, endIndex);
+    // }
 
     onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex ;
-  }
+    console.log("this.currentPage",this.currentPage);
+    console.log("event.pageIndex",event.pageIndex);
+    this.getAllMemberList();
+    }
 
     // record count
-  get pagedLocations(): any[] {
-    const startIndex = this.currentPage * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.defaultMembers.slice(startIndex, endIndex);
-  }
+  // get pagedLocations(): any[] {
+  //   const startIndex = this.currentPage * this.itemsPerPage;
+  //   const endIndex = startIndex + this.itemsPerPage;
+  //   return this.defaultMembers.slice(startIndex, endIndex);
+  // }
 
     constructor(
       private memberListService: MemberListService,
@@ -46,6 +50,10 @@ export class MemberListComponent implements OnInit {
     ) {
       translate.addLangs(['English']);
       translate.setDefaultLang('English');
+
+      console.log("this.defaultMembers.length",this.defaultMembers.length);
+      console.log("currentPage",this.currentPage);
+      // console.log("itemsPerPage",this.itemsPerPage);
     }
   
     private getMemberList() {
@@ -60,13 +68,15 @@ export class MemberListComponent implements OnInit {
       );
     }
 
-
     //get all member data
   private getAllMemberList(){
-    this.memberListService.getAllMemberList().subscribe(
-      (data: Member[]) => {
-        this.defaultMembers =data;
+    this.memberListService.getAllMemberList(this.currentPage, this.itemsPerPage).subscribe(
+      (data: any) => {
+        this.defaultMembers =data.content;
+        this.totalElements = data.totalElements;
         console.log(this.defaultMembers)
+        console.log("currentPage",this.currentPage);
+        console.log("data.totalElements", this.totalElements)
       },)
   }
   

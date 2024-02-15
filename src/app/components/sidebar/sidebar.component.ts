@@ -10,6 +10,7 @@ declare interface RouteInfo {
     class: string;
 
 }
+
 export const ROUTES: RouteInfo[] = [ 
     { path: '/dashboard', title: 'Dashboard',  icon: 'fas fa-tachometer-alt ni-dashboard text-primary', class:'' },  
     // { path: '/user-list', title: 'User',  icon:'fas fa-map-marker-alt ni-user text-primary', class: '' },
