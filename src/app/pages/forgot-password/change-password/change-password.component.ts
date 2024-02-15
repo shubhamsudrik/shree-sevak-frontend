@@ -15,6 +15,7 @@ export class ChangePasswordComponent {
    
       changePasswordForm: FormGroup;
       submitted = false;
+      Loading =false;
     
       constructor(
         private formBuilder: FormBuilder,
@@ -35,7 +36,7 @@ export class ChangePasswordComponent {
     
       onSubmit() {
         this.submitted = true;
-      
+        this.Loading =true;
           if (this.changePasswordForm.valid) {
             if (this.changePasswordForm.get('password').value !== this.changePasswordForm.get('confirmPassword').value) {
               this.changePasswordForm.get('confirmPassword').setErrors({ passwordsDoNotMatch: true });
@@ -48,7 +49,7 @@ export class ChangePasswordComponent {
           this.locationDataService.changePassword(confirmPassword).subscribe(
             (response: any) => {
               console.log("response", response);
-            
+              this.Loading=false;
               if(response === "password_change_accepted" || response === "password Successfully changed"){
                 this.toast.success('Password Changed successfully');
                 // console.log('Navigating to /register');

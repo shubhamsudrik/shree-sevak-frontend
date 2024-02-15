@@ -52,6 +52,18 @@ export class LocService {
   getLocationByAreaId(areaId: any): Observable<Object>{
     return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/allLocations/areaId/${areaId}`)
   }
+
+  getPaginateLocationList(pageNumber: number,pageSize: number){
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/pagination/all?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
+     
+  getPaginateLocationListBaseOnStatus(pageNumber: number,pageSize: number,statustype:string){
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/status/pagination/${statustype}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
+     
+  getPaginateLocationListBaseOnSearch(keyword:string,status:string,pageNumber: number,pageSize: number){
+    return this.httpclient.get<Location[]>(`${this.baseUrl}/api/location/search?keyword=${keyword}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
      
 }
 

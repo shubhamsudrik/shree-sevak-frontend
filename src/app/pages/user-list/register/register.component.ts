@@ -47,6 +47,7 @@ export class RegisterComponent implements OnInit {
   userId: number;
   filteredAreas: { id: number; value: string; city?: String; country?: string; division?: string; state?: string; }[];
   filterAreaslist: any;
+  Loading= false;
 
   constructor(
     private route: ActivatedRoute,
@@ -158,6 +159,7 @@ export class RegisterComponent implements OnInit {
   }
   proceedregistration() {
     this.submitted = true;
+    this.Loading=true
     if (!this.userId) {
       if (this.registerform.valid) {
         if (
@@ -173,6 +175,7 @@ export class RegisterComponent implements OnInit {
           this.locationDataService.signUP(this.registerform.value).subscribe(
             (res: ApiResponse) => {
               if (res.success === false) {
+                this.Loading=false
                 this.toast.warning(
                   "User Is Already Exit With Same Email,Mobile"
                 );
