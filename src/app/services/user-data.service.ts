@@ -33,7 +33,7 @@ export class UserDataService {
  }
  
  getAllUserList() :Observable<User[]>{
-  return this.httpclient.get<User[]>(`${this.url}/getUser`)
+  return this.httpclient.get<User[]>(`${this.url}/user_list`)
  }
  
  getUserListByStatus(status:string) :Observable<User[]>{

@@ -29,12 +29,12 @@ export class MemberListComponent implements OnInit {
   hasNextPage: any;
   pageSize: any;
   query: any;
-query1: any;
+
 
     get pagedMembers(): any[] {
       const startIndex = this.currentPage * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
-      return this.defaultMembers.slice(startIndex, endIndex);
+      return this.defaultMembers;
     }
 
     onPageChange(event: PageEvent): void {
@@ -104,7 +104,8 @@ query1: any;
   }
 
   ngOnInit(): void {
-    this.getAllMemberList();
+    // this.getAllMemberList();
+    this.getPaginateMemberListBaseOnSearch()
   }
 
   onOpen() {
@@ -174,8 +175,14 @@ query1: any;
 //   }
 // }
 search(): void {
-  const statusParam = this.status ? this.status : null;
-  this.memberListService.getPaginateMemberListBaseOnSearch(this.query,this.status,this.currentPage,this.pageSize).subscribe((pagination:any) => {
+  // const statusParam = this.status ? this.status : null;
+  this.currentPage=0
+  this.getPaginateMemberListBaseOnSearch();
+}
+
+getPaginateMemberListBaseOnSearch(){
+  this.currentPage=0
+  this.memberListService.getPaginateMemberListBaseOnSearch(this.query,this.status,this.currentPage,this.itemsPerPage).subscribe((pagination:any) => {
     // Handle response data
     this.hasNextPage = pagination.lastPage;
     this.defaultMembers = pagination.content;
@@ -185,20 +192,25 @@ search(): void {
   },(error) => {
     console.error("error while fetching record base on search", error);
   });
+
 }
 statusLocation(status: string) {
   this.currentPage = 0;
   if (status === "all") {
     this.status=null
+    this.query=null
     // this.getAllLocationList();
     this.getAllMemberList();
   } else {
     this.status=status
+    this.query=null
+    this.currentPage=0,
     this.memberListService
-      .getPaginateMemberListBaseOnStatus(
-        this.currentPage,
-        this.itemsPerPage,
-        status
+      .getPaginateMemberListBaseOnSearch(
+        this.query,
+          this.status,
+          this.currentPage,
+          this.itemsPerPage,
       )
       .subscribe(
         (pagination: any) => {
