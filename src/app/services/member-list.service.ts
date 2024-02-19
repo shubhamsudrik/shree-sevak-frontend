@@ -15,16 +15,22 @@ export class MemberListService {
   }
 
 
-  // For Get the all record from database
-  getAllMemberList(): Observable<Member[]> {
-    return this.httpclient.get<Member[]>(`${this.baseUrl}/api/member/all-members`);
+  // For Get the all record from database by pagination
+  getAllMemberListByPagination(pageNumber: number, pageSize: number): Observable<Member[]> {
+    return this.httpclient.get<Member[]>(`${this.baseUrl}/api/member/all-members/pagination?pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
-
+ 
+    // /api/member/all-members?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  
   
   //get member by status
   getMemberByStatus(member: string): Observable<Member[]>{
     return this.httpclient.get<Member[]>(`${this.baseUrl}/api/member/status/${member}`);
+  }
 
+  //get paginated member by status
+  getPaginateMemberListBaseOnStatus(pageNumber: number,pageSize: number,statustype:string){
+    return this.httpclient.get<any[]>(`${this.baseUrl}/api/member/status/pagination/${statustype}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
   }
 
   // For Get the active record from database
@@ -46,5 +52,10 @@ export class MemberListService {
 
   updateMember(memberId: number, member: Member): Observable<Object>{
     return this.httpclient.put(`${this.baseUrl}/api/member/update-member/${memberId}`, member);
+  }
+
+  //get by search
+  getPaginateMemberListBaseOnSearch(keyword:string,status:string,pageNumber: number,pageSize: number){
+    return this.httpclient.get<any[]>(`${this.baseUrl}/api/member/search?keyword=${keyword}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
   }
 }

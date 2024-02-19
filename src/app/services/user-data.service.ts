@@ -18,7 +18,7 @@ export class UserDataService {
     private loginservice: LoginService
   ) {}
  
-  private url = "http://localhost:8080/api/user";
+  private url = "http://localhost:8080/api/register";
  
   getUserByUsername(username: string): Observable<Object> {
     return this.httpclient.get(`${this.url}/username/${username}`);
@@ -33,7 +33,7 @@ export class UserDataService {
  }
  
  getAllUserList() :Observable<User[]>{
-  return this.httpclient.get<User[]>(`${this.url}/user_list`)
+  return this.httpclient.get<User[]>(`${this.url}/getUser`)
  }
  
  getUserListByStatus(status:string) :Observable<User[]>{

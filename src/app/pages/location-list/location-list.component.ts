@@ -142,12 +142,12 @@ query: any;
 
   //get all location data
 
-  private getAllLocationList() {
-    this.locationDataService.getAllLocationList().subscribe((data: any[]) => {
-      this.defaultLocations = data;
-      console.log(this.defaultLocations);
-    });
-  }
+  // private getAllLocationList() {
+  //   this.locationDataService.getAllLocationList().subscribe((data: any[]) => {
+  //     this.defaultLocations = data;
+  //     console.log(this.defaultLocations);
+  //   });
+  // }
 
   // show all data and handl using active inactive through button
   // statusLocation(status: string){

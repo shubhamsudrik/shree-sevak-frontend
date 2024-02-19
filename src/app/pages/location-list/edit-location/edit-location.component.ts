@@ -168,7 +168,7 @@ export class EditLocationComponent implements OnInit {
   }
 
   getAreas() {
-    const areaList = this.loginUserDetail.selectedAreas;
+    const areaList = this.loginUserDetail?.selectedAreas;
     this.arealist = areaList;
       console.log(this.arealist);
     // this.areaDataService.getAreaByStatus("1").subscribe((data) => {

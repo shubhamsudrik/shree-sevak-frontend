@@ -24,6 +24,11 @@ export class AreaListComponent implements OnInit {
     // Pagination
     currentPage: number = 0;
     itemsPerPage: number = 10;
+    query: string;
+    status: string;
+    pageSize: number;
+    hasNextPage: any;
+    totalElements: any;
 
 
   constructor(
@@ -33,7 +38,7 @@ export class AreaListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-this.getAreaList() 
+this.getAllAreaListByPagination();
   }
 
   // record count
@@ -52,33 +57,82 @@ this.getAreaList()
 
   onPageChange(event:PageEvent):void{
     this.currentPage = event.pageIndex;
+    this.getAllAreaListByPagination();
   }
 
-  private getAreaList(){
-    this.areaDataService.getAllAreaList().subscribe((areaList) =>{
-this.defaultAreas=areaList;
-console.log(this.defaultAreas);
-  },(error=>{
-    console.log(error);
-  }))
-  }
+//   private getAreaList(){
+//     this.areaDataService.getAllAreaList().subscribe((areaList) =>{
+// this.defaultAreas=areaList;
+// console.log("areaList",areaList)
+// console.log(this.defaultAreas);
+//   },(error=>{
+//     console.log(error);
+//   }))
+//   }
+
+      private getAllAreaListByPagination(){
+      this.areaDataService.getAllAreaListByPagination(this.currentPage, this.itemsPerPage ).subscribe((areaList: any) =>{
+      this.defaultAreas=areaList.content;
+      this.totalElements=areaList.totoalElement;
+      console.log("totalElements",this.totalElements);
+      console.log("areaList",areaList)
+      console.log("areaList",areaList.content);
+      console.log(this.defaultAreas);
+    },(error=>{
+      console.log(error);
+    }))
+    }
 
   public statusAreas(status:string){
     if(status=="all"){
-      this.getAreaList();
+      this.getAllAreaListByPagination();
 
     }else{
-    this.getAreaByStatus(status)
+    this.getAreaByStatusPagination(status)
     }
   }
-
-  getAreaByStatus(status:string){
-    this.areaDataService.getAreaByStatus(status).subscribe((areaList:Area[])=>{
-      this.defaultAreas = areaList
-      console.log(areaList)
-    },(error)=>{
-      console.error("fetching area details ", error)
-    })
+  search(): void {
+    const statusParam = this.status ? this.status : null;
+    this.areaDataService.getPaginateAreaListBaseOnSearch(this.query,this.status,this.currentPage,this.pageSize).subscribe((pagination:any) => {
+      // Handle response data
+      this.hasNextPage = pagination.lastPage;
+      this.defaultAreas = pagination.content;
+      this.totalElements = pagination.totoalElement;
+      this.pageSize = pagination.pageSize;
+      console.log(pagination);
+    },(error) => {
+      console.error("error while fetching record base on search", error);
+    });
+  }
+  // getAreaByStatusPagination(status:string){
+  //   this.areaDataService.getPaginateAreaBaseOnStatus(this.currentPage ,this.pageSize,status).subscribe((areaList:Area[])=>{
+  //     this.defaultAreas = areaList
+  //     console.log(areaList)
+  //   },(error)=>{
+  //     console.error("fetching area details ", error)
+  //   })
+  // }
+  getAreaByStatusPagination(status: string) {
+    this.currentPage = 0;
+    if (status === "all") {
+      this.status=null
+      // this.getAllLocationList();
+      this.getAllAreaListByPagination();
+    } else {
+      this.status=status
+      this.areaDataService.getPaginateAreaBaseOnStatus(this.currentPage,this.itemsPerPage, status).subscribe(
+          (pagination: any) => {
+            console.log(pagination);
+            this.hasNextPage = pagination.lastPage;
+            this.defaultAreas = pagination.content;
+            this.totalElements = pagination.totoalElement;
+            this.pageSize = pagination.pageSize;
+          },
+          (error) => {
+            console.error("fetching area detail:", error);
+          }
+        );
+    }
   }
 
   toggleButtons(operation:string, area:any){

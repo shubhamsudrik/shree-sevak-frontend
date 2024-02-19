@@ -17,13 +17,22 @@ export class AreaDataService {
  createArea(area:any):Observable<Object>{
 return this.httpClient.post(`${this.baseUrl}/create`,area);
  }
- getAreaByStatus(status: string):Observable<Area[]>{ {
+
+ getAreaByStatus(status: string):Observable<Area[]>{ 
   return this.httpClient.get<Area[]>(`${this.baseUrl}/statusType/${status}`);
 }
-}
+
+//get paginated area by status
+  getPaginateAreaBaseOnStatus(pageNumber: number,pageSize: number,statustype:string){
+    return this.httpClient.get<any[]>(`${this.baseUrl}/statusType/pagination/${statustype}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
 
 getAllAreaList() {
   return this.httpClient.get<Area[]>(`${this.baseUrl}/all-areas`);
+}
+// For Get the all record from database by pagination
+getAllAreaListByPagination(pageNumber: number, pageSize: number): Observable<any[]> {
+  return this.httpClient.get<any[]>(`${this.baseUrl}/pagination/all-areas?pageNumber=${pageNumber}&pageSize=${pageSize}`);
 }
 
 getAllUnselectedAreas(){
@@ -50,5 +59,9 @@ findAreaByName(areaName: any):Observable<Area>{
 
 }
 
+//get by search
+getPaginateAreaListBaseOnSearch(keyword:string,status:string,pageNumber: number,pageSize: number){
+  return this.httpClient.get<any[]>(`${this.baseUrl}/filter/search?keyword=${keyword}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+}
 
 }

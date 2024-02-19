@@ -44,6 +44,7 @@ export class AddNewMemberComponent implements OnInit {
   stateList: any;
   selectedArea: any;
   isCountryRecordListLoaded: boolean = false;
+  areaId1: any;
 
   constructor(
     private MemberListService: MemberListService,
@@ -84,19 +85,11 @@ export class AddNewMemberComponent implements OnInit {
   this.getLoginUserDetail()
     this.memberRecord();
     this.getAreas();
+    console.log("getAreas ",this.getAreas);
     this.memberId = this.route.snapshot.params["memberId"];
     console.log(this.memberId);
     if (this.memberId) {
       console.log("Im in update member");
-      this.WeekOff = [
-        { id: 1, value: "Sunday" },
-        { id: 2, value: "Monday" },
-        { id: 3, value: "Tuesday" },
-        { id: 4, value: "Wednesday" },
-        { id: 5, value: "Thursday" },
-        { id: 6, value: "Friday" },
-        { id: 7, value: "Saturday" },
-      ];
 
       this.WeekOff = [
         { id: 1, value: "Sunday" },
@@ -112,6 +105,8 @@ export class AddNewMemberComponent implements OnInit {
         next: (data: Member) => {
           console.log(data);
           this.Member = data;
+          console.log("areaId ",data.area.areaId);
+          this.areaId1 = data.area.areaId;
           this.selectedArea = data.area;
           this.getBaithakLocationList(this.selectedArea.areaId);
           this.getAllCountryRecord();
@@ -301,10 +296,11 @@ export class AddNewMemberComponent implements OnInit {
   }
 
   getAreas() {
-    const areaList = this.loginUserDetail.selectedAreas;
-    console.log(areaList);
-    this.arealist = areaList;
-      console.log(this.arealist);
+    const areaList1 = this.loginUserDetail?.selectedAreas;
+    console.log("loginUserDetail",this.loginUserDetail)
+    console.log("loginUserDetail.selectedAreas",this.loginUserDetail.selectedAreas)
+    this.arealist = areaList1;
+    console.log(this.arealist);
     // this.areaDataService.getAreaByStatus("1").subscribe((data) => {
     //   this.arealist = data;
     //   console.log(this.arealist);
