@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { PageEvent } from "@angular/material/paginator";
+import { Router } from "@angular/router";
 
-import { TranslateService } from '@ngx-translate/core';
-import { Member } from 'src/app/Classes/member';
-import { MemberListService } from 'src/app/services/member-list.service';
+import { TranslateService } from "@ngx-translate/core";
+import { ToastrService } from "ngx-toastr";
+import { Member } from "src/app/Classes/member";
+import { MemberListService } from "src/app/services/member-list.service";
+import { UserDataService } from "src/app/services/user-data.service";
 
 @Component({
-  selector: 'app-member-list',
-  templateUrl: './member-list.component.html',
-  styleUrls: ['./member-list.component.css']
+  selector: "app-member-list",
+  templateUrl: "./member-list.component.html",
+  styleUrls: ["./member-list.component.css"],
 })
 export class MemberListComponent implements OnInit {
+
     member: Member = new Member;
     defaultMembers: Member[] = [];
     public focus;
@@ -22,12 +25,17 @@ export class MemberListComponent implements OnInit {
     itemsPerPage: number = 10;
     totalElements: any;
     totalPages: any;
+  status: any;
+  hasNextPage: any;
+  pageSize: any;
+  query: any;
+query1: any;
 
-    // get pagedMembers(): any[] {
-    //   const startIndex = this.currentPage * this.itemsPerPage;
-    //   const endIndex = startIndex + this.itemsPerPage;
-    //   return this.defaultMembers.slice(startIndex, endIndex);
-    // }
+    get pagedMembers(): any[] {
+      const startIndex = this.currentPage * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.defaultMembers.slice(startIndex, endIndex);
+    }
 
     onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex ;
@@ -37,11 +45,11 @@ export class MemberListComponent implements OnInit {
     }
 
     // record count
-  // get pagedLocations(): any[] {
-  //   const startIndex = this.currentPage * this.itemsPerPage;
-  //   const endIndex = startIndex + this.itemsPerPage;
-  //   return this.defaultMembers.slice(startIndex, endIndex);
-  // }
+  get pagedLocations(): any[] {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.defaultMembers.slice(startIndex, endIndex);
+  }
 
     constructor(
       private memberListService: MemberListService,
@@ -56,70 +64,154 @@ export class MemberListComponent implements OnInit {
       // console.log("itemsPerPage",this.itemsPerPage);
     }
   
-    private getMemberList() {
-      this.memberListService.getMemberList().subscribe(
-        (data: Member[]) => {
-          this.defaultMembers = data;
-          console.log(this.defaultMembers);
-        },
-        (error) => {
-          console.error('Error fetching locations:', error);
-        }
-      );
-    }
 
-    //get all member data
+  // private getMemberList() {
+  //   this.memberListService.getMemberList().subscribe(
+  //     (data: Member[]) => {
+  //       this.defaultMembers = data;
+  //       console.log(this.defaultMembers);
+  //     },
+  //     (error) => {
+  //       console.error("Error fetching member:", error);
+  //     }
+  //   );
+  // }
+
+  // //get all member data
+  // private getAllMemberList() {
+  //   this.memberListService.getAllMemberList().subscribe((data: Member[]) => {
+  //     this.defaultMembers = data;
+  //     console.log(this.defaultMembers);
+  //   });
+  // }
+  
+      //get all member data
   private getAllMemberList(){
-    this.memberListService.getAllMemberList(this.currentPage, this.itemsPerPage).subscribe(
+    this.memberListService.getAllMemberListByPagination(this.currentPage, this.itemsPerPage).subscribe(
       (data: any) => {
+        console.log(data);
+        console.log(data.content);
         this.defaultMembers =data.content;
-        this.totalElements = data.totalElements;
+        this.totalElements = data.totoalElement;
         console.log(this.defaultMembers)
         console.log("currentPage",this.currentPage);
         console.log("data.totalElements", this.totalElements)
       },)
   }
-  
-    switchLang(lang: string) {
-      this.translate.use(lang);
-    }
-  
-    ngOnInit(): void {
-      this.getMemberList();
-    }
-  
-    onOpen() {
-      console.log(this.member);
-      this.router.navigate(['/add-new-member']);
-    }
-    
-    toggleButtons(operation: string, member: any) {
-      if (operation === 'edit') {
-        member.isEditing = true;
-      }
-    }
 
-  
-    updateMember(memberId: number) {
-      this.router.navigate(['/add-new-member', memberId]);
-    }
+  switchLang(lang: string) {
+    this.translate.use(lang);
+  }
 
-    // show all data and handl using active in active button 
-  statusLocation(status: string){
-    if (status === "all") {
-      this.getAllMemberList();
-    }else{
+  ngOnInit(): void {
+    this.getAllMemberList();
+  }
 
-    this.memberListService.getMemberByStatus(status).subscribe(
-      (data: Member[]) => {
-        this.defaultMembers = data;
-        console.log(data);
-      },
-      (error) => {
-        console.error("fetching baithak detail:", error);
-      }
-    );
+  onOpen() {
+    console.log(this.member);
+    this.router.navigate(["/add-new-member"]);
+  }
+
+  toggleButtons(operation: string, member: any) {
+    if (operation === "edit") {
+      member.isEditing = true;
     }
   }
+
+  updateMember(memberId: number) {
+
+    this.router.navigate(["/add-new-member", memberId]);
+    // this.memberListService.getMemberById(memberId).subscribe((member) => {
+    //   this.member = member;
+    //   console.log(this.member);
+    //   const loginUserAreas =
+    //     this.userDataService.getUserDetails().selectedAreas;
+    //   const isTrue = loginUserAreas.some(
+    //     (area) => area.id === this.member.area.areaId
+    //   );
+    //   if (isTrue) {
+    //     this.router.navigate(["/add-new-member", memberId]);
+    //   } else {
+    //     this.toast.error(
+    //       "You can update this member,It not belonging to your area"
+    //     );
+    //   }
+    // });
   }
-  
+
+  // show all data and handl using active in active button
+//   statusLocation(status: string) {
+//     if (status === "all") {
+//       this.getAllMemberList();
+//     } else {
+//       this.memberListService.getMemberByStatus(status).subscribe(
+//         (data: Member[]) => {
+//           this.defaultMembers = data;
+//           console.log(data);
+//         },
+//         (error) => {
+//           console.error("fetching baithak detail:", error);
+//         }
+//       );
+//     }
+// }
+//  // show all data and handl using active in active button
+//  statusLocation(status: string) {
+//   if (status === "all") {
+//     this.getAllMemberList();
+//   } else {
+//     this.memberListService.getPaginateMemberListBaseOnStatus(this.currentPage, this.itemsPerPage,status ).subscribe(
+//       (data: Member[]) => {
+//         console.log(data);
+//         console.log(data.content);
+//         this.defaultMembers = data;
+//         console.log(data);
+//       },
+//       (error) => {
+//         console.error("fetching baithak detail:", error);
+//       }
+//     );
+//   }
+// }
+search(): void {
+  const statusParam = this.status ? this.status : null;
+  this.memberListService.getPaginateMemberListBaseOnSearch(this.query,this.status,this.currentPage,this.pageSize).subscribe((pagination:any) => {
+    // Handle response data
+    this.hasNextPage = pagination.lastPage;
+    this.defaultMembers = pagination.content;
+    this.totalElements = pagination.totoalElement;
+    this.pageSize = pagination.pageSize;
+    console.log(pagination);
+  },(error) => {
+    console.error("error while fetching record base on search", error);
+  });
+}
+statusLocation(status: string) {
+  this.currentPage = 0;
+  if (status === "all") {
+    this.status=null
+    // this.getAllLocationList();
+    this.getAllMemberList();
+  } else {
+    this.status=status
+    this.memberListService
+      .getPaginateMemberListBaseOnStatus(
+        this.currentPage,
+        this.itemsPerPage,
+        status
+      )
+      .subscribe(
+        (pagination: any) => {
+          console.log(pagination);
+          this.hasNextPage = pagination.lastPage;
+          this.defaultMembers = pagination.content;
+          this.totalElements = pagination.totoalElement;
+          this.pageSize = pagination.pageSize;
+        },
+        (error) => {
+          console.error("fetching member detail:", error);
+        }
+      );
+  }
+}
+}

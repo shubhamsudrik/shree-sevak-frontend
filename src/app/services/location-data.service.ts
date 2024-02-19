@@ -2,12 +2,16 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  Observable, catchError, throwError } from 'rxjs';
 import { Country } from '../Classes/Country';
+import { State } from '@popperjs/core';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationDataService {
+
+ 
+
  
   private baseUrl = "http://localhost:8080";
   private locationUrl="http://localhost:8080/api/country"
@@ -60,8 +64,18 @@ export class LocationDataService {
     return this.httpclient.get<Country[]>(`${this.locationUrl}/all`);
 
   }
-  
-
+  getAllStateList(countryId:number): Observable<any[]>{
+    return this.httpclient.get<any[]>(`${this.locationUrl}/${countryId}/state/all`);
+  }
+  getAllCityList(countryId:number,stateId:number): Observable<any[]>{
+    return this.httpclient.get<any[]>(`${this.locationUrl}/${countryId}/state/${stateId}/allCities`);
+  }
+  getAllDivisionsList(countryId: number, stateId: number, cityId: number) {
+    return this.httpclient.get<any[]>(`${this.locationUrl}/${countryId}/state/${stateId}/city/${cityId}/all-divisions`);
+  }
+  getAllCountryesData(): Observable<any[]>{
+    return this.httpclient.get<any[]>(`${this.locationUrl}/all`);
+  }
 
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
  
 import { Router } from "@angular/router";
-import { User } from "src/app/Classes/User";
+import { User } from "src/app/Classes/user";
 import { UserDataService } from "src/app/services/user-data.service";
   
 @Component({

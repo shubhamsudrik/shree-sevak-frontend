@@ -49,22 +49,32 @@
           
           
 
-            <div class="input-group input-group-alternative">
+            <!-- <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>    
               </div>
               <input class="form-control col-md-4" placeholder="{{ 'Search City' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true" (blur)="focus = false">
               <input class="form-control col-md-4" placeholder="{{ 'Search Area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true" (blur)="focus = false">
               <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true" (blur)="focus = false">
-              </div>
+              </div> -->
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span> 
+             
+                  <div>
+                    <input  type="text" [(ngModel)]="query" placeholder="Enter your search query">
+                    <button (click)="search()">Search</button>
+                  </div>
+             </div>
+             </div>
             
             <div class="form-group"><br>
             <ul class="nav nav-pills justify-content">
               <li class="nav-item mr-2 mr-md-0">
                 <select class="btn btn-success" (change)="statusLocation($event.target.value)">
                   <option  disabled >Select Location</option>
-                  <option value="all" >All</option>
-                  <option value="1" selected >Active</option>
+                  <option value="all" selected>All</option>
+                  <option value="1">Active</option>
                   <option value="0">InActive</option>
                 </select>
               </li><br>
@@ -87,8 +97,9 @@
               <li class="nav-item mr-2 mr-md-0">
                 <span class="d-none d-md-block" class="form-group">              
                     <!-- <div style="text-align: end;">Record Count:</div> -->
-                    <button  class="btn btn-success" > Record Count: {{ (defaultLocations | filter: searchText:searchText1:searchText2).length }}</button>
-                </span>
+                    <!-- <button  class="btn btn-success" > Record Count: {{ (defaultLocations | filter: searchText:searchText1:searchText2).length }}</button> -->
+                    <button  class="btn btn-success" > Record Count: {{totalRecords}}</button>
+                  </span>
             </li>
             </ul>
           </div>
@@ -130,10 +141,10 @@
                 <td>{{ location.locationName }}</td>
                 <td>{{ location.add1 }}</td>
                 <td>{{ location.add2 }}</td>
-                <td>{{ location.division  }}</td>
-                <td>{{ location.city }}</td>
-                <td>{{ location.state }}</td>
-                <td>{{ location.country }}</td>
+                <td>{{ location.division?.divisionName  }}</td>
+                <td>{{ location.city?.cityName }}</td>
+                <td>{{ location.state?.stateName }}</td>
+                <td>{{ location.country?.countryName }}</td>
                 <td>{{ location.area?.areaName }}</td>
                 <td>{{ location.pincode }}</td>
                 
@@ -144,9 +155,10 @@
         </div>
       </div> 
       <small><mat-paginator class="justify-content-md-end"
-        [length]="defaultLocations.length"
+        [hasNextPage]="hasNextPage"
+        [length]="totalRecords"
         [pageIndex]="currentPage"
-        [pageSizeOptions]="[10]"
+        [pageSize]="pageSize"
         (page)="onPageChange($event)"
       ></mat-paginator></small>
     </div>

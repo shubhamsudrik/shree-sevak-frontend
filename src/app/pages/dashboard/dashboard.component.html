@@ -145,9 +145,9 @@
           <tbody>
             <tr class="text-dark" *ngFor="let location of locdata.slice(-5)">
               <td>{{ location.locationName }}</td>
-              <td>{{ location.division  }}</td>
-              <td>{{ location.city }}</td>
-              <td>{{ location.state }}</td>
+              <td>{{ location.division?.divisionName  }}</td>
+              <td>{{ location.city?.cityName }}</td>
+              <td>{{ location.state?.stateName }}</td>
               <td>{{ location.pincode }}</td>
             </tr>
           </tbody>
@@ -177,8 +177,8 @@
         <tbody>
           <tr class="text-dark" *ngFor="let member of defaultMembers.slice(-5)">
             <td>{{ member.initial+' ' }}{{ member.firstName+ " "}}{{ member.lastName}}</td>
-            <td>{{ member.area.areaName }}</td>            
-            <td>{{ member.city }}</td>
+            <td>{{ member.area?.areaName }}</td>            
+            <td>{{ member.city?.cityName }}</td>
             <td>{{ member.mobile }}</td>
           </tr>
         </tbody>

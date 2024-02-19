@@ -50,7 +50,7 @@
             
             
   
-              <div class="input-group input-group-alternative">
+              <!-- <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>    
                 </div>
@@ -60,7 +60,18 @@
                 (blur)="focus = false">
                 <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
                 (blur)="focus = false">
-                </div>
+                </div> -->
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span> 
+               
+                    <div>
+                      <input  type="text" [(ngModel)]="query" placeholder="Enter your search query">
+                      <button (click)="search()">Search</button>
+                    </div>
+                   
+                  </div>
+                  </div>
               
               <div class="form-group"><br>
               <ul class="nav nav-pills justify-content">
@@ -91,8 +102,9 @@
                 <li class="nav-item mr-2 mr-md-0">
                   <span class="d-none d-md-block" class="form-group">              
                       <!-- <div style="text-align: end;">Record Count:</div> -->
-                      <button  class="btn btn-success" >Record Count: {{ (defaultAreas | areaFilter: searchText:searchText1:searchText2).length }}</button>
-                  </span>
+                      <!-- <button  class="btn btn-success" >Record Count: {{ (defaultAreas | areaFilter: searchText:searchText1:searchText2).length }}</button> -->
+                      <button  class="btn btn-success" >Record Count: {{ totalElements}}</button>
+                    </span>
               </li>
               </ul>
             </div>
@@ -126,7 +138,7 @@
                   <table class="table table-bordered"> -->
                       <tbody>
                 <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
-                  <tr style="width: 10%;" *ngFor="let area of pagedAreas |areaFilter:searchText:'':'' |areaFilter:'':searchText1:'' |areaFilter:'':'':searchText2; let i = index ">
+                  <tr style="width: 10%;" *ngFor="let area of defaultAreas |areaFilter:searchText:'':'' |areaFilter:'':searchText1:'' |areaFilter:'':'':searchText2; let i = index ">
   
                   <td>
                     <input type="radio" name="operation" (click)="toggleButtons('edit', area)" value="edit"  (change)="selectedRow = i">
@@ -141,10 +153,10 @@
                   <td>{{area.contactInitial }} {{area.contactName }}</td>
                   <td>{{area.contactPhone1 }}</td>
                   <td>{{area.contactEmail }}</td>
-                  <td>{{area.state }}</td>
-                  <td>{{area.city }}</td>
-                  <td>{{area.division  }}</td>
-                  <td>{{area.country }}</td>
+                  <td>{{area.state?.stateName }}</td>
+                  <td>{{area.city?.cityName }}</td>
+                  <td>{{area.division?.divisionName  }}</td>
+                  <td>{{area.country?.countryName }}</td>
                  
                   <!-- <td>{{area.status }}</td> -->
                 </tr>
