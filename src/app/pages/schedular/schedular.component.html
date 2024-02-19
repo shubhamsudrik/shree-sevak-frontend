@@ -59,6 +59,10 @@
             <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
             (blur)="focus = false">
             </div>
+            <div class="">
+              <input  type="text" [(ngModel)]="query" placeholder="Enter your search query">
+              <button class="btn btn-primary ml-5" (click)="search()">Search</button>
+            </div>
 
           <!-- add new button -->
           <div class="form-group">
@@ -107,7 +111,8 @@
               <li class="nav-item mr-2 mr-md-0">
                 <span class="d-none d-md-block" class="form-group">              
                     <!-- <div style="text-align: end;">Record Count:</div> -->
-                    <button  class="btn btn-success" >Record Count: {{ (defaultSchedules | scheduledFilter: searchText:searchText1:searchText2).length }}</button>
+                    <!-- <button  class="btn btn-success" >Record Count: {{ (defaultSchedules | scheduledFilter: searchText:searchText1:searchText2).length }}</button> -->
+                    <button  class="btn btn-success" >Record Count: {{totalRecords }}</button>
                 </span>
             </li>
             </ul>
@@ -133,7 +138,7 @@
               <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
               <tr 
                 *ngFor="
-                  let schedule of pagedSchedules | scheduledFilter : searchText:'':'' | scheduledFilter:'':searchText1:'' |scheduledFilter:'':'': searchText2; 
+                  let schedule of defaultSchedules | scheduledFilter : searchText:'':'' | scheduledFilter:'':searchText1:'' |scheduledFilter:'':'': searchText2; 
                   let i = index
                 ">
                 <td >
@@ -173,9 +178,10 @@
         </div>
       </div>
       <small><mat-paginator class="justify-content-md-end"
-        [length]="defaultSchedules.length"
+        [hasNextPage]="hasNextPage"
+        [length]="totalRecords"
         [pageIndex]="currentPage"
-        [pageSizeOptions]="[10]"
+        [pageSize]="itemsPerPage"
         (page)="onPageChange($event)"
       ></mat-paginator></small>
     </div>

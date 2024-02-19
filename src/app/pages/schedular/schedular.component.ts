@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 })
 export class SchedularComponent implements OnInit {
 
+
     schedule: Schedule = new Schedule;
     defaultSchedules: Schedule[] = [];
     public focus;
@@ -30,16 +31,23 @@ export class SchedularComponent implements OnInit {
 
   // Pagination
     currentPage: number = 0;
-    itemsPerPage: number = 9;
+    itemsPerPage: number = 10;
+    query: string=null;
+  hasNextPage: any;
+  totalRecords: any;
 
-    get pagedSchedules(): any[] {
-      const startIndex = this.currentPage * this.itemsPerPage;
-      const endIndex = startIndex + this.itemsPerPage;
-      return this.defaultSchedules.slice(startIndex, endIndex);
-    }
+  
+
+    // get pagedSchedules(): any[] {
+    //   const startIndex = this.currentPage * this.itemsPerPage;
+    //   const endIndex = startIndex + this.itemsPerPage;
+    //   return this.defaultSchedules.slice(startIndex, endIndex);
+    // }
 
     onPageChange(event: PageEvent): void {
+      console.log(event)
     this.currentPage = event.pageIndex ;
+    this.getRecordBypagination();
   }
 
      // record count
@@ -58,6 +66,20 @@ export class SchedularComponent implements OnInit {
     ) {
       translate.addLangs(['English']);
       translate.setDefaultLang('English');
+    }
+
+    search(): void {
+      this.currentPage=0
+      this.scheduleDataService.getRecordByPagination(this.query,this.currentPage,this.itemsPerPage).subscribe((pagination:any) => {
+        // Handle response data
+        this.hasNextPage = pagination.lastPage;
+        this.defaultSchedules = pagination.content;
+        this.totalRecords = pagination.totoalElement;
+        // this.itemsPerPage = pagination.pageSize;
+        console.log(pagination);
+      },(error) => {
+        console.error("error while fetching record base on search", error);
+      });
     }
 
      //get all schedule data
@@ -116,7 +138,8 @@ export class SchedularComponent implements OnInit {
     ngOnInit(): void {
       this.spinner.show();
 
-      this.getAllData();
+      // this.getAllData();
+     this.getRecordBypagination();
       this.getBaithakList();                                    
       setTimeout(() => {
         /** spinner ends after 5 seconds */
@@ -125,6 +148,25 @@ export class SchedularComponent implements OnInit {
 
     }
   
+    getRecordBypagination(){
+      this.scheduleDataService.getRecordByPagination(this.query,this.currentPage,this.itemsPerPage).subscribe((pagination:any) => {
+        this.defaultSchedules=pagination.content
+        this.hasNextPage = pagination.lastPage;
+        this.totalRecords = pagination.totoalElement;
+        this.itemsPerPage = pagination.pageSize;
+      })
+    }
+    getAllRecordOnPagination(pageNumber:number,pageSize:number) {
+      this.scheduleDataService.getAllrecordOnPagination(pageNumber,pageSize).subscribe((records:any) => {
+
+        this.defaultSchedules=records.content
+        console.log(records)
+        this.hasNextPage = records.lastPage;
+        this.totalRecords = records.totoalElement;
+        this.itemsPerPage = records.pageSize;
+        
+      })
+    }
     onOpen(value:any) {
       console.log(this.schedule);
       this.router.navigate(['/add-schedular'], {queryParams:{baithakId:value}});

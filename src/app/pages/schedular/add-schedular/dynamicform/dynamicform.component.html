@@ -12,7 +12,7 @@
       [ngClass]="{
         'is-invalid': MemberControls.vachanGhenara.errors?.required
       }"
-      class="form-control custom-width"
+      class="custom-width"
     
     >
       <option value="">Select Reader member</option>
@@ -33,7 +33,7 @@
       [ngClass]="{
         'is-invalid': MemberControls.hajeriGhenara.errors?.required
       }"
-      class="form-control custom-width"
+      class="custom-width"
     >
       <option value="">Select Writer member</option>
       <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
