@@ -20,6 +20,12 @@ export class UserListComponent implements OnInit {
   searchText2 ='';
   currentPage: number = 0;
   itemsPerPage: number = 10;
+  status: string;
+
+  keyword: String;
+  totalElement: any;
+  query: any;
+  
  
   get pagedUser(): any[] {
     const startIndex = this.currentPage * this.itemsPerPage;
@@ -29,6 +35,8 @@ export class UserListComponent implements OnInit {
  
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex;
+    this.getAllUserList();
+    console.log(this.status)
   }
  
   // record count
@@ -37,18 +45,27 @@ export class UserListComponent implements OnInit {
     const endIndex = startIndex + this.itemsPerPage;
     return this.defaultUsers.slice(startIndex, endIndex);
   }
-  constructor(private router: Router, private userService: UserDataService) {}
+  constructor(private router: Router, private userService: UserDataService) {
+    console.log("totalElement: ",this.totalElement)
+  }
  
   ngOnInit(): void {
-    this.getActiveUserList()  ;
+    // this.getActiveUserList()  ;
+    this.getAllUserList();
   }
+
   statusUsers(status: any) {
- 
+    this.currentPage =0;
     if(status==="all"){
+      this.status=null;
       this.getAllUserList();
     }else{
-      this.userService.getUserListByStatus(status).subscribe((user) => {
-        this.defaultUsers = user;
+      this.status=status;
+      this.userService.getAllUserByPaginatiom(status, this.keyword, this.currentPage, this.itemsPerPage).subscribe((user:any) => {
+        this.defaultUsers = user.content;
+        this.totalElement=user.totoalElement;
+        this.currentPage=user.pageNumber;
+        this.itemsPerPage = user.pageSize;
         console.log("status", this.defaultUsers);
       });
     }
@@ -59,23 +76,42 @@ export class UserListComponent implements OnInit {
     console.log(this.user);
     this.router.navigate(["/register"]);
   }
- 
+  search(): void {
+    console.log("searched word",this.query)
+    const statusParam = this.status ? this.status : null;
+    this.userService.getAllUserByPaginatiom(this.status, this.query, this.currentPage, this.itemsPerPage).subscribe((pagination:any) => {
+      // Handle response data
+      this.defaultUsers = pagination.content;
+      this.totalElement = pagination.totoalElement;
+      this.currentPage=pagination.pageNumber;
+      this.itemsPerPage = pagination.pageSize;
+      console.log(pagination);
+    },(error) => {
+      console.error("error while fetching record base on search", error);
+    });
+  }
   getAllUserList() {
-    this.userService.getAllUserList().subscribe((users: User[]) => {
-      this.defaultUsers = users;
+    this.userService.getAllUserByPaginatiom(this.status, this.keyword, this.currentPage, this.itemsPerPage).subscribe((users: any) => {
+      this.defaultUsers = users.content;
+      this.totalElement=users.totoalElement;
+      this.currentPage=users.pageNumber;
+      this.itemsPerPage = users.pageSize;
+      console.log(users)
       console.log(this.defaultUsers);
     });
   }
-  getActiveUserList() {
-    this.userService.getUserListByStatus('1').subscribe((users: User[]) => {
-      this.defaultUsers = users;
-      console.log(this.defaultUsers);
-    },
-    (error) => {
-      console.error('Error fetching users:', error);
-    }
-    );
-  }
+  
+  // getActiveUserList() {
+  //   this.userService.getUserListByStatus('1').subscribe((users: User[]) => {
+  //     this.defaultUsers = users;
+  //     console.log(this.defaultUsers);
+  //   },
+  //   (error) => {
+  //     console.error('Error fetching users:', error);
+  //   }
+  //   );
+  // }
+
   toggleButtons(operation: string, user: any) {
     if (operation === "edit") {
       user.isEditing = true;
