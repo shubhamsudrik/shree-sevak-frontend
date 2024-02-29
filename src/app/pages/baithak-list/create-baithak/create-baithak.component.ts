@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Baithak } from 'src/app/Classes/baithak';
 import { BaithakDataService } from 'src/app/services/baithak-data.service';
+import { LocService } from 'src/app/services/loc.service';
 @Component({
   selector: 'app-create-baithak',
   templateUrl: './create-baithak.component.html',
@@ -16,9 +17,11 @@ export class CreateBaithakComponent implements OnInit {
   baithakForm:FormGroup;
   baithak:Baithak=new Baithak();
   baithakId: number;
+  locationlist: any[];
   
 
   constructor(
+    private locationDataService: LocService,
     private baithakService:BaithakDataService,
     private router:Router,
     private formBuilder :FormBuilder,
@@ -30,6 +33,7 @@ export class CreateBaithakComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAllLocationList();
     this.baithakId = this.route.snapshot.params["baithakId"];
     console.log("baithakId ", this.baithakId)     
     if(this.baithakId){      
@@ -45,7 +49,18 @@ export class CreateBaithakComponent implements OnInit {
     }else{
       this.baithakInfoForm();
     }
+    
   }
+
+//get all location data
+
+  private getAllLocationList() {
+    this.locationDataService.getAllLocationList().subscribe((data: any[]) => {
+      this.locationlist = data;
+      console.log(this.locationlist);
+    });
+  }
+
     baithakInfoForm(){
      // FormValidation
      this.baithakForm = this.formBuilder.group({
@@ -54,6 +69,7 @@ export class CreateBaithakComponent implements OnInit {
       // date: ['',Validators.required],
       toTime: ['',Validators.required],
       fromTime: ['',Validators.required],
+      location: ['',Validators.required],
       status: ['',Validators.required],
       
   

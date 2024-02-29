@@ -689,7 +689,7 @@ export class ReportComponent implements OnInit {
   }
 
   convertToPDF() {
-    const pdf = new jsPDF("p", "mm", "a3");
+    const pdf = new jsPDF("p", "mm", "a4");
     html2canvas(document.getElementById("contentToConvert")).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       const width = pdf.internal.pageSize.getWidth();

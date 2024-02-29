@@ -14,6 +14,10 @@
     }
     /* Additional custom styles for smaller screens */
   }
+  .is-valid {
+    border-color: blue; /* Example of setting border color to blue */
+    /* Add any other styles you want for the 'valid' state */
+  }
 
   @media (min-width: 600px) {
    .forDetail{ margin-left: 380px;

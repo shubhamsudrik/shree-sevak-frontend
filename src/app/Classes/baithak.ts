@@ -6,6 +6,7 @@ export class Baithak{
 	dayOfWeek:string ;
     // date:string;
 	fromTime:String ;
+    location:string;
 	status:string;
     toTime:string;
     

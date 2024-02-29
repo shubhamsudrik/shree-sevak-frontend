@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { ToastrService } from "ngx-toastr";
@@ -218,10 +218,10 @@ export class AddNewMemberComponent implements OnInit {
       englishWrite: [""],
       englishSpeak: [""],
 
-      eligibleForChild: [""],
-      eligibleForGents: [""],
-      eligibleForLadies: [""],
-      eligibleForNone: [""],
+      eligibleForChild: ["", Validators.required],
+      eligibleForGents: ["", Validators.required],
+      eligibleForLadies:["", Validators.required],
+      eligibleForNone: ["", Validators.required],
 
       ownBaithakDay: ["", Validators.required],
       // type: ['', Validators.required],
@@ -229,7 +229,20 @@ export class AddNewMemberComponent implements OnInit {
       baithakLocation: ["", Validators.required], // hajeri no details contain Baithak location from now
       weeklyOffs: ["", Validators.required],
       additionalInfo: [""],
-    });
+
+  },
+  {
+     validator: this.atLeastOneCheckboxSelected 
+  });
+  }
+
+   // Custom validator function to ensure at least one checkbox is selected
+   atLeastOneCheckboxSelected: ValidatorFn = (control: AbstractControl): {[key: string]: any} | null => {
+    const checkboxes = ['eligibleForChild', 'eligibleForNone', 'eligibleForGents', 'eligibleForLadies'];
+    const checkedBoxes = checkboxes.map(box => control.get(box)?.value);
+    const isChecked = checkedBoxes.some(val => val === true);
+
+    return isChecked ? null : { 'atLeastOneCheckboxSelected': true };
   }
   getBaithakLocationList(id: number) {
     console.log(id);
@@ -355,9 +368,9 @@ export class AddNewMemberComponent implements OnInit {
       alert("Data already exists with the same Aaddhar card Number.");
     } else if (this.memberform.valid) {
       // Data doesn't exist and the form is valid, save the Member
-      if (!this.Member.addharNumber) {
-        alert("Please provide Addhar card Number");
-      }
+      // if (!this.Member.addharNumber) {
+      //   alert("Please provide Addhar card Number");
+      // }
       console.log(this.Member);
       if (!this.memberId) {
         this.saveMember();
