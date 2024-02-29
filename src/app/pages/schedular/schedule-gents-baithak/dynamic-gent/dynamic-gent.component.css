@@ -5,3 +5,13 @@
   .custom-width {
     width: 250px; /* Set the desired width */
   }
+
+  .male-feild{
+   border-color: #25e71a;
+   
+   color: black;
+  }
+  .female-feild{
+    border-color: #f44336;
+    color: black;
+  }
