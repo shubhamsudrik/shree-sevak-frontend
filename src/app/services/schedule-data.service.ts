@@ -62,6 +62,18 @@ export class ScheduleDataService {
     );
   }
 
+  getRecordByPagination(keyword: string,pageNumber:number,pageSize:number): Observable<Schedule[]> {
+    return this.httpclient.get<Schedule[]>(
+      `${this.baseUrl}/filter/search?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
+  }
+  getAllrecordOnPagination(pageNumber:number,pageSize:number){
+    return this.httpclient.get<Schedule[]>(
+      `${this.baseUrl}/pagination/all-schedules?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
+  }
+
+
   // create new record
   createScheduleRecord(schedulesarray: ScheduleDto[]): Observable<Object> {
     console.log("Inside service");

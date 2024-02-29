@@ -38,7 +38,7 @@ export class AreaListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-this.getAllAreaListByPagination();
+this.getPaginateAreaListBaseOnSearch();
   }
 
   // record count
@@ -85,15 +85,20 @@ this.getAllAreaListByPagination();
 
   public statusAreas(status:string){
     if(status=="all"){
+      this.status=null
+      this.query=null
       this.getAllAreaListByPagination();
 
     }else{
-    this.getAreaByStatusPagination(status)
+      this.status=status
+    this.query=null
+    this.currentPage=0,
+    this.getPaginateAreaListBaseOnSearch();
     }
   }
-  search(): void {
-    const statusParam = this.status ? this.status : null;
-    this.areaDataService.getPaginateAreaListBaseOnSearch(this.query,this.status,this.currentPage,this.pageSize).subscribe((pagination:any) => {
+  getPaginateAreaListBaseOnSearch(){
+    this.currentPage=0
+    this.areaDataService.getPaginateAreaListBaseOnSearch(this.query,this.status,this.currentPage,this.itemsPerPage).subscribe((pagination:any) => {
       // Handle response data
       this.hasNextPage = pagination.lastPage;
       this.defaultAreas = pagination.content;
@@ -103,6 +108,10 @@ this.getAllAreaListByPagination();
     },(error) => {
       console.error("error while fetching record base on search", error);
     });
+  }
+  search(): void {
+
+  this.getPaginateAreaListBaseOnSearch();
   }
   // getAreaByStatusPagination(status:string){
   //   this.areaDataService.getPaginateAreaBaseOnStatus(this.currentPage ,this.pageSize,status).subscribe((areaList:Area[])=>{
@@ -116,22 +125,14 @@ this.getAllAreaListByPagination();
     this.currentPage = 0;
     if (status === "all") {
       this.status=null
+      this.query=null
       // this.getAllLocationList();
-      this.getAllAreaListByPagination();
+      this.getPaginateAreaListBaseOnSearch();
     } else {
       this.status=status
-      this.areaDataService.getPaginateAreaBaseOnStatus(this.currentPage,this.itemsPerPage, status).subscribe(
-          (pagination: any) => {
-            console.log(pagination);
-            this.hasNextPage = pagination.lastPage;
-            this.defaultAreas = pagination.content;
-            this.totalElements = pagination.totoalElement;
-            this.pageSize = pagination.pageSize;
-          },
-          (error) => {
-            console.error("fetching area detail:", error);
-          }
-        );
+      this.query=null
+      this.currentPage=0,
+     this.getPaginateAreaListBaseOnSearch();
     }
   }
 

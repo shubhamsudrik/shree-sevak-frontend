@@ -65,6 +65,8 @@ import { ComponentsModule } from "./components/components.module";
 // import { ButtonModule } from "primeng/button";
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
+import { ScheduleGentsBaithakComponent } from "./pages/schedular/schedule-gents-baithak/schedule-gents-baithak.component";
+import { DynamicGentComponent } from "./pages/schedular/schedule-gents-baithak/dynamic-gent/dynamic-gent.component";
 @NgModule
 ({
   imports: [
@@ -135,7 +137,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ChangePasswordComponent,
     AreaListComponent,
     CreateAreaComponent,
-    
+    ScheduleGentsBaithakComponent,
+    DynamicGentComponent,
     FilterPipe,
     BaithakSearchPipe,
     MemberFilterPipe,

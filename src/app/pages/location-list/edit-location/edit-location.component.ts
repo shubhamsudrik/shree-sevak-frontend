@@ -110,7 +110,7 @@ export class EditLocationComponent implements OnInit {
       contact1Occupation: [""],
       contact1Phone1: [""],
       contact1Phone2: [""],
-      contact2Email: ["", Validators.email],
+      contact2Email: ["",],
       contact2Initial: [""],
       contact2Name: [""],
       contact2Occupation: [""],

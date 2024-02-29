@@ -1,37 +1,21 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  ViewChild,
-} from "@angular/core";
-import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
-import { log } from "console";
-import { ToastrService } from "ngx-toastr";
-import { pairwise, startWith } from "rxjs";
-import { Member } from "src/app/Classes/member";
-import { Schedule } from "src/app/Classes/schedule";
-import { ScheduleDto } from "src/app/Classes/schedule-dto";
-import { LocService } from "src/app/services/loc.service";
-import {Location} from "src/app/Classes/location";
-import { MemberListService } from "src/app/services/member-list.service";
-import { ScheduleDataService } from "src/app/services/schedule-data.service";
-export interface Memebr1{
-  id:number;
-  value:string
-}
-@Component({
-  selector: "app-dynamicform",
-  templateUrl: "./dynamicform.component.html",
-  styleUrls: ["./dynamicform.component.css"],
-})
-export class DynamicformComponent implements OnInit {
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Member } from 'src/app/Classes/member';
+import { Schedule } from 'src/app/Classes/schedule';
+import { ScheduleDto } from 'src/app/Classes/schedule-dto';
+import { LocService } from 'src/app/services/loc.service';
+import { MemberListService } from 'src/app/services/member-list.service';
+import { ScheduleDataService } from 'src/app/services/schedule-data.service';
 
+@Component({
+  selector: 'app-dynamic-gent',
+  templateUrl: './dynamic-gent.component.html',
+  styleUrls: ['./dynamic-gent.component.css']
+})
+export class DynamicGentComponent implements OnInit {
   @Output() valueChanged: EventEmitter<ScheduleDto> = new EventEmitter();
-  @Input() locationId: any;
+  @Input() locationId: any
   @Input() date: any;
   @Input() baithakId: any;
   @ViewChild("vachanSelect") vachanSelect!: ElementRef;
@@ -45,7 +29,7 @@ export class DynamicformComponent implements OnInit {
   @Input() vachanMembers: any[];
   @Input() allMembers: Member[];
 
-  updateSchedule: Schedule; 
+  updateSchedule: Schedule;
 
   reloadHajeri: boolean = false;
   reloadChild: boolean = false;
@@ -141,46 +125,9 @@ hajeriErrorMessage: string | null = null;
     });
   }
 
-  // initializingForm() {
-  //   this.schedularFormchild = this.formBuilder.group({
-  //     locationId: ["", Validators.required],
+ 
 
-  //     baithakId: ["", Validators.required],
-  //     hajeriGhenara: ["", Validators.required],
-
-  //     vachanGhenara: ["", Validators.required],
-  //     status: ["", Validators.required],
-  //     date: ["", Validators.required],
-  //     // scheduleForms: this.formBuilder.array([
-  //     //   this.formBuilder.group({
-  //     //     locationId: ["", Validators.required],
-
-  //     //     baithakId: ["", Validators.required],
-
-  //     //     hajeriGhenara: ["", Validators.required],
-  //     //     vachanGhenara: ["", Validators.required],
-  //     //     status: ["", Validators.required],
-
-  //     //     date: ["", Validators.required],
-  //     //   }),
-  //     // ]),
-  //   });
-  // }
-
-  initialiseMemebersOnType(): void {
-    // this.hajeriMembers = this.members.filter((member: Member) => {
-    //   if (member.hajeriNo === "1") {
-    //     return member;
-    //   }
-    // });
-    // this.vachanMembers = this.members.filter((member: Member) => {
-    //   if (member.hajeriNo === "2") {
-    //     return member;
-    //   }
-    // });
-    // console.log(this.hajeriMembers);
-    // console.log(this.vachanMembers);
-  }
+  
 
   submitChildForm() {
     console.log(this.schedularFormchild.value);
@@ -345,23 +292,7 @@ hajeriErrorMessage: string | null = null;
 
       this.schedularService.addMembersToSchduleVachanGhenara(this.vachanMember);
 
-      // if (this.vachanMembers.length === 0) {
-      //   this.toast.warning("All members assigned");
-      // }
-      // if (!isVachanMember) {
-      //   // this.toast.error("Member all ready assign ");
-      //   this.removeMemeberFromSelectedVachanList(this.vachanMember);
-      // } else {
-      //   this.schedularService.addMembersToSchduleVachanGhenara(
-      //     this.vachanMember
-      //   );
-
-      //   // const selectedVachanMembers = this.schedularService.schduleVachanmember;
-      //   // const vachanMemberIdsToRemove = selectedVachanMembers.map((member) => member.memberId);
-
-      //   // this.allMembers = this.schedularService.serviceDefaultMember.filter((member) => !vachanMemberIdsToRemove.includes(member.memberId));
-      //   // this.schedularService.setMembers(this.allMembers)
-      // }
+  
 
      
 
@@ -551,12 +482,6 @@ hajeriErrorMessage: string | null = null;
 // }
 })}}
 
-// reloadChild() {
-//   this.vachanMembers = this.schedularService.getMembers();
 
-//   // if (!this.reload) {
-//   //   this.reload = true;
-//   //   this.vachanMembers = this.schedularService.getMembers();
-//   //   this.hajeriMembers = this.schedularService.getMembers();
-//   // }
-// }
+
+

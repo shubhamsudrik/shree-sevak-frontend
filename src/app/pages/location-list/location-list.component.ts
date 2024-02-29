@@ -39,9 +39,9 @@ query: any;
     return this.defaultLocations;
   }
 
-  getPaginatedLocationsList(currentPage: number, itemsPerPage: number) {
+  getPaginatedLocationsList(query:string,status:string,currentPage: number, itemsPerPage: number) {
     this.locationDataService
-      .getPaginateLocationList(currentPage, itemsPerPage)
+      .getPaginateLocationListBaseOnSearch(query,status,currentPage, itemsPerPage)
       .subscribe(
         (pagination: any) => {
           console.log(pagination);
@@ -87,26 +87,26 @@ query: any;
   //   this.sortedDefaultLocations = this.defaultLocations.slice().sort((a, b) => b.locationId - a.locationId);
   // }
 
-  // //get active data
-  // private getLocationList() {
-  //   this.locationDataService.getLocationList().subscribe(
-  //     (data: any[]) => {
-  //       this.defaultLocations = data;
-  //       console.log(this.defaultLocations);
-  //     },
-  //     (error) => {
-  //       console.error("Error fetching locations:", error);
-  //     }
-  //   );
-  // }
-
+  //get active data
+  private getLocationList() {
+    this.locationDataService.getLocationList().subscribe(
+      (data: any[]) => {
+        this.defaultLocations = data;
+        console.log(this.defaultLocations);
+      },
+      (error) => {
+        console.error("Error fetching locations:", error);
+      }
+    );
+  }
+    
   switchLang(lang: string) {
     this.translate.use(lang);
   }
 
   ngOnInit(): void {
     // this.getLocationList();
-    this.getPaginatedLocationsList(this.currentPage, this.itemsPerPage);
+    this.getPaginatedLocationsList(null,null,this.currentPage, this.itemsPerPage);
   }
 
   onOpen() {
@@ -167,8 +167,8 @@ query: any;
   //   }
   // }
   search(): void {
-    console.log("searched word",this.query)
-    const statusParam = this.status ? this.status : null;
+    // const statusParam = this.status ? this.status : null;
+    this.currentPage=0
     this.locationDataService.getPaginateLocationListBaseOnSearch(this.query,this.status,this.currentPage,this.pageSize).subscribe((pagination:any) => {
       // Handle response data
       this.hasNextPage = pagination.lastPage;
@@ -184,15 +184,22 @@ query: any;
     this.currentPage = 0;
     if (status === "all") {
       this.status=null
+      this.query=null
       // this.getAllLocationList();
-      this.getPaginatedLocationsList(this.currentPage, this.itemsPerPage);
+      this.getPaginatedLocationsList(this.query,this.status,this.currentPage, this.itemsPerPage);
     } else {
       this.status=status
+      this.query=null
+      this.currentPage=0,
+      console.log("this.query",this.query)
       this.locationDataService
-        .getPaginateLocationListBaseOnStatus(
+     
+        .getPaginateLocationListBaseOnSearch(
+          this.query,
+          this.status,
           this.currentPage,
           this.itemsPerPage,
-          status
+          
         )
         .subscribe(
           (pagination: any) => {

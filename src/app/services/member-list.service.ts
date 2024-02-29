@@ -56,6 +56,6 @@ export class MemberListService {
 
   //get by search
   getPaginateMemberListBaseOnSearch(keyword:string,status:string,pageNumber: number,pageSize: number){
-    return this.httpclient.get<any[]>(`${this.baseUrl}/api/member/search?keyword=${keyword}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    return this.httpclient.get<any[]>(`${this.baseUrl}/api/member/pagination/search?keyword=${keyword}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
   }
 }
