@@ -52,7 +52,7 @@
     width: 150px; /* Adjust the width as needed */
     height: 40px; /* Adjust the height as needed */
     text-align: left; /* To align the text to the left within the button */
-    margin-right: 100px; /* Add margin to create space between buttons */
+    margin-right: 10px; /* Add margin to create space between buttons */
     margin-bottom: 10px;
   }
   

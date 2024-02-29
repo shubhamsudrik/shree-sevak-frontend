@@ -18,7 +18,7 @@ export class UserDataService {
     private loginservice: LoginService
   ) {}
  
-  private url = "http://localhost:8080/api/register";
+  private url = "http://localhost:8080/api/user";
  
   getUserByUsername(username: string): Observable<Object> {
     return this.httpclient.get(`${this.url}/username/${username}`);
