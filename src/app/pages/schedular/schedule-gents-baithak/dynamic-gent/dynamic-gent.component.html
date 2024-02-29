@@ -1,7 +1,7 @@
 <form [formGroup]="schedularFormchild">
-  <div class="d-flex flex-row justify-content-around">
-    <!-- Get Reader data dropdown -->
-  <span>Reader:</span>
+  <div class="d-flex flex-column justify-content-around">
+    <!-- Get Male data dropdown -->
+  <span>Male </span>
     <select
       formControlName="vachanGhenara"
       type="text"
@@ -12,7 +12,7 @@
       [ngClass]="{
         'is-invalid': MemberControls.vachanGhenara.errors?.required
       }"
-      class="custom-width"
+      class="custom-width bg-green text-color-white"
     
     >
       <option value="">Select Reader member</option>
@@ -21,8 +21,7 @@
       </option>
     </select>
 
-    <!-- Get Writer data dropdown -->
-    <span>Writer:</span>
+    <span>Female</span>
     <select
       formControlName="hajeriGhenara"
       type="text"
@@ -33,7 +32,7 @@
       [ngClass]="{
         'is-invalid': MemberControls.hajeriGhenara.errors?.required
       }"
-      class="custom-width"
+      class="custom-width bg-red text-color-white"
     >
       <option value="">Select Writer member</option>
       <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
@@ -41,14 +40,7 @@
       </option>
     </select>
 
-    <!-- <p-dropdown 
-    [options]="hajeriMemebrList"
-    class="custom-width"
-     formControlName="hajeriGhenara" 
-    placeholder="Select writer" [editable]="true" 
-    optionLabel="value"
-    optionValue="id"
-     (click)="hajeriMemberChange($event.value)" ></p-dropdown> -->
+
     
   </div>
 </form>

@@ -110,7 +110,7 @@ export class EditLocationComponent implements OnInit {
       contact1Occupation: [""],
       contact1Phone1: [""],
       contact1Phone2: [""],
-      contact2Email: ["", Validators.email],
+      contact2Email: ["",],
       contact2Initial: [""],
       contact2Name: [""],
       contact2Occupation: [""],
@@ -168,7 +168,7 @@ export class EditLocationComponent implements OnInit {
   }
 
   getAreas() {
-    const areaList = this.loginUserDetail.selectedAreas;
+    const areaList = this.loginUserDetail?.selectedAreas;
     this.arealist = areaList;
       console.log(this.arealist);
     // this.areaDataService.getAreaByStatus("1").subscribe((data) => {

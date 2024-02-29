@@ -49,21 +49,21 @@
           
           
 
-            <div class="input-group input-group-alternative">
+            <!-- <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>    
               </div>
               <input class="form-control col-md-4" placeholder="{{ 'Search City' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true" (blur)="focus = false">
               <input class="form-control col-md-4" placeholder="{{ 'Search Area' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true" (blur)="focus = false">
               <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true" (blur)="focus = false">
-              </div>
+              </div> -->
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span> 
              
-                  <div>
+                  <div class="">
                     <input  type="text" [(ngModel)]="query" placeholder="Enter your search query">
-                    <button (click)="search()">Search</button>
+                    <button class="btn btn-primary ml-5" (click)="search()">Search</button>
                   </div>
              </div>
              </div>
@@ -107,7 +107,7 @@
         <!-- <div style="max-height: 500px; overflow-y: auto;">
           <table class="table table-bordered">
             <thead class="thead-light"> -->
-        <div class="table-responsive " >
+        <div class="table-responsive "> 
           <table  class="table align-items-center table-flush ">
             <thead class="thead-light">
               <tr style="width: 10%;">
@@ -141,10 +141,10 @@
                 <td>{{ location.locationName }}</td>
                 <td>{{ location.add1 }}</td>
                 <td>{{ location.add2 }}</td>
-                <td>{{ location.division.divisionName  }}</td>
-                <td>{{ location.city.cityName }}</td>
-                <td>{{ location.state.stateName }}</td>
-                <td>{{ location.country.countryName }}</td>
+                <td>{{ location.division?.divisionName  }}</td>
+                <td>{{ location.city?.cityName }}</td>
+                <td>{{ location.state?.stateName }}</td>
+                <td>{{ location.country?.countryName }}</td>
                 <td>{{ location.area?.areaName }}</td>
                 <td>{{ location.pincode }}</td>
                 

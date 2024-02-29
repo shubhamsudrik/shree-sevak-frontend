@@ -65,4 +65,12 @@ export class UserDataService {
   getUserDetails(){
     return this.userDetails;
   }
+  getUserLqistByStatus(status:string) :Observable<User[]>{
+    return this.httpclient.get<User[]>(`${this.url}/status/${status}`)
+   }
+
+  // agination?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  getAllUserByPaginatiom(status:string, keyword:String, pageNumber:number,pageSize:number) :Observable<User[]>{
+    return this.httpclient.get<User[]>(`${this.url}/pagination/search?status=${status}&keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
 }

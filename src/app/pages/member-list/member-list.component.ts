@@ -14,62 +14,89 @@ import { UserDataService } from "src/app/services/user-data.service";
   styleUrls: ["./member-list.component.css"],
 })
 export class MemberListComponent implements OnInit {
-  member: Member = new Member();
-  defaultMembers: Member[] = [];
-  public focus;
-  searchText: any;
-  searchText1: any;
-  searchText2: any;
 
-  currentPage: number = 0;
-  itemsPerPage: number = 10;
+    member: Member = new Member;
+    defaultMembers: Member[] = [];
+    public focus;
+    searchText: any;
+    searchText1: any;
+    searchText2: any;    
+    currentPage: number = 0;
+    itemsPerPage: number = 10;
+    totalElements: any;
+    totalPages: any;
+  status: any;
+  hasNextPage: any;
+  pageSize: any;
+  query: any;
 
-  get pagedMembers(): any[] {
-    const startIndex = this.currentPage * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.defaultMembers.slice(startIndex, endIndex);
-  }
 
-  onPageChange(event: PageEvent): void {
-    this.currentPage = event.pageIndex;
-  }
+    get pagedMembers(): any[] {
+      const startIndex = this.currentPage * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.defaultMembers;
+    }
 
-  // record count
+    onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex ;
+    console.log("this.currentPage",this.currentPage);
+    console.log("event.pageIndex",event.pageIndex);
+    this.getAllMemberList();
+    }
+
+    // record count
   get pagedLocations(): any[] {
     const startIndex = this.currentPage * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     return this.defaultMembers.slice(startIndex, endIndex);
   }
 
-  constructor(
-    private memberListService: MemberListService,
-    private router: Router,
-    public translate: TranslateService,
-    private userDataService: UserDataService,
-    private toast: ToastrService
-  ) {
-    translate.addLangs(["English"]);
-    translate.setDefaultLang("English");
-  }
+    constructor(
+      private memberListService: MemberListService,
+      private router: Router,
+      public translate: TranslateService
+    ) {
+      translate.addLangs(['English']);
+      translate.setDefaultLang('English');
 
-  private getMemberList() {
-    this.memberListService.getMemberList().subscribe(
-      (data: Member[]) => {
-        this.defaultMembers = data;
-        console.log(this.defaultMembers);
-      },
-      (error) => {
-        console.error("Error fetching locations:", error);
-      }
-    );
-  }
+      console.log("this.defaultMembers.length",this.defaultMembers.length);
+      console.log("currentPage",this.currentPage);
+      // console.log("itemsPerPage",this.itemsPerPage);
+    }
+  
 
-  //get all member data
-  private getAllMemberList() {
-    this.memberListService.getAllMemberList().subscribe((data: Member[]) => {
-      this.defaultMembers = data;
-      console.log(this.defaultMembers);
-    });
+  // private getMemberList() {
+  //   this.memberListService.getMemberList().subscribe(
+  //     (data: Member[]) => {
+  //       this.defaultMembers = data;
+  //       console.log(this.defaultMembers);
+  //     },
+  //     (error) => {
+  //       console.error("Error fetching member:", error);
+  //     }
+  //   );
+  // }
+
+  // //get all member data
+  // private getAllMemberList() {
+  //   this.memberListService.getAllMemberList().subscribe((data: Member[]) => {
+  //     this.defaultMembers = data;
+  //     console.log(this.defaultMembers);
+  //   });
+  // }
+  
+      //get all member data
+  private getAllMemberList(){
+    this.memberListService.getAllMemberListByPagination(this.currentPage, this.itemsPerPage).subscribe(
+      (data: any) => {
+        console.log(data);
+        console.log(data.content);
+        this.defaultMembers =data.content;
+        this.totalElements = data.totoalElement;
+        console.log(this.defaultMembers)
+        console.log("currentPage",this.currentPage);
+        console.log("data.totalElements", this.totalElements)
+      },)
   }
 
   switchLang(lang: string) {
@@ -77,7 +104,8 @@ export class MemberListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMemberList();
+    // this.getAllMemberList();
+    this.getPaginateMemberListBaseOnSearch()
   }
 
   onOpen() {
@@ -113,19 +141,89 @@ export class MemberListComponent implements OnInit {
   }
 
   // show all data and handl using active in active button
-  statusLocation(status: string) {
-    if (status === "all") {
-      this.getAllMemberList();
-    } else {
-      this.memberListService.getMemberByStatus(status).subscribe(
-        (data: Member[]) => {
-          this.defaultMembers = data;
-          console.log(data);
+//   statusLocation(status: string) {
+//     if (status === "all") {
+//       this.getAllMemberList();
+//     } else {
+//       this.memberListService.getMemberByStatus(status).subscribe(
+//         (data: Member[]) => {
+//           this.defaultMembers = data;
+//           console.log(data);
+//         },
+//         (error) => {
+//           console.error("fetching baithak detail:", error);
+//         }
+//       );
+//     }
+// }
+//  // show all data and handl using active in active button
+//  statusLocation(status: string) {
+//   if (status === "all") {
+//     this.getAllMemberList();
+//   } else {
+//     this.memberListService.getPaginateMemberListBaseOnStatus(this.currentPage, this.itemsPerPage,status ).subscribe(
+//       (data: Member[]) => {
+//         console.log(data);
+//         console.log(data.content);
+//         this.defaultMembers = data;
+//         console.log(data);
+//       },
+//       (error) => {
+//         console.error("fetching baithak detail:", error);
+//       }
+//     );
+//   }
+// }
+search(): void {
+  // const statusParam = this.status ? this.status : null;
+  this.currentPage=0
+  this.getPaginateMemberListBaseOnSearch();
+}
+
+getPaginateMemberListBaseOnSearch(){
+  this.currentPage=0
+  this.memberListService.getPaginateMemberListBaseOnSearch(this.query,this.status,this.currentPage,this.itemsPerPage).subscribe((pagination:any) => {
+    // Handle response data
+    this.hasNextPage = pagination.lastPage;
+    this.defaultMembers = pagination.content;
+    this.totalElements = pagination.totoalElement;
+    this.pageSize = pagination.pageSize;
+    console.log(pagination);
+  },(error) => {
+    console.error("error while fetching record base on search", error);
+  });
+
+}
+statusLocation(status: string) {
+  this.currentPage = 0;
+  if (status === "all") {
+    this.status=null
+    this.query=null
+    // this.getAllLocationList();
+    this.getAllMemberList();
+  } else {
+    this.status=status
+    this.query=null
+    this.currentPage=0,
+    this.memberListService
+      .getPaginateMemberListBaseOnSearch(
+        this.query,
+          this.status,
+          this.currentPage,
+          this.itemsPerPage,
+      )
+      .subscribe(
+        (pagination: any) => {
+          console.log(pagination);
+          this.hasNextPage = pagination.lastPage;
+          this.defaultMembers = pagination.content;
+          this.totalElements = pagination.totoalElement;
+          this.pageSize = pagination.pageSize;
         },
         (error) => {
-          console.error("fetching baithak detail:", error);
+          console.error("fetching member detail:", error);
         }
       );
-    }
   }
+}
 }

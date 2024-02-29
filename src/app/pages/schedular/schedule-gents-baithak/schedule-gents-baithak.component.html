@@ -1,0 +1,189 @@
+<div class="container mt--7 pb-8 pt-50 pt-md-8">
+  <div class="row">
+    <div class="col">
+      <div>
+        <div class="border-0">
+          <ul
+            class="nav nav-pills flex-column flex-md-row justify-content-center"
+          >
+            <li class="nav-item">
+              <span class="d-none d-md-block form-group">
+                <h2>{{ "Schedule Gents baithak" | translate }}</h2>
+              </span>
+            </li>
+          </ul>
+
+          <div>
+            <div>{{ displayMonth }} {{ displayYear }}</div>
+
+            <div class="d-flex flex-row">
+              <button
+                type="button"
+                class="btn btn-info"
+                (click)="setCurrentMonth()"
+                value="today"
+              >
+                Current month
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-info"
+                (click)="decreaseMonth()"
+                value="-"
+              >
+                <i class="fas fa-chevron-left"></i>
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-info"
+                (click)="increaseMonth()"
+              >
+                <i class="fas fa-chevron-right"></i>
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-info"
+                (click)="goBack()"
+                value="back"
+              >
+                Go to list of schedules
+              </button>
+              <select
+              formControlName="baithakType"
+              type="text"
+              id="baithakType"
+              name="baithakType"
+              class="btn-dropdown"
+            >
+              <option value="">Select Reader member</option>
+              <option value="Child">child</option>
+            </select>
+
+            <select
+              [(ngModel)]="day"
+              type="text"
+              class="btn-dropdown"
+              id="area"
+              name="area"
+              (click)="areaChange($event.target.value)"
+              [(ngModel)]="location.area"
+            >
+              <option value="" disabled>Select Area</option>
+              <option *ngFor="let area of arealist" [value]="area.areaId">
+                {{ area.areaName }}-{{ area.city.name }}
+              </option>
+            </select>
+            <select
+              formControlName="area"
+              type="text"
+              class="btn-dropdown"
+              id="area"
+              name="area"
+              (click)="areaChange($event.target.value)"
+              [(ngModel)]="location.area"
+            >
+              <option value="" disabled>Select Area</option>
+              <option *ngFor="let area of arealist" [value]="area.areaId">
+                {{ area.areaName }}-{{ area.city.name }}
+              </option>
+            </select>
+            </div>
+          </div>
+
+          <form [formGroup]="schedularForm" (ngSubmit)="onSubmit()">
+            <div class="table-responsive scrollit">
+              <table class="calendar-table" *ngIf="calendar" border="1px solid">
+                <thead>
+                  <tr>
+                    <th class="sticky-column">Sr.no</th>
+
+                    <th class="sticky-column">Locations</th>
+
+                    <th *ngFor="let meeting of meetings">
+                      {{meeting.day}}
+                      <div>
+                        {{ meeting.date | date }}
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr
+                    *ngFor="let location of defaultLocations; let i = index"
+                    style="text-align: center"
+                  >
+                    <td class="sticky-column">{{ i + 1 }}</td>
+
+                    <td
+                      class="text-uppercase sticky-column"
+                      style="text-align: center"
+                    >
+                      {{ location.locationName }}
+                      <div
+                        *ngIf="location.mixedGenderAllow"
+                        class="text-uppercase"
+                        style="color: red; font-size: 10px"
+                      >
+                        ( Mixed Gender Allow )
+                      </div>
+                    </td>
+
+                    <td
+                      class="calendar-day"
+                      *ngFor="let c of meetings; let j = index"
+                    >
+                      <app-dynamic-gent
+                        (valueChanged)="saveChanges($event)"
+                        [baithakId]="baithakId"
+                        [locationId]="location.locationId"
+                        [hajeriMembers]="defaultMembers"
+                        [vachanMembers]="defaultMembers"
+                        [allMembers]="defaultMembers"
+                        [defaultMembers1]="defaultMembers1"
+                        [date]="c.date | date : 'mediumDate'"
+                      >
+                      </app-dynamic-gent>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex flex flex flex-row ml-auto mt-5">
+              <button *ngIf="hasSave" type="submit" class="btn btn-primary">
+                Save and continue
+              </button>
+
+              <button
+                *ngIf="!hasSave"
+                type="button"
+                class="btn btn-danger"
+                (click)="updateSchedule()"
+              >
+                UPDATE
+              </button>
+              <button
+                *ngIf="!hasSave"
+                type="button"
+                class="btn btn-secondary p-1"
+                (click)="generateSchedule()"
+              >
+                GENERATE REPORT
+              </button>
+              <!-- <button
+                type="button"
+                class="btn btn-info"
+                (click)="resetScheduleForm()"
+              >
+                RESET
+              </button> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

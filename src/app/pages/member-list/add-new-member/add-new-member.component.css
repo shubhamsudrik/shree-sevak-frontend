@@ -15,6 +15,10 @@
     /* Additional custom styles for smaller screens */
   }
 
+  @media (min-width: 600px) {
+   .forDetail{ margin-left: 380px;
+   }
+  }
 
   .form-section-header {
     background-color: #a3aeae; /* Set the background color to blue (you can change it) */
