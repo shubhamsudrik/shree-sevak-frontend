@@ -111,7 +111,7 @@
                   </tr>
                 </thead>
 
-                <tbody>
+                <tbody *ngIf="isAreaSelectedb && IsWeekSelected && isBaithakTypeSelected">
                   <tr
                     *ngFor="let location of defaultLocations; let i = index"
                     style="text-align: center"
