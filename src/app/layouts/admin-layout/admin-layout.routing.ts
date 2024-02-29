@@ -17,6 +17,7 @@ import { RegisterComponent } from 'src/app/pages/user-list/register/register.com
 import { CreateAreaComponent } from 'src/app/pages/area-list/create-area/create-area.component';
 import { AreaListComponent } from 'src/app/pages/area-list/area-list.component';
 import { UserListComponent } from 'src/app/pages/user-list/user-list.component';
+import { ScheduleGentsBaithakComponent } from 'src/app/pages/schedular/schedule-gents-baithak/schedule-gents-baithak.component';
 
 
 
@@ -44,6 +45,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'register/:id', component: RegisterComponent },
     { path: 'schedule-ladies-baithak', component: ScheduleLadiesBaithakComponent },
+    { path: 'schedule-gents-baithak', component: ScheduleGentsBaithakComponent },
     { path: 'area-list', component: AreaListComponent},
     { path: 'create-area/:id', component: CreateAreaComponent},
     { path: 'create-area', component: CreateAreaComponent},

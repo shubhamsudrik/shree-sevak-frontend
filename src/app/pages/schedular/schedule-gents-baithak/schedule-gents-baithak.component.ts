@@ -1,11 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  Pipe,
-  PipeTransform,
-  ViewChild,
-} from "@angular/core";
-
-
+import { Component, OnInit } from "@angular/core";
+import { Pipe, PipeTransform, ViewChild } from "@angular/core";
 
 import { Location } from "src/app/Classes/location";
 
@@ -26,7 +20,8 @@ import { firstValueFrom } from "rxjs";
 import { Schedule } from "src/app/Classes/schedule";
 import { error } from "console";
 import { Router, ActivatedRoute } from "@angular/router";
-import { DynamicGentComponent } from './dynamic-gent/dynamic-gent.component';
+import { DynamicGentComponent } from "./dynamic-gent/dynamic-gent.component";
+import { UserDataService } from "src/app/services/user-data.service";
 
 export class CalendarDay {
   public date: Date;
@@ -51,28 +46,12 @@ export class CalendarDay {
 }
 
 export class MeetingDay extends CalendarDay {
-  public selectedLocation: string;
+  public day: string;
 
-  public selectedReader: string;
-
-  public selectedWriter: string;
-
-  constructor(
-    date: Date,
-
-    reader: string = "",
-
-    location: string = "",
-
-    writer: string = ""
-  ) {
+  constructor(date: Date, day: string = "") {
     super(date);
 
-    this.selectedLocation = location;
-
-    this.selectedReader = reader;
-
-    this.selectedWriter = writer;
+    this.day = day;
   }
 }
 
@@ -99,17 +78,16 @@ export class ChunkPipe implements PipeTransform {
   }
 }
 @Component({
-  selector: 'app-schedule-gents-baithak',
-  templateUrl: './schedule-gents-baithak.component.html',
-  styleUrls: ['./schedule-gents-baithak.component.css']
+  selector: "app-schedule-gents-baithak",
+  templateUrl: "./schedule-gents-baithak.component.html",
+  styleUrls: ["./schedule-gents-baithak.component.css"],
 })
 export class ScheduleGentsBaithakComponent implements OnInit {
-arealist: any;
-day: any;
-areaChange // While adding dates to the calendar, ensure they belong to the selected month and are Sundays.
-(arg0: any) {
-throw new Error('Method not implemented.');
-}
+  arealist: any;
+  day: any;
+  areaChange(arg0: any) { // While adding dates to the calendar, ensure they belong to the selected month and are Sundays.
+    throw new Error("Method not implemented.");
+  }
 
   location: Location = new Location();
   @ViewChild(DynamicGentComponent) dynamicformcomponent: DynamicGentComponent;
@@ -166,18 +144,11 @@ throw new Error('Method not implemented.');
 
   private monthIndex: number = 0;
 
-  selectedLocation: any;
-
-  selectedReader: any;
-
-  selectedWriter: any;
-
   displayDayCount: any;
   defaultVachanMembers: Member[];
   defaultHajeriMembers: Member[];
   hasSave: boolean;
   collectionOfSchedule: Schedule[];
- 
 
   constructor(
     private router: Router,
@@ -189,14 +160,14 @@ throw new Error('Method not implemented.');
     private formBuilder: FormBuilder,
 
     private scheduleService: ScheduleDataService,
-
+    private userDataService: UserDataService,
     private route: ActivatedRoute,
     private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.baithakId = this.route.snapshot.queryParamMap.get("baithakId");
-
+    this.getUserAreaList();
     this.initializingForm();
 
     this.generateCalendarDays(this.monthIndex);
@@ -250,16 +221,15 @@ throw new Error('Method not implemented.');
       console.log(dateToAdd.getMonth(), day.getMonth());
 
       //.getDay() is moday,sunday,saturday like week day
-
+const days=["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
       console.log(dateToAdd.getDay());
 
-      if (dateToAdd.getDay() === 0) {
-        // console.log(dateToAdd.getDay(), "inside if");
 
-        // console.log(dateToAdd);
+      // console.log(dateToAdd.getDay(), "inside if");
 
-        this.meetings.push(new MeetingDay(new Date(dateToAdd)));
-      }
+      // console.log(dateToAdd);
+
+      this.meetings.push(new MeetingDay(new Date(dateToAdd),days[dateToAdd.getDay()]));
 
       // console.log(dateToAdd.getDate());
 
@@ -273,6 +243,11 @@ throw new Error('Method not implemented.');
     }
   }
 
+  getUserAreaList() {
+    const user = this.userDataService.getUserDetails();
+    this.arealist = user.selectedAreas;
+    console.log(this.arealist);
+  }
   public increaseMonth() {
     this.monthIndex++;
 
@@ -312,23 +287,19 @@ throw new Error('Method not implemented.');
     this.router.navigate(["/schedular"]);
   }
 
-  public updateMeeting(
-    index: number,
+  // public updateMeeting(
+  //   index: number,
 
-    reader: string,
+  //   reader: string,
 
-    location: string,
+  //   location: string,
 
-    writer: string
-  ) {
-    if (index >= 0 && index < this.meetings.length) {
-      this.meetings[index].selectedReader = reader;
+  //   writer: string
+  // ) {
+  //   if (index >= 0 && index < this.meetings.length) {
 
-      this.meetings[index].selectedLocation = location;
-
-      this.meetings[index].selectedWriter = writer;
-    }
-  }
+  //   }
+  // }
 
   //get active location data
 
@@ -340,11 +311,11 @@ throw new Error('Method not implemented.');
     });
   }
 
-  onLocationSelect(location: any, meeting: MeetingDay) {
-    this.selectedLocation = meeting;
+  // onLocationSelect(location: any, meeting: MeetingDay) {
+  //   this.selectedLocation = meeting;
 
-    meeting.selectedLocation = location.locationId;
-  }
+  //   meeting.selectedLocation = location.locationId;
+  // }
 
   //get all member data
 
@@ -352,8 +323,6 @@ throw new Error('Method not implemented.');
     this.memberListService.getMemberList().subscribe((data: Member[]) => {
       this.defaultMembers = data;
       // let defaultmemebrsList:Memebr1[]=[];
-    
-      
 
       console.log(this.defaultMembers);
     });
@@ -372,8 +341,6 @@ throw new Error('Method not implemented.');
       status: ["", Validators.required],
 
       date: ["", Validators.required],
-
-     
     });
   }
 
@@ -720,5 +687,4 @@ throw new Error('Method not implemented.');
         (error) => console.log(error)
       );
   }
-
 }
