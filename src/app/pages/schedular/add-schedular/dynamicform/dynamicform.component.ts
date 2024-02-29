@@ -52,7 +52,7 @@ export class DynamicformComponent implements OnInit {
   @Input() allMembers: Member[];
   @Input() defaultMembers1: Memebr1[];
 
-  updateSchedule: Schedule;
+  updateSchedule: Schedule; 
 
   reloadHajeri: boolean = false;
   reloadChild: boolean = false;
