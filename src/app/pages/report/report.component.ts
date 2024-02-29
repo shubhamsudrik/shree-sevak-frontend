@@ -576,6 +576,8 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./report.component.css"],
 })
 export class ReportComponent implements OnInit {
+  dateLength: any;
+  Date1: any;
   constructor(
     private scheduleDataService: ScheduleDataService,
     private route: ActivatedRoute
@@ -695,7 +697,19 @@ export class ReportComponent implements OnInit {
       const width = pdf.internal.pageSize.getWidth();
       const height = canvas.height * (width / canvas.width);
       pdf.addImage(contentDataURL, "PNG", 0, 0, width, height);
-      pdf.save("output.pdf");
+      let a =this.b.length;
+      console.log(a)
+      let lname;
+      for(let location of this.groupedSchedules){
+        lname=location.location.locationName;
+      }
+      let year;
+      year= this.b.slice(a-2,a)
+      console.log(year);
+      pdf.save(this.b.slice(0,3)+year+"_"+lname+".pdf");
+      this.dateLength=this.b.slice(0, 3)
+      console.log(this.b.slice(0, 3));
+
     });
   }
 

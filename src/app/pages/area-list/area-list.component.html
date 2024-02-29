@@ -61,13 +61,14 @@
                 <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
                 (blur)="focus = false">
                 </div> -->
+              
                 <div class="input-group input-group-alternative">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-search"></i></span> 
                
                     <div>
-                      <input  type="text" [(ngModel)]="query" placeholder="Enter your search query">
-                      <button class="btn btn-primary" (click)="search()">Search</button>
+                      <input  type="text" [(ngModel)]="query" (keydown.enter)="search()" placeholder="Enter your search query">
+                      <button class="btn btn-primary btn-sm ml-4" (click)="search()">Search</button>
                     </div>
                    
                   </div>
