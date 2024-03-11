@@ -140,6 +140,12 @@
                   {{menuItems[7].title}}
               </a>
           </li>
+          <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[8].class}} nav-item">
+              <a  routerLinkActive="active" [routerLink]="[menuItems[8].path]" class="nav-link" >
+                  <i class="ni {{menuItems[8].icon}}"></i>
+                  {{menuItems[8].title}}
+              </a>
+          </li>
       </ul>
      
     </div>

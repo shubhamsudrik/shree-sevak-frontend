@@ -52,44 +52,46 @@
                 Go to list of schedules
               </button>
               <select
-              formControlName="baithakType"
-              type="text"
-              id="baithakType"
-              name="baithakType"
-              class="btn-dropdown"
-            >
-              <option value="">Select Reader member</option>
-              <option value="Child">child</option>
-            </select>
+                formControlName="baithakType"
+                type="text"
+                id="baithakType"
+                name="baithakType"
+                class="btn-dropdown"
+              >
+                <option value="" disabled>Select Reader member</option>
+                <!-- <option value="Child">child</option> -->
+                <option value="Child">Gents-Ladies</option>
+              </select>
 
-            <select
-              [(ngModel)]="day"
-              type="text"
-              class="btn-dropdown"
-              id="area"
-              name="area"
-              (click)="areaChange($event.target.value)"
-              [(ngModel)]="location.area"
-            >
-              <option value="" disabled>Select Area</option>
-              <option *ngFor="let area of arealist" [value]="area.areaId">
-                {{ area.areaName }}-{{ area.city.name }}
-              </option>
-            </select>
-            <select
-              formControlName="area"
-              type="text"
-              class="btn-dropdown"
-              id="area"
-              name="area"
-              (click)="areaChange($event.target.value)"
-              [(ngModel)]="location.area"
-            >
-              <option value="" disabled>Select Area</option>
-              <option *ngFor="let area of arealist" [value]="area.areaId">
-                {{ area.areaName }}-{{ area.city.name }}
-              </option>
-            </select>
+              <select
+                [(ngModel)]="day"
+                type="text"
+                class="btn-dropdown"
+                id="area"
+                name="area"
+                (click)="areaChange($event.target.value)"
+                [(ngModel)]="location.area"
+              >
+                <option value="" disabled>Select Area</option>
+                <option *ngFor="let area of arealist" [value]="area.areaId">
+                  {{ area.areaName }}-{{ area.city.name }}
+                </option>
+              </select>
+              <select
+                type="text"
+                class="btn-dropdown"
+                id="week"
+                name="week"
+                (change)="weekChange($event.target.value)"
+                [(ngModel)]="week"
+              >
+                <option value="" disabled>Select week</option>
+                <option value="1">{{ "week" }}-{{ 1 }}</option>
+                <option value="2">{{ "week" }}-{{ 2 }}</option>
+                <option value="3">{{ "week" }}-{{ 3 }}</option>
+                <option value="4">{{ "week" }}-{{ 4 }}</option>
+                <option value="5">{{ "week" }}-{{ 5 }}</option>
+              </select>
             </div>
           </div>
 
@@ -102,8 +104,8 @@
 
                     <th class="sticky-column">Locations</th>
 
-                    <th *ngFor="let meeting of meetings">
-                      {{meeting.day}}
+                    <th *ngFor="let meeting of updatedMeetings">
+                      {{ meeting.day }}
                       <div>
                         {{ meeting.date | date }}
                       </div>
@@ -111,7 +113,7 @@
                   </tr>
                 </thead>
 
-                <tbody *ngIf="isAreaSelectedb && IsWeekSelected && isBaithakTypeSelected">
+                <tbody>
                   <tr
                     *ngFor="let location of defaultLocations; let i = index"
                     style="text-align: center"
@@ -123,20 +125,23 @@
                       style="text-align: center"
                     >
                       {{ location.locationName }}
-                      <div
+                      <!-- <div
                         *ngIf="location.mixedGenderAllow"
                         class="text-uppercase"
                         style="color: red; font-size: 10px"
                       >
                         ( Mixed Gender Allow )
-                      </div>
+                      </div> -->
+                      <div style="color: green;">Male</div>
+                      <div style="color: red;">Female</div>
                     </td>
 
                     <td
                       class="calendar-day"
-                      *ngFor="let c of meetings; let j = index"
+                      *ngFor="let c of updatedMeetings; let j = index"
                     >
-                      <app-dynamic-gent
+                      <app-dynamic-gent 
+                     
                         (valueChanged)="saveChanges($event)"
                         [baithakId]="baithakId"
                         [locationId]="location.locationId"
