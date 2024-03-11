@@ -83,9 +83,14 @@ export class ChunkPipe implements PipeTransform {
   styleUrls: ["./schedule-gents-baithak.component.css"],
 })
 export class ScheduleGentsBaithakComponent implements OnInit {
+  week: any;
+
   arealist: any;
   day: any;
-  areaChange(arg0: any) { // While adding dates to the calendar, ensure they belong to the selected month and are Sundays.
+  updatedMeetings: MeetingDay[];
+  legthOfMeetings: number;
+  areaChange(arg0: any) {
+    // While adding dates to the calendar, ensure they belong to the selected month and are Sundays.
     throw new Error("Method not implemented.");
   }
 
@@ -171,7 +176,8 @@ export class ScheduleGentsBaithakComponent implements OnInit {
     this.initializingForm();
 
     this.generateCalendarDays(this.monthIndex);
-
+this.updatedMeetings=this.meetings.slice(0,7);
+this.legthOfMeetings=this.updatedMeetings.length
     this.getLocationList();
 
     this.getMemberList();
@@ -221,15 +227,24 @@ export class ScheduleGentsBaithakComponent implements OnInit {
       console.log(dateToAdd.getMonth(), day.getMonth());
 
       //.getDay() is moday,sunday,saturday like week day
-const days=["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"]
+      const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
       console.log(dateToAdd.getDay());
-
 
       // console.log(dateToAdd.getDay(), "inside if");
 
       // console.log(dateToAdd);
 
-      this.meetings.push(new MeetingDay(new Date(dateToAdd),days[dateToAdd.getDay()]));
+      this.meetings.push(
+        new MeetingDay(new Date(dateToAdd), days[dateToAdd.getDay()])
+      );
 
       // console.log(dateToAdd.getDate());
 
@@ -660,7 +675,26 @@ const days=["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Sa
       "Dec",
     ][previousMonthIndex];
   }
+  weekChange(arg0: any) { 
+    if(arg0==1){
+      this.updatedMeetings=  this.meetings.slice(0,6)
+    }else if(arg0==2){
+      this.updatedMeetings=this.meetings.slice(7,13)
 
+    }
+    else if(arg0==3){
+      this.updatedMeetings=this.meetings.slice(14,20)
+
+    
+    }else if(arg0==4){
+      this.updatedMeetings=this.meetings.slice(21,27)
+
+    
+    }else{
+      this.updatedMeetings=this.meetings.slice(28,31)
+
+    }
+  }
   generateSchedule() {
     const date = this.dynamicformcomponent.currentDate();
     let regex = /(\w{3})\s\d{1,2},\s(\d{4})/;

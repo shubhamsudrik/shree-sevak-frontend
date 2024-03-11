@@ -63,13 +63,16 @@ import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ComponentsModule } from "./components/components.module";
 // import { ButtonModule } from "primeng/button";
-import { MultiSelectModule } from 'primeng/multiselect';
-import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from "primeng/multiselect";
+import { DropdownModule } from "primeng/dropdown";
 import { ScheduleGentsBaithakComponent } from "./pages/schedular/schedule-gents-baithak/schedule-gents-baithak.component";
 import { DynamicGentComponent } from "./pages/schedular/schedule-gents-baithak/dynamic-gent/dynamic-gent.component";
-@NgModule
-({
+import { PeopleBaithakComponent } from "./pages/schedular/people-baithak/people-baithak.component";
+import { TableModule } from "primeng/table";
+import { PepoleBaithakService } from "./services/pepole-baithak.service";
+@NgModule({
   imports: [
+  
     DropdownModule,
     MultiSelectModule,
     Ng2SearchPipeModule,
@@ -88,7 +91,7 @@ import { DynamicGentComponent } from "./pages/schedular/schedule-gents-baithak/d
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
-
+    TableModule,
     NgxSpinnerModule.forRoot({ type: "ball-scale-multiple" }),
     NgFor,
     ToastrModule.forRoot({
@@ -146,6 +149,8 @@ import { DynamicGentComponent } from "./pages/schedular/schedule-gents-baithak/d
     AreaFilterPipe,
     UserListComponent,
     UserFilterPipe,
+   PeopleBaithakComponent
+
 
     // ComponentComponent
   ],
