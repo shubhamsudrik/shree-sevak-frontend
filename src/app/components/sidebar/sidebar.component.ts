@@ -21,6 +21,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/user-list', title: 'Users',  icon:'fas fa-user-plus ni-sign-up text-primary', class: '' },
     { path: '/schedular', title: 'Scheduled Baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
     { path: '/schedule-gents-baithak', title: 'Scheduled gents baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
+    { path: '/people-baithak', title: 'Schedule Pepole baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
     { path: '/report', title: '',  icon:'', class: '' },
 
 ];

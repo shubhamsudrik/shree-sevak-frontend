@@ -18,6 +18,8 @@ import { CreateAreaComponent } from 'src/app/pages/area-list/create-area/create-
 import { AreaListComponent } from 'src/app/pages/area-list/area-list.component';
 import { UserListComponent } from 'src/app/pages/user-list/user-list.component';
 import { ScheduleGentsBaithakComponent } from 'src/app/pages/schedular/schedule-gents-baithak/schedule-gents-baithak.component';
+import { PepoleBaithak } from 'src/app/Classes/pepole-baithak';
+import { PeopleBaithakComponent } from 'src/app/pages/schedular/people-baithak/people-baithak.component';
 
 
 
@@ -45,6 +47,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'register/:id', component: RegisterComponent },
     { path: 'schedule-ladies-baithak', component: ScheduleLadiesBaithakComponent },
+    { path: 'people-baithak', component: PeopleBaithakComponent },
     { path: 'schedule-gents-baithak', component: ScheduleGentsBaithakComponent },
     { path: 'area-list', component: AreaListComponent},
     { path: 'create-area/:id', component: CreateAreaComponent},

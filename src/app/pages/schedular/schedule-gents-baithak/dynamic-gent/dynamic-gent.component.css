@@ -4,11 +4,12 @@
   
   .custom-width {
     width: 250px; /* Set the desired width */
+    margin-top: 10px;
   }
 
   .male-feild{
    border-color: #25e71a;
-   
+   margin-top: 50px;
    color: black;
   }
   .female-feild{

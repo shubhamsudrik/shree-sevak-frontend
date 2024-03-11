@@ -1,42 +1,43 @@
 <form [formGroup]="schedularFormchild">
   <div class="d-flex flex-column justify-content-around">
     <!-- Get Male data dropdown -->
-    <span>Male </span>
-    <select
-      formControlName="vachanGhenara"
-      type="text"
-      id="vachanGhenara"
-      name="vachanGhenara"
-      #vachanSelect
-      (click)="vachanMemberChange($event.target.value)"
-      [ngClass]="{
-        'is-invalid': MemberControls.vachanGhenara.errors?.required
-      }"
-      class="custom-width male-feild"
-    >
-      <option value="">Select Reader member</option>
-      <option *ngFor="let reader of vachanMembers" [value]="reader.memberId">
-        {{ reader.firstName }} {{ reader.middleName }} {{ reader.lastName }}
-      </option>
-    </select>
 
-    <span>Female</span>
+   <div class="d-flex flex-column">
     <select
-      formControlName="hajeriGhenara"
-      type="text"
-      id="hajeriGhenara"
-      name="hajeriGhenara"
-      #hajeriSelect
-      (click)="hajeriMemberChange($event.target.value)"
-      [ngClass]="{
-        'is-invalid': MemberControls.hajeriGhenara.errors?.required
-      }"
-      class="custom-width female-feild"
-    >
-      <option value="">Select Writer member</option>
-      <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
-        {{ writer.firstName }} {{ writer.middleName }} {{ writer.lastName }}
-      </option>
-    </select>
+    formControlName="vachanGhenara"
+    type="text"
+    id="vachanGhenara"
+    name="vachanGhenara"
+    #vachanSelect
+    (click)="vachanMemberChange($event.target.value)"
+    [ngClass]="{
+      'is-invalid': MemberControls.vachanGhenara.errors?.required
+    }"
+    class="custom-width male-feild"
+  >
+    <option value="">Select Reader member</option>
+    <option *ngFor="let reader of vachanMembers" [value]="reader.memberId">
+      {{ reader.firstName }} {{ reader.middleName }} {{ reader.lastName }}
+    </option>
+  </select>
+
+  <select
+    formControlName="hajeriGhenara"
+    type="text"
+    id="hajeriGhenara"
+    name="hajeriGhenara"
+    #hajeriSelect
+    (click)="hajeriMemberChange($event.target.value)"
+    [ngClass]="{
+      'is-invalid': MemberControls.hajeriGhenara.errors?.required
+    }"
+    class="custom-width female-feild"
+  >
+    <option value="">Select Writer member</option>
+    <option *ngFor="let writer of hajeriMembers" [value]="writer.memberId">
+      {{ writer.firstName }} {{ writer.middleName }} {{ writer.lastName }}
+    </option>
+  </select>
+   </div>
   </div>
 </form>
