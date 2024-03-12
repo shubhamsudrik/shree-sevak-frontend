@@ -1,22 +1,23 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { PeopleBaithak } from "src/app/Classes/people-baithak";
-import { DaysService } from "src/app/services/days.service";
-import { LocService } from "src/app/services/loc.service";
-import { LocationDataService } from "src/app/services/location-data.service";
-import { PepoleBaithakService } from "src/app/services/pepole-baithak.service";
-import { UserDataService } from "src/app/services/user-data.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PeopleBaithak } from 'src/app/Classes/people-baithak';
+import { DaysService } from 'src/app/services/days.service';
+import { LocService } from 'src/app/services/loc.service';
+import { PepoleBaithakService } from 'src/app/services/pepole-baithak.service';
+import { UserDataService } from 'src/app/services/user-data.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 interface City {
   name: string;
   code: string;
 }
+
 @Component({
-  selector: "app-people-baithak",
-  templateUrl: "./people-baithak.component.html",
-  styleUrls: ["./people-baithak.component.css"],
+  selector: 'app-schedule-baithak',
+  templateUrl: './schedule-baithak.component.html',
+  styleUrls: ['./schedule-baithak.component.css']
 })
-export class PeopleBaithakComponent implements OnInit {
+export class ScheduleBaithakComponent implements OnInit {
 
   cols: { field: string; header: string }[];
 
@@ -40,8 +41,12 @@ export class PeopleBaithakComponent implements OnInit {
     private userDataService: UserDataService,
     private locDataService: LocService,
     private daysService: DaysService,
-  private peopleBaithakService: PepoleBaithakService
-  ) {}
+  private peopleBaithakService: PepoleBaithakService,
+  
+  ) {
+
+    console.log(this.cols)
+  }
 
   ngOnInit(): void {
     this.userDetails = this.userDataService.getUserDetails();
@@ -89,7 +94,6 @@ export class PeopleBaithakComponent implements OnInit {
     const addBaithak=this.baithakFrom.value
    console.log(this.baithakFrom.value)
    this.peopleBaithakService.saveBaithakDetails(addBaithak).subscribe(data=>{
-    console.log(addBaithak);
     console.log("save baithak record",data)
    })
 
@@ -134,3 +138,4 @@ export class PeopleBaithakComponent implements OnInit {
   console.log(this.locationList)
   }
 }
+

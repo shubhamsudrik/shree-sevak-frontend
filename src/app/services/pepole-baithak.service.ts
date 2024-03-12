@@ -6,9 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PepoleBaithakService {
-
-
- private baseUrl='http://localhost:/api/baithak2'
+ 
+ private baseUrl=`http://localhost:8080/api/baithak2`
   constructor(
     private httpClient:HttpClient
   ) { }

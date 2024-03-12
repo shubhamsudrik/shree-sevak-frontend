@@ -1,0 +1,192 @@
+<div class="container mt--7 pt-50 pt-md-8">
+    <div class="row">
+      <div class="col">
+        <div>
+          <div class="border-0">
+            <ul
+              class="nav nav-pills flex-column flex-md-row justify-content-center"
+            >
+              <li class="nav-item">
+                <span class="d-none d-md-block form-group">
+                  <h2>Schedule Gents Baithak</h2>
+                </span>
+              </li>
+            </ul>
+  
+            <div>
+              <div class="d-flex flex-column justify-content-around">
+                <form [formGroup]="baithakFrom" (ngSubmit)="onSubmit()">
+                  <div class="d-flex flex-row justify-content-around">
+                    <div class="d-flex flex-column align-items-center">
+                      <label for="location"> location </label>
+                        <p-dropdown
+                        [options]="locationList"
+                        name="location"
+                        id="location"
+                        formControlName="location"
+                        optionValue="locationId"
+                        optionLabel="locationName"
+                        (onClick)="onClickLocation($event)"
+                      >
+                      </p-dropdown>
+                    </div>
+  
+                  <!-- <div class="card flex justify-content-center">
+                      <p-dropdown
+                        [options]="locationList"
+                        formControlName="location"
+                        optionLabel="locationName"
+                        optionValue="locationId"
+                        [filter]="true"
+                        filterBy="locationName"
+                        [showClear]="true"
+                        placeholder="Select a location"
+                      >
+                        <ng-template pTemplate="selectedItem" let-selectedOption>
+                          <div class="flex align-items-center gap-2">
+                            <img
+                              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                              [class]="
+                                'flag flag-' + location.locationName.toLowerCase()
+                              "
+                              style="width: 18px"
+                            />
+                            <div>{{ selectedOption.locationName }}</div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-country pTemplate="item">
+                          <div class="flex align-items-center gap-2">
+                            <img
+                              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                              [class]="'flag flag-' + country.locationName.toLowerCase()"
+                              style="width: 18px"
+                            />
+                            <div>{{ country.locationName }}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                    </div>  -->
+                    <div class="d-flex flex-column align-items-center">
+                      <label for="location"> Baithak Type </label>
+                      <p-dropdown
+                        [options]="baithakTypes"
+                        formControlName="baithakType"
+                        optionValue="value"
+                        optionLabel="type"
+                      >
+                      </p-dropdown>
+                    </div>
+  
+                    <div class="d-flex flex-column align-items-center">
+                      <label for="location"> Day of Week </label>
+                      <p-dropdown
+                        [options]="days"
+                        formControlName="dayOfWeek"
+                        optionValue="id"
+                        optionLabel="day"
+                      >
+                      </p-dropdown>
+                    </div>
+  
+                    <div class="d-flex flex-column align-items-center">
+                      <label for="from-time" class="ml-3"
+                        >{{ "StartTime" }}<span class="text-danger mt-4">*</span>
+  
+                        <!-- <div
+                          class="text-danger"
+                          *ngIf="baithakFrom.get('fromTime').hasError('required')"
+                        >
+                          This field is mandatory.
+                        </div> -->
+                      </label>
+                      <input
+                        [ngxTimepicker]="picker"
+                        formControlName="fromTime"
+                        class="form-control"
+                        id="from-time"
+                        name="from-time"
+                        [(ngModel)]="peopleBaithak.fromTime"
+                      />
+                      <span
+                        ><ngx-material-timepicker
+                          #picker
+                        ></ngx-material-timepicker
+                      ></span>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                      <label for="to-time" class="ml-3"
+                        >{{ "EndTime" }}<span class="text-danger mt-4">*</span>
+                      </label>
+                      <input
+                        [ngxTimepicker]="picker1"
+                        formControlName="toTime"
+                        class="form-control"
+                        id="to-time"
+                        name="to-time"
+                        [(ngModel)]="peopleBaithak.toTime"
+                      />
+                      <!-- <div
+                        class="text-danger"
+                       *ngIf="baithakFrom.get('fromTime').hasError('required')"
+                           >
+                           This field is mandatory.
+                         </div> -->
+                      <span
+                        ><ngx-material-timepicker
+                          #picker1
+                        ></ngx-material-timepicker
+                      ></span>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                      <button type="submit" class="btn btn-primary form-control mt-4">
+                        ADD
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="table-responsive scrollit mt-5">
+                <p-table
+                  [columns]="cols"
+                  [value]="products"
+                  [tableStyle]="{ 'min-width': '80rem' }"
+                >
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns">
+                        {{ col.header }}
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td *ngFor="let col of columns">
+                        <!-- *ngFor="let item of col.items"> -->
+                            <!-- <p-card
+                                [header]="'Card ' + item.id"
+                                [style]="{ width: '25rem', 'margin-bottom': '2em' }"
+                            >
+                                <p>
+                                    {{ item.content }}
+                                </p>
+                            </p-card> -->
+                        </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+                <p-card
+        header="Simple Card"
+        [style]="{ width: '15rem', 'margin-bottom': '2em' }"
+    >
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        </p>
+    </p-card>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+  

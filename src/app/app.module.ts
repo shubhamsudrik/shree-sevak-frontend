@@ -70,9 +70,12 @@ import { DynamicGentComponent } from "./pages/schedular/schedule-gents-baithak/d
 import { PeopleBaithakComponent } from "./pages/schedular/people-baithak/people-baithak.component";
 import { TableModule } from "primeng/table";
 import { PepoleBaithakService } from "./services/pepole-baithak.service";
+import { ScheduleBaithakComponent } from './pages/schedular/people-baithak/schedule-baithak/schedule-baithak.component';
+import { CardModule } from "primeng/card";
 @NgModule({
   imports: [
-  
+    
+    CardModule,
     DropdownModule,
     MultiSelectModule,
     Ng2SearchPipeModule,
@@ -149,7 +152,8 @@ import { PepoleBaithakService } from "./services/pepole-baithak.service";
     AreaFilterPipe,
     UserListComponent,
     UserFilterPipe,
-   PeopleBaithakComponent
+   PeopleBaithakComponent,
+   ScheduleBaithakComponent
 
 
     // ComponentComponent
