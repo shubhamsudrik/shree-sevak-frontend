@@ -467,7 +467,7 @@
                       Languages known
                     </h2>
                     <span>
-                      Atleast one language should be mandatory<span
+                      One field is mandatory<span
                         class="text-danger"
                         >*</span
                       ></span
@@ -664,7 +664,7 @@
                       Schedule Role
                     </h2>
                     <span>
-                      Atleast one baithak should be mandatory<span
+                      One field is mandatory<span
                         class="text-danger"
                         >*</span
                       ></span
@@ -685,6 +685,11 @@
                                 class="custom-control-input"
                                 [(ngModel)]="Member.eligibleForChild"
                                 value="eligibleForChild"
+                                [ngClass]="{
+                                  'is-invalid': (submitted || MemberFormControl.eligibleForChild.touched) &&
+                                                 !MemberFormControl.eligibleForChild.value
+                                }"
+                                
                               />
                               <label
                                 class="custom-control-label"
@@ -710,6 +715,10 @@
                                 class="custom-control-input"
                                 [(ngModel)]="Member.eligibleForNone"
                                 value="eligibleForNone"
+                                [ngClass]="{
+                                  'is-invalid': (submitted || MemberFormControl.eligibleForNone.touched) &&
+                                                !MemberFormControl.eligibleForNone.value
+                                }"
                               />
                               <label
                                 class="custom-control-label"
@@ -736,6 +745,10 @@
                               class="custom-control-input"
                               [(ngModel)]="Member.eligibleForGents"
                               value="eligibleForGents"
+                              [ngClass]="{
+                                'is-invalid': (submitted || MemberFormControl.eligibleForGents.touched) &&
+                                    !MemberFormControl.eligibleForGents.value                             
+                                    }"
                             />
                             <label
                               class="custom-control-label"
@@ -761,6 +774,10 @@
                               class="custom-control-input"
                               [(ngModel)]="Member.eligibleForLadies"
                               value="eligibleForLadies"
+                             [ngClass]="{
+                          'is-invalid': (submitted || MemberFormControl.eligibleForLadies.touched) &&                              
+                           !MemberFormControl.eligibleForLadies.value                                           
+                              }"
                             />
                             <label
                               class="custom-control-label"

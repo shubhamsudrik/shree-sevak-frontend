@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { error } from "console";
 import { ToastrService } from "ngx-toastr";
 import { PeopleBaithak } from "src/app/Classes/people-baithak";
+import { User } from "src/app/Classes/user";
 import { DaysService } from "src/app/services/days.service";
 import { LocService } from "src/app/services/loc.service";
 import { LocationDataService } from "src/app/services/location-data.service";
@@ -34,9 +35,9 @@ export class PeopleBaithakComponent implements OnInit {
   products: any;
   cities1: { label: string; value: string }[];
   updatedDays: { label: string; value: number }[];
-  locationList: any[] = [];
-  userDetails: import("d:/shree-sevak-fe/shree-sevak-frontend1/shree-sevak-frontend/src/app/Classes/user").User;
-  tempLocationList: any = [];
+  locationList: any[]=[];
+  userDetails: User;
+  tempLocationList: any=[];
   days: any[];
   baithakTypes: any[];
   fridaybaithakList: any[]=[];
@@ -237,6 +238,7 @@ const tobaithakType=this.baithakFrom.get('baithakType');
             this.mondaybaithakList.push(data);
             break;
           case "Tuesday":
+            console.log("save baithak record", data);
             this.tuesdaybaithakList.push(data);
             break;
           case "Wednesday":

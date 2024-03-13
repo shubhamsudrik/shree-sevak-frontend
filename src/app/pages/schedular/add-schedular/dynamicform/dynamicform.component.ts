@@ -45,7 +45,7 @@ export class DynamicformComponent implements OnInit {
   @Input() vachanMembers: any[];
   @Input() allMembers: Member[];
 
-  updateSchedule: Schedule;
+  updateSchedule: Schedule; 
 
   reloadHajeri: boolean = false;
   reloadChild: boolean = false;

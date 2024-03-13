@@ -62,8 +62,8 @@
                   <span class="input-group-text"><i class="fas fa-search"></i></span> 
              
                   <div class="">
-                    <input  type="text" [(ngModel)]="query" placeholder="Enter your search query">
-                    <button class="btn btn-primary ml-5" (click)="search()">Search</button>
+                    <input  type="text" [(ngModel)]="query" (keydown.enter)="search()" placeholder="Enter your search query">
+                    <button class="btn btn-primary btn-sm ml-4" (click)="search()">Search</button>
                   </div>
              </div>
              </div>

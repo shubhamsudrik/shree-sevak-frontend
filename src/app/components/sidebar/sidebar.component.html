@@ -10,11 +10,7 @@
 
 <nav class="navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-main">
   <div class="container-fluid">
-    <!-- Toggler -->
-    <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed"
-       aria-controls="sidenav-collapse-main">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    
     <!-- Brand -->
     <!-- <a class="navbar-brand pt-0" routerLinkActive="active" [routerLink]="['/dashboard']">
       <img src="./assets/img/brand/shree-nobg.png" class="navbar-brand-img my-image " width="110" style="height: 300px !important;" alt="...">
@@ -42,7 +38,7 @@
         </a> -->
         <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
           <div class=" dropdown-header noti-title">
-            <h6 class="text-overflow m-0">Welcome!</h6>
+            <h6 class="text-overflow m-0">Welcome</h6>
           </div>
           <!-- <a routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
             <i class="ni ni-single-02"></i>
@@ -82,7 +78,48 @@
           </div>
         </div>
       </div>
-      
+<!-- sidebar.component.html -->
+<div class="sidebar">
+  <div class="dropdown">
+    <button class="btn dropdown-toggle btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      All Master Tables
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li class="{{menuItems[1].class}} nav-item">
+        <a  routerLinkActive="active" [routerLink]="[menuItems[1].path]" class="nav-link" >
+            <i class="ni {{menuItems[1].icon}}"></i>
+            {{menuItems[1].title}}
+        </a>
+    </li>
+    <li class="{{menuItems[2].class}} nav-item">
+      <a  routerLinkActive="active" [routerLink]="[menuItems[2].path]" class="nav-link" >
+          <i class="ni {{menuItems[2].icon}}"></i>
+          {{menuItems[2].title}}
+      </a>
+  </li>
+    <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[3].class}} nav-item">
+      <a  routerLinkActive="active" [routerLink]="[menuItems[3].path]" class="nav-link" >
+          <i class="ni {{menuItems[3].icon}}"></i>
+          {{menuItems[3].title}}
+      </a>
+  </li>
+  <li class="{{menuItems[4].class}} nav-item">
+    <a  routerLinkActive="active" [routerLink]="[menuItems[4].path]" class="nav-link" >
+        <i class="ni {{menuItems[4].icon}}"></i>
+        {{menuItems[4].title}}
+    </a>
+  </li>
+  <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[5].class}} nav-item">
+    <a  routerLinkActive="active" [routerLink]="[menuItems[5].path]" class="nav-link" >
+        <i class="ni {{menuItems[5].icon}}"></i>
+        {{menuItems[5].title}}  
+    </a>    
+</li>
+      <!-- <a *ngFor="let item of menuItems" [routerLink]="item.path" class="dropdown-item">{{ item.title }}</a> -->
+    </div>
+  </div>
+</div>
+
       <!-- Navigation -->
       <ul class="navbar-nav">
           <!-- <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
@@ -96,37 +133,6 @@
                   <i class="ni {{menuItems[0].icon}}"></i>
                   {{menuItems[0].title}}
               </a>
-          </li>
-          <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[1].class}} nav-item">
-            <a  routerLinkActive="active" [routerLink]="[menuItems[1].path]" class="nav-link" >
-                <i class="ni {{menuItems[1].icon}}"></i>
-                {{menuItems[1].title}}
-            </a>
-        </li>
-          <li class="{{menuItems[2].class}} nav-item">
-              <a  routerLinkActive="active" [routerLink]="[menuItems[2].path]" class="nav-link" >
-                  <i class="ni {{menuItems[2].icon}}"></i>
-                  {{menuItems[2].title}}
-              </a>
-          </li>
-          <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[3].class}} nav-item">
-              <a  routerLinkActive="active" [routerLink]="[menuItems[3].path]" class="nav-link" >
-                  <i class="ni {{menuItems[3].icon}}"></i>
-                  {{menuItems[3].title}}
-              </a>
-          </li>
-          <li class="{{menuItems[4].class}} nav-item">
-              <a  routerLinkActive="active" [routerLink]="[menuItems[4].path]" class="nav-link" >
-                  <i class="ni {{menuItems[4].icon}}"></i>
-                  {{menuItems[4].title}}
-              </a>
-          </li>
-          <li *ngIf="userDataService.roleMatch(['ADMIN'])" class="{{menuItems[5].class}} nav-item">
-              <a  routerLinkActive="active" [routerLink]="[menuItems[5].path]" class="nav-link" >
-                  <i class="ni {{menuItems[5].icon}}"></i>
-                  {{menuItems[5].title}}  
-              </a>
-    
           </li>
           <li class="{{menuItems[6].class}} nav-item">
               <a  routerLinkActive="active" [routerLink]="[menuItems[6].path]" class="nav-link" >
@@ -146,6 +152,12 @@
                   {{menuItems[8].title}}
               </a>
           </li>
+          <li class="{{menuItems[9].class}} nav-item">
+            <a  routerLinkActive="active" [routerLink]="[menuItems[9].path]" class="nav-link" >
+                <i class="ni {{menuItems[9].icon}}"></i>
+                {{menuItems[9].title}}
+            </a>
+        </li>
       </ul>
      
     </div>

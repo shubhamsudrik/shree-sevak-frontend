@@ -112,6 +112,30 @@
                 <ngx-material-timepicker #picker1></ngx-material-timepicker>
               </div>
 
+              <!-- location -->
+              <div class="form-group">
+                <label for="location">{{ "Location" | translate }}<span class="text-danger">*</span></label>
+                <select
+                  formControlName="location"
+                  class="form-control"
+                  id="location"
+                  name="location"
+                  [(ngModel)]="baithak.location"
+                >
+                <option value="" disabled>Select Location</option>
+                <option
+                  *ngFor="let area of locationlist"
+                  [value]="area.locationId"
+                >
+                  {{area.locationName}}
+                </option>
+                </select>
+                <div class="text-danger" *ngIf="baithakForm.get('location').hasError('required')">
+                  This field is mandatory.
+                </div>                
+              </div>
+
+
               <div class="form-group">
                 <label for="status">{{ "Status" | translate }}<span class="text-danger">*</span></label>
                 <select
