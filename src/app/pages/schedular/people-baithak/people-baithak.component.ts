@@ -65,17 +65,6 @@ export class PeopleBaithakComponent implements OnInit {
     this.baithakFromRecord();
     this.reloadfrom()
 
-    this.baithakTypes = [
-      {
-        type: "Gents",
-        value: "Gents",
-      },
-      {
-        type: "Ladies",
-        value: "Ladies",
-      },
-    ];
-
     // this.cols = [
     //   { field: "Monday", header: "Monday" },
     //   { field: "Tuesday", header: "Tuesday" },
@@ -87,6 +76,18 @@ export class PeopleBaithakComponent implements OnInit {
     // ];
   }
 
+  loadBaithaTypes(){
+    this.baithakTypes = [
+      {
+        type: "Gents",
+        value: "Gents",
+      },
+      {
+        type: "Ladies",
+        value: "Ladies",
+      },
+    ];
+  }
   baithakFromRecord() {
     this.baithakFrom = this.formbuilder.group({
       baithakId: [null],
@@ -215,11 +216,14 @@ export class PeopleBaithakComponent implements OnInit {
     } else {
       const fromTimeControl = this.baithakFrom.get('fromTime');
   const toTimeControl = this.baithakFrom.get('toTime');
-
-  if (!fromTimeControl.value || !toTimeControl.value) {
+  const toDayOfWeek = this.baithakFrom.get('dayOfWeek');
+const tobaithakType=this.baithakFrom.get('baithakType');
+  if (!fromTimeControl.value || !toTimeControl.value || !tobaithakType.value || !toDayOfWeek.value) {
     // Mark both fields as touched to show errors
     fromTimeControl.markAsTouched();
     toTimeControl.markAsTouched();
+    toDayOfWeek.markAsTouched()
+    tobaithakType.markAsTouched()
   // Prevent the form submission
     return; // Exit the function, do not proceed with submission
   }else{
