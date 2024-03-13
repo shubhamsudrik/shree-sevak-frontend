@@ -39,13 +39,13 @@ export class PeopleBaithakComponent implements OnInit {
   tempLocationList: any=[];
   days: any[];
   baithakTypes: any[];
-  fridaybaithakList: any[];
-  sundaybaithakList: any[];
-  tuesdaybaithakList: any[];
-  mondaybaithakList: any[];
-  wednesdaybaithakList: any[];
-  thursdaybaithakList: any[];
-  saturdaybaithakList: any[];
+  fridaybaithakList: any[]=[];
+  sundaybaithakList: any[]=[];
+  tuesdaybaithakList: any[]=[];
+  mondaybaithakList: any[]=[];
+  wednesdaybaithakList: any[]=[];
+  thursdaybaithakList: any[]=[];
+  saturdaybaithakList: any[]=[];
   userAreas: any;
   constructor(
     private formbuilder: FormBuilder,
@@ -233,6 +233,7 @@ export class PeopleBaithakComponent implements OnInit {
             this.mondaybaithakList.push(data);
             break;
           case "Tuesday":
+            console.log("save baithak record", data);
             this.tuesdaybaithakList.push(data);
             break;
           case "Wednesday":
