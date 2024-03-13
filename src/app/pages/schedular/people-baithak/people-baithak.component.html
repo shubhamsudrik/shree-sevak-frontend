@@ -8,7 +8,7 @@
           >
             <li class="nav-item">
               <span class="d-none d-md-block form-group">
-                <h2>"Schedule baithak"</h2>
+                <h2>Baithak</h2>
               </span>
             </li>
           </ul>
@@ -109,7 +109,14 @@
                       id="from-time"
                       name="from-time"
                       [(ngModel)]="peopleBaithak.fromTime"
+                      [class.error-border]="baithakFrom.get('fromTime').invalid && baithakFrom.get('fromTime').touched"
                     />
+                    <div
+                    class="text-danger"
+                   *ngIf="baithakFrom.get('fromTime').hasError('required')"
+                       >
+                       This field is mandatory.
+                     </div>
                     <span
                       ><ngx-material-timepicker
                         #picker
@@ -128,12 +135,12 @@
                       name="to-time"
                       [(ngModel)]="peopleBaithak.toTime"
                     />
-                    <!-- <div
+                    <div
                       class="text-danger"
-                     *ngIf="baithakFrom.get('fromTime').hasError('required')"
+                     *ngIf="baithakFrom.get('toTime').hasError('required')"
                          >
                          This field is mandatory.
-                       </div> -->
+                       </div>
                     <span
                       ><ngx-material-timepicker
                         #picker1
