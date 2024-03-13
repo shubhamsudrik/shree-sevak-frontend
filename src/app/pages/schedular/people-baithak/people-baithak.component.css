@@ -18,3 +18,6 @@ table{
     background: #dfdcdc;
     color: rgb(186, 196, 205);
 }
+.error-border {
+  border: 1px solid red;
+}

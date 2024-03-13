@@ -46,6 +46,7 @@ export class PeopleBaithakComponent implements OnInit {
   wednesdaybaithakList: any[];
   thursdaybaithakList: any[];
   saturdaybaithakList: any[];
+  userAreas: any;
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
@@ -56,7 +57,7 @@ export class PeopleBaithakComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    this.userAreas = JSON.parse(localStorage.getItem('userArea'));
     console.log(this.userDetails);
     this.getAllLocationBaseOnUserArea();
     this.retrunlocationlist();
@@ -212,47 +213,59 @@ export class PeopleBaithakComponent implements OnInit {
           }
         );
     } else {
-      const addBaithak = this.baithakFrom.value;
-      console.log(this.baithakFrom.value);
-      this.peopleBaithakService.saveBaithakDetails(addBaithak).subscribe(
-        (data: any) => {
-          console.log("save baithak record", data);
-          switch (data.dayOfWeek.day) {
-            case "Monday":
-              this.mondaybaithakList.push(data);
-              break;
-            case "Tuesday":
-              this.tuesdaybaithakList.push(data);
-              break;
-            case "Wednesday":
-              this.wednesdaybaithakList.push(data);
-              break;
-            case "Thursday":
-              this.thursdaybaithakList.push(data);
-              break;
-            case "Friday":
-              this.fridaybaithakList.push(data);
-              break;
-            case "Saturday":
-              this.saturdaybaithakList.push(data);
-              break;
-            case "Sunday":
-              this.sundaybaithakList.push(data);
-              break;
-            default:
-              console.error("Invalid day of the week");
-              break;
-          }
-          this.toast.success("baithak successfully added");
-        },
-        (error) => {
-          if(error.status===409){
-            this.toast.error("Baithak All read Exists");
-          }
+      const fromTimeControl = this.baithakFrom.get('fromTime');
+  const toTimeControl = this.baithakFrom.get('toTime');
+
+  if (!fromTimeControl.value || !toTimeControl.value) {
+    // Mark both fields as touched to show errors
+    fromTimeControl.markAsTouched();
+    toTimeControl.markAsTouched();
+  // Prevent the form submission
+    return; // Exit the function, do not proceed with submission
+  }else{
+    const addBaithak = this.baithakFrom.value;
+    console.log(this.baithakFrom.value);
+    this.peopleBaithakService.saveBaithakDetails(addBaithak).subscribe(
+      (data: any) => {
+        console.log("save baithak record", data);
+        switch (data.dayOfWeek.day) {
+          case "Monday":
+            this.mondaybaithakList.push(data);
+            break;
+          case "Tuesday":
+            this.tuesdaybaithakList.push(data);
+            break;
+          case "Wednesday":
+            this.wednesdaybaithakList.push(data);
+            break;
+          case "Thursday":
+            this.thursdaybaithakList.push(data);
+            break;
+          case "Friday":
+            this.fridaybaithakList.push(data);
+            break;
+          case "Saturday":
+            this.saturdaybaithakList.push(data);
+            break;
+          case "Sunday":
+            this.sundaybaithakList.push(data);
+            break;
+          default:
+            console.error("Invalid day of the week");
+            break;
         }
-       
-      );
-    }
+        this.toast.success("baithak successfully added");
+      },
+      (error) => {
+        if(error.status===409){
+          this.toast.error("Baithak All read Exists");
+        }
+      }
+     
+    );
+  }
+  }
+     
   }
 
   retrunlocationlist() {
@@ -260,7 +273,7 @@ export class PeopleBaithakComponent implements OnInit {
     console.log(this.tempLocationList);
   }
   getAllLocationBaseOnUserArea() {
-    const areaList = this.userDetails.selectedAreas;
+    const areaList = this.userAreas;
     console.log(areaList);
 
     for (let i = 0; i < areaList.length; i++) {

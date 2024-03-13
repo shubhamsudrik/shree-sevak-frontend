@@ -60,7 +60,8 @@ export class UserDataService {
 
   setUserDetails(user:User){
    this.userDetails=user;
-   localStorage.setItem('userDetails', JSON.stringify(this.userDetails))
+   const userAreas=this.userDetails.selectedAreas;
+   localStorage.setItem('userArea', JSON.stringify(userAreas))
    console.log("set user ",user);
   }
   getUserDetails(){
