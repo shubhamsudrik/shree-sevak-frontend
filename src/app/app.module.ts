@@ -72,6 +72,7 @@ import { TableModule } from "primeng/table";
 import { ScheduleBaithakComponent } from "./pages/schedular/people-baithak/schedule-baithak/schedule-baithak.component";
 import { BaithakCardComponent } from "./pages/schedular/people-baithak/baithak-card/baithak-card.component";
 import { CardModule } from "primeng/card";
+import { GentsLadiesSchedularMasterComponent } from './pages/schedular/people-baithak/schedule-baithak/gents-ladies-schedular-master/gents-ladies-schedular-master.component';
 
 @NgModule({
   imports: [
@@ -154,7 +155,8 @@ import { CardModule } from "primeng/card";
     UserFilterPipe,
     PeopleBaithakComponent,
     ScheduleBaithakComponent,
-    BaithakCardComponent
+    BaithakCardComponent,
+    GentsLadiesSchedularMasterComponent
     // ComponentComponent
   ],
 

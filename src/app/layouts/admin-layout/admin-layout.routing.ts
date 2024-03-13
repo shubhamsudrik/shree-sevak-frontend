@@ -20,6 +20,7 @@ import { UserListComponent } from 'src/app/pages/user-list/user-list.component';
 import { ScheduleGentsBaithakComponent } from 'src/app/pages/schedular/schedule-gents-baithak/schedule-gents-baithak.component';
 import { PeopleBaithakComponent } from 'src/app/pages/schedular/people-baithak/people-baithak.component';
 import { ScheduleBaithakComponent } from 'src/app/pages/schedular/people-baithak/schedule-baithak/schedule-baithak.component';
+import { GentsLadiesSchedularMasterComponent } from 'src/app/pages/schedular/people-baithak/schedule-baithak/gents-ladies-schedular-master/gents-ladies-schedular-master.component';
 
 
 
@@ -53,7 +54,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'create-area/:id', component: CreateAreaComponent},
     { path: 'create-area', component: CreateAreaComponent},
     { path: 'user-list', component: UserListComponent},
-    { path: 'schedule-baithak', component: ScheduleBaithakComponent},    
+    { path: 'schedule-baithak', component: ScheduleBaithakComponent},  
+    { path: 'gents-ladies-schedular-master.component', component: GentsLadiesSchedularMasterComponent}  
     
 
 ];

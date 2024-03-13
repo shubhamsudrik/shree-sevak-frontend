@@ -1,0 +1,190 @@
+<div class=" bg-gradient-danger py-7 py-lg-8 custom-header-height" style="margin-bottom: -300px;">
+    <div class="container">
+      <div class="header-body text-center mb-7">
+        <div class="row justify-content-center">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7 pb-8 pt-50 pt-md-8">
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <ul
+              class="nav nav-pills flex-column flex-md-row justify-content-md-end"
+            >
+              <li class="nav-item ml-auto">
+                <span class="d-none d-md-block form-group">
+                  <h2>{{ "Available Scheduled" | translate }}</h2>
+                </span>
+              </li>
+              <li class="nav-item ml-auto">
+                <!-- <span class="d-none d-md-block form-group align-items-right">
+                  <label>{{ "Choose Language" | translate }}</label>
+                  <select
+                    name=""
+                    class="form-control ml-auto"
+                    #selectedLang
+                    (change)="switchLang(selectedLang.value)"
+                  >
+                    <option
+                      *ngFor="let language of translate.getLangs()"
+                      [value]="language"
+                      [selected]="language === translate.currentLang"
+                    >
+                      {{ language }}
+                    </option>
+                  </select>
+                </span> -->
+              </li>
+  
+              <!-- For screens less than 600px -->
+              <li class="nav-item d-md-none">
+                <!-- Hide this for medium and larger scren -->
+                <span class="form-group">
+                  <h3>{{ "Scheduled Record" | translate }}</h3>
+                </span>
+              </li>
+            </ul>
+            <!-- search -->
+            <!-- <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>    
+              </div>
+              <input class="form-control col-md-4" placeholder="{{ 'Search Baithak Date' | translate }}" [(ngModel)]="searchText" type="text" (focus)="focus = true"
+              (blur)="focus = false">
+              <input class="form-control col-md-4" placeholder="{{ 'Search Location Name' | translate }}" [(ngModel)]="searchText1" type="text" (focus)="focus = true"
+              (blur)="focus = false">
+              <input class="form-control col-md-4" placeholder="{{ 'Search Anything' | translate }}" [(ngModel)]="searchText2" type="text" (focus)="focus = true"
+              (blur)="focus = false">
+              </div> -->
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span> 
+              <div>
+                <input  type="text" [(ngModel)]="query" (keydown.enter)="search()" placeholder="Enter your search query">
+                <button class="btn btn-primary btn-sm ml-4" (click)="search()">Search</button>
+              </div>
+              </div>
+              </div>
+  
+            <!-- add new button -->
+             <div class="form-group">
+             <!-- <br />
+              <ul class="nav nav-pills justify-content">
+                <li class="nav-item mr-2 mr-md-0">
+                  
+                </li>
+                <br />
+                <li class="nav-item mr-2 mr-md-0">
+                  <span class="d-none d-md-block" class="form-group">
+                    <li class="nav-item mr-2 mr-md-0">
+                      <select
+                        class="btn btn-success"
+                        (change)="onOpen($event.target.value)"
+                      >
+                        <option disabled selected>Schedule New Baithak</option>
+                        <option
+                          style="background-color: gray"
+                          *ngFor="let baithak of baithakList; let i = index"
+                          [value]="baithak.bithakId"
+                        >
+                          {{ baithak.baithakType }}--{{ baithak.fromTime }}--{{
+                            baithak.toTime
+                          }}-{{ baithak.dayOfWeek }}
+                        </option>
+                      </select>
+                    </li>
+                  </span>
+                </li> -->
+              
+                <!-- update button -->
+                <!-- <li class="nav-item mr-2 mr-md-0">
+                  <span class="d-none d-md-block" class="form-group">
+                    <div *ngFor="let schedule of defaultSchedules; let i = index">
+                      <button
+                        *ngIf="selectedRow === i"
+                        class="btn btn-success"
+                        (click)="updateSchedules(schedule.baithak.bithakId)"
+                      >
+                        {{ "Update" | translate }}
+                      </button>
+                    </div>
+                  </span>
+                </li>
+                <li class="nav-item mr-2 mr-md-0">
+                  <span class="d-none d-md-block" class="form-group">              
+                      <button  class="btn btn-success" >Record Count: {{totalRecords }}</button>
+                  </span>
+              </li>
+              </ul>
+            </div> -->
+          </div>
+            <div class="table-responsive " >
+              <table  class="table align-items-center table-flush ">
+                <thead class="thead-light">
+                <tr >
+                  <th  style="width: 75px;" scope="col">{{ "Action" | translate }}</th>
+                  <th style="width: 65px;" scope="col">{{ "Schedule Id" | translate }}</th>
+                  <th style="width: 10%;" scope="col">{{ "Baithak Type" | translate }}</th>
+                  <th style="width: 10%;" scope="col">{{ "Date" | translate }}</th>
+                  <th style="width: 10%;"scope="col">{{ "Baithak Time" | translate }}</th>
+                  <th style="width: 10%;" scope="col">{{ "dayOfWeek" | translate }}</th>
+                  <th style="width: 10%;" scope="col">{{ "Member" | translate }}</th>
+                  <th style="width: 10%;" scope="col">{{ "Locations" | translate }}</th>                
+                </tr>
+              </thead>
+                  <tbody>
+                <!-- <tr *ngFor="let location of defaultLocations; trackBy: trackLocationByIndex"> -->
+                <tr 
+                  *ngFor="
+                    let schedule of defaultSchedules | scheduledFilter : searchText:'':'' | scheduledFilter:'':searchText1:'' |scheduledFilter:'':'': searchText2; 
+                    let i = index
+                  ">
+                  <td >
+                    <input                   
+                      type="radio"
+                      name="operation"
+                      (click)="toggleButtons('edit', schedule)"
+                      value="edit"
+                      (change)="selectedRow = i"
+                    />
+                    <!-- <input type="radio" name="operation" (click)="toggleButtons('delete', location)" value="delete"> Delete -->
+                  </td>
+                  <td >{{ schedule.scheduleId }}</td>
+                  <td >{{ schedule?.baithak?.baithakType }}</td>
+                  <td >{{ schedule?.date }}</td>
+                  <td >{{ schedule?.baithak?.fromTime }}</td>
+                  <td >{{ schedule?.baithak?.toTime }}</td>               
+                  <td >{{ schedule?.baithak?.dayOfWeek }}</td>
+                  <!-- <td>
+                    <table>
+                      <tr> -->
+                        <td>
+                          {{ schedule.members[0]?.firstName}} {{ schedule.members[0]?.lastName }}
+                        </td>
+                      <!-- </tr>
+                      <tr> -->
+                        <td>
+                          {{ schedule.members[1]?.firstName }} {{ schedule.members[1]?.lastName }}
+                        </td>
+                      <!-- </tr>
+                    </table>
+                  </td> -->
+                  <td>{{ schedule.location.locationName }}</td>               
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <small><mat-paginator class="justify-content-md-end"
+          [hasNextPage]="hasNextPage"
+          [length]="totalRecords"
+          [pageIndex]="currentPage"
+          [pageSize]="itemsPerPage"
+          (page)="onPageChange($event)"
+        ></mat-paginator></small>
+      </div>
+    </div>
+  </div>

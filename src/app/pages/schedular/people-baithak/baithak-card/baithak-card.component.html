@@ -14,7 +14,7 @@
       <!-- <ng-template pTemplate="header">
        
       </ng-template> -->
-      <p [ngClass]="{'card': baithak.baithakType === 'Ladies'}">{{ baithak.baithakType }}--{{ baithak.fromTime }}</p>
+      <p [ngClass]="{'card': baithak.baithakType === 'Ladies'}">{{ baithak.baithakType }}- <br>{{ baithak.fromTime | slice:0:4 }}-{{baithak.toTime}}</p>
     </p-card>
   </div>
 </div>
