@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { error } from "console";
 import { ToastrService } from "ngx-toastr";
 import { PeopleBaithak } from "src/app/Classes/people-baithak";
+import { User } from "src/app/Classes/user";
 import { DaysService } from "src/app/services/days.service";
 import { LocService } from "src/app/services/loc.service";
 import { LocationDataService } from "src/app/services/location-data.service";
@@ -35,7 +36,7 @@ export class PeopleBaithakComponent implements OnInit {
   cities1: { label: string; value: string }[];
   updatedDays: { label: string; value: number }[];
   locationList: any[]=[];
-  userDetails: import("D:/Users/shubhams.SSKTECH/Documents/GitHub/shree-sevak-frontend/src/app/Classes/user").User;
+  userDetails: User;
   tempLocationList: any=[];
   days: any[];
   baithakTypes: any[];
