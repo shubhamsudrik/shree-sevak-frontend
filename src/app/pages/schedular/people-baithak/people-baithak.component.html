@@ -19,19 +19,22 @@
                 <div class="d-flex flex-row justify-content-around">
                   <div class="d-flex flex-column align-items-center">
                     <label for="location"> location </label>
+                    <div (click)="onClickLocation()">
                       <p-dropdown
-                      [options]="locationList"
-                      name="location"
-                      id="location"
-                      formControlName="location"
-                      optionValue="locationId"
-                      optionLabel="locationName"
-                      (onClick)="onClickLocation($event)"
-                    >
-                    </p-dropdown>
+                        [options]="locationList"
+                        name="location"
+                        id="location"
+                        formControlName="location"
+                        optionValue="locationId"
+                        optionLabel="locationName"
+                        (onChange)="onChangeLocation($event)"
+                      >
+                        >
+                      </p-dropdown>
+                    </div>
                   </div>
 
-                <!-- <div class="card flex justify-content-center">
+                  <!-- <div class="card flex justify-content-center">
                     <p-dropdown
                       [options]="locationList"
                       formControlName="location"
@@ -137,39 +140,139 @@
                       ></ngx-material-timepicker
                     ></span>
                   </div>
-                  <div class="d-flex flex-column align-items-center">
-                    <button type="submit" class="btn btn-primary form-control mt-4">
+                  <div class="d-flex flex-row align-items-center">
+                    <button
+                      *ngIf="isAdd"
+                      type="submit"
+                      class="btn btn-primary form-control mt-4"
+                    >
                       ADD
+                    </button>
+                    <button
+                      *ngIf="isUpdate"
+                      type="submit"
+                      class="btn btn-secondary form-control mt-4"
+                    >
+                      UPDATE
+                    </button>
+                    <button
+                      *ngIf="isCancel"
+                      type="button"
+                      class="btn btn-danger form-control mt-4"
+                      (click)="cancelClick()"
+                    >
+                      CANCEL
                     </button>
                   </div>
                 </div>
               </form>
             </div>
-            <div class="table-responsive scrollit mt-5">
-              <p-table
-                [columns]="cols"
-                [value]="products"
-                [tableStyle]="{ 'min-width': '80rem' }"
-              >
-                <ng-template pTemplate="header" let-columns>
-                  <tr>
-                    <th *ngFor="let col of columns">
-                      {{ col.header }}
-                    </th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-rowData let-columns="columns">
-                  <tr>
-                    <td *ngFor="let col of columns">
-                   
-                    </td>
-                  </tr>
-                </ng-template>
-              </p-table>
+            <!-- <div class="table-responsive scrollit mt-5"> -->
+            <div class="d-flex flex-row justify-content-between">
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  (valueUpdate)="onCardClick($event)"
+                  [day]="'Monday'"
+                  [dayBaithakList]="mondaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  (valueUpdate)="onCardClick($event)"
+                  [day]="'Tuesday'"
+                  [dayBaithakList]="tuesdaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  (valueUpdate)="onCardClick($event)"
+                  [day]="'Wednesday'"
+                  [dayBaithakList]="wednesdaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  [day]="'Thursday'"
+                  (valueUpdate)="onCardClick($event)"
+                  [dayBaithakList]="thursdaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  [day]="'Friday'"
+                  (valueUpdate)="onCardClick($event)"
+                  [dayBaithakList]="fridaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  [day]="'Saturday'"
+                  (valueUpdate)="onCardClick($event)"
+                  [dayBaithakList]="saturdaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  [day]="'Sunday'"
+                  (valueUpdate)="onCardClick($event)"
+                  [dayBaithakList]="sundaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
             </div>
           </div>
+          <!-- <p-table
+                [value]="mondaybaithakList"
+                [tableStyle]="{ 'min-width': '50rem' }"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Monday</th>
+                    <th>Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                  <tr *ngFor="let baithak of mondaybaithakList ">
+                    
+                    {{ baithak.bairhakType }}--{{baithak.fromTime}}
+
+                    <div class="card flex justify-content-center">
+                      <p-card
+                        header="Advanced Card"
+                        subheader="Card Subheader"
+                        [style]="{ width: '360px' }"
+                      >
+                        <ng-template pTemplate="header">
+                          <img
+                            alt="Card"
+                            src="https://primefaces.org/cdn/primeng/images/usercard.png"
+                          />
+                        </ng-template>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Inventore sed consequuntur error repudiandae
+                          numquam deserunt quisquam repellat libero asperiores
+                          earum nam nobis, culpa ratione quam perferendis esse,
+                          cupiditate neque quas!
+                        </p>
+                       
+                      </p-card> 
+                    </div>
+                  </tr>
+                </ng-template>
+              </p-table> -->
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- </div> -->
+<!-- </div> -->

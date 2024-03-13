@@ -18,7 +18,6 @@ import { CreateAreaComponent } from 'src/app/pages/area-list/create-area/create-
 import { AreaListComponent } from 'src/app/pages/area-list/area-list.component';
 import { UserListComponent } from 'src/app/pages/user-list/user-list.component';
 import { ScheduleGentsBaithakComponent } from 'src/app/pages/schedular/schedule-gents-baithak/schedule-gents-baithak.component';
-import { PepoleBaithak } from 'src/app/Classes/pepole-baithak';
 import { PeopleBaithakComponent } from 'src/app/pages/schedular/people-baithak/people-baithak.component';
 import { ScheduleBaithakComponent } from 'src/app/pages/schedular/people-baithak/schedule-baithak/schedule-baithak.component';
 

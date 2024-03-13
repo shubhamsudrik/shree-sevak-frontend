@@ -7,4 +7,5 @@ export class PeopleBaithak {
   fromTime: any;
   status: any;
   toTime: any;
+  location:any
 }
