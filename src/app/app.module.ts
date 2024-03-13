@@ -71,10 +71,11 @@ import { PeopleBaithakComponent } from "./pages/schedular/people-baithak/people-
 import { TableModule } from "primeng/table";
 import { ScheduleBaithakComponent } from "./pages/schedular/people-baithak/schedule-baithak/schedule-baithak.component";
 import { BaithakCardComponent } from "./pages/schedular/people-baithak/baithak-card/baithak-card.component";
+import { CardModule } from "primeng/card";
 
 @NgModule({
   imports: [
-  
+    CardModule,
     DropdownModule,
     MultiSelectModule,
     Ng2SearchPipeModule,
@@ -154,7 +155,6 @@ import { BaithakCardComponent } from "./pages/schedular/people-baithak/baithak-c
     PeopleBaithakComponent,
     ScheduleBaithakComponent,
     BaithakCardComponent
-
     // ComponentComponent
   ],
 

@@ -6,6 +6,7 @@ import { LocService } from 'src/app/services/loc.service';
 import { PepoleBaithakService } from 'src/app/services/pepole-baithak.service';
 import { UserDataService } from 'src/app/services/user-data.service';
 import { PrimeNGConfig } from 'primeng/api';
+import { User } from 'src/app/Classes/user';
 
 interface City {
   name: string;
@@ -32,7 +33,7 @@ export class ScheduleBaithakComponent implements OnInit {
   cities1: { label: string; value: string }[];
   updatedDays: { label: string; value: number }[];
   locationList: any[]=[];
-  userDetails: import("D:/Users/shubhams.SSKTECH/Documents/GitHub/shree-sevak-frontend/src/app/Classes/user").User;
+  userDetails: User;
   tempLocationList: any=[];
   days: any[];
   baithakTypes: any[];
