@@ -56,7 +56,8 @@ export class PeopleBaithakComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userDetails = this.userDataService.getUserDetails();
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    console.log(this.userDetails);
     this.getAllLocationBaseOnUserArea();
     this.retrunlocationlist();
     this.daysInWeek();

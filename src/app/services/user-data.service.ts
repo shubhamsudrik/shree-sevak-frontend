@@ -60,6 +60,7 @@ export class UserDataService {
 
   setUserDetails(user:User){
    this.userDetails=user;
+   localStorage.setItem('userDetails', JSON.stringify(this.userDetails))
    console.log("set user ",user);
   }
   getUserDetails(){
