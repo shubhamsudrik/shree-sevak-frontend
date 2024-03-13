@@ -14,7 +14,9 @@ export class BaithakCardComponent implements OnInit {
 
   baithakFormCard:FormGroup;
 
-  constructor() { }
+  constructor() {
+    console.log(this.dayBaithakList)
+   }
 
   ngOnInit(): void {
   }

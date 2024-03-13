@@ -8,7 +8,7 @@ import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LocationDataService } from 'src/app/services/location-data.service';
-
+import { CardModule, } from 'primeng/card';
 // import { NgxPopper } from 'angular-popper';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ToastrModule } from 'ngx-toastr';
@@ -23,6 +23,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     HttpClientModule,
     NgbModule,
+    CardModule,
     NgxMaterialTimepickerModule,
     // NgxPopper,
     Ng2SearchPipeModule,

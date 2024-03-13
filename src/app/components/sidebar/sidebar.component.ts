@@ -19,8 +19,10 @@ export const ROUTES: RouteInfo[] = [
     { path: '/baithak-list', title: 'Baithak Type',  icon:'fas fa-clock ni-schedule-meeting text-primary', class: '' },
     { path: '/area-list', title: 'Area',  icon:'fas fa-clock ni-schedule-meeting text-primary', class: '' },
     { path: '/user-list', title: 'Users',  icon:'fas fa-user-plus ni-sign-up text-primary', class: '' },
-    { path: '/schedular', title: 'Scheduled Baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
+    { path: '/schedular', title: 'Scheduled Child Baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
     { path: '/schedule-gents-baithak', title: 'Scheduled gents baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
+    { path: '/people-baithak', title: 'Schedule Pepole baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
+    { path: '/schedule-baithak', title: 'Schedule Baithak',  icon:'fas fa-user ni-user text-primary', class: '' },
     { path: '/people-baithak', title: 'Pepole baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
     { path: '/report', title: '',  icon:'', class: '' },
 
@@ -43,6 +45,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    console.log(this.menuItems);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
    });
