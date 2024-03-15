@@ -1,20 +1,42 @@
-<div class="align-items-center text-center mt-2 ">
-  <div class="dayCustom" >
+<div class="align-items-center text-center mt-2">
+  <div class="dayCustom">
     {{ day }}
   </div>
 
   <div *ngFor="let baithak of dayBaithakList" class="text-center m-2">
-    <p-card
-      header="Baithak"
-      subheader="Baithak"
-      [style]="{ width: '130px', height: '200px' }"
-     
-      (click)="onCardClick(baithak)"
-    >
-      <!-- <ng-template pTemplate="header">
+    <!-- header="Baithak"
+    subheader="Baithak" -->
+    <p-card [style]="{ width: '130px', height: '200px' }">
+      <ng-template pTemplate="header">
+        <i
+          class="pi pi-pencil ml-7"
+          style="font-size: 1rem"
+          (click)="onCardClick(baithak)"
+        ></i>
+       <div 
+       [ngClass]="{
+        bgLadies: baithak.baithakType === 'Ladies',
+        bgGents: baithak.baithakType === 'Gents'
+      }"
+       >
+       <div class="d-flex align-items-center justify-content-center">
+        <i class="pi pi-user" style="font-size: 1rem"></i
+          >
+        <div style="margin-left: 10px; color: white;">{{ baithak.baithakType }}</div>
+      </div>
+       </div>
+           
+
+          
        
-      </ng-template> -->
-      <p [ngClass]="{'card': baithak.baithakType === 'Ladies'}">{{ baithak.baithakType }}- <br>{{ baithak.fromTime | slice:0:4 }}-{{baithak.toTime}}</p>
+      </ng-template>
+      <div class="d-flex flex-column align-items-start" style="margin-top: -30px; width: 130px;
+      margin-left: -14px;">
+      <div class="d-flex align-items-center">
+        <i class="pi pi-clock item" style="font-size: 1rem"></i>
+        <div style="margin-left: 3px;">Time: <br>{{ baithak.fromTime | slice:0:4 }}-{{baithak.toTime}}</div>
+      </div>      
+    </div>
     </p-card>
   </div>
 </div>

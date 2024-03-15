@@ -1,16 +1,24 @@
 .form-control{
-    width: 100px;
-    height: 50px;
+  width: 100px;
+  height: 50px;
 }
 table{
-    box-sizing: border-box;
+  box-sizing: border-box;
+width: 100%;
+}
+table thead tr th{
+ text-align: center;
+}
+.scrollit {
+  overflow:scroll;
+  height:100%;
   width: 100%;
-  }
-  table thead tr th{
-   text-align: center;
-  }
-  .scrollit {
-    overflow:scroll;
-    height:100%;
-    width: 100%;
-  }
+}
+.dayCustom{
+  background: #dfdcdc;
+  color: rgb(186, 196, 205);
+  width: 150px;
+}
+.error-border {
+border: 1px solid red;
+}

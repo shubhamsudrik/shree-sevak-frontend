@@ -23,7 +23,6 @@ export class PeopleBaithakComponent implements OnInit {
   isAdd = true;
   isUpdate = false;
   isCancel = false;
-  isDelete = false;
   cols: { field: string; header: string }[];
   baithakList: any[];
   submited: boolean = false;
@@ -51,6 +50,8 @@ export class PeopleBaithakComponent implements OnInit {
   userAreas: any;
   activeBaithakList: PeopleBaithak[];
   cardData: any;
+  location: any=null;
+  isDelete: boolean;
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
@@ -285,6 +286,7 @@ const tobaithakType=this.baithakFrom.get('baithakType');
   getAllLocationBaseOnUserArea() {
     const areaList = this.userAreas;
     console.log(areaList);
+    this.loadBaithaTypes()
 
     for (let i = 0; i < areaList.length; i++) {
       this.locDataService
@@ -327,9 +329,12 @@ const tobaithakType=this.baithakFrom.get('baithakType');
   onChangeLocation(event: any) {
     // console.log(event.target)
     // console.log(event.target.value)
+    const locationId = event.value;
+    this.location = this.locationList.find(location => location.locationId === locationId);
+    console.log("found location",this.location)
+
     console.log(event.value);
     // console.log(event.target.value);
-    const locationId = event.value;
     console.log(locationId);
   //  this.baithakListBaseOnLocation(locationId)
    this.ActiveBaithakListBaseOnLocation(locationId);
@@ -429,13 +434,81 @@ const tobaithakType=this.baithakFrom.get('baithakType');
     this.isDelete = false;
   }
 
-  deleteClick(){
+  
+  
+  // deleterecord() {
+  //   const baithak = this.baithakFrom.value;
+  //   console.log(this.baithakFrom.value);
+  
+  //   baithak.status = false;
+  //   baithak.baithakType ="gents"
+  //   console.log(baithak);
+  
+  //   this.peopleBaithakService.updateBaithakDetails(baithak, this.cardData.baithakId)
+  //     .subscribe(
+  //       (data: any) => {
+  //         // If the update is successful, remove the baithak from the respective list
+  //         switch (baithak.dayOfWeek) {
+  //           case "Monday":
+  //             this.mondaybaithakList = this.mondaybaithakList.filter(item => item.baithakId !== this.cardData.baithakId);
+  //             break;
+  //           case "Tuesday":
+  //             this.tuesdaybaithakList = this.tuesdaybaithakList.filter(item => item.baithakId !== this.cardData.baithakId);
+  //             break;
+  //           case "Wednesday":
+  //             this.wednesdaybaithakList = this.wednesdaybaithakList.filter(item => item.baithakId !== this.cardData.baithakId);
+  //             break;
+  //           case "Thursday":
+  //             this.thursdaybaithakList = this.thursdaybaithakList.filter(item => item.baithakId !== this.cardData.baithakId);
+  //             break;
+  //           case "Friday":
+  //             this.fridaybaithakList = this.fridaybaithakList.filter(item => item.baithakId !== this.cardData.baithakId);
+  //            break;
+  //           case "Saturday":
+  //             this.saturdaybaithakList = this.saturdaybaithakList.filter(item => item.baithakId !== this.cardData.baithakId);
+  //            break; 
+  //           case "Sunday":
+  //             this.sundaybaithakList = this.sundaybaithakList.filter(item => item.baithakId !== this.cardData.baithakId);
+  //            break;
+  //         }
+  //         this.toast.success("Baithak successfully deleted");
+  //       },
+  //       (error) => {
+  //         console.error("Error deleting baithak:", error);
+  //         if (error.status === 409) {
+  //           this.toast.error(error.error.message);
+  //         } else {
+  //           this.toast.error("Failed to delete baithak. Please try again.");
+  //         }
+  //       }
+  //     );
+  // }
+  
+  deleterecord(){
+    const confirmation = confirm("Are you sure you want to delete?");
+  if (confirmation) {
     const baithak = this.baithakFrom.value;
-      this.baithakFrom.value.status = false;
+    console.log(this.baithakFrom.value)
+     baithak.status = false;
+     const a =baithak.baithakType;
+     console.log(a)
+     baithak.baithakType ="type"
       this.peopleBaithakService.updateBaithakDetails(baithak, this.cardData.baithakId)
       .subscribe(
         (data: any) => {
           this.toast.success("Baithak successfully deleted");
+          baithak.baithakType =a;
+          console.log(baithak)
+          this.peopleBaithakService.updateBaithakDetails(baithak, this.cardData.baithakId)
+          .subscribe(
+            (data: any) => {
+            }
+          );
+          this.isUpdate = false;
+          this.isCancel = false;
+          this.isAdd = true;
+          this.isDelete = false;
+          window.location.reload();
         },
         (error) => {
           console.error("Error deleting baithak:", error);
@@ -443,6 +516,7 @@ const tobaithakType=this.baithakFrom.get('baithakType');
           this.toast.error("Failed to delete baithak. Please try again.");
         }
       );
+     
+    }
   }
- 
 }

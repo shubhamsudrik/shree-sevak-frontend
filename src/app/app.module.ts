@@ -72,10 +72,11 @@ import { TableModule } from "primeng/table";
 import { ScheduleBaithakComponent } from "./pages/schedular/people-baithak/schedule-baithak/schedule-baithak.component";
 import { BaithakCardComponent } from "./pages/schedular/people-baithak/baithak-card/baithak-card.component";
 import { CardModule } from "primeng/card";
-import { GentsLadiesSchedularMasterComponent } from './pages/schedular/people-baithak/schedule-baithak/gents-ladies-schedular-master/gents-ladies-schedular-master.component';
+import { ButtonModule } from "primeng/button";
 
 @NgModule({
   imports: [
+   
     CardModule,
     DropdownModule,
     MultiSelectModule,
@@ -83,7 +84,7 @@ import { GentsLadiesSchedularMasterComponent } from './pages/schedular/people-ba
     MatPaginatorModule,
     NgxMaterialTimepickerModule,
     TranslateModule,
-    // ButtonModule,
+    ButtonModule,
     HttpClientModule,
     ComponentsModule,
     NgbModule,
@@ -156,8 +157,6 @@ import { GentsLadiesSchedularMasterComponent } from './pages/schedular/people-ba
     PeopleBaithakComponent,
     ScheduleBaithakComponent,
     BaithakCardComponent,
-    GentsLadiesSchedularMasterComponent
-    // ComponentComponent
   ],
 
   providers: [

@@ -3,7 +3,10 @@
     color: rgb(20, 23, 26);
     font-weight: 500;
 }
-.card{
+.bgLadies{
     background: #e474b4;
 
+}
+.bgGents{
+    background: #8ea6e0;
 }

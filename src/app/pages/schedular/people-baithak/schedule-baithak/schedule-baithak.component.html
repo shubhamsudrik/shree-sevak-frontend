@@ -1,176 +1,217 @@
 <div class="container mt--7 pt-50 pt-md-8">
-    <div class="row">
-      <div class="col">
-        <div>
-          <div class="border-0">
-            <ul
-              class="nav nav-pills flex-column flex-md-row justify-content-center"
-            >
-              <li class="nav-item">
-                <span class="d-none d-md-block form-group">
-                  <h2>Schedule Gents Baithak</h2>
-                </span>
-              </li>
-            </ul>
-  
-            <div>
-              <div class="d-flex flex-column justify-content-around">
-                <form [formGroup]="baithakFrom" (ngSubmit)="onSubmit()">
-                  <div class="d-flex flex-row justify-content-around">
-                    <div class="d-flex flex-column align-items-center">
-                      <label for="location"> location </label>
-                        <p-dropdown
+  <div class="row">
+    <div class="col">
+      <div>
+        <div class="border-0">
+          <ul
+            class="nav nav-pills flex-column flex-md-row justify-content-center"
+          >
+            <li class="nav-item">
+              <span class="d-none d-md-block form-group">
+                <h2>Schedule Baithak</h2>
+              </span>
+            </li>
+          </ul>
+
+          <div>
+            <div class="d-flex flex-column justify-content-around mb-5" >
+              <form [formGroup]="baithakFrom" (ngSubmit)="onSubmit()">
+                <div class="d-flex flex-row justify-content-around">
+                  <div class="d-flex flex-column align-items-center">
+                    <label for="location"> location </label>
+                    <div (click)="onClickLocation()">
+                      <p-dropdown
                         [options]="locationList"
+                        placeholder="Select Location"
                         name="location"
                         id="location"
                         formControlName="location"
                         optionValue="locationId"
                         optionLabel="locationName"
-                        (onClick)="onClickLocation($event)"
+                        (onChange)="onChangeLocation($event)"
                       >
-                      </p-dropdown>
-                    </div>
-  
-                  <!-- <div class="card flex justify-content-center">
-                      <p-dropdown
-                        [options]="locationList"
-                        formControlName="location"
-                        optionLabel="locationName"
-                        optionValue="locationId"
-                        [filter]="true"
-                        filterBy="locationName"
-                        [showClear]="true"
-                        placeholder="Select a location"
-                      >
-                        <ng-template pTemplate="selectedItem" let-selectedOption>
-                          <div class="flex align-items-center gap-2">
-                            <img
-                              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                              [class]="
-                                'flag flag-' + location.locationName.toLowerCase()
-                              "
-                              style="width: 18px"
-                            />
-                            <div>{{ selectedOption.locationName }}</div>
-                          </div>
-                        </ng-template>
-                        <ng-template let-country pTemplate="item">
-                          <div class="flex align-items-center gap-2">
-                            <img
-                              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                              [class]="'flag flag-' + country.locationName.toLowerCase()"
-                              style="width: 18px"
-                            />
-                            <div>{{ country.locationName }}</div>
-                          </div>
-                        </ng-template>
-                      </p-dropdown>
-                    </div>  -->
-                    <div class="d-flex flex-column align-items-center">
-                      <label for="location"> Baithak Type </label>
-                      <p-dropdown
-                        [options]="baithakTypes"
-                        formControlName="baithakType"
-                        optionValue="value"
-                        optionLabel="type"
-                      >
-                      </p-dropdown>
-                    </div>
-  
-                    <div class="d-flex flex-column align-items-center">
-                      <label for="location"> Day of Week </label>
-                      <p-dropdown
-                        [options]="days"
-                        formControlName="dayOfWeek"
-                        optionValue="id"
-                        optionLabel="day"
-                      >
-                      </p-dropdown>
-                    </div>
-  
-                    <div class="d-flex flex-column align-items-center">
-                      <label for="from-time" class="ml-3"
-                        >{{ "StartTime" }}<span class="text-danger mt-4">*</span>
-  
-                        <!-- <div
-                          class="text-danger"
-                          *ngIf="baithakFrom.get('fromTime').hasError('required')"
                         >
-                          This field is mandatory.
-                        </div> -->
-                      </label>
-                      <input
-                        [ngxTimepicker]="picker"
-                        formControlName="fromTime"
-                        class="form-control"
-                        id="from-time"
-                        name="from-time"
-                        [(ngModel)]="peopleBaithak.fromTime"
-                      />
-                      <span
-                        ><ngx-material-timepicker
-                          #picker
-                        ></ngx-material-timepicker
-                      ></span>
-                    </div>
-                    <div class="d-flex flex-column align-items-center">
-                      <label for="to-time" class="ml-3"
-                        >{{ "EndTime" }}<span class="text-danger mt-4">*</span>
-                      </label>
-                      <input
-                        [ngxTimepicker]="picker1"
-                        formControlName="toTime"
-                        class="form-control"
-                        id="to-time"
-                        name="to-time"
-                        [(ngModel)]="peopleBaithak.toTime"
-                      />
-                      <!-- <div
-                        class="text-danger"
-                       *ngIf="baithakFrom.get('fromTime').hasError('required')"
-                           >
-                           This field is mandatory.
-                         </div> -->
-                      <span
-                        ><ngx-material-timepicker
-                          #picker1
-                        ></ngx-material-timepicker
-                      ></span>
-                    </div>
-                    <div class="d-flex flex-column align-items-center">
-                      <button type="submit" class="btn btn-primary form-control mt-4">
-                        ADD
-                      </button>
+                      </p-dropdown>
                     </div>
                   </div>
-                </form>
-              </div>
-              <div class="table-responsive scrollit mt-5">
-                <p-table
-                  [columns]="cols"
-                  [value]="products"
-                  [tableStyle]="{ 'min-width': '80rem' }"
+
+                  <div class="d-flex flex-column align-items-center" (click)="loadBaithaTypes()">
+                    <label for="location"> Baithak Type </label>
+                    <p-dropdown
+                      [options]="baithakTypes"
+                      formControlName="baithakType"
+                      optionValue="value"
+                      optionLabel="type"
+                      [class.error-border]="baithakFrom.get('baithakType').invalid && baithakFrom.get('baithakType').touched"
+                    >
+                    </p-dropdown>
+                  </div>
+
+                  <div class="d-flex flex-column align-items-center">
+                    <label for="location"> Day of Week </label>
+                    <p-dropdown
+                      [options]="days"
+                      formControlName="dayOfWeek"
+                      optionValue="id"
+                      optionLabel="day"
+                      [class.error-border]="baithakFrom.get('dayOfWeek').invalid && baithakFrom.get('dayOfWeek').touched"
+                    >
+                    </p-dropdown>
+                  </div>
+
+                  <div class="d-flex flex-column align-items-center">
+                    <label for="from-time" class="ml-3"
+                      >{{ "StartTime" }}<span class="text-danger mt-4">*</span>
+
+                    </label>
+                    <input
+                      [ngxTimepicker]="picker"
+                      formControlName="fromTime"
+                      class="form-control"
+                      id="from-time"
+                      name="from-time"
+                      [(ngModel)]="peopleBaithak.fromTime"
+                      [class.error-border]="baithakFrom.get('fromTime').invalid && baithakFrom.get('fromTime').touched"
+                    />
+                    <div
+                    class="text-danger"
+                   *ngIf="baithakFrom.get('fromTime').hasError('required')"
+                       >
+                       <!-- This field is mandatory. -->
+                     </div>
+                    <span
+                      ><ngx-material-timepicker
+                        #picker
+                      ></ngx-material-timepicker
+                    ></span>
+                  </div>
+                  <div class="d-flex flex-column align-items-center">
+                    <label for="to-time" class="ml-3"
+                      >{{ "EndTime" }}<span class="text-danger mt-4">*</span>
+                    </label>
+                    <input
+                      [ngxTimepicker]="picker1"
+                      formControlName="toTime"
+                      class="form-control"
+                      id="to-time"
+                      name="to-time"
+                      [(ngModel)]="peopleBaithak.toTime"
+                      [class.error-border]="baithakFrom.get('toTime').invalid && baithakFrom.get('toTime').touched"
+                    />
+                    <div
+                      class="text-danger"
+                     *ngIf="baithakFrom.get('toTime').hasError('required')"
+                         >
+                         <!-- This field is mandatory. -->
+                       </div>
+                    <span
+                      ><ngx-material-timepicker
+                        #picker1
+                      ></ngx-material-timepicker
+                    ></span>
+                  </div>
+                  <div class="d-flex flex-row align-items-center">
+                    <button
+                      *ngIf="isAdd"
+                      type="submit"
+                      class="btn btn-primary form-control mt-4"
+                    >
+                      ADD
+                    </button>
+                    <button
+                      *ngIf="isUpdate"
+                      type="submit"
+                      class="btn btn-success form-control mt-4"
+                    >
+                      UPDATE
+                    </button>
+                    <button
+                      *ngIf="isCancel"
+                      type="button"
+                      class="btn btn-info form-control mt-4"
+                      (click)="cancelClick()"
+                    >
+                      CANCEL
+                    </button>
+                    <button
+                      *ngIf="isCancel"
+                      type="button"
+                      class="btn btn-danger form-control mt-4"
+                      (click)="deleterecord()"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div *ngIf="location" class="d-flex justify-content-center align-items-center bg-secondary mb-3" style="height: 50px;">
+              <h3 class="text-center " style="color: white">
+                Baithak - {{location.locationName}}
+              </h3>
+            </div>
+            <!-- <div class="table-responsive scrollit mt-5"> -->
+            <div class="d-flex flex-row justify-content-between">
+              <div class="dayCustom">
+                <app-baithak-card
+                  (valueUpdate)="onCardClick($event)"
+                  [day]="'Monday'"
+                  [dayBaithakList]="mondaybaithakList"
                 >
-                  <ng-template pTemplate="header" let-columns>
-                    <tr>
-                      <th *ngFor="let col of columns">
-                        {{ col.header }}
-                      </th>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-rowData let-columns="columns">
-                    <tr>
-                        <td *ngFor="let col of columns">
-                        
-                        </td>
-                    </tr>
-                  </ng-template>
-                </p-table>
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  (valueUpdate)="onCardClick($event)"
+                  [day]="'Tuesday'"
+                  [dayBaithakList]="tuesdaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  (valueUpdate)="onCardClick($event)"
+                  [day]="'Wednesday'"
+                  [dayBaithakList]="wednesdaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  [day]="'Thursday'"
+                  (valueUpdate)="onCardClick($event)"
+                  [dayBaithakList]="thursdaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  [day]="'Friday'"
+                  (valueUpdate)="onCardClick($event)"
+                  [dayBaithakList]="fridaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  [day]="'Saturday'"
+                  (valueUpdate)="onCardClick($event)"
+                  [dayBaithakList]="saturdaybaithakList"
+                >
+                </app-baithak-card>
+              </div>
+              <div class="dayCustom ml-1 mr-1">
+                <app-baithak-card
+                  [day]="'Sunday'"
+                  (valueUpdate)="onCardClick($event)"
+                  [dayBaithakList]="sundaybaithakList"
+                >
+                </app-baithak-card>
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

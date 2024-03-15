@@ -23,7 +23,6 @@ export const ROUTES: RouteInfo[] = [
     { path: '/schedule-gents-baithak', title: 'Scheduled gents baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
     { path: '/people-baithak', title: 'Schedule Pepole baithak',  icon:'fas fa-calendar-check text-primary', class: '' },
     { path: '/schedule-baithak', title: 'Schedule Baithak',  icon:'fas fa-user ni-user text-primary', class: '' },
-    { path : '/gents-ladies-schedular-master.component', title : 'Scheduled Master', icon:"fas fa-user ni-user text-primary", class: '' },
     { path: '/report', title: '',  icon:'', class: '' },
 
 ];
