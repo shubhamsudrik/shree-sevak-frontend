@@ -72,9 +72,11 @@ import { TableModule } from "primeng/table";
 import { ScheduleBaithakComponent } from "./pages/schedular/people-baithak/schedule-baithak/schedule-baithak.component";
 import { BaithakCardComponent } from "./pages/schedular/people-baithak/baithak-card/baithak-card.component";
 import { CardModule } from "primeng/card";
+import { ButtonModule } from "primeng/button";
 
 @NgModule({
   imports: [
+   
     CardModule,
     DropdownModule,
     MultiSelectModule,
@@ -82,7 +84,7 @@ import { CardModule } from "primeng/card";
     MatPaginatorModule,
     NgxMaterialTimepickerModule,
     TranslateModule,
-    // ButtonModule,
+    ButtonModule,
     HttpClientModule,
     ComponentsModule,
     NgbModule,

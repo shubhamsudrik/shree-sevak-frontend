@@ -14,7 +14,7 @@
           </ul>
 
           <div>
-            <div class="d-flex flex-column justify-content-around">
+            <div class="d-flex flex-column justify-content-around mb-5" >
               <form [formGroup]="baithakFrom" (ngSubmit)="onSubmit()">
                 <div class="d-flex flex-row justify-content-around">
                   <div class="d-flex flex-column align-items-center">
@@ -161,21 +161,34 @@
                     <button
                       *ngIf="isUpdate"
                       type="submit"
-                      class="btn btn-secondary form-control mt-4"
+                      class="btn btn-success form-control mt-4"
                     >
                       UPDATE
                     </button>
                     <button
                       *ngIf="isCancel"
                       type="button"
-                      class="btn btn-danger form-control mt-4"
+                      class="btn btn-info form-control mt-4"
                       (click)="cancelClick()"
                     >
                       CANCEL
                     </button>
+                    <button
+                      *ngIf="isCancel"
+                      type="submit"
+                      class="btn btn-danger form-control mt-4"
+                    
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </form>
+            </div>
+            <div *ngIf="location" class="d-flex justify-content-center align-items-center bg-secondary mb-3" style="height: 50px;">
+              <h3 class="text-center " style="color: white">
+                Baithak - {{location.locationName}}
+              </h3>
             </div>
             <!-- <div class="table-responsive scrollit mt-5"> -->
             <div class="d-flex flex-row justify-content-between">

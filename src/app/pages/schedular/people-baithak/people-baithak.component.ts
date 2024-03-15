@@ -48,6 +48,8 @@ export class PeopleBaithakComponent implements OnInit {
   thursdaybaithakList: any[]=[];
   saturdaybaithakList: any[]=[];
   userAreas: any;
+  location: any=null;
+  isDelete: boolean;
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
@@ -281,6 +283,7 @@ const tobaithakType=this.baithakFrom.get('baithakType');
   getAllLocationBaseOnUserArea() {
     const areaList = this.userAreas;
     console.log(areaList);
+    this.loadBaithaTypes()
 
     for (let i = 0; i < areaList.length; i++) {
       this.locDataService
@@ -323,9 +326,12 @@ const tobaithakType=this.baithakFrom.get('baithakType');
   onChangeLocation(event: any) {
     // console.log(event.target)
     // console.log(event.target.value)
+    const locationId = event.value;
+    this.location = this.locationList.find(location => location.locationId === locationId);
+    console.log("found location",this.location)
+
     console.log(event.value);
     // console.log(event.target.value);
-    const locationId = event.value;
     console.log(locationId);
    this.baithakListBaseOnLocation(locationId)
 
@@ -406,6 +412,13 @@ const tobaithakType=this.baithakFrom.get('baithakType');
     this.isAdd = true;
     this.isUpdate = false;
     this.isCancel = false;
+  }
+  deleteClick(){
+    this.isUpdate = false;
+    this.isCancel = false;
+    this.isAdd = true;
+    this.isDelete = false;
+
   }
  
 }
