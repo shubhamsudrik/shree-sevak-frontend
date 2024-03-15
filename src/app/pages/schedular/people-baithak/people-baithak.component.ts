@@ -23,6 +23,7 @@ export class PeopleBaithakComponent implements OnInit {
   isAdd = true;
   isUpdate = false;
   isCancel = false;
+  isDelete = false;
   cols: { field: string; header: string }[];
   baithakList: any[];
   submited: boolean = false;
@@ -48,6 +49,8 @@ export class PeopleBaithakComponent implements OnInit {
   thursdaybaithakList: any[]=[];
   saturdaybaithakList: any[]=[];
   userAreas: any;
+  activeBaithakList: PeopleBaithak[];
+  cardData: any;
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
@@ -64,7 +67,7 @@ export class PeopleBaithakComponent implements OnInit {
     this.retrunlocationlist();
     this.daysInWeek();
     this.baithakFromRecord();
-    this.reloadfrom()
+    this.reloadfrom();
 
     // this.cols = [
     //   { field: "Monday", header: "Monday" },
@@ -96,7 +99,7 @@ export class PeopleBaithakComponent implements OnInit {
       baithakType: ["", Validators.required],
       dayOfWeek: ["", Validators.required],
       fromTime: ["", Validators.required],
-      status: [null],
+      status: [""],
       toTime: ["", Validators.required],
     });
   }
@@ -104,6 +107,7 @@ export class PeopleBaithakComponent implements OnInit {
   onSubmit() {
     if (this.isUpdate) {
       const baithak = this.baithakFrom.value;
+      console.log(this.baithakFrom.value);
       const day = baithak.dayOfWeek;
       this.peopleBaithakService
         .updateBaithakDetails(baithak, baithak.baithakId)
@@ -120,7 +124,7 @@ export class PeopleBaithakComponent implements OnInit {
                 } else {
                   // this.removeFromPriviousdayList(day, data);
                   // this.mondaybaithakList.push(data);
-                  this.baithakListBaseOnLocation(baithak.location)
+                  this.ActiveBaithakListBaseOnLocation(baithak.location)
                 }
                 break;
               case "Tuesday":
@@ -133,7 +137,7 @@ export class PeopleBaithakComponent implements OnInit {
                 } else {
                   // this.removeFromPriviousdayList(day, data);
                   // this.tuesdaybaithakList.push(data);
-                  this.baithakListBaseOnLocation(baithak.location)
+                  this.ActiveBaithakListBaseOnLocation(baithak.location)
                 }
                 break;
               case "Wednesday":
@@ -146,7 +150,7 @@ export class PeopleBaithakComponent implements OnInit {
                 } else {
                   // this.removeFromPriviousdayList(day, data);
                   // this.wednesdaybaithakList.push(data);
-                  this.baithakListBaseOnLocation(baithak.location)
+                  this.ActiveBaithakListBaseOnLocation(baithak.location)
                 }
                 break;
               case "Thursday":
@@ -159,7 +163,7 @@ export class PeopleBaithakComponent implements OnInit {
                 } else {
                   // this.removeFromPriviousdayList(day, data);
                   // this.thursdaybaithakList.push(data);
-                  this.baithakListBaseOnLocation(baithak.location)
+                  this.ActiveBaithakListBaseOnLocation(baithak.location)
                 }
                 break;
               case "Friday":
@@ -172,7 +176,7 @@ export class PeopleBaithakComponent implements OnInit {
                 } else {
                   // this.removeFromPriviousdayList(day, data);
                   // this.fridaybaithakList.push(data);
-                  this.baithakListBaseOnLocation(baithak.location)
+                  this.ActiveBaithakListBaseOnLocation(baithak.location)
                 }
                 break;
               case "Saturday":
@@ -185,7 +189,7 @@ export class PeopleBaithakComponent implements OnInit {
                 } else {
                   // this.removeFromPriviousdayList(day, data);
                   // this.saturdaybaithakList.push(data);
-                  this.baithakListBaseOnLocation(baithak.location)
+                  this.ActiveBaithakListBaseOnLocation(baithak.location)
                 }
                 break;
               case "Sunday":
@@ -198,7 +202,7 @@ export class PeopleBaithakComponent implements OnInit {
                 } else {
                   // this.removeFromPriviousdayList(day, data);
                   // this.sundaybaithakList.push(data);
-                  this.baithakListBaseOnLocation(baithak.location)
+                  this.ActiveBaithakListBaseOnLocation(baithak.location)
                 }
                 break;
               default:
@@ -214,7 +218,7 @@ export class PeopleBaithakComponent implements OnInit {
           
           }
         );
-    } else {
+    } if(this.isAdd) {
       const fromTimeControl = this.baithakFrom.get('fromTime');
   const toTimeControl = this.baithakFrom.get('toTime');
   const toDayOfWeek = this.baithakFrom.get('dayOfWeek');
@@ -327,21 +331,34 @@ const tobaithakType=this.baithakFrom.get('baithakType');
     // console.log(event.target.value);
     const locationId = event.value;
     console.log(locationId);
-   this.baithakListBaseOnLocation(locationId)
-
+  //  this.baithakListBaseOnLocation(locationId)
+   this.ActiveBaithakListBaseOnLocation(locationId);
     // console.log(this.locationList)
   }
 
-  baithakListBaseOnLocation(locationId:any){
-    console.log(locationId);
+  // baithakListBaseOnLocation(locationId:any){
+  //   console.log(locationId);
+  //   this.peopleBaithakService
+  //     .getBaithakListBaseOnLocation(locationId)
+  //     .subscribe((data) => {
+  //       console.log(data);
+  //       this.baithakList = data;
+  //       console.log(this.baithakList);
+  //       this.filtterAllDayBaithak(this.baithakList);
+  //     });
+  // }
+  
+  ActiveBaithakListBaseOnLocation(locationId:any){
     this.peopleBaithakService
-      .getBaithakListBaseOnLocation(locationId)
+      .getActiveBaithakListBaseOnLocation(locationId)
       .subscribe((data) => {
+        console.log(data);
         this.baithakList = data;
-        console.log(this.baithakList);
+        console.log(this.activeBaithakList);
         this.filtterAllDayBaithak(this.baithakList);
       });
   }
+
   filtterAllDayBaithak(baithakList: any[]) {
     this.sundaybaithakList = this.baithakList.filter((data) => {
       return data.dayOfWeek.day === "Sunday";
@@ -385,27 +402,47 @@ const tobaithakType=this.baithakFrom.get('baithakType');
     });
   }
   onCardClick(event: any) {
-    const cardData = event;
-    console.log("card data", cardData);
+    this.cardData =event;
+    console.log("card data", this.cardData);
     console.log("card event", event);
     this.baithakFrom.patchValue({
-      baithakId: cardData.baithakId,
-      location: cardData.location.locationId,
-      baithakType: cardData.baithakType,
-      dayOfWeek: cardData.dayOfWeek.id,
-      fromTime: cardData.fromTime,
-      status: cardData.status,
-      toTime: cardData.toTime,
+      baithakId: this.cardData.baithakId,
+      location: this.cardData.location.locationId,
+      baithakType: this.cardData.baithakType,
+      dayOfWeek: this.cardData.dayOfWeek.id,
+      fromTime: this.cardData.fromTime,
+      status: this.cardData.status,
+      toTime: this.cardData.toTime,
     });
 
+    console.log(this.cardData.status);
     this.isAdd = false;
     this.isUpdate = true;
     this.isCancel = true;
+    this.isDelete =true;
+
   }
   cancelClick() {
     this.isAdd = true;
     this.isUpdate = false;
     this.isCancel = false;
+    this.isDelete = false;
+  }
+
+  deleteClick(){
+    const baithak = this.baithakFrom.value;
+      this.baithakFrom.value.status = false;
+      this.peopleBaithakService.updateBaithakDetails(baithak, this.cardData.baithakId)
+      .subscribe(
+        (data: any) => {
+          this.toast.success("Baithak successfully deleted");
+        },
+        (error) => {
+          console.error("Error deleting baithak:", error);
+          this.cardData.status = true; 
+          this.toast.error("Failed to delete baithak. Please try again.");
+        }
+      );
   }
  
 }

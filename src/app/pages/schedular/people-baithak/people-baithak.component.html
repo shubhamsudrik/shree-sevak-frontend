@@ -173,6 +173,9 @@
                     >
                       CANCEL
                     </button>
+                    <div >
+                    <button *ngIf="isDelete" type="button"  class="btn btn-danger form-control mt-4" (click)="deleteClick()"> DELETE </button>
+                    </div>
                   </div>
                 </div>
               </form>

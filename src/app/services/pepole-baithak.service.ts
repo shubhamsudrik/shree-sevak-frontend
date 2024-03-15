@@ -24,5 +24,10 @@ private baseUrl='http://localhost:8080/api/baithak2'
     updateBaithakDetails(baithak:any,baithakId:any):Observable<object>{
       return this.httpClient.put(`${this.baseUrl}/update-baithak2/${baithakId}`,baithak)
     }
+
+    // For Get the active record from database
+    getActiveBaithakListBaseOnLocation(locationId:any): Observable<PeopleBaithak[]> {
+    return this.httpClient.get<PeopleBaithak[]>(`${this.baseUrl}/status/1/${locationId}`);
+  }
  
 }
