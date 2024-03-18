@@ -73,6 +73,7 @@ import { ScheduleBaithakComponent } from "./pages/schedular/people-baithak/sched
 import { BaithakCardComponent } from "./pages/schedular/people-baithak/baithak-card/baithak-card.component";
 import { CardModule } from "primeng/card";
 import { ButtonModule } from "primeng/button";
+import { CardForScheduleBaithakComponent } from './pages/schedular/people-baithak/schedule-baithak/card-for-schedule-baithak/card-for-schedule-baithak.component';
 
 @NgModule({
   imports: [
@@ -157,6 +158,7 @@ import { ButtonModule } from "primeng/button";
     PeopleBaithakComponent,
     ScheduleBaithakComponent,
     BaithakCardComponent,
+    CardForScheduleBaithakComponent,
   ],
 
   providers: [

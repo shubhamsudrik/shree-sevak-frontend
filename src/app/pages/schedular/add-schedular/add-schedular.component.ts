@@ -256,6 +256,7 @@ export class AddSchedularComponent implements OnInit {
         // console.log(dateToAdd);
 
         this.meetings.push(new MeetingDay(new Date(dateToAdd)));
+        console.log(this.meetings)
       }
 
       // console.log(dateToAdd.getDate());
