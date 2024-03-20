@@ -297,7 +297,7 @@ if(foundIndex !== -1) {
   console.log("list of members scheduleHajeri", this.schduleHajeriMember);
 }
   
-}
+} 
 
   getMembers(date: string, baithakId: any, locationId: any): any[] {
    console.log( this.serviceDefaultMember)

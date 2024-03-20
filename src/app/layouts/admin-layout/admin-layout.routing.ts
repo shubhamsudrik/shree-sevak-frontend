@@ -20,6 +20,7 @@ import { UserListComponent } from 'src/app/pages/user-list/user-list.component';
 import { ScheduleGentsBaithakComponent } from 'src/app/pages/schedular/schedule-gents-baithak/schedule-gents-baithak.component';
 import { PeopleBaithakComponent } from 'src/app/pages/schedular/people-baithak/people-baithak.component';
 import { ScheduleBaithakComponent } from 'src/app/pages/schedular/people-baithak/schedule-baithak/schedule-baithak.component';
+import { PeopleSchedularMasterComponent } from 'src/app/pages/schedular/people-baithak/schedule-baithak/people-schedular-master/people-schedular-master.component';
 
 
 
@@ -32,12 +33,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-new-member', component: AddNewMemberComponent },
     { path: 'add-new-member/:memberId', component: AddNewMemberComponent },
     { path: 'member-list', component: MemberListComponent },
-    // { path: 'update-location/:id', component: UpdateLocationComponent },
-    // { path: 'update-member/:id', component: UpdateMemberComponent },
     { path: 'baithak-list', component: BaithakListComponent },
     { path: 'create-baithak', component: CreateBaithakComponent },
     { path: 'create-baithak/:baithakId', component: CreateBaithakComponent},
-    // { path: 'update-baithak/:id', component: UpdateBaithakComponent },
     { path: 'schedular', component: SchedularComponent },
     { path: 'add-schedular', component: AddSchedularComponent },
     { path: 'update-schedule/:id', component: UpdateScheduleComponent },
@@ -54,6 +52,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'create-area', component: CreateAreaComponent},
     { path: 'user-list', component: UserListComponent},
     { path: 'schedule-baithak', component: ScheduleBaithakComponent},  
+    { path: 'people-schedular-master.component', component: PeopleSchedularMasterComponent},  
+
     
 
 ];

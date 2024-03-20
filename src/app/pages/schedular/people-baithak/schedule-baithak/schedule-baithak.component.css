@@ -22,3 +22,16 @@ table thead tr th{
 .error-border {
 border: 1px solid red;
 }
+
+.container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.container div {
+  margin-right: 10px; /* Adjust spacing between items */
+}
+
+.buttons {
+  margin-left: auto; /* Push buttons to the right */
+}

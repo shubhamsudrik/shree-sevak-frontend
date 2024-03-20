@@ -52,6 +52,9 @@ export class PeopleBaithakComponent implements OnInit {
   cardData: any;
   location: any=null;
   isDelete: boolean;
+  selectedDate: any;
+  filteredBaithakList: any[];
+  selectedDay: any;
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
@@ -59,7 +62,12 @@ export class PeopleBaithakComponent implements OnInit {
     private daysService: DaysService,
     private peopleBaithakService: PepoleBaithakService,
     private toast: ToastrService
-  ) {}
+  ) {
+    console.log(this.selectedDate);
+
+// Change it to use the correct property name
+console.log(this.selectedDay);
+  }
 
   ngOnInit(): void {
     this.userAreas = JSON.parse(localStorage.getItem('userArea'));
@@ -352,6 +360,25 @@ const tobaithakType=this.baithakFrom.get('baithakType');
   //       this.filtterAllDayBaithak(this.baithakList);
   //     });
   // }
+  
+  onChangeDate(event: any) {
+    // Update selectedDate when the date changes
+    this.selectedDate = event.value;
+    // Filter records based on selected day and date
+    this.filterRecords();
+  }
+  filterRecords() {
+    // Filter records based on selected day and date
+    // Example logic:
+    this.selectedDay = this.selectedDate.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+    const selectedDateString = this.selectedDate.toISOString().slice(0, 10); // Get YYYY-MM-DD format of the selected date
+
+    // Filter records based on day and date
+    // Example:
+    this.filteredBaithakList = this.baithakList.filter((baithak) => {
+      return baithak.dayOfWeek === this.selectedDay && baithak.date === selectedDateString;
+    });
+  }
   
   ActiveBaithakListBaseOnLocation(locationId:any){
     this.peopleBaithakService

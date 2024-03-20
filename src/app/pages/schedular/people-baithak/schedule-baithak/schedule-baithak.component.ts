@@ -8,6 +8,15 @@ import { UserDataService } from 'src/app/services/user-data.service';
 import { User } from 'src/app/Classes/user';
 import { ToastrService } from 'ngx-toastr';
 
+export class CalendarDay {
+  public date: Date;
+  public dayName: string;
+
+  constructor(d: Date, dayName: string) {
+    this.date = d;
+    this.dayName =dayName
+  }
+}
 interface City {
   name: string;
   code: string;
@@ -47,11 +56,22 @@ export class ScheduleBaithakComponent implements OnInit {
   wednesdaybaithakList: any[]=[];
   thursdaybaithakList: any[]=[];
   saturdaybaithakList: any[]=[];
+  calendar: CalendarDay[] = [];
+  weekStartDate: Date;
   userAreas: any;
   activeBaithakList: PeopleBaithak[];
   cardData: any;
   location: any=null;
   isDelete: boolean;
+   // Variables to store dates for each day
+   sundayDate: any;
+   mondayDate: any;
+   tuesdayDate: any;
+   wednesdayDate: any;
+   thursdayDate: any;
+   fridayDate: any;
+   saturdayDate: any;
+
   constructor(
     private formbuilder: FormBuilder,
     private locDataService: LocService,
@@ -61,6 +81,9 @@ export class ScheduleBaithakComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.weekStartDate = new Date(); // Initialize with current date
+    this.populateCalendar();
+
     this.userAreas = JSON.parse(localStorage.getItem('userArea'));
     console.log(this.userDetails);
     this.getAllLocationBaseOnUserArea();
@@ -69,6 +92,70 @@ export class ScheduleBaithakComponent implements OnInit {
     this.baithakFromRecord();
     this.reloadfrom();
 
+  }
+  
+  populateCalendar() {
+    this.calendar = [];
+    const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'];
+    const currentDayIndex = this.weekStartDate.getDay();
+    const daysToMonday = currentDayIndex === 0 ? 6 : currentDayIndex - 1;
+  
+    const startDate = new Date(this.weekStartDate);
+    startDate.setDate(startDate.getDate() - daysToMonday);
+
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(startDate);
+      date.setDate(date.getDate() + i);
+      const dayName = dayNames[i];
+      this.calendar.push(new CalendarDay(date, dayName));
+
+      // Store the date for each day separately
+    switch (dayName) {
+      case 'Monday':
+        this.mondayDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        break;
+      case 'Tuesday':
+        this.tuesdayDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        break;
+      case 'Wednesday':
+        this.wednesdayDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        break;
+      case 'Thursday':
+        this.thursdayDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        break;
+      case 'Friday':
+        this.fridayDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        break;
+      case 'Saturday':
+        this.saturdayDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        break;      
+      case 'Sunday':
+        this.sundayDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        break;  
+    }
+    }
+    console.log(this.calendar)
+    console.log(this.mondayDate)
+    console.log(this.tuesdayDate)
+    console.log(this.wednesdayDate)
+    console.log(this.thursdayDate)
+    console.log(this.fridayDate)
+    console.log(this.saturdayDate)
+    console.log(this.sundayDate)
+
+  }
+  onNextWeek() {
+    this.weekStartDate.setDate(this.weekStartDate.getDate() + 7);
+    this.populateCalendar();
+  }
+  onPriveWeek() {
+    this.weekStartDate.setDate(this.weekStartDate.getDate() - 7);
+    this.populateCalendar();
+  }
+  
+  extractDatesFromCalendar(): Date[] {
+    // Extract dates from calendar array
+    return this.calendar.map(day => day.date);
   }
 
   loadBaithaTypes(){

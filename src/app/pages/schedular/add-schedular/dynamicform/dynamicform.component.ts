@@ -77,9 +77,15 @@ hajeriErrorMessage: string | null = null;
       console.log(this.scheduleDto);
       if (this.schedularFormchild.valid) {
         this.updateScheduleDto();
+        console.log(this.updateScheduleDto)
         this.valueChanged.emit(this.scheduleDto);
       }
     });
+
+    console.log(this.date)
+    console.log(this.baithakId)
+    console.log(this,this.vachanMembers)
+    console.log(this.schedularService.getMembers)
   }
 
   assignMemeberList() {
