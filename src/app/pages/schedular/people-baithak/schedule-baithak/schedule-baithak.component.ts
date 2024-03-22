@@ -9,6 +9,7 @@ import { User } from 'src/app/Classes/user';
 import { ToastrService } from 'ngx-toastr';
 import { PepoleBaithak } from 'src/app/Classes/pepole-baithak';
 import { PeopleSchedule } from 'src/app/Classes/people-schedule';
+import { SchedulePeopleBaithakService } from 'src/app/services/schedule-people-baithak.service';
 
 export class CalendarDay {
   public date: Date;
@@ -79,7 +80,8 @@ export class ScheduleBaithakComponent implements OnInit {
     private locDataService: LocService,
     private daysService: DaysService,
     private peopleBaithakService: PepoleBaithakService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private schedulePeopleBaithakService:SchedulePeopleBaithakService
   ) {}
 
   ngOnInit(): void {
@@ -406,11 +408,11 @@ const tobaithakType=this.baithakFrom.get('baithakType');
         console.log(data);
         this.baithakList = data;
         console.log(this.activeBaithakList);
-        this.filtterAllDayBaithak(this.baithakList);
+        this.filtterAllDayBaithak();
       });
   }
 
-  filtterAllDayBaithak(baithakList: any[]) {
+  filtterAllDayBaithak() {
     this.sundaybaithakList = this.baithakList.filter((data) => {
       return data.dayOfWeek.day === "Sunday";
     });
@@ -540,4 +542,10 @@ console.log("schedule object ",newSchedule)
      
     }
   }
+  scheduleCreated() {
+     this.schedulePeopleBaithakService.createPeolpeSchedule(this.scheduleArray).subscribe((data)=>{
+      this.toast.success("Schedule created successfully")
+      console.log("schedule baithak data",data);
+     })
+    }
 }

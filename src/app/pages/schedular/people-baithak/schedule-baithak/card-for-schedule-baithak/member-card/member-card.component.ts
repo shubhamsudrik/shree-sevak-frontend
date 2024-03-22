@@ -19,6 +19,7 @@ export class MemberCardComponent implements OnInit {
   memberList: any[] = [];
   defaultMembers: any;
   totalElements: any;
+  memberSelected: any;
 
   constructor(
     private memberListService: MemberListService,
@@ -28,13 +29,26 @@ export class MemberCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializingForm();
-    this.individualScheduleRecord(this.date,this.baithakId);
     this.getAllActiveMemberList();
+    
   }
 
-  
   individualScheduleRecord(date: any, baithakId: any) {
-    throw new Error("Method not implemented.");
+    this.schedulePeopleBaithakService
+      .getIndividulaScheduleByDateAndBaithakId(date, baithakId)
+      .subscribe((data) => {
+        console.log("individual schedule record", data);
+        let member = data.member;
+        member.baithak = this.baithakId;
+        member.date = this.date;
+        this.memberSelected = member;
+        console.log("memberSelected", this.memberSelected);
+        this.schedulePeopleBaithakService.addMemeberToSchedule(this.memberSelected);
+        console.log(this.memberSelected);
+      this.memberChildForm.patchValue({
+        member: this.memberSelected.memberId,
+      });
+      });
   }
 
   initializingForm() {
@@ -65,19 +79,21 @@ export class MemberCardComponent implements OnInit {
         member.date = this.date;
         return member;
       });
-      console.log(updatedmemberList)
+      console.log(updatedmemberList);
 
       this.schedulePeopleBaithakService.setMembers(updatedmemberList);
       this.totalElements = data.totoalElement;
       // }
       console.log(this.defaultMembers);
       console.log("data.totalElements", this.totalElements);
-      this.memberList = this.schedulePeopleBaithakService.getMembers(this.baithakId);
+      this.memberList = this.schedulePeopleBaithakService.getMembers(
+        this.baithakId
+      );
+      this.individualScheduleRecord(this.date, this.baithakId);
     });
   }
   loadMemberList() {
     this.getAllActiveMemberList();
     //this.memberList = this.schedulePeopleBaithakService.getMembers(this.baithakId);
   }
-  
 }

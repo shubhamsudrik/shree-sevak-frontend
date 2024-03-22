@@ -1,7 +1,7 @@
 <form [formGroup]="memberChildForm">
-    <div class="d-flex flex-column align-items-center" (click)="loadMemberList()">
+    <div class="d-flex flex-column align-items-center">
   
-        <div>
+        <div (click)="loadMemberList()">
             <p-dropdown
             [options]="memberList"
             placeholder="Select Member"

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PeopleBaithak } from 'src/app/Classes/people-baithak';
+import { PeopleSchedule } from '../Classes/people-schedule';
 
 
 @Injectable({
@@ -12,14 +13,14 @@ export class SchedulePeopleBaithakService {
   private baseUrl = "http://localhost:8080/api/people";
   public serviceDefaultMember: any[] = [];
   public scheduleMember: any[] = [];
-  public serviceSelectedMember: any[] = [];
+  //public serviceSelectedMember: any[] = [];
   totalMembers: number;
   constructor(private httpclient: HttpClient) {
   }
 
-  createPeolpeSchedule(peopleBaithak: PeopleBaithak): Observable<any> {
-    const dataToSend = [peopleBaithak];
-    return this.httpclient.post<any>('http://localhost:8080/api/people/createschedule', dataToSend);
+  createPeolpeSchedule(peopleSchedule: PeopleSchedule[]): Observable<any> {
+
+    return this.httpclient.post<any>('http://localhost:8080/api/people/createschedule', peopleSchedule);
   }
 
   // For Get all AllpeopleScheduleList
@@ -52,7 +53,7 @@ export class SchedulePeopleBaithakService {
        (member) =>  member.baithak === +baithakId
      );
      console.log("schedule member",scheduleMember)
-     console.log("selected vachan",this.scheduleMember)
+     console.log("selected member",this.scheduleMember)
 
      const memberIdsToRemove = scheduleMember.map(
        (member) => member.memberId
@@ -98,7 +99,7 @@ export class SchedulePeopleBaithakService {
       this.scheduleMember.push(memberDetail);
     }
 
-    console.log("Array of HAJERIMEMBERS", this.scheduleMember);
+    console.log("Array of scheduleMemebr", this.scheduleMember);
   }
   setSingleScheduleMember(member: any) {
     const foundIndex=this.scheduleMember.findIndex((value)=>{
