@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PeopleBaithak } from 'src/app/Classes/people-baithak';
+import { PeopleSchedule } from 'src/app/Classes/people-schedule';
 import { MemberListService } from 'src/app/services/member-list.service';
 import { SchedulePeopleBaithakService } from 'src/app/services/schedule-people-baithak.service';
 
@@ -23,7 +24,7 @@ export class CalendarDay {
 })
 export class CardForScheduleBaithakComponent implements OnInit {
 
-  @Output() valueUpdate: EventEmitter<any> = new EventEmitter();
+  @Output() valueChange: EventEmitter<any> = new EventEmitter();
   @Input() dayBaithakList:any[] = [];
   @Input() day:any
   @Input() day1:any
@@ -35,7 +36,7 @@ export class CardForScheduleBaithakComponent implements OnInit {
   calendar: CalendarDay[] = [];
   weekStartDate: Date;
   scheduleform: FormGroup;
-  peopleBaithak: PeopleBaithak = new PeopleBaithak();
+  peopleBaithak: PeopleSchedule = new PeopleSchedule();
 
   selectedBaithak: any = {}; // Store selected baithak ID and date
   selectedMemberId: any;
@@ -59,6 +60,7 @@ export class CardForScheduleBaithakComponent implements OnInit {
     this.populateCalendar();
     this.initializingForm();
     this.getAllActiveMemberList();
+    
   }
   
   initializingForm() {
@@ -69,40 +71,7 @@ export class CardForScheduleBaithakComponent implements OnInit {
   });
   }
 
-  onSubmit(){
-    // if(this.scheduleform.valid){
-    //   this.scheduleform.patchValue({
-    //     baithakId: this.selectedBaithak.baithakId,
-    //     date: this.selectedBaithak.date,
-    //   });
-    //   console.log(this.scheduleform.value);
-      
-    //   // Clear selectedBaithak
-    //   this.selectedBaithak = {};
 
-    //   // Reset form
-    //   this.scheduleform.reset();
-    
-    if (this.selectedMemberId && this.selectedBaithakId && this.selectedDate) {
-      this.peopleBaithak.date = this.selectedDate;
-      this.peopleBaithak.member = this.selectedMemberId;
-      this.peopleBaithak.baithak = this.selectedBaithakId;
-    
-      this.schedulePeopleBaithakService.createPeolpeSchedule(this.peopleBaithak).subscribe(
-        (data) => {
-          console.log(data);
-          this.toast.success("New Baithak Created Successfully ");
-        },
-        (error) => {
-          console.log(error);
-          this.toast.error("Baithak Already Scheduled For Same Time.");
-        }
-      );
-    } else {
-      console.log('Incomplete data. Cannot submit.');
-    }
-  }
-    
 
   populateCalendar() {
     this.calendar = [];
@@ -128,7 +97,8 @@ export class CardForScheduleBaithakComponent implements OnInit {
 
   onCardClick(baithak:any):void {
     console.log('onCardClick', baithak);
-    this.valueUpdate.emit(baithak);
+  
+    // this.valueUpdate.emit(baithak);
 
   }
 
@@ -151,12 +121,12 @@ export class CardForScheduleBaithakComponent implements OnInit {
       onClickMember(baithakId: number, date: string) {
         let memberList = [];
           for (let i = 0; i < this.defaultMembers.length; i++) {
-            console.log(this.defaultMembers[i]);
+            // console.log(this.defaultMembers[i]);
             // console.log(memberList.push(...this.defaultMembers[i]));
             memberList = this.defaultMembers;
           }
           this.memberList = memberList;
-          console.log(this.memberList);
+          // console.log(this.memberList);
 
 
         const memberId = this.scheduleform.get('member').value;
@@ -186,39 +156,11 @@ export class CardForScheduleBaithakComponent implements OnInit {
         console.log('Selected baithak ID:', baithakId);
         console.log('Selected date:', date);
 
-        // Filter out the selected member from the memberList for the selected date
-    // this.memberList = this.defaultMembers.filter(member => {
-    //   // Check if the member is available for the selected date and not the selected member
-    //   return !this.isMemberScheduledForDate(member, date);
-    // });
-
-    // console.log(this.memberList);
+  
       }
-      
-      // onClickMember() {
-
-      //   if (this.memberList.length == 0 || this.memberList == null) {
-      //     let memberList = [];
-      //     for (let i = 0; i < this.defaultMembers.length; i++) {
-      //       console.log(this.defaultMembers[i]);
-      //       // console.log(memberList.push(...this.defaultMembers[i]));
-      //       memberList = this.defaultMembers;
-      //     }
-      //     this.memberList = memberList;
-      //     console.log(this.memberList);
-    
-      //   }
-    
-      // }
-
-      // onSelectMember(memberId: any) {
-      //   // Update selectedBaithak with member ID, baithak ID, and date
-      //   this.selectedBaithak.memberId = memberId;
-      // }
-      onSelectMember(memberId: any) {
-        this.selectedMemberId = memberId;
-        this.peopleBaithak.member = memberId;
-        this.peopleBaithak.baithak = this.selectedBaithakId;
-        this.peopleBaithak.date = this.selectedDate;
+      onMemebrChange(peopleSchedule: PeopleSchedule){
+         console.log('in member change method',peopleSchedule)
+          this.valueChange.emit(peopleSchedule)
       }
+   
 }

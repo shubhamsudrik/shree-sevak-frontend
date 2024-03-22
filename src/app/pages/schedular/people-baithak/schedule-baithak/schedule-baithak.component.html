@@ -16,25 +16,25 @@
           <div>
             <div>
               <!-- <form [formGroup]="baithakFrom" (ngSubmit)="onSubmit()"> -->
-                <div class="container">
-                  <div style="margin-bottom: 32px;">
-                    <label for="location"> Choose Location Name </label>
-                    <div (click)="onClickLocation()">
-                      <p-dropdown
-                        [options]="locationList"
-                        placeholder="Select Location"
-                        name="location"
-                        id="location"
-                        formControlName="location"
-                        optionValue="locationId"
-                        optionLabel="locationName"
-                        (onChange)="onChangeLocation($event)"
+              <div class="container">
+                <div style="margin-bottom: 32px">
+                  <label for="location"> Choose Location Name </label>
+                  <div (click)="onClickLocation()">
+                    <p-dropdown
+                      [options]="locationList"
+                      placeholder="Select Location"
+                      name="location"
+                      id="location"
+                      formControlName="location"
+                      optionValue="locationId"
+                      optionLabel="locationName"
+                      (onChange)="onChangeLocation($event)"
+                    >
                       >
-                        >
-                      </p-dropdown>
-                    </div>
+                    </p-dropdown>
                   </div>
-<!-- 
+                </div>
+                <!-- 
                   <div class="d-flex flex-column align-items-center" (click)="loadBaithaTypes()">
                     <label for="location"> Baithak Type </label>
                     <p-dropdown
@@ -142,18 +142,25 @@
                       Delete
                     </button>
                   </div>-->
-            <button class="btn btn-primary" (click)="onPriveWeek()">Previous Week</button>
-            <button class="btn btn-primary" (click)="onNextWeek()">Next Week</button>
-                </div>
+                <button class="btn btn-primary" (click)="onPriveWeek()">
+                  Previous Week
+                </button>
+                <button class="btn btn-primary" (click)="onNextWeek()">
+                  Next Week
+                </button>
+              </div>
               <!-- </form> -->
-              
             </div>
             <!-- <button class="btn btn-primary" (click)="onPriveWeek()">Previous Week</button>
             <button class="btn btn-primary" (click)="onNextWeek()">Next Week</button> -->
-            
-            <div *ngIf="location" class="d-flex justify-content-center align-items-center bg-secondary mb-3" style="height: 50px;">
-              <h3 class="text-center " style="color: white">
-                Baithak - {{location.locationName}}
+
+            <div
+              *ngIf="location"
+              class="d-flex justify-content-center align-items-center bg-secondary mb-3"
+              style="height: 50px"
+            >
+              <h3 class="text-center" style="color: white">
+                Baithak - {{ location.locationName }}
               </h3>
             </div>
             <!-- <table class="calendar-table" border="1px solid" >
@@ -172,8 +179,8 @@
             <div class="d-flex flex-row justify-content-between">
               <div class="dayCustom">
                 <app-card-for-schedule-baithak
-                  (valueUpdate)="onCardClick($event)"
-                  [day]=mondayDate
+                (valueChange)="addSchedule($event)"
+                  [day]="mondayDate"
                   [day1]="'Monday'"
                   [dayBaithakList]="mondaybaithakList"
                 >
@@ -181,8 +188,8 @@
               </div>
               <div class="dayCustom ml-1 mr-1">
                 <app-card-for-schedule-baithak
-                  (valueUpdate)="onCardClick($event)"
-                  [day]=tuesdayDate
+                (valueChange)="addSchedule($event)"
+                  [day]="tuesdayDate"
                   [day1]="'Tuesday'"
                   [dayBaithakList]="tuesdaybaithakList"
                 >
@@ -190,8 +197,8 @@
               </div>
               <div class="dayCustom ml-1 mr-1">
                 <app-card-for-schedule-baithak
-                  (valueUpdate)="onCardClick($event)"
-                  [day]=wednesdayDate
+                (valueChange)="addSchedule($event)"
+                  [day]="wednesdayDate"
                   [day1]="'Wednesday'"
                   [dayBaithakList]="wednesdaybaithakList"
                 >
@@ -199,36 +206,36 @@
               </div>
               <div class="dayCustom ml-1 mr-1">
                 <app-card-for-schedule-baithak
-                  [day]=thursdayDate
+                (valueChange)="addSchedule($event)"
+                  [day]="thursdayDate"
                   [day1]="'Thursday'"
-                  (valueUpdate)="onCardClick($event)"
                   [dayBaithakList]="thursdaybaithakList"
                 >
                 </app-card-for-schedule-baithak>
               </div>
               <div class="dayCustom ml-1 mr-1">
                 <app-card-for-schedule-baithak
-                  [day]=fridayDate
+                (valueChange)="addSchedule($event)"
+                  [day]="fridayDate"
                   [day1]="'Friday'"
-                  (valueUpdate)="onCardClick($event)"
                   [dayBaithakList]="fridaybaithakList"
                 >
                 </app-card-for-schedule-baithak>
               </div>
               <div class="dayCustom ml-1 mr-1">
                 <app-card-for-schedule-baithak
-                  [day]=saturdayDate
+                (valueChange)="addSchedule($event)"
+                  [day]="saturdayDate"
                   [day1]="'Saturday'"
-                  (valueUpdate)="onCardClick($event)"
                   [dayBaithakList]="saturdaybaithakList"
                 >
                 </app-card-for-schedule-baithak>
               </div>
               <div class="dayCustom ml-1 mr-1">
                 <app-card-for-schedule-baithak
-                  [day]=sundayDate
+                (valueChange)="addSchedule($event)"
+                  [day]="sundayDate"
                   [day1]="'Sunday'"
-                  (valueUpdate)="onCardClick($event)"
                   [dayBaithakList]="sundaybaithakList"
                 >
                 </app-card-for-schedule-baithak>

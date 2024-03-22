@@ -73,8 +73,10 @@ import { ScheduleBaithakComponent } from "./pages/schedular/people-baithak/sched
 import { BaithakCardComponent } from "./pages/schedular/people-baithak/baithak-card/baithak-card.component";
 import { CardModule } from "primeng/card";
 import { ButtonModule } from "primeng/button";
-import { CardForScheduleBaithakComponent } from './pages/schedular/people-baithak/schedule-baithak/card-for-schedule-baithak/card-for-schedule-baithak.component';
-import { PeopleSchedularMasterComponent } from './pages/schedular/people-baithak/schedule-baithak/people-schedular-master/people-schedular-master.component';
+import { CardForScheduleBaithakComponent } from "./pages/schedular/people-baithak/schedule-baithak/card-for-schedule-baithak/card-for-schedule-baithak.component";
+import { MemberCardComponent } from "./pages/schedular/people-baithak/schedule-baithak/card-for-schedule-baithak/member-card/member-card.component";
+import { PeopleSchedularMasterComponent } from "./pages/schedular/people-baithak/schedule-baithak/people-schedular-master/people-schedular-master.component";
+
 
 @NgModule({
   imports: [
@@ -161,6 +163,7 @@ import { PeopleSchedularMasterComponent } from './pages/schedular/people-baithak
     BaithakCardComponent,
     CardForScheduleBaithakComponent,
     PeopleSchedularMasterComponent,
+    MemberCardComponent,
   ],
 
   providers: [

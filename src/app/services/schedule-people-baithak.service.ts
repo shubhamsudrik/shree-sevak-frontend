@@ -11,9 +11,9 @@ export class SchedulePeopleBaithakService {
  
   private baseUrl = "http://localhost:8080/api/people";
   public serviceDefaultMember: any[] = [];
-  public schduleVachanmember: any[] = [];
-  
-
+  public scheduleMember: any[] = [];
+  public serviceSelectedMember: any[] = [];
+  totalMembers: number;
   constructor(private httpclient: HttpClient) {
   }
 
@@ -27,26 +27,34 @@ export class SchedulePeopleBaithakService {
     return this.httpclient.get<any[]>(`${this.baseUrl}/allschedules`);
   }
 
-  getMembers(date: string, baithakId: any, locationId: any): any[] {
+ getIndividulaScheduleByDateAndBaithakId(date:any,baithakId:any): Observable<any> {
+  return this.httpclient.get<any[]>(`${this.baseUrl}/getByDateLocationBaithak/${date}/${baithakId}`);
+}
+
+
+
+
+  getMembers(baithakId: any): any[] {
     console.log( this.serviceDefaultMember)
+    console.log("baithak id ",baithakId)
      const newServiceDefaultMember = this.serviceDefaultMember.filter(
        (member) => {
          // Check if member's date and baithakId match the provided parameters
-         return member.date === date && member.baithakId === +baithakId;
+         return  member.baithak === +baithakId;
        }
      );
  
      console.log(
-       "fillter members base on date memebers",
+       "fillter members base on baithak memebers",
        newServiceDefaultMember
      );
-     const vachanMember = this.schduleVachanmember.filter(
-       (member) => member.date === date && member.baithakId === +baithakId
+     const scheduleMember = this.scheduleMember.filter(
+       (member) =>  member.baithak === +baithakId
      );
-     console.log("vachan member",vachanMember)
-     console.log("selected vachan",this.schduleVachanmember)
+     console.log("schedule member",scheduleMember)
+     console.log("selected vachan",this.scheduleMember)
 
-     const memberIdsToRemove = vachanMember.map(
+     const memberIdsToRemove = scheduleMember.map(
        (member) => member.memberId
      );
  
@@ -58,5 +66,62 @@ export class SchedulePeopleBaithakService {
      this.serviceDefaultMember=[]
      return sortedMemeberList;
    }
+   setMembers(members: any[]) {
+    this.serviceDefaultMember = [...members];
+    console.log("list of members", this.serviceDefaultMember);
+  }
+
+  addMemeberToSchedule(memberDetail: any) {
+    const index = this.scheduleMember.findIndex(
+      (member) =>
+        // member.memberId === memberDetail.memberId &&
+        member.baithak === +memberDetail.baithak
+    );
+    if (index !== -1) {
+      //update member if found
+      try {
+        if (
+          this.scheduleMember[index].memberId !== 0 &&
+          memberDetail.memberId !== 0
+        ) {
+          console.log(
+            "List of serviceDefaultMemebr: ",
+            this.serviceDefaultMember
+          );
+          this.scheduleMember[index] = memberDetail;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    } else if (!isNaN(+memberDetail.memberId) && memberDetail.memberId !== 0) {
+      //Add a new Meber if not found
+      this.scheduleMember.push(memberDetail);
+    }
+
+    console.log("Array of HAJERIMEMBERS", this.scheduleMember);
+  }
+  setSingleScheduleMember(member: any) {
+    const foundIndex=this.scheduleMember.findIndex((value)=>{
+      return (
+     
+        value.baithak === +member.baithak 
+     
+      );
+    })
+    console.log("found", foundIndex)
+    if(foundIndex !== -1) {
+      this.scheduleMember[foundIndex]=member
+      console.log("list of members", this.scheduleMember);
+    }else{
+      this.scheduleMember.push(member);
+      console.log("list of members", this.scheduleMember);
+    }
+      
+  
+  }
+ 
+ 
+
+  
 }
 

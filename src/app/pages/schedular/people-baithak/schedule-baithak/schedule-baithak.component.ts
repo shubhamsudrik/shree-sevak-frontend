@@ -7,6 +7,8 @@ import { PepoleBaithakService } from 'src/app/services/pepole-baithak.service';
 import { UserDataService } from 'src/app/services/user-data.service';
 import { User } from 'src/app/Classes/user';
 import { ToastrService } from 'ngx-toastr';
+import { PepoleBaithak } from 'src/app/Classes/pepole-baithak';
+import { PeopleSchedule } from 'src/app/Classes/people-schedule';
 
 export class CalendarDay {
   public date: Date;
@@ -40,7 +42,7 @@ export class ScheduleBaithakComponent implements OnInit {
 
   selectedCity: City;
   cities: { name: string; code: string; inactive: boolean }[];
-
+  scheduleArray:PeopleSchedule[]=[]
   products: any;
   cities1: { label: string; value: string }[];
   updatedDays: { label: string; value: number }[];
@@ -450,21 +452,25 @@ const tobaithakType=this.baithakFrom.get('baithakType');
       toTime: '',
     });
   }
-  onCardClick(event: any) {
-    this.cardData =event;
-    console.log("card data", this.cardData);
-    console.log("card event", event);
-    this.baithakFrom.patchValue({
-      baithakId: this.cardData.baithakId,
-      location: this.cardData.location.locationId,
-      baithakType: this.cardData.baithakType,
-      dayOfWeek: this.cardData.dayOfWeek.id,
-      fromTime: this.cardData.fromTime,
-      status: this.cardData.status,
-      toTime: this.cardData.toTime,
-    });
+  addSchedule(schedule: any) {
+    this.cardData =schedule;
+    console.log("card value change",this.cardData);
+    this.updateOrPushSchedule( this.cardData);
 
-    console.log(this.cardData.status);
+
+    // console.log("card data", this.cardData);
+    // console.log("card event", event);
+    // this.baithakFrom.patchValue({
+    //   baithakId: this.cardData.baithakId,
+    //   location: this.cardData.location.locationId,
+    //   baithakType: this.cardData.baithakType,
+    //   dayOfWeek: this.cardData.dayOfWeek.id,
+    //   fromTime: this.cardData.fromTime,
+    //   status: this.cardData.status,
+    //   toTime: this.cardData.toTime,
+    // });
+
+    // console.log(this.cardData.status);
     this.isAdd = false;
     this.isUpdate = true;
     this.isCancel = true;
@@ -477,7 +483,28 @@ const tobaithakType=this.baithakFrom.get('baithakType');
     this.isCancel = false;
     this.isDelete = false;
   }
-  
+  updateOrPushSchedule( newSchedule) {
+    // Find the index in the scheduleArray where location, baithak, and date match
+
+    const index = this.scheduleArray.findIndex(
+      (schedule) =>
+        schedule.baithak === newSchedule.baithak 
+        // schedule.date === newSchedule.date
+    );
+
+    if (index !== -1) {
+      // If the schedule exists, update member
+
+      this.scheduleArray[index].member = +newSchedule.member;
+
+    } else {
+      // If the schedule doesn't exist, push the newSchedule into the array
+
+      this.scheduleArray.push(newSchedule);
+    }
+    console.log("schedule Array ",this.scheduleArray)
+console.log("schedule object ",newSchedule)
+  }
   deleterecord(){
     const confirmation = confirm("Are you sure you want to delete?");
   if (confirmation) {
