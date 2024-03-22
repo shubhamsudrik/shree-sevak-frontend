@@ -117,11 +117,5 @@ export class SchedulePeopleBaithakService {
       console.log("list of members", this.scheduleMember);
     }
       
-  
-  }
- 
- 
-
-  
+  } 
 }
-
