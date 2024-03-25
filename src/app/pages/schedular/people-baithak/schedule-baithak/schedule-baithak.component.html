@@ -148,6 +148,7 @@
                 <button class="btn btn-primary" (click)="onNextWeek()">
                   Next Week
                 </button>
+                 <button type="submit" class="btn btn-primary" (click)="scheduleCreated()">Save</button>
               </div>
               <!-- </form> -->
             </div>
@@ -183,6 +184,7 @@
                   [day]="mondayDate"
                   [day1]="'Monday'"
                   [dayBaithakList]="mondaybaithakList"
+                  [selectedLocations]="location"
                 >
                 </app-card-for-schedule-baithak>
               </div>

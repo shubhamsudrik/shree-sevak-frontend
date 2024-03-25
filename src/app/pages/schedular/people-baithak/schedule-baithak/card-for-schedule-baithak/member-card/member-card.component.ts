@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Baithak } from "src/app/Classes/baithak";
 import { PeopleSchedule } from "src/app/Classes/people-schedule";
@@ -14,27 +14,55 @@ export class MemberCardComponent implements OnInit {
   @Output() valueUpdate: EventEmitter<any> = new EventEmitter();
   @Input() date: any;
   @Input() baithakId: any;
+  @Input() selectedLocation;
+  @Input() selectedLocations;
+
   schedule: PeopleSchedule = new PeopleSchedule();
   memberChildForm: FormGroup;
   memberList: any[] = [];
   defaultMembers: any;
   totalElements: any;
+  memberSelected: any;
+  scheduleList: any[];
 
   constructor(
     private memberListService: MemberListService,
     private formBuilder: FormBuilder,
-    private schedulePeopleBaithakService: SchedulePeopleBaithakService
-  ) {}
+    private schedulePeopleBaithakService: SchedulePeopleBaithakService,
+    private cdr: ChangeDetectorRef
+  ) {
+    console.log(this.selectedLocations);
+  }
 
   ngOnInit(): void {
     this.initializingForm();
-    this.individualScheduleRecord(this.date,this.baithakId);
     this.getAllActiveMemberList();
+    this.getAllpeopleScheduleList();
   }
 
-  
+  // ngOnChanges(): void {
+  //   // Manually trigger change detection
+  //   this.cdr.detectChanges();
+  //   // Call method to update member list when baithakId changes
+  //   this.getAllActiveMemberList();
+  // }
+
   individualScheduleRecord(date: any, baithakId: any) {
-    throw new Error("Method not implemented.");
+    this.schedulePeopleBaithakService
+      .getIndividulaScheduleByDateAndBaithakId(date, baithakId)
+      .subscribe((data) => {
+        console.log("individual schedule record", data);
+        let member = data.member;
+        member.baithak = this.baithakId;
+        member.date = this.date;
+        this.memberSelected = member;
+        console.log("memberSelected", this.memberSelected);
+        this.schedulePeopleBaithakService.addMemeberToSchedule(this.memberSelected);
+        console.log(this.memberSelected);
+      this.memberChildForm.patchValue({
+        member: this.memberSelected.memberId,
+      });
+      });
   }
 
   initializingForm() {
@@ -53,6 +81,16 @@ export class MemberCardComponent implements OnInit {
 
     this.valueUpdate.emit(this.schedule);
   }
+
+
+      //get all schedular data
+    private getAllpeopleScheduleList() {
+      this.schedulePeopleBaithakService.getAllpeopleScheduleList().subscribe((data: any[]) => {
+        this.scheduleList = data;
+        console.log(this.scheduleList);
+      });
+    }
+
   private getAllActiveMemberList() {
     this.memberListService.getMemberList().subscribe((data: any) => {
       console.log(data);
@@ -65,19 +103,21 @@ export class MemberCardComponent implements OnInit {
         member.date = this.date;
         return member;
       });
-      console.log(updatedmemberList)
+      console.log(updatedmemberList);
 
       this.schedulePeopleBaithakService.setMembers(updatedmemberList);
       this.totalElements = data.totoalElement;
       // }
       console.log(this.defaultMembers);
       console.log("data.totalElements", this.totalElements);
-      this.memberList = this.schedulePeopleBaithakService.getMembers(this.baithakId);
+      this.memberList = this.schedulePeopleBaithakService.getMembers(
+        this.baithakId
+      );
+      this.individualScheduleRecord(this.date, this.baithakId);
     });
   }
   loadMemberList() {
     this.getAllActiveMemberList();
     //this.memberList = this.schedulePeopleBaithakService.getMembers(this.baithakId);
   }
-  
 }
