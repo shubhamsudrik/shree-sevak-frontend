@@ -28,6 +28,9 @@ export class CardForScheduleBaithakComponent implements OnInit {
   @Input() dayBaithakList:any[] = [];
   @Input() day:any
   @Input() day1:any
+  @Input() selectedLocations : any ;
+
+
 
   baithakFormCard:FormGroup;
   defaultMembers: any;
@@ -52,16 +55,20 @@ export class CardForScheduleBaithakComponent implements OnInit {
     private memberListService: MemberListService,
     private schedulePeopleBaithakService: SchedulePeopleBaithakService,
 
-  ) {
-  }
+  ) {  }
 
   ngOnInit(): void {
     this.weekStartDate = new Date(); // Initialize with current date
     this.populateCalendar();
     this.initializingForm();
     this.getAllActiveMemberList();
-    
-  }
+
+    setTimeout(() => {
+      console.log(this.selectedLocations)
+
+    }, 2000);
+    console.log(this.day)
+      }
   
   initializingForm() {
     this.scheduleform = this.formBuilder.group({

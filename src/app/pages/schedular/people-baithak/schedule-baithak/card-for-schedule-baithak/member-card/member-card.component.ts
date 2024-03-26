@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Baithak } from "src/app/Classes/baithak";
 import { PeopleSchedule } from "src/app/Classes/people-schedule";
 import { MemberListService } from "src/app/services/member-list.service";
 import { SchedulePeopleBaithakService } from "src/app/services/schedule-people-baithak.service";
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: "app-member-card",
@@ -14,8 +15,7 @@ export class MemberCardComponent implements OnInit {
   @Output() valueUpdate: EventEmitter<any> = new EventEmitter();
   @Input() date: any;
   @Input() baithakId: any;
-  @Input() selectedLocation;
-  @Input() selectedLocations;
+  @Input() selectedLocations:any;
 
   schedule: PeopleSchedule = new PeopleSchedule();
   memberChildForm: FormGroup;
@@ -24,6 +24,10 @@ export class MemberCardComponent implements OnInit {
   totalElements: any;
   memberSelected: any;
   scheduleList: any[];
+  scheduleDates: any[];
+  scheduleLocation: any;
+  filteredMembers: any[] = []; // Initialize filteredMembers array
+  allmemberList: any[];
 
   constructor(
     private memberListService: MemberListService,
@@ -36,16 +40,12 @@ export class MemberCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializingForm();
-    this.getAllActiveMemberList();
-    this.getAllpeopleScheduleList();
-  }
+    this.getAllpeopleScheduleList().subscribe(() =>{
+      this.getAllActiveMemberList();
+      this.getAllActiveMemberList1();
 
-  // ngOnChanges(): void {
-  //   // Manually trigger change detection
-  //   this.cdr.detectChanges();
-  //   // Call method to update member list when baithakId changes
-  //   this.getAllActiveMemberList();
-  // }
+    });
+  }
 
   individualScheduleRecord(date: any, baithakId: any) {
     this.schedulePeopleBaithakService
@@ -59,9 +59,9 @@ export class MemberCardComponent implements OnInit {
         console.log("memberSelected", this.memberSelected);
         this.schedulePeopleBaithakService.addMemeberToSchedule(this.memberSelected);
         console.log(this.memberSelected);
-      this.memberChildForm.patchValue({
-        member: this.memberSelected.memberId,
-      });
+        this.memberChildForm.patchValue({
+          member: this.memberSelected.memberId,
+        });
       });
   }
 
@@ -74,29 +74,54 @@ export class MemberCardComponent implements OnInit {
   }
 
   onSelectMember(value: any) {
-    // throw new Error('Method not implemented.');
     this.schedule.baithak = this.baithakId;
     this.schedule.date = this.date;
     this.schedule.member = value;
-
     this.valueUpdate.emit(this.schedule);
   }
 
-
-      //get all schedular data
-    private getAllpeopleScheduleList() {
-      this.schedulePeopleBaithakService.getAllpeopleScheduleList().subscribe((data: any[]) => {
+  private getAllpeopleScheduleList() {
+    return this.schedulePeopleBaithakService.getAllpeopleScheduleList().pipe(
+      switchMap((data: any[]) => {
         this.scheduleList = data;
         console.log(this.scheduleList);
-      });
-    }
+  
+        this.scheduleDates = this.scheduleList.map(item => item.date);
+        console.log(this.scheduleDates );
+  
+        this.scheduleLocation = this.scheduleList.map(item => item.baithak.location.locationId);
+        console.log("previous selectedLocations "+this.scheduleLocation);
+  
+        return of(null); // Emitting null to signify completion
+      })
+    );
+  }
 
   private getAllActiveMemberList() {
     this.memberListService.getMemberList().subscribe((data: any) => {
-      console.log(data);
-      console.log(data.content);
-      console.log(data.length);
-      // for (let i = 0; i < data.length; i++){
+      this.defaultMembers = data;
+
+      if (this.scheduleList && this.scheduleList.length > 0) {
+        this.filteredMembers = this.defaultMembers.filter(member => {
+          return !this.scheduleList.some(schedule => schedule.member.memberId === member.memberId);
+        });
+      } else {
+        this.filteredMembers = this.defaultMembers.slice();
+      }
+
+      this.updateDropdownOptions(this.filteredMembers);
+    });
+  }
+
+  private updateDropdownOptions(options: any[]): void {
+    this.memberChildForm.controls['member'].setValue(null);
+    this.memberList = [];
+    this.memberList = options;
+  }
+
+  private getAllActiveMemberList1() {
+    this.memberListService.getMemberList().subscribe((data: any) => {
+
       this.defaultMembers = data;
       const updatedmemberList = this.defaultMembers.map((member) => {
         member.baithak = this.baithakId;
@@ -107,17 +132,22 @@ export class MemberCardComponent implements OnInit {
 
       this.schedulePeopleBaithakService.setMembers(updatedmemberList);
       this.totalElements = data.totoalElement;
-      // }
       console.log(this.defaultMembers);
-      console.log("data.totalElements", this.totalElements);
-      this.memberList = this.schedulePeopleBaithakService.getMembers(
+
+      this.allmemberList = this.schedulePeopleBaithakService.getMembers(
         this.baithakId
       );
       this.individualScheduleRecord(this.date, this.baithakId);
     });
   }
+
   loadMemberList() {
-    this.getAllActiveMemberList();
-    //this.memberList = this.schedulePeopleBaithakService.getMembers(this.baithakId);
+    // this.getAllActiveMemberList();
+    this.initializingForm();
+    this.getAllpeopleScheduleList().subscribe(() =>{
+      this.getAllActiveMemberList();
+      this.getAllActiveMemberList1();
+
+    });
   }
 }

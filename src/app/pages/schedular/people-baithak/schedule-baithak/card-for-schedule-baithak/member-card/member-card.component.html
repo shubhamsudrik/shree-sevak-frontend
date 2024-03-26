@@ -1,18 +1,17 @@
 <form [formGroup]="memberChildForm">
-    <div class="d-flex flex-column align-items-center">
-  
-        <div (click)="loadMemberList()">
-            <p-dropdown
-            [options]="memberList"
-            placeholder="Select Member"
-            name="member"
-            id="member"
-            formControlName="member"
-            optionValue="memberId"
-            optionLabel="firstName"  
-            (onChange)="onSelectMember($event.value)"            
-          >
-          </p-dropdown>
-        </div>
-      </div>
+  <div class="d-flex flex-column align-items-center">
+    <div (click)="loadMemberList()">
+      <p-dropdown
+        [options]="allmemberList"
+        placeholder="Select Member"
+        name="member"
+        id="member"
+        formControlName="member"
+        optionValue="memberId"
+        optionLabel="firstName"
+        (onChange)="onSelectMember($event.value)"
+      >
+      </p-dropdown>
+    </div>
+  </div>
 </form>

@@ -390,12 +390,15 @@ const tobaithakType=this.baithakFrom.get('baithakType');
     // console.log(event.target)
     // console.log(event.target.value)
     const locationId = event.value;
-    this.location = this.locationList.find(location => location.locationId === locationId);
+    this.location =locationId
+
+    this.location= this.locationList.find(location => location.locationId === locationId);
     console.log("found location",this.location)
 
     console.log(event.value);
     // console.log(event.target.value);
-    console.log(locationId);
+    // this.location =locationId
+    console.log(this.location);
   //  this.baithakListBaseOnLocation(locationId)
    this.ActiveBaithakListBaseOnLocation(locationId);
     // console.log(this.locationList)

@@ -32,41 +32,72 @@ export class SchedulePeopleBaithakService {
   return this.httpclient.get<any[]>(`${this.baseUrl}/getByDateLocationBaithak/${date}/${baithakId}`);
 }
 
+  
+getMembers1(baithakId: any): any[] {
+  console.log(this.serviceDefaultMember);
+  console.log("baithak id ", baithakId);
+
+  // Filter out members who are already scheduled for the given baithakId
+  const scheduleMemberForBaithak = this.scheduleMember.filter(
+    (member) => member.baithak === +baithakId
+  );
+
+  console.log("Schedule members for baithak:", scheduleMemberForBaithak);
+
+  // Extract memberIds of scheduled members
+  const memberIdsToRemove = scheduleMemberForBaithak.map(
+    (member) => member.memberId
+  );
+
+  console.log("MemberIds to remove:", memberIdsToRemove);
+
+  // Filter out default members who are not already scheduled
+  const filteredDefaultMembers = this.serviceDefaultMember.filter(
+    (member) => !memberIdsToRemove.includes(member.memberId)
+  );
+
+  console.log("Filtered members based on baithak:", filteredDefaultMembers);
+
+  return filteredDefaultMembers;
+}
 
 
 
-  getMembers(baithakId: any): any[] {
-    console.log( this.serviceDefaultMember)
-    console.log("baithak id ",baithakId)
-     const newServiceDefaultMember = this.serviceDefaultMember.filter(
-       (member) => {
-         // Check if member's date and baithakId match the provided parameters
-         return  member.baithak === +baithakId;
-       }
-     );
+getMembers(baithakId: any): any[] {
+  console.log( this.serviceDefaultMember)
+  console.log("baithak id ",baithakId)
+   const newServiceDefaultMember = this.serviceDefaultMember.filter(
+     (member) => {
+      console.log(member)
+       // Check if member's date and baithakId match the provided parameters
+       return  member.baithak === +baithakId;
+     }
+   );
+
+   console.log(
+     "fillter members base on baithak memebers",
+     newServiceDefaultMember
+   );
+   const scheduleMember = this.scheduleMember.filter(
+     (member) =>  member.baithak === +baithakId
+   );
+   console.log("schedule member",scheduleMember)
+   console.log("selected member",this.scheduleMember)
+
+   const memberIdsToRemove = scheduleMember.map(
+     (member) => member.memberId
+   );
+
+   const sortedMemeberList = newServiceDefaultMember.filter(
+     (member) => !memberIdsToRemove.includes(member.memberId)
+   );
+   // const nonSelectHajeriMembers=updatedServiceDefaultMember.filter()
+   console.log(sortedMemeberList);
+   this.serviceDefaultMember=[]
+   return sortedMemeberList;
+ }
+
  
-     console.log(
-       "fillter members base on baithak memebers",
-       newServiceDefaultMember
-     );
-     const scheduleMember = this.scheduleMember.filter(
-       (member) =>  member.baithak === +baithakId
-     );
-     console.log("schedule member",scheduleMember)
-     console.log("selected member",this.scheduleMember)
-
-     const memberIdsToRemove = scheduleMember.map(
-       (member) => member.memberId
-     );
- 
-     const sortedMemeberList = newServiceDefaultMember.filter(
-       (member) => !memberIdsToRemove.includes(member.memberId)
-     );
-     // const nonSelectHajeriMembers=updatedServiceDefaultMember.filter()
-     console.log(sortedMemeberList);
-     this.serviceDefaultMember=[]
-     return sortedMemeberList;
-   }
    setMembers(members: any[]) {
     this.serviceDefaultMember = [...members];
     console.log("list of members", this.serviceDefaultMember);
